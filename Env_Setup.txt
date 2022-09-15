@@ -1,0 +1,32 @@
+Environment Setup Instructions 
+
+ 
+ANGULAR 
+
+1. Install the latest Node.js version from https://nodejs.org/en/download/  
+
+2. Install the Angular CLI using npm with this command: 
+
+3. npm i –g @angular/cli 
+
+ 
+
+ASP.NET 
+
+1. Download Visual Studio from https://visualstudio.microsoft.com/vs/mac/  
+
+2. During the installation process, selected .NET to be installed. 
+
+ 
+
+Then, clone and pull down the code from the Azure Repository: https://dev.azure.com/F22-Team02-Wilson-Bondura-Clay-Hayes-Saad/_git/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad  
+
+1. Click on ‘Clone’, then ‘Clone in VS Code’ and select the location where you want the repository. 
+
+2. Navigate to the frontend folder, and run this command: npm install 
+ 
+ - This will install all the dependencies for Angular to run properly, RUN THIS COMMAND OFTEN. 
+
+ 
+
+After following these steps, you should be able to run all the code and begin working. 
