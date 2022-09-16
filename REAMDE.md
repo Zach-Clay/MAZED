@@ -10,7 +10,7 @@ Database: AWS RDS
 
 1. I am big believer of committing early and often, that way if something goes wrong in your code, it is easy to revert to a stable commit and pinpoint the error. 
 2. To commit your changes in Visual Studio Code:
-   1. First, make sure your repo is connected the Azure branches and that you are in the correct branch
+   1. First, make sure your repo is connected to the Azure branches and that you are in the correct branch
       1. DO NOT COMMIT TO MAIN!!!!!!
    2. Second, select the Source Control tab on the left-hand menu 
    3. In this view, you should be able to see all of your changes since your last commit
