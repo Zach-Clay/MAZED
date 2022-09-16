@@ -32,7 +32,7 @@ Database: AWS RDS
       2. Click on the up/down arrows themselves. This action will also pull changes from your branch as well.
 4. It is up to you when push your changes, as long as you commit regularly.
 ![](images/Change_file_view.png)
-5. VS Code also has a nift view for seeing what additions and deletions were made on a certain file, as shown by my editing of the README
+5. VS Code also has a nifty view for seeing what additions and deletions were made on a certain file, as shown by my editing of the README
 
 ### Pulling changes
    1. Pulling is when you bring a teammate's changes/commits into your own branch, updating the code. 
