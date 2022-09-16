@@ -70,3 +70,7 @@ Database: AWS RDS
    1.  Please take this seriously and responsibly, you are the last line of defense between our beloved working repo and one PR that could destroy it all.
 
 # Creating a new branch
+1. Before creating a new branch at the start of a new sprint, be sure to first pull from main so that all of our local branches and repos are up to date and matching. 
+2. After that, create your new branch
+
+### Happy Coding!!!
