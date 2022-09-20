@@ -8,13 +8,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 
 //Angular Material
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
+import { UserRegistrationComponent } from './pages/user-registration/user-registration.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    UserRegistrationComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
