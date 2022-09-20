@@ -1,25 +1,26 @@
 ﻿<Properties StartupConfiguration="{2703C320-98CB-43A7-8319-A193DC54EC6E}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.api-backend PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="api-backend/Models/TestValues.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="api-backend/appsettings.json">
     <Files>
-      <File FileName="api-backend/Models/TestValues.cs" Line="11" Column="1" />
+      <File FileName="api-backend/Models/TestValues.cs" Line="7" Column="22" />
       <File FileName="api-backend/Controllers/TestController.cs" Line="1" Column="1" />
+      <File FileName="api-backend/appsettings.json" Line="14" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="api-backend" expanded="True">
-            <Node name="api-backend" expanded="True">
+            <Node name="api-backend" expanded="True" selected="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
               <Node name="Controllers" expanded="True" />
               <Node name="Logic" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="TestValues.cs" selected="True" />
-              </Node>
+              <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
             </Node>
           </Node>
@@ -30,5 +31,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.api-backend PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
 </Properties>

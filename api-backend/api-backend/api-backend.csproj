@@ -8,12 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Models\" />
     <None Remove="Logic\" />
+    <None Remove="Pomelo.EntityFrameworkCore.MySql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
