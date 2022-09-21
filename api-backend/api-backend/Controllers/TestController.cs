@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using api_backend.Models;
 using api_backend.Logic;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api_backend.Controllers
 {
+    [ApiController]
     [Route("api/test")]
     public class ValuesController : Controller
     {
