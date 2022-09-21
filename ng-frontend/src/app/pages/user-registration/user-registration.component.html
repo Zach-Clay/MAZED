@@ -8,7 +8,7 @@
 
 <div class="wrapper">
   <div class="register-form">
-    <form>
+    <form (ngSubmit)="onSubmit()">
   
       <span>Name</span>
       <br/>
@@ -18,7 +18,8 @@
         id="name"
         placeholder="First and Last"
         class="field"
-        required>
+        required
+        [(ngModel)]="name">
       <br/>
       <br/>
 
@@ -30,7 +31,8 @@
         id="username"
         placeholder="Username"
         class="field"
-        required>
+        required
+        [(ngModel)]="username">
       <br/>
       <br/>
 
@@ -42,7 +44,8 @@
         id="email"
         placeholder="Email"
         class="field"
-        required>
+        required
+        [(ngModel)]="email">
       <br/>
       <br/>
 
@@ -54,7 +57,8 @@
         id="password"
         placeholder="Password"
         class="field"
-        required>
+        required
+        [(ngModel)]="password">
       <br/>
       <br/>
 
@@ -62,11 +66,12 @@
       <br/>
       <input 
         type="text"
-        name="repeat-password"
+        name="repeat_password"
         id="repeat-password"
         placeholder="Password"
         class="field"
-        required>
+        required
+        [(ngModel)]="repeat_password">
       <br/>
       <br/>
 
@@ -78,7 +83,8 @@
         id="phone"
         placeholder="Phone Number"
         class="field"
-        required>
+        required
+        [(ngModel)]="phone">
       <br/>
       <br/>
 
@@ -90,7 +96,8 @@
         id="address"
         placeholder="Address"
         class="field"
-        required>
+        required
+        [(ngModel)]="address">
       <br/>
       <br/>
 
