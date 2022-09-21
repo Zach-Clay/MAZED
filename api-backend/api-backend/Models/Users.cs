@@ -1,13 +1,17 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
+
 namespace api_backend.Models
 {
     public class users
     {
-        public Guid UserId { get; set; }
+        public Guid Id { get; set; }
 
         public string? FName { get; set; }
 
         public string? LName { get; set; }
+
+        public string? Username { get; set; }
 
         public Guid SponsorID { get; set; }
 

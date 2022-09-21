@@ -13,7 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //use builder to add context -- in mem DB
-builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseInMemoryDatabase("TEAM2_DB"));
+//builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseInMemoryDatabase("TEAM2_DB"));
+builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
 
 var app = builder.Build();
 
