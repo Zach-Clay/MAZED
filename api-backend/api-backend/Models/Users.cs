@@ -1,7 +1,7 @@
 ﻿using System;
 namespace api_backend.Models
 {
-    public class Users
+    public class users
     {
         public Guid UserId { get; set; }
 
