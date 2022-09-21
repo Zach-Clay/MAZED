@@ -4,11 +4,12 @@ namespace api_backend.Data
 {
     public class UsersAPIDBContext : DbContext
     {
+
         public UsersAPIDBContext(DbContextOptions options) : base(options)
         {
         }
 
-        public DbSet<Users>? Users{ get; set; }
+        public DbSet<users> Users{ get; set; }
     }
 }
 

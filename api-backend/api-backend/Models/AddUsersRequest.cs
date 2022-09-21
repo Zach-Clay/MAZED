@@ -5,7 +5,7 @@ namespace api_backend.Models
 {
     public class AddUsersRequest
     {
-        //removed ID b/c given in API
+        //removed ID b/c we give the ID
 
         public string? FName { get; set; }
 
