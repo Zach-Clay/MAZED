@@ -1,17 +1,16 @@
-﻿//want to get certain info from DB
-
-using System;
+﻿using System;
 namespace api_backend.Models
 {
-    public class AddUsersRequest
+    public class UpdateUsersRequest
     {
-        //removed ID b/c we give the ID
 
         public string? FName { get; set; }
 
         public string? LName { get; set; }
 
         public string? Username { get; set; }
+
+        public Guid SponsorID { get; set; }
 
         public string? UserType { get; set; }
 
