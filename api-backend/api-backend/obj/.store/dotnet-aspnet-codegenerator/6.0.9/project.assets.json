@@ -479,16 +479,16 @@
     ]
   },
   "packageFolders": {
-    "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/.store/.stage/ljpj3bt0.buz": {}
+    "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/.store/.stage/vxzxljar.qjh": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/var/folders/yb/czc_zzbj10vd7ww17q6571fc0000gn/T/5ou3nuu0.f3n/restore.csproj",
+      "projectUniqueName": "/var/folders/yb/czc_zzbj10vd7ww17q6571fc0000gn/T/dvunqt3v.sxy/restore.csproj",
       "projectName": "restore",
-      "projectPath": "/var/folders/yb/czc_zzbj10vd7ww17q6571fc0000gn/T/5ou3nuu0.f3n/restore.csproj",
-      "packagesPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/.store/.stage/ljpj3bt0.buz",
-      "outputPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/.store/.stage/ljpj3bt0.buz/",
+      "projectPath": "/var/folders/yb/czc_zzbj10vd7ww17q6571fc0000gn/T/dvunqt3v.sxy/restore.csproj",
+      "packagesPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/.store/.stage/vxzxljar.qjh",
+      "outputPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/.store/.stage/vxzxljar.qjh/",
       "projectStyle": "DotnetToolReference",
       "configFilePaths": [
         "/Users/madisonwilson/.nuget/NuGet/NuGet.Config"
