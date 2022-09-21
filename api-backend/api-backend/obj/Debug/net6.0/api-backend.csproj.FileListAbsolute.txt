@@ -247,3 +247,13 @@
 /Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.pdb
 /Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.genruntimeconfig.cache
 /Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/ref/api-backend.dll
+/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.dll
+/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/refint/api-backend.dll
+/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.pdb
+/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.csproj.AssemblyReference.cache
+/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.GeneratedMSBuildEditorConfig.editorconfig
+/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.AssemblyInfoInputs.cache
+/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.AssemblyInfo.cs
+/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.csproj.CoreCompileInputs.cache
+/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.MvcApplicationPartsAssemblyInfo.cs
+/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/api-backend.MvcApplicationPartsAssemblyInfo.cache
