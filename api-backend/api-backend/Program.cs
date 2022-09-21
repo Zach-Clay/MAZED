@@ -1,4 +1,9 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿// app starting point
+
+using Microsoft.EntityFrameworkCore;
+using api_backend.Data;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -6,6 +11,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//use builder to add context -- in mem DB
+builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseInMemoryDatabase("TEAM2_DB"));
 
 var app = builder.Build();
 
