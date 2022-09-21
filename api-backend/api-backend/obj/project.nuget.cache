@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aba2N3fgzFyESSRNR9jZCLN7WPASpDpIFVtRqFhtS7kZ1jJBdsGOAZ1uBm0RBW63BYXYjfI8kw4pW6u/XKGdfg==",
+  "dgSpecHash": "A77dKnPnTYnUzk7mqNEd3vxWh1bwpXp0FmweEAEdlERq8v+vjwUzZLUHUObdHtt6rOWDgTeGsjSzg1Fe1QgUWA==",
   "success": true,
   "projectFilePath": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
   "expectedPackageFiles": [
@@ -61,7 +61,7 @@
     "/Users/zachclay/.nuget/packages/microsoft.win32.primitives/4.3.0/microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "/Users/zachclay/.nuget/packages/microsoft.win32.registry/4.3.0/microsoft.win32.registry.4.3.0.nupkg.sha512",
     "/Users/zachclay/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
-    "/Users/zachclay/.nuget/packages/mysqlconnector/2.1.2/mysqlconnector.2.1.2.nupkg.sha512",
+    "/Users/zachclay/.nuget/packages/mysqlconnector/2.1.13/mysqlconnector.2.1.13.nupkg.sha512",
     "/Users/zachclay/.nuget/packages/netstandard.library/1.6.1/netstandard.library.1.6.1.nupkg.sha512",
     "/Users/zachclay/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
     "/Users/zachclay/.nuget/packages/nuget.common/6.2.1/nuget.common.6.2.1.nupkg.sha512",

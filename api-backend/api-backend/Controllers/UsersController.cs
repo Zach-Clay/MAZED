@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using api_backend.Data;
 using api_backend.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
+using Microsoft.Extensions.Configuration;
 
 namespace api_backend.Controllers
 {
@@ -15,45 +16,44 @@ namespace api_backend.Controllers
     public class UsersController : Controller
     {
         //how we talk to db
-        private readonly UsersAPIDBContext dbContext;
+        private readonly UsersAPIDBContext dbcontext;
+        
 
-        public Guid UserId { get; private set; }
-
-        public UsersController(UsersAPIDBContext dbContext)
+        public UsersController(UsersAPIDBContext dbcontext)
         {
-            this.dbContext = dbContext;
+            this.dbcontext = dbcontext;
         }
 
         //get keyword but for swagger we need this annotation
         [HttpGet]
-        //talk to database async
-        public async Task<IActionResult> GetUsers()
+        public IActionResult GetUsers()
         {
             //inject DB context, wrap for response
-            return Ok(await dbContext.Users.ToListAsync());
+            //return Ok(dbcontext.Users.ToList());
+
+            using var connection = new MySqlConnection("Server=team2.codb8enwsupz.us-east-1.rds.amazon.aws; Database=TEAM_DB; ID=admin; Password=cpsc4910;");
+            connection.Open();
+
+            using var command = new MySqlCommand("SELECT * FROM TEAM_DB.users;", connection);
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+                Console.WriteLine(reader.GetString(0));
+
+
+            return Ok("hello");
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUsers(AddUsersRequest addUsers)
+        public IActionResult AddUsers(AddUsersRequest addUsers)
         {
-            var user = new users()
-            {
-                UserId = Guid.NewGuid(),
-                SponsorID = Guid.NewGuid(),
-                FName = addUsers.FName,
-                LName = addUsers.LName,
-                UserType = addUsers.UserType,
-                UserAddress = addUsers.UserAddress,
-                UserEmail = addUsers.UserEmail,
-                UserPhonenum = addUsers.UserPhonenum,
-                UserPronouns = addUsers.UserPronouns,
-                UserPwd = addUsers.UserPwd
-               
-            };
-            await dbContext.Users.AddAsync(user);
-            await dbContext.SaveChangesAsync();
+    //        var users = new Users()
+    //        {
+    //            users.UserId = Guid.NewGuid(),
+    //            users.FName = addUsers
+    //}
 
-            return Ok(user);
+            return Ok("Not Implemented");
         }
     }
 }

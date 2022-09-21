@@ -12,9 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//use builder to add context -- in mem DB
+//use builder to add context
 builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseInMemoryDatabase("TEAM2_DB"));
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
