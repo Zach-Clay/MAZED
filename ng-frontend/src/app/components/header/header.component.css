@@ -1,10 +1,11 @@
 .header {
-  background: rgb(97, 97, 233);
+  background: var(--primary-color);
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
 }
 
-.logo {
+img {
+  width: 15%;
 }
