@@ -61,15 +61,6 @@ namespace api_backend.Controllers
         [HttpPost]
         public IActionResult AddUsers(AddUsersRequest addUsers)
         {
-<<<<<<< HEAD
-    //        var users = new Users()
-    //        {
-    //            users.UserId = Guid.NewGuid(),
-    //            users.FName = addUsers
-    //}
-
-            return Ok("Not Implemented");
-=======
             var user = new users()
             {
                 Id = Guid.NewGuid(),
@@ -89,7 +80,6 @@ namespace api_backend.Controllers
             await dbContext.SaveChangesAsync();
 
             return Ok(user);
->>>>>>> Madison/Dev
         }
 
         [HttpPut]

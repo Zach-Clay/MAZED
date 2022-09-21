@@ -1433,7 +1433,7 @@
           }
         }
       },
-      "MySqlConnector/2.1.13": {
+      "MySqlConnector/2.1.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/MySqlConnector.dll": {}
@@ -5636,10 +5636,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "MySqlConnector/2.1.13": {
-      "sha512": "Y3qts7mnuZ4EGEQOI4xJ1n+9ZJOmrcwD2CdqyAXuQONBkrc2ENDywE6ZBysFaRojXrnWzLXpc595+GYlN/PI9Q==",
+    "MySqlConnector/2.1.2": {
+      "sha512": "JVokQTUNN3WHAu9Vw8ieeq1dXTFokJiig5P0VJ4f439UxRrsPo6SaVWC8Zdm6mkPeQFhZ0/9afdWa02EY/1j/w==",
       "type": "package",
-      "path": "mysqlconnector/2.1.13",
+      "path": "mysqlconnector/2.1.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5661,7 +5661,7 @@
         "lib/netstandard2.1/MySqlConnector.dll",
         "lib/netstandard2.1/MySqlConnector.xml",
         "logo.png",
-        "mysqlconnector.2.1.13.nupkg.sha512",
+        "mysqlconnector.2.1.2.nupkg.sha512",
         "mysqlconnector.nuspec"
       ]
     },
@@ -9927,7 +9927,6 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.9",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.9",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.9",
-      "MySqlConnector >= 2.1.13",
       "Pomelo.EntityFrameworkCore.MySql >= 6.0.2",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
@@ -9997,10 +9996,6 @@
             "target": "Package",
             "version": "[6.0.9, )"
           },
-          "MySqlConnector": {
-            "target": "Package",
-            "version": "[2.1.13, )"
-          },
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[6.0.2, )"
@@ -10032,5 +10027,13 @@
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file /Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
