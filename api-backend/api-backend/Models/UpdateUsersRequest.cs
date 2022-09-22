@@ -10,7 +10,7 @@ namespace api_backend.Models
 
         public string? Username { get; set; }
 
-        public Guid SponsorID { get; set; }
+        public int SponsorID { get; set; }
 
         public string? UserType { get; set; }
 

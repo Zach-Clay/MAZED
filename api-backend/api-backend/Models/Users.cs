@@ -5,7 +5,7 @@ namespace api_backend.Models
 {
     public class users
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string? FName { get; set; }
 
@@ -13,7 +13,7 @@ namespace api_backend.Models
 
         public string? Username { get; set; }
 
-        public Guid SponsorID { get; set; }
+        public int SponsorID { get; set; }
 
         public string? UserType { get; set; }
 
