@@ -24,6 +24,7 @@
     </PackageReference>
     <PackageReference Include="MySql.Data" Version="8.0.30" />
     <PackageReference Include="MySqlConnector" Version="2.1.13" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,10 +40,13 @@
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="MySql.Data" />
     <None Remove="MySqlConnector" />
+    <None Remove="Migrations\" />
+    <None Remove="Microsoft.Extensions.Configuration.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Logic\" />
     <Folder Include="Data\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>
