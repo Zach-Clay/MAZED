@@ -4,7 +4,6 @@ MAZED Team Good Driver Rewards Program for CPSC4910
 # Technologies
 Frontend: AngularJS, Bootstrap, Angular Material
 Backend: ASP.NET Web API's, C#
-<<<<<<< HEAD
 Database: AWS RDS
 
 # Committing
@@ -75,6 +74,3 @@ Database: AWS RDS
 2. After that, create your new branch
 
 ### Happy Coding!!!
-=======
-Database: AWS RDS
->>>>>>> origin/main
