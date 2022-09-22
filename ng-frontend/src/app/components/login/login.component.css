@@ -16,18 +16,19 @@
 
 .login-form {
   background: var(--secondary-color);
-  padding: 1em 0 4em 0;
+  padding-top: 1em;
   position: relative;
 }
 
 form {
-  width: 80%;
+  width: 100%;
   margin: auto;
+  text-align: center;
 }
 
 .field {
   background-color: var(--secondary-color);
-  width: 100%;
+  width: 80%;
   height: 40px;
   font-size: 17px;
   border-radius: 0.5em;
@@ -38,8 +39,6 @@ form {
 
 .submit {
   width: 100%;
-  position: absolute;
-  bottom: 0;
   background-color: var(--primary-color);
   padding: 5px;
   font-size: 20px;

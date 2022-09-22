@@ -13,7 +13,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log('hello');
-    alert('test');
+    if (!this.username) {
+      alert('Please enter your username!');
+      return;
+    }
+    if (!this.password) {
+      alert('Please enter your password!');
+      return;
+    }
+    console.log(this.username, this.password);
+    this.username = '';
+    this.password = '';
   }
 }
