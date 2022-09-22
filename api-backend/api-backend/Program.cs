@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 
 //use builder to add context -- in mem DB
 //builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseInMemoryDatabase("TEAM2_DB"));
-builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("DB")));
+//builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("DB")));
 
 var app = builder.Build();
 
