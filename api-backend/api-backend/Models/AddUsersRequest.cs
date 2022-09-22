@@ -11,6 +11,8 @@ namespace api_backend.Models
 
         public string? LName { get; set; }
 
+        public string? Username { get; set; }
+
         public string? UserType { get; set; }
 
         public string? UserAddress { get; set; }

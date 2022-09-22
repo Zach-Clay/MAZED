@@ -8,28 +8,101 @@
 
 <div class="wrapper">
   <div class="register-form">
-    <form>
+    <form (ngSubmit)="onSubmit()">
   
-      <p>Name</p>
+      <span>Name</span>
+      <br/>
       <input 
         type="text"
         name="name"
         id="name"
-        placeholder="First and Last">
+        placeholder="First and Last"
+        class="field"
+        required
+        [(ngModel)]="name">
+      <br/>
+      <br/>
 
-      <p>Username</p>
+      <span>Username</span>
+      <br/>
       <input 
         type="text"
         name="username"
         id="username"
-        placeholder="Username">
+        placeholder="Username"
+        class="field"
+        required
+        [(ngModel)]="username">
+      <br/>
+      <br/>
 
-      <p>Email</p>
+      <span>Email</span>
+      <br/>
+      <input 
+        type="text"
+        name="email"
+        id="email"
+        placeholder="Email"
+        class="field"
+        required
+        [(ngModel)]="email">
+      <br/>
+      <br/>
 
-      <p>Password</p>
+      <span>Password</span>
+      <br/>
+      <input 
+        type="text"
+        name="password"
+        id="password"
+        placeholder="Password"
+        class="field"
+        required
+        [(ngModel)]="password">
+      <br/>
+      <br/>
 
-      <p>Phone</p>
+      <span>Repeat Password</span>
+      <br/>
+      <input 
+        type="text"
+        name="repeat_password"
+        id="repeat-password"
+        placeholder="Password"
+        class="field"
+        required
+        [(ngModel)]="repeat_password">
+      <br/>
+      <br/>
 
+      <span>Phone</span>
+      <br/>
+      <input 
+        type="text"
+        name="phone"
+        id="phone"
+        placeholder="Phone Number"
+        class="field"
+        required
+        [(ngModel)]="phone">
+      <br/>
+      <br/>
+
+      <span>Address</span>
+      <br/>
+      <input 
+        type="text"
+        name="address"
+        id="address"
+        placeholder="Address"
+        class="field"
+        required
+        [(ngModel)]="address">
+      <br/>
+      <br/>
+
+      <input type="submit" class="submit" value="Register">
     </form>
+
   </div>
 </div>
