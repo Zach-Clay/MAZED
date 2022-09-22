@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid p-0">
   <app-header></app-header>
 </div>
 
@@ -9,100 +9,118 @@
 <div class="wrapper">
   <div class="register-form">
     <form (ngSubmit)="onSubmit()">
-  
-      <span>Name</span>
-      <br/>
-      <input 
+      <span class="lead">Name</span>
+      <br />
+      <input
         type="text"
         name="name"
         id="name"
         placeholder="First and Last"
         class="field"
         required
-        [(ngModel)]="name">
-      <br/>
-      <br/>
+        [(ngModel)]="name"
+      />
+      <br />
+      <br />
 
-      <span>Username</span>
-      <br/>
-      <input 
+      <span class="lead">Username</span>
+      <br />
+      <input
         type="text"
         name="username"
         id="username"
         placeholder="Username"
         class="field"
         required
-        [(ngModel)]="username">
-      <br/>
-      <br/>
+        [(ngModel)]="username"
+      />
+      <br />
+      <br />
 
-      <span>Email</span>
-      <br/>
-      <input 
+      <span class="lead">Email</span>
+      <br />
+      <input
         type="text"
         name="email"
         id="email"
         placeholder="Email"
         class="field"
         required
-        [(ngModel)]="email">
-      <br/>
-      <br/>
+        [(ngModel)]="email"
+      />
+      <br />
+      <br />
 
-      <span>Password</span>
-      <br/>
-      <input 
-        type="text"
+      <span class="lead">Password</span>
+      <br />
+      <input
+        type="password"
         name="password"
         id="password"
         placeholder="Password"
         class="field"
         required
-        [(ngModel)]="password">
-      <br/>
-      <br/>
+        [(ngModel)]="password"
+      />
+      <br />
+      <br />
 
-      <span>Repeat Password</span>
-      <br/>
-      <input 
-        type="text"
+      <span class="lead">Repeat Password</span>
+      <br />
+      <input
+        type="password"
         name="repeat_password"
         id="repeat-password"
         placeholder="Password"
         class="field"
         required
-        [(ngModel)]="repeat_password">
-      <br/>
-      <br/>
+        [(ngModel)]="repeat_password"
+      />
+      <br />
+      <br />
 
-      <span>Phone</span>
-      <br/>
-      <input 
+      <span class="lead">Phone</span>
+      <br />
+      <input
         type="text"
         name="phone"
         id="phone"
         placeholder="Phone Number"
         class="field"
         required
-        [(ngModel)]="phone">
-      <br/>
-      <br/>
+        [(ngModel)]="phone"
+      />
+      <br />
+      <br />
 
-      <span>Address</span>
-      <br/>
-      <input 
+      <span class="lead">Address</span>
+      <br />
+      <input
         type="text"
         name="address"
         id="address"
         placeholder="Address"
         class="field"
         required
-        [(ngModel)]="address">
-      <br/>
-      <br/>
-
-      <input type="submit" class="submit" value="Register">
+        [(ngModel)]="address"
+      />
+      <br />
+      <br />
+      <span class="lead">Birthday</span>
+      <br />
+      <input
+        type="date"
+        name="date"
+        id="date"
+        class="field"
+        required
+        [(ngModel)]="date"
+      />
+      <br />
+      <br />
+      <div class="text-center">
+        <input type="submit" class="submit" value="Register" />
+      </div>
     </form>
-
   </div>
 </div>
