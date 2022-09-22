@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 using api_backend.Data;
 using api_backend.Models;
 using Microsoft.AspNetCore.Mvc;
-using MySqlConnector;
 using api_backend.Logic;
-using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace api_backend.Controllers
 {
@@ -25,6 +23,20 @@ namespace api_backend.Controllers
             try
             {
                 return Ok(UserLogic.getUser(username));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        //Add user to the DB
+        [HttpPost]
+        public IActionResult AddUser([FromBody]User user)
+        {
+            try
+            {
+                return Ok(UserLogic.addUser(user));
             }
             catch (Exception ex)
             {
