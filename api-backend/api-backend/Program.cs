@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using api_backend.Data;
+using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,7 @@ builder.Services.AddSwaggerGen();
 
 //use builder to add context -- in mem DB
 //builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseInMemoryDatabase("TEAM2_DB"));
-builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
+builder.Services.AddDbContext<UsersAPIDBContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("DB")));
 
 var app = builder.Build();
 
