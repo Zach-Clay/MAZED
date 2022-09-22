@@ -15,6 +15,9 @@ namespace api_backend.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
+
+        //THIS WILL BE IN EVERY CONTROLLER FILE --
+        //USED TO GET THE CONNECTION STRING FROM appsettings.json
         private IConfiguration Configuration;
         public UsersController(IConfiguration _configuration)
         {
@@ -52,6 +55,7 @@ namespace api_backend.Controllers
             {
                 Console.WriteLine(ex.ToString());
             }
+
             connection.Close();
             return Ok(user);
         }
