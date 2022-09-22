@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Extensions.Configuration;
 using api_backend.Models;
 using MySqlConnector;
 using api_backend;
@@ -8,24 +7,28 @@ namespace api_backend.Logic
 {
     public class UserLogic
     {
-        //Get user with id = id
+        //Get user with username = username
         public static User getUser(string username)
         {
+            //Get the conn info
             string connStr = DBContext.ConnectionString();
             MySqlConnection conn = new MySqlConnection(connStr);
 
+            //create a user to return
             var user = new User();
             try
             {
+                //Open the connection
                 conn.Open();
 
+                //Create sql command
                 string sql = "SELECT * FROM TEAM2_DB.users WHERE Username=@username";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-                //add parameters
+                //add parameters (this removes the possibility of SQL injection)
                 cmd.Parameters.AddWithValue("@username", username);
 
-
+                //Execute the query and read the data
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -41,6 +44,8 @@ namespace api_backend.Logic
                     user.Pronouns = rdr["UserPronouns"].ToString();
                     user.Pwd = rdr["UserPwd"].ToString();
                 }
+
+                //close the reader
                 rdr.Close();
             }
             catch (Exception ex)
@@ -48,7 +53,10 @@ namespace api_backend.Logic
                 Console.WriteLine(ex.ToString());
             }
 
+            //close the conection
             conn.Close();
+
+            //return the user
             return user;
         }//end getUser
     }

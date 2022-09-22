@@ -3,10 +3,7 @@ namespace api_backend
 {
     public class DBContext
     {
-        public DBContext()
-        {
-        }
-
+        //Returns the connection string for the DB
         public static string ConnectionString()
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
@@ -14,7 +11,6 @@ namespace api_backend
             IConfiguration config = builder.Build();
 
             return config.GetValue<string>("ConnectionStrings:DB");
-        }
+        }//end ConnectionString
     }
 }
-

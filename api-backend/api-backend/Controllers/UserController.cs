@@ -17,6 +17,7 @@ namespace api_backend.Controllers
     public class UserController : Controller
     {
 
+        //Get the user based off username
         [HttpGet]
         [Route("username")]
         public IActionResult GetUser(string username)
