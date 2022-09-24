@@ -1,4 +1,5 @@
 ﻿using api_backend.Models;
+using MazedDB.Models;
 using Microsoft.EntityFrameworkCore;
 namespace api_backend.Data
 {

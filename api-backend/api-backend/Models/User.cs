@@ -1,32 +1,30 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
-namespace api_backend.Models
+namespace MazedDB.Models
 {
-    public class User
+    public partial class User
     {
+        public User()
+        {
+            DriverOrders = new HashSet<DriverOrder>();
+            PointTransactions = new HashSet<PointTransaction>();
+        }
+
         public int Id { get; set; }
+        public int? SponsorId { get; set; }
+        public string Username { get; set; } = null!;
+        public string UserFname { get; set; } = null!;
+        public string UserLname { get; set; } = null!;
+        public string UserType { get; set; } = null!;
+        public string? UserAddress { get; set; }
+        public string? UserEmail { get; set; }
+        public string? UserPhoneNum { get; set; }
+        public string? UserPronouns { get; set; }
+        public string UserPwd { get; set; } = null!;
 
-        public string? FName { get; set; }
-
-        public string? LName { get; set; }
-
-        public string? Username { get; set; }
-
-        public int SponsorID { get; set; }
-
-        public string? Type { get; set; }
-
-        public string? Address { get; set; }
-
-        public string? Email { get; set; }
-
-        public string? Phonenum { get; set; }
-
-        public string? Pronouns { get; set; }
-
-        public string? Pwd { get; set; }
-
+        public virtual SponsorOrg? Sponsor { get; set; }
+        public virtual ICollection<DriverOrder> DriverOrders { get; set; }
+        public virtual ICollection<PointTransaction> PointTransactions { get; set; }
     }
 }
-

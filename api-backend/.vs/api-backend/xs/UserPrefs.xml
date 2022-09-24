@@ -1,16 +1,25 @@
 ﻿<Properties StartupConfiguration="{2703C320-98CB-43A7-8319-A193DC54EC6E}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.api-backend PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="api-backend/Controllers/UsersController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="api-backend/Controllers/UserController2.cs">
     <Files>
-      <File FileName="api-backend/Models/Users.cs" Line="8" Column="37" />
-      <File FileName="api-backend/Data/UsersAPIDBContext.cs" Line="16" Column="1" />
-      <File FileName="api-backend/Program.cs" Line="18" Column="3" />
-      <File FileName="api-backend/Controllers/UsersController.cs" Line="41" Column="14" />
+      <File FileName="api-backend/Data/UsersAPIDBContext.cs" Line="17" Column="1" />
+      <File FileName="api-backend/Program.cs" Line="33" Column="68" />
+      <File FileName="api-backend/Controllers/UserController.cs" Line="46" Column="10" />
+      <File FileName="api-backend/Logic/UserLogic.cs" Line="104" Column="1" />
+      <File FileName="api-backend/Models/User.cs" Line="24" Column="30" />
+      <File FileName="api-backend/appsettings.json" Line="10" Column="69" />
+      <File FileName="api-backend/Models/Product.cs" Line="1" Column="1" />
+      <File FileName="api-backend/Models/UpdateUsersRequest.cs" Line="1" Column="1" />
+      <File FileName="api-backend/Models/SponsorOrg.cs" Line="1" Column="1" />
+      <File FileName="api-backend/Models/PointTransaction.cs" Line="1" Column="1" />
+      <File FileName="api-backend/Models/DriverOrder.cs" Line="12" Column="47" />
+      <File FileName="api-backend/Models/Catalogue.cs" Line="1" Column="1" />
+      <File FileName="api-backend/Models/Application.cs" Line="1" Column="1" />
+      <File FileName="api-backend/Models/AddUsersRequest.cs" Line="1" Column="1" />
+      <File FileName="api-backend/Data/MazedDBContext.cs" Line="29" Column="80" />
+      <File FileName="api-backend/Properties/launchSettings.json" Line="17" Column="11" />
+      <File FileName="api-backend/Controllers/UserController2.cs" Line="134" Column="1" />
+      <File FileName="api-backend/Procedures/UserOrderHistory.cs" Line="7" Column="1" />
+      <File FileName="api-backend/Procedures/MazedDBContextProcedures.cs" Line="6" Column="40" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,8 +29,8 @@
               <Node name="Controllers" expanded="True" />
               <Node name="Data" expanded="True" />
               <Node name="Logic" expanded="True" />
-              <Node name="Migrations" expanded="True" />
               <Node name="Models" expanded="True" />
+              <Node name="Procedures" expanded="True" />
               <Node name="Properties" expanded="True" />
             </Node>
           </Node>
@@ -32,5 +41,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.api-backend PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
