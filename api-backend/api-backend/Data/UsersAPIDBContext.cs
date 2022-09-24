@@ -9,9 +9,8 @@ namespace api_backend.Data
         {
         }
 
-        public DbSet<users> Users{ get; set; }
+        public DbSet<User> Users{ get; set; }
     }
 }
 
 
- 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_backend.Models
 {
-    public class users
+    public class User
     {
         public int Id { get; set; }
 
@@ -15,17 +15,17 @@ namespace api_backend.Models
 
         public int SponsorID { get; set; }
 
-        public string? UserType { get; set; }
+        public string? Type { get; set; }
 
-        public string? UserAddress { get; set; }
+        public string? Address { get; set; }
 
-        public string? UserEmail { get; set; }
+        public string? Email { get; set; }
 
-        public string? UserPhonenum { get; set; }
+        public string? Phonenum { get; set; }
 
-        public string? UserPronouns { get; set; }
+        public string? Pronouns { get; set; }
 
-        public string? UserPwd { get; set; }
+        public string? Pwd { get; set; }
 
     }
 }
