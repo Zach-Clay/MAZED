@@ -21,6 +21,7 @@
             type="button"
             class="btn bg-transparent font-italic"
             style="color: var(--primary-color)"
+            (click)="forgotUsername()"
           >
             reset username
           </button>
@@ -39,6 +40,7 @@
             type="button"
             class="btn bg-transparent font-italic"
             style="color: var(--primary-color)"
+            (click)="forgotPassword()"
           >
             reset password
           </button>
@@ -47,10 +49,7 @@
       </form>
     </div>
   </div>
-
-  <br />
-  <div class="register">
-    <a [routerLink]="['/register']">New User? Create an account here</a>
-  </div>
-
+</div>
+<div class="register mt-3">
+  <a [routerLink]="['/register']">New User? Create an account here</a>
 </div>

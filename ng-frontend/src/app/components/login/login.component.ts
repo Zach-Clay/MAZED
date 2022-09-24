@@ -12,6 +12,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  forgotUsername() {
+    alert('Forgot username');
+  }
+  forgotPassword() {
+    alert('Forgot password');
+  }
+
   onSubmit() {
     if (!this.username) {
       alert('Please enter your username!');
