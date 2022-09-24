@@ -7,6 +7,7 @@ using api_backend.Data;
 using api_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using api_backend.Logic;
+using MazedDB.Models;
 
 namespace api_backend.Controllers
 {

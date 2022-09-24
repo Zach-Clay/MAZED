@@ -2,6 +2,7 @@
 using api_backend.Models;
 using MySqlConnector;
 using api_backend;
+using MazedDB.Models;
 
 namespace api_backend.Logic
 {
@@ -33,16 +34,16 @@ namespace api_backend.Logic
                 while (rdr.Read())
                 {
                     user.Id = (int)rdr["Id"];
-                    if (rdr["SponsorID"].ToString() != "") user.SponsorID = (int)rdr["SponsorID"];
+                    if (rdr["SponsorID"].ToString() != "") user.SponsorId = (int)rdr["SponsorID"];
                     user.Username = rdr["Username"].ToString();
-                    user.FName = rdr["UserFName"].ToString();
-                    user.LName = rdr["UserLName"].ToString();
-                    user.Type = rdr["UserType"].ToString();
-                    user.Address = rdr["UserAddress"].ToString();
-                    user.Email = rdr["UserLName"].ToString();
-                    user.Phonenum = rdr["UserPhoneNum"].ToString();
-                    user.Pronouns = rdr["UserPronouns"].ToString();
-                    user.Pwd = rdr["UserPwd"].ToString();
+                    user.UserFname = rdr["UserFName"].ToString();
+                    user.UserLname = rdr["UserLName"].ToString();
+                    user.UserType = rdr["UserType"].ToString();
+                    user.UserAddress = rdr["UserAddress"].ToString();
+                    user.UserEmail = rdr["UserLName"].ToString();
+                    user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
+                    user.UserPronouns = rdr["UserPronouns"].ToString();
+                    user.UserPwd = rdr["UserPwd"].ToString();
                 }
 
                 //close the reader
@@ -76,17 +77,17 @@ namespace api_backend.Logic
                     "@Email, @Phonenum, @Pronouns, @Pwd)";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", user.Id);
-                if (user.SponsorID == 0) cmd.Parameters.AddWithValue("@SponsorId", null);
-                else cmd.Parameters.AddWithValue("@SponsorId", user.SponsorID);
+                if (user.SponsorId == 0) cmd.Parameters.AddWithValue("@SponsorId", null);
+                else cmd.Parameters.AddWithValue("@SponsorId", user.SponsorId);
                 cmd.Parameters.AddWithValue("@Username", user.Username);
-                cmd.Parameters.AddWithValue("@FName", user.FName);
-                cmd.Parameters.AddWithValue("@LName", user.LName);
-                cmd.Parameters.AddWithValue("@Type", user.Type);
-                cmd.Parameters.AddWithValue("@Address", user.Address);
-                cmd.Parameters.AddWithValue("@Email", user.Email);
-                cmd.Parameters.AddWithValue("@Phonenum", user.Phonenum);
-                cmd.Parameters.AddWithValue("@Pronouns", user.Pronouns);
-                cmd.Parameters.AddWithValue("@Pwd", user.Pwd);
+                cmd.Parameters.AddWithValue("@FName", user.UserFname);
+                cmd.Parameters.AddWithValue("@LName", user.UserLname);
+                cmd.Parameters.AddWithValue("@Type", user.UserType);
+                cmd.Parameters.AddWithValue("@Address", user.UserAddress);
+                cmd.Parameters.AddWithValue("@Email", user.UserEmail);
+                cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
+                cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
+                cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
 
                 //Execute the command
                 ret = cmd.ExecuteNonQuery();
@@ -100,5 +101,6 @@ namespace api_backend.Logic
 
             return ret;
         }//end addUser
+
     }
 }

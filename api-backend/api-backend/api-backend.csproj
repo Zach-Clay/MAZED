@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
@@ -25,6 +26,7 @@
     <PackageReference Include="MySql.Data" Version="8.0.30" />
     <PackageReference Include="MySqlConnector" Version="2.1.13" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.9" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,11 +44,14 @@
     <None Remove="MySqlConnector" />
     <None Remove="Migrations\" />
     <None Remove="Microsoft.Extensions.Configuration.Json" />
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Logic\" />
     <Folder Include="Data\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Procedures\" />
   </ItemGroup>
 </Project>
