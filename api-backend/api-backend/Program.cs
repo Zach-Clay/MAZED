@@ -30,6 +30,7 @@ builder.Services.AddMvc(option => option.EnableEndpointRouting = false)
     .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
 
+//service for our procedure just as we did for our original context
 //builder.Services.AddDbContext<MazedDBContextProcedures>(
 //options =>
 //{
