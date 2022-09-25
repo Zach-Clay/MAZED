@@ -17,8 +17,7 @@ namespace api_backend.Controllers
     {
 
         //Get the user based off username
-        [HttpGet]
-        [Route("Id")]
+        [HttpGet("{id}")]
         public IActionResult GetUser(int Id)
         {
             try
@@ -46,8 +45,7 @@ namespace api_backend.Controllers
         }
 
         //Change user on the DB
-        [HttpPut]
-        [Route("Id")]
+        [HttpPut("{id}")]
         public IActionResult ChangeUser(int Id, [FromBody] User user)
         {
             try
@@ -60,20 +58,19 @@ namespace api_backend.Controllers
             }
         }
 
-        ////Delete user from the DB
-        //[HttpDelete]
-        //[Route("Id")]
-        //public IActionResult DeleteUser([FromBody] User user)
-        //{
-        //    try
-        //    {
-        //        return Ok(UserLogic.addUser(user));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex);
-        //    }
-        //}
+        //Delete user from the DB
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser([FromBody] User user)
+        {
+            try
+            {
+                return Ok(UserLogic.addUser(user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
 
     }
 }

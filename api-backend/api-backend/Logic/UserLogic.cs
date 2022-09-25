@@ -148,7 +148,39 @@ namespace api_backend.Logic
 
             conn.Close();
             return ret;
-        }
+        }//CHANGE USER END
+
+
+        //Change user with their id
+        public static int deleteUser(int Id, User user)
+        {
+            //Get the conn info
+            string connStr = DBContext.ConnectionString();
+            MySqlConnection conn = new MySqlConnection(connStr);
+
+            int ret = 0;
+
+            try
+            {
+                //Open the connection
+                conn.Open();
+
+                //Create sql command
+                string sql = "DELETE FROM TEAM2_DB.users WHERE Id = @Id";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                //Execute the command
+                ret = cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            return ret;
+        }//DELETE USER END
 
     }
 }
