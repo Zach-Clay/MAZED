@@ -3,13 +3,14 @@ using api_backend.Models;
 using MySqlConnector;
 using api_backend;
 using MazedDB.Models;
+using Org.BouncyCastle.Ocsp;
 
 namespace api_backend.Logic
 {
     public class UserLogic
     {
-        //Get user with username = username
-        public static User getUser(string username)
+        //Get user with their id
+        public static User getUser(int Id)
         {
             //Get the conn info
             string connStr = DBContext.ConnectionString();
@@ -23,11 +24,11 @@ namespace api_backend.Logic
                 conn.Open();
 
                 //Create sql command
-                string sql = @"SELECT * FROM TEAM2_DB.users WHERE Username=@username";
+                string sql = @"SELECT * FROM TEAM2_DB.users WHERE Id=@Id";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 //add parameters (this removes the possibility of SQL injection)
-                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@Id", Id);
 
                 //Execute the query and read the data
                 MySqlDataReader rdr = cmd.ExecuteReader();
@@ -101,6 +102,53 @@ namespace api_backend.Logic
 
             return ret;
         }//end addUser
+
+        //Change user with their id
+        public static int changeUser(int Id, User user)
+        {
+            //Get the conn info
+            string connStr = DBContext.ConnectionString();
+            MySqlConnection conn = new MySqlConnection(connStr);
+
+            int ret = 0;
+
+            try
+            {
+                //Open the connection
+                conn.Open();
+
+                //Create sql command
+                string sql = "UPDATE TEAM2_DB.users SET" +
+                    "(@Id, @SponsorId, @Username, @FName, @LName, @Type, " +
+                    "@Address, @Email, @Phonenum, @Pronouns, @Pwd) WHERE " +
+                    "Id = @Id";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@Id", user.Id);
+                if (user.SponsorId == 0) cmd.Parameters.AddWithValue("@SponsorId", null);
+                else cmd.Parameters.AddWithValue("@SponsorId", user.SponsorId);
+                cmd.Parameters.AddWithValue("@Username", user.Username);
+                cmd.Parameters.AddWithValue("@FName", user.UserFname);
+                cmd.Parameters.AddWithValue("@LName", user.UserLname);
+                cmd.Parameters.AddWithValue("@Type", user.UserType);
+                cmd.Parameters.AddWithValue("@Address", user.UserAddress);
+                cmd.Parameters.AddWithValue("@Email", user.UserEmail);
+                cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
+                cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
+                cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
+
+                //Execute the command
+                ret = cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            return ret;
+        }
 
     }
 }
