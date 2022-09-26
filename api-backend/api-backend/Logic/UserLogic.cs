@@ -65,8 +65,16 @@ namespace api_backend.Logic
         //Add user to the db
         public static int addUser(User user)
         {
+
+            //WE WILL WANT TO MODIFY THIS TO BE REGISTER AS A USER
             string connStr = DBContext.ConnectionString();
             MySqlConnection conn = new MySqlConnection(connStr);
+
+
+            //CreatePwdHash(request.Pwd, out byte[] pwdHash, out byte[] pwdSalt);
+
+            //random token
+            //Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
 
             int ret = 0;
             try
@@ -102,6 +110,18 @@ namespace api_backend.Logic
 
             return ret;
         }//end addUser
+
+
+        ////function to hash for security
+        //public void CreatePwdHash(string pwd, out byte[] pwdHash, out byte[] pwdSalt)
+        //{
+        //    using(var hmac = new HMACSHA512())
+        //    {
+        //        pwdSalt = hmac.Key;
+        //        pwdHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pwd));
+        //    }
+        //}
+
 
         //Change user with their id
         public static int changeUser(int Id, User user)
@@ -181,6 +201,56 @@ namespace api_backend.Logic
             conn.Close();
             return ret;
         }//DELETE USER END
+
+
+
+        ////AUSER LOGIN
+        //public static string userLogin(User user)
+        //{
+
+        //    //WE WILL WANT TO MODIFY THIS TO BE REGISTER AS A USER
+        //    string connStr = DBContext.ConnectionString();
+        //    MySqlConnection conn = new MySqlConnection(connStr);
+
+            
+
+        //    //CreatePwdHash(request.Pwd, out byte[] pwdHash, out byte[] pwdSalt);
+
+        //    //random token
+        //    //Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
+
+        //    string ret = "";
+        //    try
+        //    {
+        //        conn.Open();
+
+        //        if(!VerifyPwdHash(user.UserPwd, user.pwdHash, user.pwdSalt))
+        //        {
+        //            return BadHttpRequestException("Password is incorrect");
+        //        }
+
+        //        ret = "Welcome back," + user.UserFname + user.UserLname + "!";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.ToString());
+        //    }
+
+        //    conn.Close();
+
+        //    return ret;
+        //}//end Login user
+
+
+        //function to hash for security
+        //public bool VerifyPwdHash(string pwd, byte[] pwdHash, byte[] pwdSalt)
+        //{
+        //    using (var hmac = new HMACSHA512(pwdSalt))
+        //    { 
+        //        var computeHash = pwdHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pwd));
+        //        return computeHash.SequenceEqual(pwdHash);
+        //    }
+        //}
 
     }
 }

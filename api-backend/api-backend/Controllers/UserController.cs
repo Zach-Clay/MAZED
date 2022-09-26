@@ -16,6 +16,7 @@ namespace api_backend.Controllers
     public class UserController : Controller
     {
 
+
         //Get the user based off username
         [HttpGet("{id}")]
         public IActionResult GetUser(int Id)
@@ -65,6 +66,20 @@ namespace api_backend.Controllers
             try
             {
                 return Ok(UserLogic.addUser(user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        //user log in user from the DB
+        [HttpPost("login")]
+        public IActionResult UserLogin([FromBody] User user)
+        {
+            try
+            {
+                return Ok(UserLogic.userLogin(user));
             }
             catch (Exception ex)
             {
