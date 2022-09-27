@@ -43,11 +43,12 @@ export class LoginService {
   }
 
   public confirmSignUp(user: UserInfo): Promise<any> {
-    return Auth.confirmSignUp(user.email, user.code);
+    console.log('inside login service');
+    return Auth.confirmSignUp(user.username, user.code);
   }
 
   public signIn(user: UserInfo): Promise<any> {
-    return Auth.signIn(user.email, user.password).then(() => {
+    return Auth.signIn(user.username, user.password).then(() => {
       this.authSubject.next(true);
     });
   }
@@ -63,15 +64,16 @@ export class LoginService {
       return Promise.resolve(true);
     } else {
       return this.getUser()
-      .then((user: any) => {
-        if (user) {
-          return true;
-        } else {
+        .then((user: any) => {
+          if (user) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+        .catch(() => {
           return false;
-        }
-      }).catch(() => {
-        return false;
-      });
+        });
     }
   }
 
@@ -80,8 +82,7 @@ export class LoginService {
   }
 
   public updateUser(user: UserInfo): Promise<any> {
-    return Auth.currentUserPoolUser()
-    .then((cognitoUser: any) => {
+    return Auth.currentUserPoolUser().then((cognitoUser: any) => {
       return Auth.updateUserAttributes(cognitoUser, user);
     });
   }
