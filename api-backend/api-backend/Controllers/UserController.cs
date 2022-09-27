@@ -14,6 +14,21 @@ namespace api_backend.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
+
+        //Get all of the users based off id
+        [HttpGet()]
+        public IActionResult GetAllUsers()
+        {
+            try
+            {
+                return Ok(UserLogic.getAllUsers());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         //Get the user based off id
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)

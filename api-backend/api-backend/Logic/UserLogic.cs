@@ -9,6 +9,55 @@ namespace api_backend.Logic
 {
     public class UserLogic
     {
+        //Get all the users
+        public static User getAllUsers()
+        {
+            //Get the conn info
+            string connStr = DBContext.ConnectionString();
+            MySqlConnection conn = new MySqlConnection(connStr);
+
+            //create a user to return
+            var user = new User();
+            try
+            {
+                //Open the connection
+                conn.Open();
+
+                //Create sql command
+                string sql = @"SELECT * FROM TEAM2_DB.users";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                //Execute the query and read the data
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    user.Id = (int)rdr["Id"];
+                    if (rdr["SponsorID"].ToString() != "") user.SponsorId = (int)rdr["SponsorID"];
+                    user.Username = rdr["Username"].ToString();
+                    user.UserFname = rdr["UserFName"].ToString();
+                    user.UserLname = rdr["UserLName"].ToString();
+                    user.UserType = rdr["UserType"].ToString();
+                    user.UserAddress = rdr["UserAddress"].ToString();
+                    user.UserEmail = rdr["UserEmail"].ToString();
+                    user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
+                    user.Blacklist = (int)rdr["blacklist"];
+                }
+
+                //close the reader
+                rdr.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            //close the conection
+            conn.Close();
+
+            //return the user
+            return user;
+        }//end getAllUsers
+
         //Get user with their id
         public static User getUser(int Id)
         {
