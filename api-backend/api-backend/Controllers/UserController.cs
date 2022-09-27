@@ -7,6 +7,7 @@ using api_backend.Data;
 using api_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using api_backend.Logic;
+using MazedDB.Models;
 
 namespace api_backend.Controllers
 {
@@ -15,14 +16,14 @@ namespace api_backend.Controllers
     public class UserController : Controller
     {
 
+
         //Get the user based off username
-        [HttpGet]
-        [Route("username")]
-        public IActionResult GetUser(string username)
+        [HttpGet("{id}")]
+        public IActionResult GetUser(int Id)
         {
             try
             {
-                return Ok(UserLogic.getUser(username));
+                return Ok(UserLogic.getUser(Id));
             }
             catch (Exception ex)
             {
@@ -37,6 +38,48 @@ namespace api_backend.Controllers
             try
             {
                 return Ok(UserLogic.addUser(user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        //Change user on the DB
+        [HttpPut("{id}")]
+        public IActionResult ChangeUser(int Id, [FromBody] User user)
+        {
+            try
+            {
+                return Ok(UserLogic.changeUser(Id, user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        //Delete user from the DB
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser([FromBody] User user)
+        {
+            try
+            {
+                return Ok(UserLogic.addUser(user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        //user log in user from the DB
+        [HttpPost("login")]
+        public IActionResult UserLogin([FromBody] User user)
+        {
+            try
+            {
+                return Ok(UserLogic.userLogin(user));
             }
             catch (Exception ex)
             {
