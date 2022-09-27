@@ -41,3 +41,8 @@ span {
   background: var(--primary-color);
   color: white;
 }
+
+.displayBadge{
+  margin-top: 5%; 
+  text-align :center;
+}

@@ -10,6 +10,7 @@ import {
   CognitoUserAttribute,
 } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-user-registration',
@@ -25,11 +26,18 @@ export class UserRegistrationComponent implements OnInit {
   public password: any = '';
   public repeat_password: any = '';
   public gender: any = '';
-  public phone: any = '';
+  public phone: any = '+1';
   public address: any = '';
   public date: any = '';
   public confirmationCode: any = '';
   user: UserInfo;
+  
+  public timeout: any;
+  public strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
+  public mediumPassword = new RegExp('((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))');
+  public displayType: string = 'none';
+  public strengthColor: string = 'red';
+  public strengthText: string = 'Weak';
 
   constructor(private router: Router, private loginService: LoginService) {
     this.user = {} as UserInfo;
@@ -54,6 +62,13 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   onSubmit = () => {
+    this.formatPhone();
+    
+    if (this.strengthColor !== 'green') {
+      alert('Password must be at least 8 characters long, contain at least one uppercase letter, contain at least one lowercase letter, contain at least one digit, and contain at least one special character');
+      return;
+    }
+
     if (
       !this.name ||
       !this.username ||
@@ -146,4 +161,34 @@ export class UserRegistrationComponent implements OnInit {
         this.loading = false;
       });
   }
+
+   StrengthChecker = (PasswordParameter:any) => {
+    if(this.strongPassword.test(PasswordParameter)) {
+        this.strengthColor = "green";
+        this.strengthText = 'Strong';
+    } else if(this.mediumPassword.test(PasswordParameter)) {
+        this.strengthColor = 'blue';
+        this.strengthText = 'Medium';
+    } else {
+        this.strengthColor = 'red';
+        this.strengthText = 'Weak';
+    }
+  }
+  
+  eventListener = () => {
+    this.displayType = 'block';
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => this.StrengthChecker(this.password), 500);
+    if(this.password.length !== 0) {
+      this.displayType != 'block';
+    } else {
+      this.displayType = 'none';
+    }
+  }
+
+  //Removes everyhing but + and numbers
+  formatPhone = () => {
+    this.phone = this.phone.replace(/[^+\d]+/g, "");
+  }
+
 }

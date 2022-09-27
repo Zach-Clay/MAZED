@@ -61,7 +61,15 @@
         class="field"
         required
         [(ngModel)]="password"
+        (keyup)="eventListener()"
       />
+      <span 
+        #strengthDisp id="StrengthDisp" 
+        class="badge displayBadge"
+        [ngStyle]="{'display': displayType, 'backgroundColor': strengthColor}"
+        >
+        {{strengthText}}
+      </span>
       <br />
       <br />
 
