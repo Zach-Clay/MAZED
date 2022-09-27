@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
-using api_backend.Data;
 using api_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using api_backend.Logic;
