@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
       .then(() => {
         this.router.navigate(['/register']);
       })
-      .catch(() => {
+      .catch((err) => {
+        alert(err);
         this.loading = false;
       });
   }
