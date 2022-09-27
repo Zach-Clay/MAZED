@@ -17,13 +17,13 @@ namespace api_backend.Controllers
     {
 
 
-        //Get the user based off username
+        //Get the user based off id
         [HttpGet("{id}")]
-        public IActionResult GetUser(int Id)
+        public IActionResult GetUser(int id)
         {
             try
             {
-                return Ok(UserLogic.getUser(Id));
+                return Ok(UserLogic.getUser(id));
             }
             catch (Exception ex)
             {
@@ -47,11 +47,11 @@ namespace api_backend.Controllers
 
         //Change user on the DB
         [HttpPut("{id}")]
-        public IActionResult ChangeUser(int Id, [FromBody] User user)
+        public IActionResult ChangeUser(int id, [FromBody] User user)
         {
             try
             {
-                return Ok(UserLogic.changeUser(Id, user));
+                return Ok(UserLogic.changeUser(id, user));
             }
             catch (Exception ex)
             {
@@ -59,13 +59,13 @@ namespace api_backend.Controllers
             }
         }
 
-        //Delete user from the DB
+        //Delete user from the DB with id = id
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser([FromBody] User user)
+        public IActionResult DeleteUser(int id)
         {
             try
             {
-                return Ok(UserLogic.addUser(user));
+                return Ok(UserLogic.deleteUser(id));
             }
             catch (Exception ex)
             {
@@ -79,7 +79,8 @@ namespace api_backend.Controllers
         {
             try
             {
-                return Ok(UserLogic.userLogin(user));
+                //return Ok(UserLogic.userLogin(user));
+                return Ok();
             }
             catch (Exception ex)
             {

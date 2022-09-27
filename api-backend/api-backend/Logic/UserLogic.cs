@@ -172,7 +172,7 @@ namespace api_backend.Logic
 
 
         //Change user with their id
-        public static int deleteUser(int Id, User user)
+        public static int deleteUser(int Id)
         {
             //Get the conn info
             string connStr = DBContext.ConnectionString();
@@ -188,6 +188,8 @@ namespace api_backend.Logic
                 //Create sql command
                 string sql = "DELETE FROM TEAM2_DB.users WHERE Id = @Id";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@Id", Id);
 
                 //Execute the command
                 ret = cmd.ExecuteNonQuery();
