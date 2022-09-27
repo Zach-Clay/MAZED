@@ -5,12 +5,6 @@ namespace MazedDB.Models
 {
     public partial class User
     {
-        public User()
-        {
-            DriverOrders = new HashSet<DriverOrder>();
-            PointTransactions = new HashSet<PointTransaction>();
-        }
-
         public int Id { get; set; }
         public int? SponsorId { get; set; }
         public string Username { get; set; } = null!;
@@ -20,11 +14,6 @@ namespace MazedDB.Models
         public string? UserAddress { get; set; }
         public string? UserEmail { get; set; }
         public string? UserPhoneNum { get; set; }
-        public string? UserPronouns { get; set; }
-        public string UserPwd { get; set; } = null!;
-
-        public virtual SponsorOrg? Sponsor { get; set; }
-        public virtual ICollection<DriverOrder> DriverOrders { get; set; }
-        public virtual ICollection<PointTransaction> PointTransactions { get; set; }
+        public int Blacklist { get; set; }
     }
 }

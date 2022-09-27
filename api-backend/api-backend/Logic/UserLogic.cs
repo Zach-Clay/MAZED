@@ -34,6 +34,7 @@ namespace api_backend.Logic
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
+                    Console.WriteLine(rdr["blacklist"]);
                     user.Id = (int)rdr["Id"];
                     if (rdr["SponsorID"].ToString() != "") user.SponsorId = (int)rdr["SponsorID"];
                     user.Username = rdr["Username"].ToString();
@@ -41,10 +42,9 @@ namespace api_backend.Logic
                     user.UserLname = rdr["UserLName"].ToString();
                     user.UserType = rdr["UserType"].ToString();
                     user.UserAddress = rdr["UserAddress"].ToString();
-                    user.UserEmail = rdr["UserLName"].ToString();
+                    user.UserEmail = rdr["UserEmail"].ToString();
                     user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
-                    user.UserPronouns = rdr["UserPronouns"].ToString();
-                    user.UserPwd = rdr["UserPwd"].ToString();
+                    user.Blacklist = (int)rdr["blacklist"];
                 }
 
                 //close the reader
@@ -63,18 +63,10 @@ namespace api_backend.Logic
         }//end getUser
 
         //Add user to the db
-        public static int addUser(User user)
+        public static int registerUser(User user)
         {
-
-            //WE WILL WANT TO MODIFY THIS TO BE REGISTER AS A USER
             string connStr = DBContext.ConnectionString();
             MySqlConnection conn = new MySqlConnection(connStr);
-
-
-            //CreatePwdHash(request.Pwd, out byte[] pwdHash, out byte[] pwdSalt);
-
-            //random token
-            //Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
 
             int ret = 0;
             try
@@ -83,7 +75,7 @@ namespace api_backend.Logic
 
                 string sql = "INSERT INTO TEAM2_DB.users VALUES (" +
                     "@Id, @SponsorId, @Username, @FName, @LName, @Type, @Address, " +
-                    "@Email, @Phonenum, @Pronouns, @Pwd)";
+                    "@Email, @Phonenum, @Blacklist)";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", user.Id);
                 if (user.SponsorId == 0) cmd.Parameters.AddWithValue("@SponsorId", null);
@@ -95,8 +87,7 @@ namespace api_backend.Logic
                 cmd.Parameters.AddWithValue("@Address", user.UserAddress);
                 cmd.Parameters.AddWithValue("@Email", user.UserEmail);
                 cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
-                cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
-                cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
+                cmd.Parameters.AddWithValue("@Blacklist", 0);
 
                 //Execute the command
                 ret = cmd.ExecuteNonQuery();
@@ -154,8 +145,6 @@ namespace api_backend.Logic
                 cmd.Parameters.AddWithValue("@Address", user.UserAddress);
                 cmd.Parameters.AddWithValue("@Email", user.UserEmail);
                 cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
-                cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
-                cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
 
                 //Execute the command
                 ret = cmd.ExecuteNonQuery();

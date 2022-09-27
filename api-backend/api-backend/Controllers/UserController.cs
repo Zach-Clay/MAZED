@@ -15,8 +15,6 @@ namespace api_backend.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-
-
         //Get the user based off id
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)
@@ -31,13 +29,13 @@ namespace api_backend.Controllers
             }
         }
 
-        //Add user to the DB
+        //Register user to the DB
         [HttpPost]
         public IActionResult AddUser([FromBody]User user)
         {
             try
             {
-                return Ok(UserLogic.addUser(user));
+                return Ok(UserLogic.registerUser(user));
             }
             catch (Exception ex)
             {

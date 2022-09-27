@@ -35,14 +35,12 @@
     <None Remove="Pomelo.EntityFrameworkCore.MySql" />
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Microsoft.EntityFrameworkCore.InMemory" />
-    <None Remove="Data\" />
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="MySql.Data" />
     <None Remove="MySqlConnector" />
-    <None Remove="Migrations\" />
     <None Remove="Microsoft.Extensions.Configuration.Json" />
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     <None Remove="Procedures\" />
@@ -50,8 +48,6 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Logic\" />
-    <Folder Include="Data\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Procedures\" />
   </ItemGroup>
 </Project>
