@@ -72,9 +72,9 @@ namespace api_backend.Logic
             {
                 conn.Open();
 
-                string sql = "INSERT INTO TEAM2_DB.users VALUES (" +
-                    "@Id, @SponsorId, @Username, @FName, @LName, @Type, @Address, " +
-                    "@Email, @Phonenum, @Blacklist)";
+                string sql = @"INSERT INTO TEAM2_DB.users VALUES (
+                    @Id, @SponsorId, @Username, @FName, @LName, @Type, @Address,
+                    @Email, @Phonenum, @Blacklist)";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", user.Id);
                 if (user.SponsorId == 0) cmd.Parameters.AddWithValue("@SponsorId", null);
