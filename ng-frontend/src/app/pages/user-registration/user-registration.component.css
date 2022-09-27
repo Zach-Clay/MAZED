@@ -26,11 +26,18 @@ span {
   border-color: var(--primary-color);
 }
 
-.submit {
+.submit-button {
   background-color: var(--primary-color);
   padding: 5px;
   font-size: 20px;
+  width: 50%;
+  height: 35px;
   color: white;
   border-color: var(--primary-color);
-  border-radius: 0.5em;
+  border-radius: 0.25em;
+}
+
+.confirm-button {
+  background: var(--primary-color);
+  color: white;
 }

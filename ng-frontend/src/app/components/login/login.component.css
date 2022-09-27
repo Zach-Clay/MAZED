@@ -54,3 +54,9 @@ form {
 .register {
   text-align: center;
 }
+
+.show-password-button {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  border-width: 2px;
+}

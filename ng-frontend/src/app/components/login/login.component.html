@@ -11,7 +11,7 @@
         <input
           class="field"
           type="text"
-          [(ngModel)]="username"
+          [(ngModel)]="user.username"
           name="username"
           id="username"
           placeholder="username"
@@ -28,13 +28,26 @@
         </div>
 
         <input
-          class="field"
-          type="password"
-          [(ngModel)]="password"
+          class="field w-75"
+          [type]="user.showPassword ? 'text' : 'password'"
+          [(ngModel)]="user.password"
           name="password"
           id="password"
           placeholder="password"
         />
+        <button
+          type="button"
+          class="btn btn-outline-secondary mb-1 show-password-button"
+          (click)="user.showPassword = !user.showPassword"
+        >
+          <i
+            class="bi"
+            [ngClass]="{
+              'bi-eye-fill': !user.showPassword,
+              'bi-eye-slash-fill': user.showPassword
+            }"
+          ></i>
+        </button>
         <div class="forgot-password text-right">
           <button
             type="button"

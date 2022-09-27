@@ -8,7 +8,7 @@
 
 <div class="wrapper">
   <div class="register-form">
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" *ngIf="!needsConfirmation">
       <span class="lead">Name</span>
       <br />
       <input
@@ -79,6 +79,40 @@
       <br />
       <br />
 
+      <span class="lead">Gender</span>
+      <br />
+      <div id="gender-group">
+        <input
+          type="radio"
+          name="gender-group"
+          class="gender-button"
+          (click)="selectGender(0)"
+        />
+        Male <br />
+        <input
+          type="radio"
+          name="gender-group"
+          class="gender-button"
+          (click)="selectGender(1)"
+        />
+        Female <br />
+        <input
+          type="radio"
+          name="gender-group"
+          class="gender-button"
+          (click)="selectGender(2)"
+        />
+        Other <br />
+        <input
+          type="radio"
+          name="gender-group"
+          class="gender-button"
+          (click)="selectGender(3)"
+        />
+        Prefer not to say <br />
+      </div>
+
+      <br />
       <span class="lead">Phone</span>
       <br />
       <input
@@ -119,9 +153,55 @@
       <br />
       <br />
       <div class="text-center">
-        <input type="submit" class="submit" value="Register" />
+        <button
+          type="button"
+          class="submit-button"
+          [disabled]="loading"
+          (click)="onSubmit()"
+        >
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+            *ngIf="loading"
+          ></span>
+          Register
+        </button>
       </div>
     </form>
+    <div class="card-body" *ngIf="needsConfirmation">
+      <div class="row">
+        <div class="col mb-2">
+          <label for="code" class="form-label">Enter code from email:</label>
+          <input
+            type="text"
+            id="code"
+            name="code"
+            #code="ngModel"
+            [(ngModel)]="confirmationCode"
+            class="form-control form-control-sm"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-grid">
+          <button
+            type="button"
+            (click)="confirmSignup()"
+            class="btn btn-sm confirm-button"
+            [disabled]="loading"
+          >
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+              *ngIf="loading"
+            ></span>
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
