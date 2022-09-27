@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private loginService: LoginService) {
     this.loading = false;
     this.user = {} as UserInfo;
-   }
+  }
 
   ngOnInit(): void {}
 
@@ -40,14 +40,16 @@ export class LoginComponent implements OnInit {
   }
 
   public signIn(): void {
-    console.log("SIGN IN");
+    console.log('SIGN IN');
     console.log(this.user);
     this.loading = true;
-    this.loginService.signIn(this.user)
-    .then(() => {
-      this.router.navigate(['/profile']);
-    }).catch(() => {
-      this.loading = false;
-    });
+    this.loginService
+      .signIn(this.user)
+      .then(() => {
+        this.router.navigate(['/register']);
+      })
+      .catch(() => {
+        this.loading = false;
+      });
   }
 }

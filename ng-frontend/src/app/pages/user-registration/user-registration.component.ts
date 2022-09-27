@@ -31,10 +31,14 @@ export class UserRegistrationComponent implements OnInit {
   public date: any = '';
   public confirmationCode: any = '';
   user: UserInfo;
-  
+
   public timeout: any;
-  public strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
-  public mediumPassword = new RegExp('((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))');
+  public strongPassword = new RegExp(
+    '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})'
+  );
+  public mediumPassword = new RegExp(
+    '((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))'
+  );
   public displayType: string = 'none';
   public strengthColor: string = 'red';
   public strengthText: string = 'Weak';
@@ -63,9 +67,11 @@ export class UserRegistrationComponent implements OnInit {
 
   onSubmit = () => {
     this.formatPhone();
-    
+
     if (this.strengthColor !== 'green') {
-      alert('Password must be at least 8 characters long, contain at least one uppercase letter, contain at least one lowercase letter, contain at least one digit, and contain at least one special character');
+      alert(
+        'Password must be at least 8 characters long, contain at least one uppercase letter, contain at least one lowercase letter, contain at least one digit, and contain at least one special character'
+      );
       return;
     }
 
@@ -151,44 +157,46 @@ export class UserRegistrationComponent implements OnInit {
 
   confirmSignup() {
     this.loading = true;
-    this.loading = true;
+    this.user.code = this.confirmationCode;
+    console.log('clicked buttton');
     this.loginService
       .confirmSignUp(this.user)
-      .then(() => {
+      .then((success) => {
+        console.log(success);
         this.router.navigate(['/']);
       })
-      .catch(() => {
+      .catch((error) => {
         this.loading = false;
+        console.log(error);
       });
   }
 
-   StrengthChecker = (PasswordParameter:any) => {
-    if(this.strongPassword.test(PasswordParameter)) {
-        this.strengthColor = "green";
-        this.strengthText = 'Strong';
-    } else if(this.mediumPassword.test(PasswordParameter)) {
-        this.strengthColor = 'blue';
-        this.strengthText = 'Medium';
+  StrengthChecker = (PasswordParameter: any) => {
+    if (this.strongPassword.test(PasswordParameter)) {
+      this.strengthColor = 'green';
+      this.strengthText = 'Strong';
+    } else if (this.mediumPassword.test(PasswordParameter)) {
+      this.strengthColor = 'blue';
+      this.strengthText = 'Medium';
     } else {
-        this.strengthColor = 'red';
-        this.strengthText = 'Weak';
+      this.strengthColor = 'red';
+      this.strengthText = 'Weak';
     }
-  }
-  
+  };
+
   eventListener = () => {
     this.displayType = 'block';
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => this.StrengthChecker(this.password), 500);
-    if(this.password.length !== 0) {
+    if (this.password.length !== 0) {
       this.displayType != 'block';
     } else {
       this.displayType = 'none';
     }
-  }
+  };
 
   //Removes everyhing but + and numbers
   formatPhone = () => {
-    this.phone = this.phone.replace(/[^+\d]+/g, "");
-  }
-
+    this.phone = this.phone.replace(/[^+\d]+/g, '');
+  };
 }
