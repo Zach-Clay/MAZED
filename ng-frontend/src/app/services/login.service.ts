@@ -57,4 +57,32 @@ export class LoginService {
       this.authSubject.next(false);
     });
   }
+
+  public isAuthenticated(): Promise<boolean> {
+    if (this.authSubject.value) {
+      return Promise.resolve(true);
+    } else {
+      return this.getUser()
+      .then((user: any) => {
+        if (user) {
+          return true;
+        } else {
+          return false;
+        }
+      }).catch(() => {
+        return false;
+      });
+    }
+  }
+
+  public getUser(): Promise<any> {
+    return Auth.currentUserInfo();
+  }
+
+  public updateUser(user: UserInfo): Promise<any> {
+    return Auth.currentUserPoolUser()
+    .then((cognitoUser: any) => {
+      return Auth.updateUserAttributes(cognitoUser, user);
+    });
+  }
 }
