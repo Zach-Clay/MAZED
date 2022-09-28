@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +33,8 @@ namespace api_backend.Controllers
             {
                 return NotFound();
             }
-            return await _context.Users.ToListAsync();
+
+            return await _context.Users.Where(e => e.blacklist == false).ToListAsync();
         }
 
         // GET: api/UserController2/5
@@ -44,7 +47,7 @@ namespace api_backend.Controllers
             }
             var user = await _context.Users.FindAsync(id);
 
-            if (user == null)
+            if (user?.blacklist == true)
             {
                 return NotFound();
             }
@@ -92,6 +95,8 @@ namespace api_backend.Controllers
             {
                 return Problem("Entity set 'MazedDBContext.Users'  is null.");
             }
+
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -106,13 +111,14 @@ namespace api_backend.Controllers
             {
                 return NotFound();
             }
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
 
-            _context.Users.Remove(user);
+
+            //_context.Users.Remove(user);
+            user.blacklist = true;
+            //telling context the entry was modified so we then can change it
+            _context.Entry(user).State = EntityState.Modified;
+
             await _context.SaveChangesAsync();
 
             return NoContent();

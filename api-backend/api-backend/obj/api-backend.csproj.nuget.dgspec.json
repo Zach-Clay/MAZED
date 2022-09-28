@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/evanbondura/Desktop/api-backend/api-backend/api-backend.csproj": {}
+    "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/api-backend.csproj": {}
   },
   "projects": {
-    "/Users/evanbondura/Desktop/api-backend/api-backend/api-backend.csproj": {
+    "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/api-backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/evanbondura/Desktop/api-backend/api-backend/api-backend.csproj",
+        "projectUniqueName": "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/api-backend.csproj",
         "projectName": "api-backend",
-        "projectPath": "/Users/evanbondura/Desktop/api-backend/api-backend/api-backend.csproj",
+        "projectPath": "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/api-backend.csproj",
         "packagesPath": "/Users/evanbondura/.nuget/packages/",
-        "outputPath": "/Users/evanbondura/Desktop/api-backend/api-backend/obj/",
+        "outputPath": "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -42,11 +42,27 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[6.0.9, )"
             },
+            "Microsoft.Bcl.AsyncInterfaces": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Analyzers": {
               "target": "Package",
               "version": "[6.0.9, )"
             },
@@ -57,6 +73,10 @@
               "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
               "version": "[6.0.9, )"
             },
@@ -78,6 +98,14 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.9, )"
@@ -86,9 +114,25 @@
               "target": "Package",
               "version": "[8.0.30, )"
             },
+            "MySql.Data.EntityFramework": {
+              "target": "Package",
+              "version": "[8.0.22, )"
+            },
+            "MySql.Data.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.22, )"
+            },
+            "MySql.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.1.13, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",

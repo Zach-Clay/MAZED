@@ -20,11 +20,12 @@ namespace MazedDB.Models
         public string? UserAddress { get; set; }
         public string? UserEmail { get; set; }
         public string? UserPhoneNum { get; set; }
-        public string? UserPronouns { get; set; }
+        //public string? UserPronouns { get; set; }
         public string UserPwd { get; set; } = null!;
+        public bool blacklist { get; set; } = false;
 
         public virtual SponsorOrg? Sponsor { get; set; }
-        public virtual ICollection<DriverOrder> DriverOrders { get; set; }
-        public virtual ICollection<PointTransaction> PointTransactions { get; set; }
+        public virtual ICollection<DriverOrder>? DriverOrders { get; set; }
+        public virtual ICollection<PointTransaction>? PointTransactions { get; set; }
     }
 }

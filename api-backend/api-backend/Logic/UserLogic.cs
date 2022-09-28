@@ -43,7 +43,7 @@ namespace api_backend.Logic
                     user.UserAddress = rdr["UserAddress"].ToString();
                     user.UserEmail = rdr["UserLName"].ToString();
                     user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
-                    user.UserPronouns = rdr["UserPronouns"].ToString();
+                    //user.UserPronouns = rdr["UserPronouns"].ToString();
                     user.UserPwd = rdr["UserPwd"].ToString();
                 }
 
@@ -95,7 +95,7 @@ namespace api_backend.Logic
                 cmd.Parameters.AddWithValue("@Address", user.UserAddress);
                 cmd.Parameters.AddWithValue("@Email", user.UserEmail);
                 cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
-                cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
+                //cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
                 cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
 
                 //Execute the command
@@ -154,7 +154,7 @@ namespace api_backend.Logic
                 cmd.Parameters.AddWithValue("@Address", user.UserAddress);
                 cmd.Parameters.AddWithValue("@Email", user.UserEmail);
                 cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
-                cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
+                //cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
                 cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
 
                 //Execute the command

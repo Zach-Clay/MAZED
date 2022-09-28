@@ -207,7 +207,7 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.UserPhoneNum).HasMaxLength(30);
 
-                entity.Property(e => e.UserPronouns).HasMaxLength(30);
+                //entity.Property(e => e.UserPronouns).HasMaxLength(30);
 
                 entity.Property(e => e.UserPwd).HasMaxLength(30);
 
