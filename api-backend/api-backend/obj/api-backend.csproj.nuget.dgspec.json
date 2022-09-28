@@ -1,29 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/api-backend.csproj": {}
+    "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj": {}
   },
   "projects": {
-    "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/api-backend.csproj": {
+    "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/api-backend.csproj",
+        "projectUniqueName": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
         "projectName": "api-backend",
-        "projectPath": "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/api-backend.csproj",
-        "packagesPath": "/Users/evanbondura/.nuget/packages/",
-        "outputPath": "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/obj/",
+        "projectPath": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
+        "packagesPath": "/Users/zachclay/.nuget/packages/",
+        "outputPath": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "/Users/evanbondura/.nuget/NuGet/NuGet.Config"
+          "/Users/zachclay/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -42,30 +38,22 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-<<<<<<< HEAD
-=======
             "EntityFramework": {
               "target": "Package",
               "version": "[6.4.4, )"
             },
->>>>>>> Evan/Dev
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[6.0.9, )"
             },
-<<<<<<< HEAD
-=======
             "Microsoft.Bcl.AsyncInterfaces": {
               "target": "Package",
               "version": "[6.0.0, )"
             },
->>>>>>> Evan/Dev
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.9, )"
             },
-<<<<<<< HEAD
-=======
             "Microsoft.EntityFrameworkCore.Abstractions": {
               "target": "Package",
               "version": "[6.0.9, )"
@@ -74,7 +62,6 @@
               "target": "Package",
               "version": "[6.0.9, )"
             },
->>>>>>> Evan/Dev
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -85,13 +72,10 @@
               "target": "Package",
               "version": "[6.0.9, )"
             },
-<<<<<<< HEAD
-=======
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
               "version": "[6.0.9, )"
             },
->>>>>>> Evan/Dev
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.9, )"
@@ -110,11 +94,6 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
-<<<<<<< HEAD
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-              "target": "Package",
-              "version": "[6.0.10, )"
-=======
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -126,14 +105,11 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.9, )"
->>>>>>> Evan/Dev
             },
             "MySql.Data": {
               "target": "Package",
               "version": "[8.0.30, )"
             },
-<<<<<<< HEAD
-=======
             "MySql.Data.EntityFramework": {
               "target": "Package",
               "version": "[8.0.22, )"
@@ -146,18 +122,14 @@
               "target": "Package",
               "version": "[6.0.4, )"
             },
->>>>>>> Evan/Dev
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.1.13, )"
             },
-<<<<<<< HEAD
-=======
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
             },
->>>>>>> Evan/Dev
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[6.0.2, )"

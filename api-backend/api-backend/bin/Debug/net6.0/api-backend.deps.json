@@ -8,12 +8,6 @@
     ".NETCoreApp,Version=v6.0": {
       "api-backend/1.0.0": {
         "dependencies": {
-<<<<<<< HEAD
-          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.9",
-          "Microsoft.EntityFrameworkCore": "6.0.9",
-          "Microsoft.EntityFrameworkCore.Design": "6.0.9",
-          "Microsoft.EntityFrameworkCore.InMemory": "6.0.9",
-=======
           "EntityFramework": "6.4.4",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.9",
           "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
@@ -23,16 +17,10 @@
           "Microsoft.EntityFrameworkCore.Design": "6.0.9",
           "Microsoft.EntityFrameworkCore.InMemory": "6.0.9",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.9",
->>>>>>> Evan/Dev
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.9",
           "Microsoft.EntityFrameworkCore.Sqlite": "6.0.9",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.9",
           "Microsoft.Extensions.Configuration.Json": "6.0.0",
-<<<<<<< HEAD
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.10",
-          "MySql.Data": "8.0.30",
-          "MySqlConnector": "2.1.13",
-=======
           "Microsoft.Extensions.DependencyInjection": "6.0.0",
           "Microsoft.Extensions.Logging": "6.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.9",
@@ -42,7 +30,6 @@
           "MySql.EntityFrameworkCore": "6.0.4",
           "MySqlConnector": "2.1.13",
           "Newtonsoft.Json": "13.0.1",
->>>>>>> Evan/Dev
           "Pomelo.EntityFrameworkCore.MySql": "6.0.2",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
@@ -50,8 +37,6 @@
           "api-backend.dll": {}
         }
       },
-<<<<<<< HEAD
-=======
       "EntityFramework/6.4.4": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
@@ -71,7 +56,6 @@
           }
         }
       },
->>>>>>> Evan/Dev
       "Google.Protobuf/3.19.4": {
         "runtime": {
           "lib/net5.0/Google.Protobuf.dll": {
@@ -125,11 +109,7 @@
       "MessagePack/2.1.152": {
         "dependencies": {
           "MessagePack.Annotations": "2.1.152",
-<<<<<<< HEAD
-          "Microsoft.Bcl.AsyncInterfaces": "5.0.0",
-=======
           "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
->>>>>>> Evan/Dev
           "System.Memory": "4.5.4",
           "System.Reflection.Emit": "4.6.0",
           "System.Reflection.Emit.Lightweight": "4.6.0",
@@ -185,19 +165,11 @@
           }
         }
       },
-<<<<<<< HEAD
-      "Microsoft.Bcl.AsyncInterfaces/5.0.0": {
-        "runtime": {
-          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.20.51904"
-=======
       "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.21.52210"
->>>>>>> Evan/Dev
           }
         }
       },
@@ -806,11 +778,7 @@
       "Microsoft.CodeAnalysis.Workspaces.Common/4.0.0": {
         "dependencies": {
           "Humanizer.Core": "2.8.26",
-<<<<<<< HEAD
-          "Microsoft.Bcl.AsyncInterfaces": "5.0.0",
-=======
           "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
->>>>>>> Evan/Dev
           "Microsoft.CodeAnalysis.Common": "4.0.0",
           "System.Composition": "1.0.31",
           "System.IO.Pipelines": "5.0.1"
@@ -999,11 +967,7 @@
           }
         }
       },
-<<<<<<< HEAD
-      "Microsoft.DotNet.Scaffolding.Shared/6.0.10": {
-=======
       "Microsoft.DotNet.Scaffolding.Shared/6.0.9": {
->>>>>>> Evan/Dev
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Features": "4.0.0",
           "Microsoft.CodeAnalysis.CSharp.Scripting": "4.0.0",
@@ -1022,13 +986,8 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.DotNet.Scaffolding.Shared.dll": {
-<<<<<<< HEAD
-            "assemblyVersion": "6.0.10.0",
-            "fileVersion": "6.0.1022.47102"
-=======
             "assemblyVersion": "6.0.9.0",
             "fileVersion": "6.0.922.45203"
->>>>>>> Evan/Dev
           }
         }
       },
@@ -1325,11 +1284,7 @@
         "dependencies": {
           "MessagePack": "2.1.152",
           "MessagePackAnalyzer": "2.1.152",
-<<<<<<< HEAD
-          "Microsoft.Bcl.AsyncInterfaces": "5.0.0",
-=======
           "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
->>>>>>> Evan/Dev
           "System.Collections.Immutable": "6.0.0"
         },
         "runtime": {
@@ -1339,17 +1294,10 @@
           }
         }
       },
-<<<<<<< HEAD
-      "Microsoft.VisualStudio.Web.CodeGeneration/6.0.10": {
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "6.0.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore": "6.0.10",
-=======
       "Microsoft.VisualStudio.Web.CodeGeneration/6.0.9": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "6.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore": "6.0.9",
->>>>>>> Evan/Dev
           "NuGet.Packaging": "6.2.1",
           "System.Collections.Immutable": "6.0.0",
           "System.Configuration.ConfigurationManager": "6.0.0",
@@ -1358,17 +1306,6 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.VisualStudio.Web.CodeGeneration.dll": {
-<<<<<<< HEAD
-            "assemblyVersion": "6.0.10.0",
-            "fileVersion": "6.0.1022.47102"
-          }
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Core/6.0.10": {
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "6.0.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "6.0.10",
-=======
             "assemblyVersion": "6.0.9.0",
             "fileVersion": "6.0.922.45203"
           }
@@ -1378,7 +1315,6 @@
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "6.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "6.0.9",
->>>>>>> Evan/Dev
           "Newtonsoft.Json": "13.0.1",
           "NuGet.Packaging": "6.2.1",
           "System.Configuration.ConfigurationManager": "6.0.0",
@@ -1387,17 +1323,6 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll": {
-<<<<<<< HEAD
-            "assemblyVersion": "6.0.10.0",
-            "fileVersion": "6.0.1022.47102"
-          }
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design/6.0.10": {
-        "dependencies": {
-          "Microsoft.DotNet.Scaffolding.Shared": "6.0.10",
-          "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": "6.0.10",
-=======
             "assemblyVersion": "6.0.9.0",
             "fileVersion": "6.0.922.45203"
           }
@@ -1407,7 +1332,6 @@
         "dependencies": {
           "Microsoft.DotNet.Scaffolding.Shared": "6.0.9",
           "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": "6.0.9",
->>>>>>> Evan/Dev
           "NuGet.Packaging": "6.2.1",
           "System.Configuration.ConfigurationManager": "6.0.0",
           "System.Private.Uri": "4.3.2",
@@ -1415,17 +1339,6 @@
         },
         "runtime": {
           "lib/net6.0/dotnet-aspnet-codegenerator-design.dll": {
-<<<<<<< HEAD
-            "assemblyVersion": "6.0.10.0",
-            "fileVersion": "6.0.1022.47102"
-          }
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/6.0.10": {
-        "dependencies": {
-          "Microsoft.DotNet.Scaffolding.Shared": "6.0.10",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Core": "6.0.10",
-=======
             "assemblyVersion": "6.0.9.0",
             "fileVersion": "6.0.922.45203"
           }
@@ -1435,7 +1348,6 @@
         "dependencies": {
           "Microsoft.DotNet.Scaffolding.Shared": "6.0.9",
           "Microsoft.VisualStudio.Web.CodeGeneration.Core": "6.0.9",
->>>>>>> Evan/Dev
           "NuGet.Packaging": "6.2.1",
           "System.Configuration.ConfigurationManager": "6.0.0",
           "System.Private.Uri": "4.3.2",
@@ -1443,30 +1355,17 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll": {
-<<<<<<< HEAD
-            "assemblyVersion": "6.0.10.0",
-            "fileVersion": "6.0.1022.47102"
-          }
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Templating/6.0.10": {
-=======
             "assemblyVersion": "6.0.9.0",
             "fileVersion": "6.0.922.45203"
           }
         }
       },
       "Microsoft.VisualStudio.Web.CodeGeneration.Templating/6.0.9": {
->>>>>>> Evan/Dev
         "dependencies": {
           "Microsoft.AspNetCore.Razor.Language": "6.0.0",
           "Microsoft.CodeAnalysis.CSharp": "4.0.0",
           "Microsoft.CodeAnalysis.Razor": "6.0.0",
-<<<<<<< HEAD
-          "Microsoft.VisualStudio.Web.CodeGeneration.Utils": "6.0.10",
-=======
           "Microsoft.VisualStudio.Web.CodeGeneration.Utils": "6.0.9",
->>>>>>> Evan/Dev
           "NuGet.Packaging": "6.2.1",
           "System.Configuration.ConfigurationManager": "6.0.0",
           "System.Private.Uri": "4.3.2",
@@ -1474,18 +1373,6 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll": {
-<<<<<<< HEAD
-            "assemblyVersion": "6.0.10.0",
-            "fileVersion": "6.0.1022.47102"
-          }
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Utils/6.0.10": {
-        "dependencies": {
-          "Microsoft.Build": "17.0.0",
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.0.0",
-          "Microsoft.DotNet.Scaffolding.Shared": "6.0.10",
-=======
             "assemblyVersion": "6.0.9.0",
             "fileVersion": "6.0.922.45203"
           }
@@ -1496,7 +1383,6 @@
           "Microsoft.Build": "17.0.0",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.0.0",
           "Microsoft.DotNet.Scaffolding.Shared": "6.0.9",
->>>>>>> Evan/Dev
           "Newtonsoft.Json": "13.0.1",
           "NuGet.Packaging": "6.2.1",
           "System.Configuration.ConfigurationManager": "6.0.0",
@@ -1505,17 +1391,6 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll": {
-<<<<<<< HEAD
-            "assemblyVersion": "6.0.10.0",
-            "fileVersion": "6.0.1022.47102"
-          }
-        }
-      },
-      "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/6.0.10": {
-        "dependencies": {
-          "Microsoft.DotNet.Scaffolding.Shared": "6.0.10",
-          "Microsoft.VisualStudio.Web.CodeGeneration": "6.0.10",
-=======
             "assemblyVersion": "6.0.9.0",
             "fileVersion": "6.0.922.45203"
           }
@@ -1525,7 +1400,6 @@
         "dependencies": {
           "Microsoft.DotNet.Scaffolding.Shared": "6.0.9",
           "Microsoft.VisualStudio.Web.CodeGeneration": "6.0.9",
->>>>>>> Evan/Dev
           "NuGet.Packaging": "6.2.1",
           "System.Configuration.ConfigurationManager": "6.0.0",
           "System.Private.Uri": "4.3.2",
@@ -1533,13 +1407,8 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll": {
-<<<<<<< HEAD
-            "assemblyVersion": "6.0.10.0",
-            "fileVersion": "6.0.1022.47102"
-=======
             "assemblyVersion": "6.0.9.0",
             "fileVersion": "6.0.922.45203"
->>>>>>> Evan/Dev
           }
         }
       },
@@ -1598,8 +1467,6 @@
           }
         }
       },
-<<<<<<< HEAD
-=======
       "MySql.Data.EntityFramework/8.0.22": {
         "dependencies": {
           "EntityFramework": "6.4.4",
@@ -1637,7 +1504,6 @@
           }
         }
       },
->>>>>>> Evan/Dev
       "MySqlConnector/2.1.13": {
         "runtime": {
           "lib/net6.0/MySqlConnector.dll": {
@@ -1843,8 +1709,6 @@
           "Microsoft.NETCore.Targets": "1.1.3"
         }
       },
-<<<<<<< HEAD
-=======
       "runtime.native.System.Data.SqlClient.sni/4.7.0": {
         "dependencies": {
           "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni": "4.4.0",
@@ -1852,7 +1716,6 @@
           "runtime.win-x86.runtime.native.System.Data.SqlClient.sni": "4.4.0"
         }
       },
->>>>>>> Evan/Dev
       "runtime.native.System.IO.Compression/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -1892,8 +1755,6 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
-<<<<<<< HEAD
-=======
       "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
         "runtimeTargets": {
           "runtimes/win-arm64/native/sni.dll": {
@@ -1921,7 +1782,6 @@
           }
         }
       },
->>>>>>> Evan/Dev
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
         "dependencies": {
           "SQLitePCLRaw.core": "2.0.6",
@@ -2080,8 +1940,6 @@
         }
       },
       "System.Buffers/4.5.1": {},
-<<<<<<< HEAD
-=======
       "System.CodeDom/4.7.0": {
         "runtime": {
           "lib/netstandard2.0/System.CodeDom.dll": {
@@ -2090,7 +1948,6 @@
           }
         }
       },
->>>>>>> Evan/Dev
       "System.Collections/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -2117,10 +1974,7 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
-<<<<<<< HEAD
-=======
       "System.ComponentModel.Annotations/4.7.0": {},
->>>>>>> Evan/Dev
       "System.Composition/1.0.31": {
         "dependencies": {
           "System.Composition.AttributedModel": "1.0.31",
@@ -2250,8 +2104,6 @@
           "System.Text.Encoding": "4.3.0"
         }
       },
-<<<<<<< HEAD
-=======
       "System.Data.SqlClient/4.8.1": {
         "dependencies": {
           "Microsoft.Win32.Registry": "4.7.0",
@@ -2279,7 +2131,6 @@
           }
         }
       },
->>>>>>> Evan/Dev
       "System.Diagnostics.Debug/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -2909,11 +2760,6 @@
       "serviceable": false,
       "sha512": ""
     },
-<<<<<<< HEAD
-    "Google.Protobuf/3.19.4": {
-      "type": "package",
-      "serviceable": true,
-=======
     "EntityFramework/6.4.4": {
       "type": "package",
       "serviceable": true,
@@ -2924,7 +2770,6 @@
     "Google.Protobuf/3.19.4": {
       "type": "package",
       "serviceable": true,
->>>>>>> Evan/Dev
       "sha512": "sha512-fd07/ykL4O4FhqrZIELm5lmiyOHfdPg9+o+hWr6tcfRdS7tHXnImg/2wtogLzlW2eEmr0J7j6ZrZvaWOLiJbxQ==",
       "path": "google.protobuf/3.19.4",
       "hashPath": "google.protobuf.3.19.4.nupkg.sha512"
@@ -2999,21 +2844,12 @@
       "path": "microsoft.aspnetcore.razor.language/6.0.0",
       "hashPath": "microsoft.aspnetcore.razor.language.6.0.0.nupkg.sha512"
     },
-<<<<<<< HEAD
-    "Microsoft.Bcl.AsyncInterfaces/5.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-W8DPQjkMScOMTtJbPwmPyj9c3zYSFGawDW3jwlBOOsnY+EzZFLgNQ/UMkK35JmkNOVPdCyPr2Tw7Vv9N+KA3ZQ==",
-      "path": "microsoft.bcl.asyncinterfaces/5.0.0",
-      "hashPath": "microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512"
-=======
     "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-UcSjPsst+DfAdJGVDsu346FX0ci0ah+lw3WRtn18NUwEqRt70HaOQ7lI72vy3+1LxtqI3T5GWwV39rQSrCzAeg==",
       "path": "microsoft.bcl.asyncinterfaces/6.0.0",
       "hashPath": "microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512"
->>>>>>> Evan/Dev
     },
     "Microsoft.Build/17.0.0": {
       "type": "package",
@@ -3169,21 +3005,12 @@
       "path": "microsoft.diasymreader/1.3.0",
       "hashPath": "microsoft.diasymreader.1.3.0.nupkg.sha512"
     },
-<<<<<<< HEAD
-    "Microsoft.DotNet.Scaffolding.Shared/6.0.10": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-PZm9NdakQy5rtkkEWK+tJNYDD9KODH726a5wbb5k6fpKEk6zd7vCsUo/OaBrTE+zagNGDTii9TeAz7GvDV0bUg==",
-      "path": "microsoft.dotnet.scaffolding.shared/6.0.10",
-      "hashPath": "microsoft.dotnet.scaffolding.shared.6.0.10.nupkg.sha512"
-=======
     "Microsoft.DotNet.Scaffolding.Shared/6.0.9": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-ixfrXJUBn931Mx8tpD7iqw1Jbkb58ON+BeSyGKh1cEBPDVUuVYb8AQuyhnbfRhr2F08ND1mfnZy5cwX+hNThKQ==",
       "path": "microsoft.dotnet.scaffolding.shared/6.0.9",
       "hashPath": "microsoft.dotnet.scaffolding.shared.6.0.9.nupkg.sha512"
->>>>>>> Evan/Dev
     },
     "Microsoft.EntityFrameworkCore/6.0.9": {
       "type": "package",
@@ -3451,56 +3278,6 @@
       "path": "microsoft.visualstudio.debugger.contracts/17.2.0",
       "hashPath": "microsoft.visualstudio.debugger.contracts.17.2.0.nupkg.sha512"
     },
-<<<<<<< HEAD
-    "Microsoft.VisualStudio.Web.CodeGeneration/6.0.10": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-jcwfm5lcnE1gZdYK3ciu8bpMerIvc/xOz+swLJPXv3VR34vBm4V/OPhwqOFLV0Hxsdwja4DNZOVZdFGBw7sX8w==",
-      "path": "microsoft.visualstudio.web.codegeneration/6.0.10",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.6.0.10.nupkg.sha512"
-    },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Core/6.0.10": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-0iYBGyUXe+4eH9rb2yvrhKH8VuLz5otW8cpEZ4OZR+/TdlPxQ+3Ndb/Qg2MvI5WZmcmTnEoJzXd5tfpi+g8AMQ==",
-      "path": "microsoft.visualstudio.web.codegeneration.core/6.0.10",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.core.6.0.10.nupkg.sha512"
-    },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Design/6.0.10": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-4X4woAKNixsFWJH7tBWpj7gsM9QlvAIpOSwP5QEOOnjYDrNphNkqk8NnEkMhPIAVLpv+S7j5ZkTSYUvB92FC6A==",
-      "path": "microsoft.visualstudio.web.codegeneration.design/6.0.10",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.design.6.0.10.nupkg.sha512"
-    },
-    "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/6.0.10": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-tHwtinZ+Zgbk8V7DopG/eerNm9WYrjuPBg7QnwDERbWcU5NSbvbQb6BIxwdPRlQZwSKRpWHBMMDh4fs8I72vbA==",
-      "path": "microsoft.visualstudio.web.codegeneration.entityframeworkcore/6.0.10",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.entityframeworkcore.6.0.10.nupkg.sha512"
-    },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Templating/6.0.10": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-lvqognkL8eolgfTCNYFmUKYbPT/WhY9GaTz3m0MzX4cOd1qgQqPuUsIp6YdjI11eWgb9AaCJcGEI6YweRIRK9g==",
-      "path": "microsoft.visualstudio.web.codegeneration.templating/6.0.10",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.templating.6.0.10.nupkg.sha512"
-    },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Utils/6.0.10": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-DHxXuZOhUg2TDWZQeC/JYqPsgpLdjgpQF+VEaFPIzFNBwv8y2/DWIakPitfjMtmRH4M0n4tfVidxjbzSmb7vbg==",
-      "path": "microsoft.visualstudio.web.codegeneration.utils/6.0.10",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.utils.6.0.10.nupkg.sha512"
-    },
-    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/6.0.10": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-7QdD1LXFftoQPuk77Isp/8BQR4PYebPaRle38NbUYjJlK9sHPoORiOID2WOPeqLC8EP5SabwN2XS468GuOPG7w==",
-      "path": "microsoft.visualstudio.web.codegenerators.mvc/6.0.10",
-      "hashPath": "microsoft.visualstudio.web.codegenerators.mvc.6.0.10.nupkg.sha512"
-=======
     "Microsoft.VisualStudio.Web.CodeGeneration/6.0.9": {
       "type": "package",
       "serviceable": true,
@@ -3549,7 +3326,6 @@
       "sha512": "sha512-gzMBpEjbjHkq/pfKFve3BSK7UcNKzHBTeRuCyz0LxFpUZXophl8pPXsa0rZUt/uDA/DqeCCgHt6nHxnTFQ1QOw==",
       "path": "microsoft.visualstudio.web.codegenerators.mvc/6.0.9",
       "hashPath": "microsoft.visualstudio.web.codegenerators.mvc.6.0.9.nupkg.sha512"
->>>>>>> Evan/Dev
     },
     "Microsoft.Win32.Primitives/4.3.0": {
       "type": "package",
@@ -3579,8 +3355,6 @@
       "path": "mysql.data/8.0.30",
       "hashPath": "mysql.data.8.0.30.nupkg.sha512"
     },
-<<<<<<< HEAD
-=======
     "MySql.Data.EntityFramework/8.0.22": {
       "type": "package",
       "serviceable": true,
@@ -3602,7 +3376,6 @@
       "path": "mysql.entityframeworkcore/6.0.4",
       "hashPath": "mysql.entityframeworkcore.6.0.4.nupkg.sha512"
     },
->>>>>>> Evan/Dev
     "MySqlConnector/2.1.13": {
       "type": "package",
       "serviceable": true,
@@ -3736,8 +3509,6 @@
       "path": "runtime.native.system/4.3.0",
       "hashPath": "runtime.native.system.4.3.0.nupkg.sha512"
     },
-<<<<<<< HEAD
-=======
     "runtime.native.System.Data.SqlClient.sni/4.7.0": {
       "type": "package",
       "serviceable": true,
@@ -3745,7 +3516,6 @@
       "path": "runtime.native.system.data.sqlclient.sni/4.7.0",
       "hashPath": "runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512"
     },
->>>>>>> Evan/Dev
     "runtime.native.System.IO.Compression/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -3830,8 +3600,6 @@
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
     },
-<<<<<<< HEAD
-=======
     "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
       "type": "package",
       "serviceable": true,
@@ -3853,7 +3621,6 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
->>>>>>> Evan/Dev
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
       "type": "package",
       "serviceable": true,
@@ -3924,8 +3691,6 @@
       "path": "system.buffers/4.5.1",
       "hashPath": "system.buffers.4.5.1.nupkg.sha512"
     },
-<<<<<<< HEAD
-=======
     "System.CodeDom/4.7.0": {
       "type": "package",
       "serviceable": true,
@@ -3933,7 +3698,6 @@
       "path": "system.codedom/4.7.0",
       "hashPath": "system.codedom.4.7.0.nupkg.sha512"
     },
->>>>>>> Evan/Dev
     "System.Collections/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -3955,8 +3719,6 @@
       "path": "system.collections.immutable/6.0.0",
       "hashPath": "system.collections.immutable.6.0.0.nupkg.sha512"
     },
-<<<<<<< HEAD
-=======
     "System.ComponentModel.Annotations/4.7.0": {
       "type": "package",
       "serviceable": true,
@@ -3964,7 +3726,6 @@
       "path": "system.componentmodel.annotations/4.7.0",
       "hashPath": "system.componentmodel.annotations.4.7.0.nupkg.sha512"
     },
->>>>>>> Evan/Dev
     "System.Composition/1.0.31": {
       "type": "package",
       "serviceable": true,
@@ -4021,8 +3782,6 @@
       "path": "system.console/4.3.0",
       "hashPath": "system.console.4.3.0.nupkg.sha512"
     },
-<<<<<<< HEAD
-=======
     "System.Data.SqlClient/4.8.1": {
       "type": "package",
       "serviceable": true,
@@ -4030,7 +3789,6 @@
       "path": "system.data.sqlclient/4.8.1",
       "hashPath": "system.data.sqlclient.4.8.1.nupkg.sha512"
     },
->>>>>>> Evan/Dev
     "System.Diagnostics.Debug/4.3.0": {
       "type": "package",
       "serviceable": true,

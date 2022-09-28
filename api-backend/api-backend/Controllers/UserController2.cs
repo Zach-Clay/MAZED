@@ -119,7 +119,7 @@ namespace api_backend.Controllers
         [HttpGet("GetSponsorFromUserId")]
         public async Task<User?> GetSponsorFromUserId(int id)
         {
-            return await _context.Users.Include(p => p.Sponsor).Where(p => p.Id == id && p.isBlacklisted == false).FirstOrDefaultAsync();
+            return await _context.Users.Include(p => p.SponsorId).Where(p => p.Id == id && p.isBlacklisted == false).FirstOrDefaultAsync();
         }
 
         //how to call stored proceduere
