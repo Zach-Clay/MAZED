@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MazedDB.Models
 {
-    public partial class User
+    public partial class user
     {
-        public User()
-        {
-            DriverOrders = new HashSet<DriverOrder>();
-            PointTransactions = new HashSet<PointTransaction>();
-        }
-
         public int Id { get; set; }
         public int? SponsorId { get; set; }
         public string Username { get; set; } = null!;
@@ -18,13 +13,9 @@ namespace MazedDB.Models
         public string UserLname { get; set; } = null!;
         public string UserType { get; set; } = null!;
         public string? UserAddress { get; set; }
+        [Required, EmailAddress]
         public string? UserEmail { get; set; }
         public string? UserPhoneNum { get; set; }
-        public string? UserPronouns { get; set; }
-        public string UserPwd { get; set; } = null!;
-
-        public virtual SponsorOrg? Sponsor { get; set; }
-        public virtual ICollection<DriverOrder> DriverOrders { get; set; }
-        public virtual ICollection<PointTransaction> PointTransactions { get; set; }
+        public int Blacklist { get; set; }
     }
 }

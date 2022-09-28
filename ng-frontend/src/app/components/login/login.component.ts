@@ -9,20 +9,58 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loading: boolean;
+  forgot: boolean;
   user: UserInfo;
+  resetCode: string;
+  newPassword: string;
+  newPasswordRepeat: string;
 
   constructor(private router: Router, private loginService: LoginService) {
     this.loading = false;
     this.user = {} as UserInfo;
+    this.forgot = false;
+    this.resetCode = '';
+    this.newPassword = '';
+    this.newPasswordRepeat = '';
   }
 
   ngOnInit(): void {}
 
-  forgotUsername() {
-    alert('Forgot username');
-  }
   forgotPassword() {
-    alert('Forgot password');
+    if (!this.user.username) {
+      alert('Please enter a username');
+      return;
+    }
+    this.forgot = true;
+
+    this.loginService
+      .forgotPassword(this.user)
+      .then(() => {})
+      .catch(() => {});
+  }
+
+  submitForgotPassword() {
+    if (!this.resetCode) {
+      alert('Please enter the code you received in your email');
+    }
+    if (!this.newPassword || !this.newPasswordRepeat) {
+      alert('Please enter in password');
+    }
+    if (this.newPassword != this.newPasswordRepeat) {
+      alert('Passwords do not match');
+    }
+    this.user.code = this.resetCode;
+    this.loginService
+      .forgotPasswordSubmit(this.user, this.newPassword)
+      .then((success) => {
+        // call our own API and log the password change
+        this.resetCode = '';
+        this.user.code = '';
+        this.forgot = false;
+      })
+      .catch((error) => {
+        alert(error);
+      });
   }
 
   onSubmit() {
@@ -48,7 +86,8 @@ export class LoginComponent implements OnInit {
       .then(() => {
         this.router.navigate(['/register']);
       })
-      .catch(() => {
+      .catch((err) => {
+        alert(err);
         this.loading = false;
       });
   }

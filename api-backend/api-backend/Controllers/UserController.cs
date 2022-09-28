@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
-using api_backend.Data;
 using api_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using api_backend.Logic;
@@ -16,14 +15,13 @@ namespace api_backend.Controllers
     public class UserController : Controller
     {
 
-
-        //Get the user based off username
-        [HttpGet("{id}")]
-        public IActionResult GetUser(int Id)
+        //Get all of the users based off id
+        [HttpGet()]
+        public IActionResult GetAllUsers()
         {
             try
             {
-                return Ok(UserLogic.getUser(Id));
+                return Ok(UserLogic.getAllUsers());
             }
             catch (Exception ex)
             {
@@ -31,13 +29,27 @@ namespace api_backend.Controllers
             }
         }
 
-        //Add user to the DB
-        [HttpPost]
-        public IActionResult AddUser([FromBody]User user)
+        //Get the user based off id
+        [HttpGet("{id}")]
+        public IActionResult GetUser(int id)
         {
             try
             {
-                return Ok(UserLogic.addUser(user));
+                return Ok(UserLogic.getUser(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        //Register user to the DB
+        [HttpPost]
+        public IActionResult AddUser([FromBody]user user)
+        {
+            try
+            {
+                return Ok(UserLogic.registerUser(user));
             }
             catch (Exception ex)
             {
@@ -47,11 +59,11 @@ namespace api_backend.Controllers
 
         //Change user on the DB
         [HttpPut("{id}")]
-        public IActionResult ChangeUser(int Id, [FromBody] User user)
+        public IActionResult ChangeUserWId(int id, [FromBody] user user)
         {
             try
             {
-                return Ok(UserLogic.changeUser(Id, user));
+                return Ok(UserLogic.changeUserWID(id, user));
             }
             catch (Exception ex)
             {
@@ -59,13 +71,27 @@ namespace api_backend.Controllers
             }
         }
 
-        //Delete user from the DB
+        //Change user on the DB
+        [HttpPut("{username}")]
+        public IActionResult ChangeUserWUsername(string username, [FromBody] user user)
+        {
+            try
+            {
+                return Ok(UserLogic.changeUserWUsername(username, user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        //Delete user from the DB with id = id
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser([FromBody] User user)
+        public IActionResult DeleteUser(int id)
         {
             try
             {
-                return Ok(UserLogic.addUser(user));
+                return Ok(UserLogic.deleteUser(id));
             }
             catch (Exception ex)
             {
@@ -73,19 +99,20 @@ namespace api_backend.Controllers
             }
         }
 
-        //user log in user from the DB
-        [HttpPost("login")]
-        public IActionResult UserLogin([FromBody] User user)
-        {
-            try
-            {
-                return Ok(UserLogic.userLogin(user));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
+        ////user log in user from the DB
+        //[HttpPost("login")]
+        //public IActionResult UserLogin([FromBody] user user)
+        //{
+        //    try
+        //    {
+        //        //return Ok(UserLogic.userLogin(user));
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex);
+        //    }
+        //}
 
     }
 }
