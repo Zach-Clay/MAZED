@@ -31,7 +31,7 @@ namespace api_backend.Controllers
         {
             if (_context.Users == null) return NotFound();
             
-            return await _context.Users.Where(e => e.isBlacklisted == false).ToListAsync();
+            return await _context.Users.Where(e => e.IsBlacklisted == false).ToListAsync();
         }
 
         // GET: api/UserController2/5
@@ -42,7 +42,7 @@ namespace api_backend.Controllers
             
             var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
 
-            if (user.isBlacklisted == true) return NotFound();
+            if (user.IsBlacklisted == true) return NotFound();
 
             return user;
         }
@@ -101,7 +101,7 @@ namespace api_backend.Controllers
             
             var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
 
-            user.isBlacklisted = true;
+            user.IsBlacklisted = true;
             //telling context the entry was modified so we then can change it
             _context.Entry(user).State = EntityState.Modified;
 
@@ -119,7 +119,7 @@ namespace api_backend.Controllers
         [HttpGet("GetSponsorFromUserId")]
         public async Task<User?> GetSponsorFromUserId(int id)
         {
-            return await _context.Users.Include(p => p.SponsorId).Where(p => p.Id == id && p.isBlacklisted == false).FirstOrDefaultAsync();
+            return await _context.Users.Include(p => p.SponsorId).Where(p => p.Id == id && p.IsBlacklisted == false).FirstOrDefaultAsync();
         }
 
         //how to call stored proceduere
