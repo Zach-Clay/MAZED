@@ -7,7 +7,7 @@ namespace api_backend.Procedures
     {
         public string Username { get; set; } = null!;
 
-        [Required]
+        [Required, ]
         public string UserPwd { get; set; } = null!;
     }
 }
