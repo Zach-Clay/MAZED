@@ -1,0 +1,68 @@
+<div class="login_box">
+  <div class="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Header -->
+    <div class="login_header text-uppercase">welcome</div>
+
+    <!-- Login Form -->
+    <div class="login-form">
+      <form (ngSubmit)="signIn()">
+        <input
+          class="field"
+          type="text"
+          [(ngModel)]="user.username"
+          name="username"
+          id="username"
+          placeholder="username"
+        />
+        <div class="forgot-username text-right">
+          <button
+            type="button"
+            class="btn bg-transparent font-italic"
+            style="color: var(--primary-color)"
+            (click)="forgotUsername()"
+          >
+            reset username
+          </button>
+        </div>
+
+        <input
+          class="field w-75"
+          [type]="user.showPassword ? 'text' : 'password'"
+          [(ngModel)]="user.password"
+          name="password"
+          id="password"
+          placeholder="password"
+        />
+        <button
+          type="button"
+          class="btn btn-outline-secondary mb-1 show-password-button"
+          (click)="user.showPassword = !user.showPassword"
+        >
+          <i
+            class="bi"
+            [ngClass]="{
+              'bi-eye-fill': !user.showPassword,
+              'bi-eye-slash-fill': user.showPassword
+            }"
+          ></i>
+        </button>
+        <div class="forgot-password text-right">
+          <button
+            type="button"
+            class="btn bg-transparent font-italic"
+            style="color: var(--primary-color)"
+            (click)="forgotPassword()"
+          >
+            reset password
+          </button>
+        </div>
+        <input type="submit" class="submit" value="login." />
+      </form>
+    </div>
+  </div>
+</div>
+<div class="register mt-3">
+  <a [routerLink]="['/register']">New User? Create an account here</a>
+</div>

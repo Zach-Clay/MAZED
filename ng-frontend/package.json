@@ -20,6 +20,8 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+    "amazon-cognito-identity-js": "^5.2.10",
+    "aws-amplify": "^4.3.36",
     "bootstrap": "^5.2.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

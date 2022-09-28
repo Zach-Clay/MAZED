@@ -1,0 +1,48 @@
+.title {
+  margin-top: 2em;
+}
+
+.wrapper {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+span {
+  font-weight: bold;
+}
+
+.register-form {
+  background: var(--secondary-color);
+  padding: 1em;
+  border-radius: 0.5em;
+}
+
+.field {
+  width: 100%;
+  height: 40px;
+  font-size: 17px;
+  border-radius: 0.5em;
+  border-color: var(--primary-color);
+}
+
+.submit-button {
+  background-color: var(--primary-color);
+  padding: 5px;
+  font-size: 20px;
+  width: 50%;
+  height: 35px;
+  color: white;
+  border-color: var(--primary-color);
+  border-radius: 0.25em;
+}
+
+.confirm-button {
+  background: var(--primary-color);
+  color: white;
+}
+
+.displayBadge{
+  margin-top: 5%; 
+  text-align :center;
+}
