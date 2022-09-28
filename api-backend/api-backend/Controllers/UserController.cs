@@ -45,7 +45,7 @@ namespace api_backend.Controllers
 
         //Register user to the DB
         [HttpPost]
-        public IActionResult AddUser([FromBody]user user)
+        public IActionResult AddUser([FromBody]User user)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace api_backend.Controllers
 
         //Change user on the DB
         [HttpPut("{id}")]
-        public IActionResult ChangeUserWId(int id, [FromBody] user user)
+        public IActionResult ChangeUserWId(int id, [FromBody] User user)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace api_backend.Controllers
 
         //Change user on the DB
         [HttpPut("{username}")]
-        public IActionResult ChangeUserWUsername(string username, [FromBody] user user)
+        public IActionResult ChangeUserWUsername(string username, [FromBody] User user)
         {
             try
             {

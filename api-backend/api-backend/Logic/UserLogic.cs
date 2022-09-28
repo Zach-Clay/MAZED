@@ -10,14 +10,14 @@ namespace api_backend.Logic
     public class UserLogic
     {
         //Get all the users
-        public static user getAllUsers()
+        public static User getAllUsers()
         {
             //Get the conn info
             string connStr = DBContext.ConnectionString();
             MySqlConnection conn = new MySqlConnection(connStr);
 
             //create a user to return
-            var user = new user();
+            var user = new User();
             try
             {
                 //Open the connection
@@ -40,7 +40,7 @@ namespace api_backend.Logic
                     user.UserAddress = rdr["UserAddress"].ToString();
                     user.UserEmail = rdr["UserEmail"].ToString();
                     user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
-                    user.Blacklist = (int)rdr["blacklist"];
+                    user.isBlacklisted = (bool)rdr["isBlacklisted"];
                 }
 
                 //close the reader
@@ -59,14 +59,14 @@ namespace api_backend.Logic
         }//end getAllUsers
 
         //Get user with their id
-        public static user getUser(string Username)
+        public static User getUser(string Username)
         {
             //Get the conn info
             string connStr = DBContext.ConnectionString();
             MySqlConnection conn = new MySqlConnection(connStr);
 
             //create a user to return
-            var user = new user();
+            var user = new User();
             try
             {
                 //Open the connection
@@ -92,7 +92,7 @@ namespace api_backend.Logic
                     user.UserAddress = rdr["UserAddress"].ToString();
                     user.UserEmail = rdr["UserEmail"].ToString();
                     user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
-                    user.Blacklist = (int)rdr["blacklist"];
+                    user.isBlacklisted = (bool)rdr["isBlacklisted"];
                 }
 
                 //close the reader
@@ -111,7 +111,7 @@ namespace api_backend.Logic
         }//end getUser
 
         //Add user to the db
-        public static int registerUser(user user)
+        public static int registerUser(User user)
         {
             string connStr = DBContext.ConnectionString();
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -152,7 +152,7 @@ namespace api_backend.Logic
 
 
         //Change user with their id
-        public static int changeUserWID(int Id, user user)
+        public static int changeUserWID(int Id, User user)
         {
             //Get the conn info
             string connStr = DBContext.ConnectionString();
@@ -168,7 +168,7 @@ namespace api_backend.Logic
                 //Create sql command
                 string sql = "UPDATE TEAM2_DB.users SET" +
                     "(@Id, @SponsorId, @Username, @FName, @LName, @Type, " +
-                    "@Address, @Email, @Phonenum, @Blacklist) WHERE " +
+                    "@Address, @Email, @Phonenum, @IsBlacklisted) WHERE " +
                     "Id = @Id";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
@@ -182,7 +182,7 @@ namespace api_backend.Logic
                 cmd.Parameters.AddWithValue("@Address", user.UserAddress);
                 cmd.Parameters.AddWithValue("@Email", user.UserEmail);
                 cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
-                cmd.Parameters.AddWithValue("@Blacklist", user.Blacklist);
+                cmd.Parameters.AddWithValue("@IsBlacklisted", user.isBlacklisted);
 
                 //Execute the command
                 ret = cmd.ExecuteNonQuery();
@@ -198,7 +198,7 @@ namespace api_backend.Logic
         }//CHANGE USER END
 
         //Change user with their username
-        public static int changeUserWUsername(string Username, user user)
+        public static int changeUserWUsername(string Username, User user)
         {
             //Get the conn info
             string connStr = DBContext.ConnectionString();
@@ -228,7 +228,7 @@ namespace api_backend.Logic
                 cmd.Parameters.AddWithValue("@Address", user.UserAddress);
                 cmd.Parameters.AddWithValue("@Email", user.UserEmail);
                 cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
-                cmd.Parameters.AddWithValue("@Blacklist", user.Blacklist);
+                cmd.Parameters.AddWithValue("@Blacklist", user.isBlacklisted);
 
                 //Execute the command
                 ret = cmd.ExecuteNonQuery();
