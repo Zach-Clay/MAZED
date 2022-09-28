@@ -12,7 +12,11 @@
     "api_backend": {
       "commandName": "Project",
       "launchBrowser": true,
+<<<<<<< HEAD
       "applicationUrl": "http://localhost:19698",
+=======
+      "applicationUrl": "http://localhost:28631",
+>>>>>>> Evan/Dev
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

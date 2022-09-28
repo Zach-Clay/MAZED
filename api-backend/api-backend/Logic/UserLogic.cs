@@ -9,6 +9,7 @@ namespace api_backend.Logic
 {
     public class UserLogic
     {
+<<<<<<< HEAD
         //Get all the users
         public static List<user> getAllUsers()
         {
@@ -64,13 +65,21 @@ namespace api_backend.Logic
 
         //Get user with their id
         public static user getUser(int Id)
+=======
+        //Get user with their id
+        public static User getUser(int Id)
+>>>>>>> Evan/Dev
         {
             //Get the conn info
             string connStr = DBContext.ConnectionString();
             MySqlConnection conn = new MySqlConnection(connStr);
 
             //create a user to return
+<<<<<<< HEAD
             var user = new user();
+=======
+            var user = new User();
+>>>>>>> Evan/Dev
             try
             {
                 //Open the connection
@@ -94,9 +103,16 @@ namespace api_backend.Logic
                     user.UserLname = rdr["UserLName"].ToString();
                     user.UserType = rdr["UserType"].ToString();
                     user.UserAddress = rdr["UserAddress"].ToString();
+<<<<<<< HEAD
                     user.UserEmail = rdr["UserEmail"].ToString();
                     user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
                     user.Blacklist = (SByte)rdr["blacklist"];
+=======
+                    user.UserEmail = rdr["UserLName"].ToString();
+                    user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
+                    //user.UserPronouns = rdr["UserPronouns"].ToString();
+                    //user.UserPwd = rdr["UserPwd"].ToString();
+>>>>>>> Evan/Dev
                 }
 
                 //close the reader
@@ -115,19 +131,41 @@ namespace api_backend.Logic
         }//end getUser
 
         //Add user to the db
+<<<<<<< HEAD
         public static int registerUser(user user)
         {
             string connStr = DBContext.ConnectionString();
             MySqlConnection conn = new MySqlConnection(connStr);
 
+=======
+        public static int addUser(User user)
+        {
+
+            //WE WILL WANT TO MODIFY THIS TO BE REGISTER AS A USER
+            string connStr = DBContext.ConnectionString();
+            MySqlConnection conn = new MySqlConnection(connStr);
+
+
+            //CreatePwdHash(request.Pwd, out byte[] pwdHash, out byte[] pwdSalt);
+
+            //random token
+            //Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
+
+>>>>>>> Evan/Dev
             int ret = 0;
             try
             {
                 conn.Open();
 
+<<<<<<< HEAD
                 string sql = @"INSERT INTO TEAM2_DB.users VALUES (
                     @Id, @SponsorId, @Username, @FName, @LName, @Type, @Address,
                     @Email, @Phonenum, @Blacklist)";
+=======
+                string sql = "INSERT INTO TEAM2_DB.users VALUES (" +
+                    "@Id, @SponsorId, @Username, @FName, @LName, @Type, @Address, " +
+                    "@Email, @Phonenum, @Pronouns, @Pwd)";
+>>>>>>> Evan/Dev
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Id", user.Id);
                 if (user.SponsorId == 0) cmd.Parameters.AddWithValue("@SponsorId", null);
@@ -139,7 +177,12 @@ namespace api_backend.Logic
                 cmd.Parameters.AddWithValue("@Address", user.UserAddress);
                 cmd.Parameters.AddWithValue("@Email", user.UserEmail);
                 cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
+<<<<<<< HEAD
                 cmd.Parameters.AddWithValue("@Blacklist", 0);
+=======
+                //cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
+                //cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
+>>>>>>> Evan/Dev
 
                 //Execute the command
                 ret = cmd.ExecuteNonQuery();
@@ -155,8 +198,24 @@ namespace api_backend.Logic
         }//end addUser
 
 
+<<<<<<< HEAD
         //Change user with their id
         public static int changeUserWID(int Id, user user)
+=======
+        ////function to hash for security
+        //public void CreatePwdHash(string pwd, out byte[] pwdHash, out byte[] pwdSalt)
+        //{
+        //    using(var hmac = new HMACSHA512())
+        //    {
+        //        pwdSalt = hmac.Key;
+        //        pwdHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(pwd));
+        //    }
+        //}
+
+
+        //Change user with their id
+        public static int changeUser(int Id, User user)
+>>>>>>> Evan/Dev
         {
             //Get the conn info
             string connStr = DBContext.ConnectionString();
@@ -172,7 +231,11 @@ namespace api_backend.Logic
                 //Create sql command
                 string sql = "UPDATE TEAM2_DB.users SET" +
                     "(@Id, @SponsorId, @Username, @FName, @LName, @Type, " +
+<<<<<<< HEAD
                     "@Address, @Email, @Phonenum, @Blacklist) WHERE " +
+=======
+                    "@Address, @Email, @Phonenum, @Pronouns, @Pwd) WHERE " +
+>>>>>>> Evan/Dev
                     "Id = @Id";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
@@ -186,7 +249,12 @@ namespace api_backend.Logic
                 cmd.Parameters.AddWithValue("@Address", user.UserAddress);
                 cmd.Parameters.AddWithValue("@Email", user.UserEmail);
                 cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
+<<<<<<< HEAD
                 cmd.Parameters.AddWithValue("@Blacklist", user.Blacklist);
+=======
+                //cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
+                //cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
+>>>>>>> Evan/Dev
 
                 //Execute the command
                 ret = cmd.ExecuteNonQuery();
