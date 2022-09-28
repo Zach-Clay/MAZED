@@ -37,6 +37,12 @@ builder.Services.AddMvc(option => option.EnableEndpointRouting = false)
 //    Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.23-mysql"));
 //});
 
+//services cors
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,7 +52,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors();
+//app cors
+app.UseCors("corsapp");
+//app.UseCors(prodCorsPolicy);
 
 app.UseHttpsRedirection();
 
