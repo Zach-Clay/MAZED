@@ -27,7 +27,7 @@ builder.Services.AddMvc(option => option.EnableEndpointRouting = false)
 //    Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.23-mysql"));
 //});
 
-//services cors
+//Services cors
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();

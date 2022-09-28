@@ -44,7 +44,7 @@ namespace api_backend.Logic
                     user.Blacklist = (SByte)rdr["blacklist"];
 
                     //add each user to the list
-                    users.Add(user);
+                    if (user.Blacklist == 0) users.Add(user);
                 }
 
                 //close the reader
