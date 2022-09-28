@@ -30,12 +30,12 @@ namespace api_backend.Controllers
         }
 
         //Get the user based off id
-        [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
+        [HttpGet("{username}")]
+        public IActionResult GetUser(string username)
         {
             try
             {
-                return Ok(UserLogic.getUser(id));
+                return Ok(UserLogic.getUser(username));
             }
             catch (Exception ex)
             {

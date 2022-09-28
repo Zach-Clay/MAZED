@@ -59,7 +59,7 @@ namespace api_backend.Logic
         }//end getAllUsers
 
         //Get user with their id
-        public static user getUser(int Id)
+        public static user getUser(string Username)
         {
             //Get the conn info
             string connStr = DBContext.ConnectionString();
@@ -73,11 +73,11 @@ namespace api_backend.Logic
                 conn.Open();
 
                 //Create sql command
-                string sql = @"SELECT * FROM TEAM2_DB.users WHERE Id=@Id";
+                string sql = @"SELECT * FROM TEAM2_DB.users WHERE Username=@Username";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 //add parameters (this removes the possibility of SQL injection)
-                cmd.Parameters.AddWithValue("@Id", Id);
+                cmd.Parameters.AddWithValue("@Username", Username);
 
                 //Execute the query and read the data
                 MySqlDataReader rdr = cmd.ExecuteReader();
