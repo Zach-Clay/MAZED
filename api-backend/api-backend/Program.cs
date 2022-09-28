@@ -28,15 +28,6 @@ options =>
 builder.Services.AddMvc(option => option.EnableEndpointRouting = false)
     .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
-
-//service for our procedure just as we did for our original context
-//builder.Services.AddDbContext<MazedDBContextProcedures>(
-//options =>
-//{
-//    options.UseMySql(builder.Configuration.GetConnectionString("DB"),
-//    Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.23-mysql"));
-//});
-
 //services cors
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {
