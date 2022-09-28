@@ -6,29 +6,19 @@
     <div class="login_header text-uppercase">welcome</div>
 
     <!-- Login Form -->
-    <div class="login-form">
+    <div class="login-form" *ngIf="!forgot">
       <form (ngSubmit)="signIn()">
         <input
-          class="field"
+          class="field mb-3"
           type="text"
           [(ngModel)]="user.username"
           name="username"
           id="username"
           placeholder="username"
         />
-        <div class="forgot-username text-right">
-          <button
-            type="button"
-            class="btn bg-transparent font-italic"
-            style="color: var(--primary-color)"
-            (click)="forgotUsername()"
-          >
-            reset username
-          </button>
-        </div>
 
         <input
-          class="field w-75"
+          class="field password-field"
           [type]="user.showPassword ? 'text' : 'password'"
           [(ngModel)]="user.password"
           name="password"
@@ -60,6 +50,72 @@
         </div>
         <input type="submit" class="submit" value="login." />
       </form>
+    </div>
+
+    <div
+      class="card-body"
+      style="background: var(--secondary-color)"
+      *ngIf="forgot"
+    >
+      <div class="text-center mb-3">
+        If this user exists, a code was sent to the email associated with the
+        username
+      </div>
+      <div
+        class="mb-3"
+        style="background: var(--primary-color); height: 1px"
+      ></div>
+      <div class="row">
+        <div class="col mb-2">
+          <label for="code" class="form-label">Enter code from email:</label>
+          <input
+            type="text"
+            id="code"
+            name="code"
+            #code="ngModel"
+            [(ngModel)]="resetCode"
+            class="form-control form-control-sm"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mb-2">
+          <label for="code" class="form-label">Enter new password:</label>
+          <input
+            type="text"
+            id="code"
+            name="code"
+            #code="ngModel"
+            [(ngModel)]="newPassword"
+            class="form-control form-control-sm"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mb-2">
+          <label for="code" class="form-label">Repeat new password:</label>
+          <input
+            type="text"
+            id="code"
+            name="code"
+            #code="ngModel"
+            [(ngModel)]="newPasswordRepeat"
+            class="form-control form-control-sm"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-grid text-center">
+          <button
+            type="button"
+            (click)="submitForgotPassword()"
+            class="btn btn-sm confirm-button"
+            style="background: var(--primary-color); color: white"
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

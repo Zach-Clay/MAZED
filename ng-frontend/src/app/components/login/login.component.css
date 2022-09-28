@@ -60,3 +60,7 @@ form {
   color: var(--primary-color);
   border-width: 2px;
 }
+
+.password-field {
+  width: 73%;
+}
