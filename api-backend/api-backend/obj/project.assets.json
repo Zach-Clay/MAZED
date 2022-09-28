@@ -10858,19 +10858,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/madisonwilson/.nuget/packages/": {}
+    "/Users/zachclay/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
+      "projectUniqueName": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
       "projectName": "api-backend",
-      "projectPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
-      "packagesPath": "/Users/madisonwilson/.nuget/packages/",
-      "outputPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/",
+      "projectPath": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
+      "packagesPath": "/Users/zachclay/.nuget/packages/",
+      "outputPath": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/madisonwilson/.nuget/NuGet/NuGet.Config"
+        "/Users/zachclay/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
