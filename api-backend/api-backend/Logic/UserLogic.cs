@@ -10,14 +10,14 @@ namespace api_backend.Logic
     public class UserLogic
     {
         //Get all the users
-        public static user getAllUsers()
+        public static List<user> getAllUsers()
         {
             //Get the conn info
             string connStr = DBContext.ConnectionString();
             MySqlConnection conn = new MySqlConnection(connStr);
 
             //create a user to return
-            var user = new user();
+            List<user> users = new List<user>();
             try
             {
                 //Open the connection
@@ -31,6 +31,7 @@ namespace api_backend.Logic
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
+                    user user = new user();
                     user.Id = (int)rdr["Id"];
                     if (rdr["SponsorID"].ToString() != "") user.SponsorId = (int)rdr["SponsorID"];
                     user.Username = rdr["Username"].ToString();
@@ -40,7 +41,10 @@ namespace api_backend.Logic
                     user.UserAddress = rdr["UserAddress"].ToString();
                     user.UserEmail = rdr["UserEmail"].ToString();
                     user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
-                    user.Blacklist = (int)rdr["blacklist"];
+                    user.Blacklist = (SByte)rdr["blacklist"];
+
+                    //add each user to the list
+                    users.Add(user);
                 }
 
                 //close the reader
@@ -55,7 +59,7 @@ namespace api_backend.Logic
             conn.Close();
 
             //return the user
-            return user;
+            return users;
         }//end getAllUsers
 
         //Get user with their id
@@ -92,7 +96,7 @@ namespace api_backend.Logic
                     user.UserAddress = rdr["UserAddress"].ToString();
                     user.UserEmail = rdr["UserEmail"].ToString();
                     user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
-                    user.Blacklist = (int)rdr["blacklist"];
+                    user.Blacklist = (SByte)rdr["blacklist"];
                 }
 
                 //close the reader
