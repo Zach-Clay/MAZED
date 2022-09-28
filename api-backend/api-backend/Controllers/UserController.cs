@@ -14,6 +14,21 @@ namespace api_backend.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
+
+        //Get all of the users based off id
+        [HttpGet()]
+        public IActionResult GetAllUsers()
+        {
+            try
+            {
+                return Ok(UserLogic.getAllUsers());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         //Get the user based off id
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)
@@ -30,7 +45,7 @@ namespace api_backend.Controllers
 
         //Register user to the DB
         [HttpPost]
-        public IActionResult AddUser([FromBody]User user)
+        public IActionResult AddUser([FromBody]user user)
         {
             try
             {
@@ -44,11 +59,25 @@ namespace api_backend.Controllers
 
         //Change user on the DB
         [HttpPut("{id}")]
-        public IActionResult ChangeUser(int id, [FromBody] User user)
+        public IActionResult ChangeUserWId(int id, [FromBody] user user)
         {
             try
             {
-                return Ok(UserLogic.changeUser(id, user));
+                return Ok(UserLogic.changeUserWID(id, user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        //Change user on the DB
+        [HttpPut("{username}")]
+        public IActionResult ChangeUserWUsername(string username, [FromBody] user user)
+        {
+            try
+            {
+                return Ok(UserLogic.changeUserWUsername(username, user));
             }
             catch (Exception ex)
             {
@@ -70,20 +99,20 @@ namespace api_backend.Controllers
             }
         }
 
-        //user log in user from the DB
-        [HttpPost("login")]
-        public IActionResult UserLogin([FromBody] User user)
-        {
-            try
-            {
-                //return Ok(UserLogic.userLogin(user));
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
+        ////user log in user from the DB
+        //[HttpPost("login")]
+        //public IActionResult UserLogin([FromBody] user user)
+        //{
+        //    try
+        //    {
+        //        //return Ok(UserLogic.userLogin(user));
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex);
+        //    }
+        //}
 
     }
 }
