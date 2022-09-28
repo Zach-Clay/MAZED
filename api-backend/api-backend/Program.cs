@@ -1,7 +1,6 @@
 ﻿// app starting point
 
 using Microsoft.EntityFrameworkCore;
-using api_backend.Data;
 using MySqlConnector;
 using MazedDB.Data;
 using Newtonsoft.Json;
@@ -17,13 +16,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //add db context service so our context can create our controller
-builder.Services.AddDbContext<MazedDBContext>(
-options =>
+//builder.Services.AddDbContext<MazedDBContext>(
+/*options =>
 {
     //tell to use our string and versuon
     options.UseMySql(builder.Configuration.GetConnectionString("DB"),
     Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.23-mysql"));
-});
+});*/
 
 //adding the services to ignore referenceloop so we can fix error thrown for object disconnected
 builder.Services.AddMvc(option => option.EnableEndpointRouting = false)

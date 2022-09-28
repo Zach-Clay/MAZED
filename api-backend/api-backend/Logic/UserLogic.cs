@@ -44,7 +44,7 @@ namespace api_backend.Logic
                     user.UserEmail = rdr["UserLName"].ToString();
                     user.UserPhoneNum = rdr["UserPhoneNum"].ToString();
                     //user.UserPronouns = rdr["UserPronouns"].ToString();
-                    user.UserPwd = rdr["UserPwd"].ToString();
+                    //user.UserPwd = rdr["UserPwd"].ToString();
                 }
 
                 //close the reader
@@ -96,7 +96,7 @@ namespace api_backend.Logic
                 cmd.Parameters.AddWithValue("@Email", user.UserEmail);
                 cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
                 //cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
-                cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
+                //cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
 
                 //Execute the command
                 ret = cmd.ExecuteNonQuery();
@@ -155,7 +155,7 @@ namespace api_backend.Logic
                 cmd.Parameters.AddWithValue("@Email", user.UserEmail);
                 cmd.Parameters.AddWithValue("@Phonenum", user.UserPhoneNum);
                 //cmd.Parameters.AddWithValue("@Pronouns", user.UserPronouns);
-                cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
+                //cmd.Parameters.AddWithValue("@Pwd", user.UserPwd);
 
                 //Execute the command
                 ret = cmd.ExecuteNonQuery();

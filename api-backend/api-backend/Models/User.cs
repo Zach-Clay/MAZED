@@ -8,7 +8,8 @@ namespace MazedDB.Models
         public User()
         {
             DriverOrders = new HashSet<DriverOrder>();
-            PointTransactions = new HashSet<PointTransaction>();
+            PointTransations = new HashSet<PointTransation>();
+            PwdChanges = new HashSet<PwdChange>();
         }
 
         public int Id { get; set; }
@@ -20,12 +21,12 @@ namespace MazedDB.Models
         public string? UserAddress { get; set; }
         public string? UserEmail { get; set; }
         public string? UserPhoneNum { get; set; }
-        //public string? UserPronouns { get; set; }
-        public string UserPwd { get; set; } = null!;
-        public bool blacklist { get; set; } = false;
+        public string? UserPwd { get; set; }
+        public sbyte IsBlacklisted { get; set; }
 
-        public virtual SponsorOrg? Sponsor { get; set; }
-        public virtual ICollection<DriverOrder>? DriverOrders { get; set; }
-        public virtual ICollection<PointTransaction>? PointTransactions { get; set; }
+        public virtual AuditLogging? AuditLogging { get; set; }
+        public virtual ICollection<DriverOrder> DriverOrders { get; set; }
+        public virtual ICollection<PointTransation> PointTransations { get; set; }
+        public virtual ICollection<PwdChange> PwdChanges { get; set; }
     }
 }

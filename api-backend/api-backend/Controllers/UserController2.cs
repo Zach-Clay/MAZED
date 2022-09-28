@@ -29,28 +29,20 @@ namespace api_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            if (_context.Users == null)
-            {
-                return NotFound();
-            }
-
-            return await _context.Users.Where(e => e.blacklist == false).ToListAsync();
+            if (_context.Users == null) return NotFound();
+            
+            return await _context.Users.Where(e => e.isBlacklisted == false).ToListAsync();
         }
 
         // GET: api/UserController2/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            if (_context.Users == null)
-            {
-                return NotFound();
-            }
-            var user = await _context.Users.FindAsync(id);
+            if (_context.Users == null) return NotFound();
+            
+            var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
 
-            if (user?.blacklist == true)
-            {
-                return NotFound();
-            }
+            if (user.isBlacklisted == true) return NotFound();
 
             return user;
         }
@@ -60,10 +52,8 @@ namespace api_backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
+            if (id != user.Id) return BadRequest();
+            
             //telling context the entry was modified so we then can change it
             _context.Entry(user).State = EntityState.Modified;
 
@@ -107,15 +97,11 @@ namespace api_backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            if (_context.Users == null)
-            {
-                return NotFound();
-            }
+            if (_context.Users == null) return NotFound();
+            
             var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
 
-
-            //_context.Users.Remove(user);
-            user.blacklist = true;
+            user.isBlacklisted = true;
             //telling context the entry was modified so we then can change it
             _context.Entry(user).State = EntityState.Modified;
 
@@ -133,7 +119,7 @@ namespace api_backend.Controllers
         [HttpGet("GetSponsorFromUserId")]
         public async Task<User?> GetSponsorFromUserId(int id)
         {
-            return await _context.Users.Include(p => p.Sponsor).Where(p => p.Id == id).FirstOrDefaultAsync();
+            return await _context.Users.Include(p => p.Sponsor).Where(p => p.Id == id && p.isBlacklisted == false).FirstOrDefaultAsync();
         }
 
         //how to call stored proceduere

@@ -3,6 +3,7 @@ using System;
 using MazedDB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace api_backend.Migrations
 {
     [DbContext(typeof(MazedDBContext))]
-    partial class MazedDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220928151033_Update2")]
+    partial class Update2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
