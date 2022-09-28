@@ -3,14 +3,15 @@ using System.Collections.Generic;
 
 namespace MazedDB.Models
 {
-    public partial class application
+    public partial class Application
     {
-        public int userId { get; set; }
-        public int sponsorId { get; set; }
-        public sbyte approvalStatus { get; set; }
-        public string? description { get; set; }
-        public DateTime requestedDate { get; set; }
-        public DateTime? responseDate { get; set; }
-        public sbyte isActive { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int SponsorId { get; set; }
+        public sbyte? ApprovalStatus { get; set; }
+        public string Description { get; set; } = null!;
+        public DateOnly RequestedDate { get; set; }
+        public DateOnly? ResponseDate { get; set; }
+        public sbyte IsActive { get; set; }
     }
 }
