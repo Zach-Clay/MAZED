@@ -13,7 +13,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   //Get user with username = username
-  getUser = (username: string) => {
+  public getUser(username: string) {
     this.http.get<any>(`${api_url}/user/${username}`).subscribe({
         next: data => {
           console.log('SUCCESS:  ' + data);
@@ -26,7 +26,7 @@ export class UserService {
   }
 
   //Add user to the DB with post
-  registerUser = (user: user) => {
+  public registerUser(user: user) {
     this.http.post<any>(`${api_url}/user`, user).subscribe({
         next: data => {
             console.log('SUCESS: ' + data);

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import {} from 'aws-amplify';
+import { HttpClientModule } from '@angular/common/http';
 
 //Angular Material
 import { MatButtonModule } from '@angular/material/button';
@@ -29,6 +30,7 @@ import { LoginComponent } from './components/login/login.component';
     BrowserAnimationsModule,
     MatButtonModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
