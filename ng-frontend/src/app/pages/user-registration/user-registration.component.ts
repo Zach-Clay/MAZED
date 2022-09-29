@@ -11,6 +11,7 @@ import {
 } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
 import { runInThisContext } from 'vm';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-registration',
@@ -43,7 +44,7 @@ export class UserRegistrationComponent implements OnInit {
   public strengthColor: string = 'red';
   public strengthText: string = 'Weak';
 
-  constructor(private router: Router, private loginService: LoginService) {
+  constructor(private router: Router, private loginService: LoginService, private userService: UserService) {
     this.user = {} as UserInfo;
   }
 
@@ -169,6 +170,10 @@ export class UserRegistrationComponent implements OnInit {
         this.loading = false;
         console.log(error);
       });
+
+
+    //send the user to our API
+    
   }
 
   StrengthChecker = (PasswordParameter: any) => {
