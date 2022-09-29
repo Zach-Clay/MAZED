@@ -86,4 +86,15 @@ export class LoginService {
       return Auth.updateUserAttributes(cognitoUser, user);
     });
   }
+
+  public forgotPassword(user: UserInfo): Promise<any> {
+    return Auth.forgotPassword(user.username);
+  }
+
+  public forgotPasswordSubmit(
+    user: UserInfo,
+    newPassword: string
+  ): Promise<any> {
+    return Auth.forgotPasswordSubmit(user.username, user.code, newPassword);
+  }
 }
