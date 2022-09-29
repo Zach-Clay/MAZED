@@ -3,25 +3,24 @@ using System.Collections.Generic;
 
 namespace MazedDB.Models
 {
-    public partial class sponsorOrg
+    public partial class SponsorOrg
     {
-        public sponsorOrg()
+        public SponsorOrg()
         {
-            Catalogues = new HashSet<catalogue>();
-            DriverOrders = new HashSet<driverOrders>();
-            PointTransactions = new HashSet<pointTransaction>();
-            Users = new HashSet<user>();
+            Catalogues = new HashSet<Catalogue>();
+            DriverOrders = new HashSet<DriverOrder>();
+            PointTransations = new HashSet<PointTransation>();
         }
 
         public int Id { get; set; }
         public string OrgName { get; set; } = null!;
         public string OrgDescription { get; set; } = null!;
         public int CatalogueId { get; set; }
-        public Boolean Blacklist { get; set; }
+        public sbyte IsBlacklisted { get; set; }
 
-        public virtual ICollection<catalogue> Catalogues { get; set; }
-        public virtual ICollection<driverOrders> DriverOrders { get; set; }
-        public virtual ICollection<pointTransaction> PointTransactions { get; set; }
-        public virtual ICollection<user> Users { get; set; }
+        public virtual AuditLogging? AuditLogging { get; set; }
+        public virtual ICollection<Catalogue> Catalogues { get; set; }
+        public virtual ICollection<DriverOrder> DriverOrders { get; set; }
+        public virtual ICollection<PointTransation> PointTransations { get; set; }
     }
 }

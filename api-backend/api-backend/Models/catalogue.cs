@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace MazedDB.Models
 {
-    public partial class catalogue
+    public partial class Catalogue
     {
-        public catalogue()
+        public Catalogue()
         {
-            Products = new HashSet<product>();
+            Products = new HashSet<Product>();
         }
 
         public int Id { get; set; }
         public int SponsorId { get; set; }
 
-        public virtual sponsorOrg Sponsor { get; set; } = null!;
-        public virtual ICollection<product> Products { get; set; }
+        public virtual SponsorOrg Sponsor { get; set; } = null!;
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
