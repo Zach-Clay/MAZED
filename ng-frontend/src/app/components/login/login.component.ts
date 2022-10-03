@@ -35,7 +35,13 @@ export class LoginComponent implements OnInit {
     this.newPasswordRepeat = '';
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loginService.isAuthenticated().then((success: boolean) => {
+      if (success) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
 
   forgotPassword() {
     if (!this.user.username) {
@@ -95,7 +101,7 @@ export class LoginComponent implements OnInit {
     this.loginService
       .signIn(this.user)
       .then(() => {
-        this.router.navigate(['/register']);
+        this.router.navigate(['/home']);
       })
       .catch((err) => {
         alert(err);
