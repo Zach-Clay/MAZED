@@ -44,7 +44,11 @@ export class UserRegistrationComponent implements OnInit {
   public strengthColor: string = 'red';
   public strengthText: string = 'Weak';
 
-  constructor(private router: Router, private loginService: LoginService, private userService: UserService) {
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private userService: UserService
+  ) {
     this.user = {} as UserInfo;
   }
 
@@ -172,7 +176,6 @@ export class UserRegistrationComponent implements OnInit {
       });
 
     //send the user to our API
-    
   }
 
   StrengthChecker = (PasswordParameter: any) => {
@@ -203,4 +206,14 @@ export class UserRegistrationComponent implements OnInit {
   formatPhone = () => {
     this.phone = this.phone.replace(/[^+\d]+/g, '');
   };
+
+  // checks to make sure that the user verifies their account, before navigating off the page
+  // theres probably a better way to do this, directly in the html. but oh well
+  returnToLogin() {
+    if (this.needsConfirmation && !this.confirmationCode) {
+      alert('You must verify your account before proceeding');
+      return;
+    }
+    this.router.navigate(['/']);
+  }
 }

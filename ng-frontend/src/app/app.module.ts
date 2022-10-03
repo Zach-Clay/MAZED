@@ -15,6 +15,8 @@ import { UserRegistrationComponent } from './pages/user-registration/user-regist
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { HomePageHeaderComponent } from './components/home-page-header/home-page-header.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { LoginComponent } from './components/login/login.component';
     LoginComponent,
     UserRegistrationComponent,
     LoginPageComponent,
-    HttpClientModule
+    HomePageComponent,
+    HomePageHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { LoginComponent } from './components/login/login.component';
     BrowserAnimationsModule,
     MatButtonModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
