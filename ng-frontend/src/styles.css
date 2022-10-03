@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  --primary-color: #5962ff;
+  --secondary-color: #8fbaff;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&family=Poppins:ital,wght@1,400;1,700&display=swap");
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
