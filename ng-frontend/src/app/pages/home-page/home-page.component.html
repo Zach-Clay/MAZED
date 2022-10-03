@@ -1,0 +1,26 @@
+<div class="header">
+  <div class="row pb-3" style="background: var(--secondary-color)">
+    <div class="col">
+      <a href="/home">
+        <img
+          class="pt-3 ml-5"
+          src="../../../assets/light-logo.png"
+          style="width: 30%"
+      /></a>
+    </div>
+    <div class="col pt-4 text-center" style="font-size: 2em">
+      <div class="row">POINTS</div>
+      <div class="row mt-3">120</div>
+    </div>
+    <div class="col pt-3 text-right">
+      <a class="nav-link" routerLink="">Profile</a>
+      <a class="nav-link" routerLink="" (click)="signOut()">Sign out</a>
+    </div>
+  </div>
+</div>
+
+<div class="p-0">
+  <div class="text-center" *ngIf="isAuthenticated">
+    Welcome, {{ currentUser.attributes.name }}
+  </div>
+</div>

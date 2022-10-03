@@ -11,6 +11,7 @@ import {
 } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
 import { runInThisContext } from 'vm';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-registration',
@@ -43,7 +44,11 @@ export class UserRegistrationComponent implements OnInit {
   public strengthColor: string = 'red';
   public strengthText: string = 'Weak';
 
-  constructor(private router: Router, private loginService: LoginService) {
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private userService: UserService
+  ) {
     this.user = {} as UserInfo;
   }
 
@@ -169,6 +174,8 @@ export class UserRegistrationComponent implements OnInit {
         this.loading = false;
         console.log(error);
       });
+
+    //send the user to our API
   }
 
   StrengthChecker = (PasswordParameter: any) => {
@@ -199,4 +206,14 @@ export class UserRegistrationComponent implements OnInit {
   formatPhone = () => {
     this.phone = this.phone.replace(/[^+\d]+/g, '');
   };
+
+  // checks to make sure that the user verifies their account, before navigating off the page
+  // theres probably a better way to do this, directly in the html. but oh well
+  returnToLogin() {
+    if (this.needsConfirmation && !this.confirmationCode) {
+      alert('You must verify your account before proceeding');
+      return;
+    }
+    this.router.navigate(['/']);
+  }
 }

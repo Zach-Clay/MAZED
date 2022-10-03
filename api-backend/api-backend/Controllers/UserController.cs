@@ -1,12 +1,18 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
+using api_backend.Data;
 using api_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using api_backend.Logic;
 using MazedDB.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using api_backend.Data;
 
 namespace api_backend.Controllers
 {
@@ -15,27 +21,14 @@ namespace api_backend.Controllers
     public class UserController : Controller
     {
 
-        //Get all of the users based off id
-        [HttpGet()]
-        public IActionResult GetAllUsers()
-        {
-            try
-            {
-                return Ok(UserLogic.getAllUsers());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
 
-        //Get the user based off id
+        //Get the user based off username
         [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
+        public IActionResult GetUser(int Id)
         {
             try
             {
-                return Ok(UserLogic.getUser(id));
+                return Ok(UserLogic.getUser(Id));
             }
             catch (Exception ex)
             {
@@ -43,13 +36,13 @@ namespace api_backend.Controllers
             }
         }
 
-        //Register user to the DB
+        //Add user to the DB
         [HttpPost]
-        public IActionResult AddUser([FromBody]user user)
+        public IActionResult AddUser([FromBody] User user)
         {
             try
             {
-                return Ok(UserLogic.registerUser(user));
+                return Ok(UserLogic.addUser(user));
             }
             catch (Exception ex)
             {
@@ -59,11 +52,11 @@ namespace api_backend.Controllers
 
         //Change user on the DB
         [HttpPut("{id}")]
-        public IActionResult ChangeUserWId(int id, [FromBody] user user)
+        public IActionResult ChangeUser(int Id, [FromBody] User user)
         {
             try
             {
-                return Ok(UserLogic.changeUserWID(id, user));
+                return Ok(UserLogic.changeUser(Id, user));
             }
             catch (Exception ex)
             {
@@ -71,27 +64,13 @@ namespace api_backend.Controllers
             }
         }
 
-        //Change user on the DB
-        [HttpPut("{username}")]
-        public IActionResult ChangeUserWUsername(string username, [FromBody] user user)
-        {
-            try
-            {
-                return Ok(UserLogic.changeUserWUsername(username, user));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-
-        //Delete user from the DB with id = id
+        //Delete user from the DB
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser(int id)
+        public IActionResult DeleteUser([FromBody] User user)
         {
             try
             {
-                return Ok(UserLogic.deleteUser(id));
+                return Ok(UserLogic.addUser(user));
             }
             catch (Exception ex)
             {
@@ -99,14 +78,13 @@ namespace api_backend.Controllers
             }
         }
 
-        ////user log in user from the DB
+        //user log in user from the DB
         //[HttpPost("login")]
-        //public IActionResult UserLogin([FromBody] user user)
+        //public IActionResult UserLogin([FromBody] User user)
         //{
         //    try
         //    {
-        //        //return Ok(UserLogic.userLogin(user));
-        //        return Ok();
+        //        return Ok(UserLogic.userLogin(user));
         //    }
         //    catch (Exception ex)
         //    {
@@ -116,3 +94,19 @@ namespace api_backend.Controllers
 
     }
 }
+
+
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace api_backend.Controllers
+{
+    public class EvanController : Controller
+    {
+        // GET: /<controller>/
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}
+
