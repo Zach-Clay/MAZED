@@ -22,9 +22,12 @@ namespace MazedDB.Models
         public string? UserEmail { get; set; }
         public string? UserPhoneNum { get; set; }
         public string? UserPwd { get; set; }
-        public bool IsBlacklisted { get; set; }
+        public Boolean IsBlacklisted { get; set; }
+        public DateTime? ModDate { get; set; }
+        public string? ModBy { get; set; }
 
         public virtual AuditLogging? AuditLogging { get; set; }
+        public virtual LoginAttempt? LoginAttempt { get; set; }
         public virtual ICollection<DriverOrder> DriverOrders { get; set; }
         public virtual ICollection<PointTransation> PointTransations { get; set; }
         public virtual ICollection<PwdChange> PwdChanges { get; set; }
