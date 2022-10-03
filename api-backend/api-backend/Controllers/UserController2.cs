@@ -91,7 +91,7 @@ namespace api_backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(username))
+                if (!UserExistsUsername(username))
                 {
                     return NotFound();
                 }
@@ -105,9 +105,9 @@ namespace api_backend.Controllers
         }
 
         //user this for username PUT
-        private bool UserExists(string username)
+        private bool UserExistsUsername(string username)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         // POST: api/UserController2

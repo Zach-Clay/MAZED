@@ -104,7 +104,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[6.0.10, )"
             },
             "MySql.Data": {
               "target": "Package",
@@ -112,7 +112,7 @@
             },
             "MySql.Data.EntityFramework": {
               "target": "Package",
-              "version": "[8.0.22, )"
+              "version": "[8.0.30, )"
             },
             "MySql.Data.EntityFrameworkCore": {
               "target": "Package",

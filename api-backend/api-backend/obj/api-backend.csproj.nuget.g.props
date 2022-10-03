@@ -7,23 +7,23 @@
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/Users/madisonwilson/.nuget/packages/</NuGetPackageRoot>
     <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/Users/madisonwilson/.nuget/packages/</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.3.0</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.2.1</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="/Users/madisonwilson/.nuget/packages/" />
   </ItemGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Content Include="$(NuGetPackageRoot)mysql.data.entityframework/8.0.22/contentFiles/any/netstandard2.1/app.config.transform" Condition="Exists('$(NuGetPackageRoot)mysql.data.entityframework/8.0.22/contentFiles/any/netstandard2.1/app.config.transform')">
+    <Content Include="$(NuGetPackageRoot)mysql.data.entityframework/8.0.30/contentFiles/any/netstandard2.1/app.config.transform" Condition="Exists('$(NuGetPackageRoot)mysql.data.entityframework/8.0.30/contentFiles/any/netstandard2.1/app.config.transform')">
       <NuGetPackageId>MySql.Data.EntityFramework</NuGetPackageId>
-      <NuGetPackageVersion>8.0.22</NuGetPackageVersion>
+      <NuGetPackageVersion>8.0.30</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
       <Link>app.config.transform</Link>
     </Content>
-    <Content Include="$(NuGetPackageRoot)mysql.data.entityframework/8.0.22/contentFiles/any/netstandard2.1/web.config.transform" Condition="Exists('$(NuGetPackageRoot)mysql.data.entityframework/8.0.22/contentFiles/any/netstandard2.1/web.config.transform')">
+    <Content Include="$(NuGetPackageRoot)mysql.data.entityframework/8.0.30/contentFiles/any/netstandard2.1/web.config.transform" Condition="Exists('$(NuGetPackageRoot)mysql.data.entityframework/8.0.30/contentFiles/any/netstandard2.1/web.config.transform')">
       <NuGetPackageId>MySql.Data.EntityFramework</NuGetPackageId>
-      <NuGetPackageVersion>8.0.22</NuGetPackageVersion>
+      <NuGetPackageVersion>8.0.30</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
       <Pack>false</Pack>
       <Private>False</Private>
