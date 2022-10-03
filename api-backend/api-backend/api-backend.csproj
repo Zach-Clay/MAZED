@@ -24,11 +24,9 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="MySql.Data" Version="8.0.30" />
+    <PackageReference Include="MySqlConnector" Version="2.1.13" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.9" />
-<<<<<<< HEAD
-    <PackageReference Include="MySqlConnector" Version="2.1.13" />
-=======
     <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.9" />
@@ -40,7 +38,6 @@
     <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.4" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="MySql.Data.EntityFramework" Version="8.0.22" />
->>>>>>> Zach/Dev
   </ItemGroup>
 
   <ItemGroup>

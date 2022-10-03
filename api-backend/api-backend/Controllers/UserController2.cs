@@ -12,7 +12,7 @@ using MazedDB.Models;
 
 namespace api_backend.Controllers
 {
-    [Route("api/user")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController2 : ControllerBase
     {
@@ -35,20 +35,17 @@ namespace api_backend.Controllers
         }
 
         // GET: api/UserController2/5
-        [HttpGet("{username}")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser(string username)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(int id)
         {
             if (_context.Users == null) return NotFound();
+            
+            var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
 
-            //var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
+            if (user.IsBlacklisted == true) return NotFound();
 
-            //if (user.IsBlacklisted == true) return NotFound();
-
-            //return user;
-            return await _context.Users.Where(e => e.Username == username).ToListAsync();
+            return user;
         }
-
-
 
         // PUT: api/UserController2/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -77,6 +74,40 @@ namespace api_backend.Controllers
             }
 
             return NoContent();
+        }
+
+        //change user based on their username
+        [HttpPut("{username}/change by username")]
+        public async Task<IActionResult> PutUserUsername(string username, User user)
+        {
+            if (username != user.Username) return BadRequest();
+
+            //telling context the entry was modified so we then can change it
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(username))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        //user this for username PUT
+        private bool UserExists(string username)
+        {
+            throw new NotImplementedException();
         }
 
         // POST: api/UserController2

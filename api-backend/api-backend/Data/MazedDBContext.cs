@@ -272,11 +272,7 @@ namespace MazedDB.Data
             {
                 entity.ToTable("users");
 
-<<<<<<< HEAD
-                entity.Property(e => e.isBlacklisted).HasColumnName("isBlacklisted");
-=======
                 entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
->>>>>>> Zach/Dev
 
                 entity.Property(e => e.SponsorId).HasColumnName("SponsorID");
 
