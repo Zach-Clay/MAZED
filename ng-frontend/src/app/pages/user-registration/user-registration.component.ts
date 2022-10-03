@@ -175,6 +175,7 @@ export class UserRegistrationComponent implements OnInit {
         console.log(error);
       });
 
+
     //send the user to our API
   }
 

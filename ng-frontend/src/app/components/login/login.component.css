@@ -64,3 +64,8 @@ form {
 .password-field {
   width: 73%;
 }
+
+.displayBadge{
+  margin-top: 5%; 
+  text-align :center;
+}
