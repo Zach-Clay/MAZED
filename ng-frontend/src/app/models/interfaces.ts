@@ -8,5 +8,5 @@ export interface user {
   UserAddress: string;
   UserEmail: string;
   UserPhoneNum: string;
-  Blacklist: number;
+  isBlacklisted: number;
 }
