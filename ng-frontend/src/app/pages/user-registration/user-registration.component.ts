@@ -56,7 +56,8 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginService.getUser()
+    this.loginService
+      .getUser()
       .then((user) => {
         console.log(user);
         //this.userService.getUser(user.username).subscribe((data)=>{
@@ -65,10 +66,10 @@ export class UserRegistrationComponent implements OnInit {
       })
       .catch((err) => {
         console.log(err);
-      })
-    this.userService.getUser("maddie").subscribe((data)=>{
+      });
+    this.userService.getUser('maddie').subscribe((data) => {
       this.testUser2 = data;
-    })
+    });
   }
 
   selectGender(selection: number) {
@@ -192,7 +193,6 @@ export class UserRegistrationComponent implements OnInit {
         console.log(error);
       });
 
-
     //get users first and last name
     const nameArr = this.name.split(' ');
     let FName = nameArr[0];
@@ -201,17 +201,17 @@ export class UserRegistrationComponent implements OnInit {
 
     //create the user in json format
     let newUser = {
-      'Id': 0,
-      'SponsorId': 0,
-      'Username': this.username,
-      'UserFname': FName,
-      'UserLname': LName,
-      'UserType': 'Driver',
-      'UserAddress': this.address,
-      'UserEmail': this.email,
-      'UserPhoneNum': this.phone,
-      'isBlacklisted': 0,
-    }
+      Id: 0,
+      SponsorId: 0,
+      Username: this.username,
+      UserFname: FName,
+      UserLname: LName,
+      UserType: 'Driver',
+      UserAddress: this.address,
+      UserEmail: this.email,
+      UserPhoneNum: this.phone,
+      isBlacklisted: 0,
+    };
 
     //post to our api
     this.userService.registerUser(newUser);
