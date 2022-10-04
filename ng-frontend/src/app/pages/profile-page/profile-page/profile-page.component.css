@@ -1,0 +1,45 @@
+.info-wrapper {
+  margin-top: 5em;
+}
+
+.info-container {
+  /* background: var(--secondary-color); */
+  background: #AED2FF;
+  border-radius: 5%;
+}
+
+.info-col {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-col {
+  padding-top: 2em;
+}
+
+.field {
+  padding: 1em;
+  
+}
+
+.field input {
+  color: #5962FF;
+  font-size: 17px;
+}
+
+.field input:disabled {
+  background-color: #AED2FF;
+  border: none;
+}
+
+.field input:enabled {
+  border: #5962FF;
+}
+
+.info-text {
+  font-size: 17px;
+  color: #5962FF;
+  padding-right: 10px;
+}

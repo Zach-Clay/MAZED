@@ -1,0 +1,41 @@
+<app-home-page-header></app-home-page-header>
+
+<div class="wrapper info-wrapper">
+  <div class="container info-container">
+    <div class="row d-flex">
+
+      <div class="col-9 info-col">
+        <div class="field">
+          <span class="info-text"><strong>First Name: </strong></span>
+          <input class="info-input" type="text" [(ngModel)]="FName" [disabled]="isDisabled">
+        </div>
+        <div class="field">
+          <span class="info-text"><strong>Last Name: </strong></span>
+          <input class="info-input" type="text" [(ngModel)]="FName" [disabled]="isDisabled">
+        </div>
+        <div class="field">
+          <span class="info-text"><strong>Phone Number: </strong></span>
+          <input class="info-input" type="text" [(ngModel)]="FName" [disabled]="isDisabled">
+        </div>
+        <div class="field">
+          <span class="info-text"><strong>Address: </strong></span>
+          <input class="info-input" type="text" [(ngModel)]="FName" [disabled]="isDisabled">
+        </div>
+        <div class="field">
+          <span class="info-text"><strong>Email: </strong></span>
+          <input class="info-input" type="text" [(ngModel)]="FName" [disabled]="isDisabled">
+        </div>
+      </div>
+
+      <div class="col-3 btn-col">
+        <div *ngIf="isDisabled" class="edit-btn">
+          <button mat-raised-button color="primary" (click)="editBtn()">Edit Profile</button>
+        </div>
+        <div *ngIf="!isDisabled" class="save-btn">
+          <button mat-raised-button color="warn" (click)="editBtn();updateProfile()">&emsp;SAVE&emsp;</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

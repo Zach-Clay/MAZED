@@ -17,6 +17,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HomePageHeaderComponent } from './components/home-page-header/home-page-header.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HomePageHeaderComponent } from './components/home-page-header/home-page
     LoginPageComponent,
     HomePageComponent,
     HomePageHeaderComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
