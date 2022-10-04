@@ -12,6 +12,7 @@ import {
 import { environment } from 'src/environments/environment';
 import { runInThisContext } from 'vm';
 import { UserService } from 'src/app/services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-registration',
@@ -33,6 +34,8 @@ export class UserRegistrationComponent implements OnInit {
   public confirmationCode: any = '';
   user: UserInfo;
 
+  public testUser2: any;
+
   public timeout: any;
   public strongPassword = new RegExp(
     '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})'
@@ -44,11 +47,30 @@ export class UserRegistrationComponent implements OnInit {
   public strengthColor: string = 'red';
   public strengthText: string = 'Weak';
 
-  constructor(private router: Router, private loginService: LoginService, private userService: UserService) {
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private userService: UserService
+  ) {
     this.user = {} as UserInfo;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loginService
+      .getUser()
+      .then((user) => {
+        console.log(user);
+        //this.userService.getUser(user.username).subscribe((data)=>{
+        //   this.testUser2 = data;
+        // })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    this.userService.getUser('maddie').subscribe((data) => {
+      this.testUser2 = data;
+    });
+  }
 
   selectGender(selection: number) {
     switch (selection) {
@@ -171,9 +193,28 @@ export class UserRegistrationComponent implements OnInit {
         console.log(error);
       });
 
+    //get users first and last name
+    const nameArr = this.name.split(' ');
+    let FName = nameArr[0];
+    let LName = '';
+    if (nameArr.length > 1) LName = nameArr[1];
 
-    //send the user to our API
-    
+    //create the user in json format
+    let newUser = {
+      Id: 0,
+      SponsorId: 0,
+      Username: this.username,
+      UserFname: FName,
+      UserLname: LName,
+      UserType: 'Driver',
+      UserAddress: this.address,
+      UserEmail: this.email,
+      UserPhoneNum: this.phone,
+      isBlacklisted: 0,
+    };
+
+    //post to our api
+    this.userService.registerUser(newUser);
   }
 
   StrengthChecker = (PasswordParameter: any) => {
@@ -204,4 +245,14 @@ export class UserRegistrationComponent implements OnInit {
   formatPhone = () => {
     this.phone = this.phone.replace(/[^+\d]+/g, '');
   };
+
+  // checks to make sure that the user verifies their account, before navigating off the page
+  // theres probably a better way to do this, directly in the html. but oh well
+  returnToLogin() {
+    if (this.needsConfirmation && !this.confirmationCode) {
+      alert('You must verify your account before proceeding');
+      return;
+    }
+    this.router.navigate(['/']);
+  }
 }

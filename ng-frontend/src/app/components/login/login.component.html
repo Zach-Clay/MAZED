@@ -88,7 +88,15 @@
             #code="ngModel"
             [(ngModel)]="newPassword"
             class="form-control form-control-sm"
+            (keyup)="eventListener()"
           />
+          <span 
+            #strengthDisp id="StrengthDisp" 
+            class="badge displayBadge"
+            [ngStyle]="{'display': displayType, 'backgroundColor': strengthColor}"
+            >
+            {{strengthText}}
+          </span>
         </div>
       </div>
       <div class="row">

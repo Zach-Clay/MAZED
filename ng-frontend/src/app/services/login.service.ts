@@ -42,6 +42,10 @@ export class LoginService {
     });
   }
 
+  public resendSignupCode(user: UserInfo): Promise<any> {
+    return Auth.resendSignUp(user.username);
+  }
+
   public confirmSignUp(user: UserInfo): Promise<any> {
     console.log('inside login service');
     return Auth.confirmSignUp(user.username, user.code);
@@ -71,7 +75,7 @@ export class LoginService {
             return false;
           }
         })
-        .catch(() => {
+        .catch((e) => {
           return false;
         });
     }

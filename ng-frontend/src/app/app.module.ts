@@ -5,15 +5,18 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import {} from 'aws-amplify';
+import { HttpClientModule } from '@angular/common/http';
 
 //Angular Material
-import { MatButtonModule } from '@angular/material/button';
+import { AngularMaterialModule } from './angular-material.module';
 
 //Components
 import { UserRegistrationComponent } from './pages/user-registration/user-registration.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { HomePageHeaderComponent } from './components/home-page-header/home-page-header.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +25,16 @@ import { LoginComponent } from './components/login/login.component';
     LoginComponent,
     UserRegistrationComponent,
     LoginPageComponent,
+    HomePageComponent,
+    HomePageHeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
+    AngularMaterialModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
