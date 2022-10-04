@@ -63,12 +63,13 @@
         [(ngModel)]="password"
         (keyup)="eventListener()"
       />
-      <span 
-        #strengthDisp id="StrengthDisp" 
+      <span
+        #strengthDisp
+        id="StrengthDisp"
         class="badge displayBadge"
-        [ngStyle]="{'display': displayType, 'backgroundColor': strengthColor}"
-        >
-        {{strengthText}}
+        [ngStyle]="{ display: displayType, backgroundColor: strengthColor }"
+      >
+        {{ strengthText }}
       </span>
       <br />
       <br />
@@ -214,6 +215,11 @@
 </div>
 
 <div class="register mt-3 mb-3 text-center">
-  <a [routerLink]="['/']">Back to login page</a>
+  <button
+    class="bg-transparent border-0 text-primary"
+    (click)="returnToLogin()"
+  >
+    Back to login page
+  </button>
 </div>
 <br />
