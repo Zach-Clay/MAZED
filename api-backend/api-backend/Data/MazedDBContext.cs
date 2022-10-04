@@ -22,6 +22,7 @@ namespace MazedDB.Data
         public virtual DbSet<Catalogue> Catalogues { get; set; } = null!;
         public virtual DbSet<DriverOrder> DriverOrders { get; set; } = null!;
         public virtual DbSet<EfmigrationsHistory> EfmigrationsHistories { get; set; } = null!;
+        public virtual DbSet<LoginAttempt> LoginAttempts { get; set; } = null!;
         public virtual DbSet<PointTransation> PointTransations { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<PwdChange> PwdChanges { get; set; } = null!;
@@ -155,6 +156,31 @@ namespace MazedDB.Data
                 entity.Property(e => e.ProductVersion).HasMaxLength(32);
             });
 
+            modelBuilder.Entity<LoginAttempt>(entity =>
+            {
+                entity.ToTable("loginAttempts");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.AttemptedDate)
+                    .HasMaxLength(45)
+                    .HasColumnName("attemptedDate");
+
+                entity.Property(e => e.IsLoginSuccessful)
+                    .HasMaxLength(45)
+                    .HasColumnName("isLoginSuccessful");
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(45)
+                    .HasColumnName("username");
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.LoginAttempt)
+                    .HasForeignKey<LoginAttempt>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("userID_FK");
+            });
+
             modelBuilder.Entity<PointTransation>(entity =>
             {
                 entity.HasKey(e => e.PointId)
@@ -273,6 +299,14 @@ namespace MazedDB.Data
                 entity.ToTable("users");
 
                 entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
+
+                entity.Property(e => e.ModBy)
+                    .HasMaxLength(45)
+                    .HasColumnName("modBy");
+
+                entity.Property(e => e.ModDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("modDate");
 
                 entity.Property(e => e.SponsorId).HasColumnName("SponsorID");
 
