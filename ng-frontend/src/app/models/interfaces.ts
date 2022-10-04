@@ -1,4 +1,4 @@
-export interface User {
+export interface user {
   Id: number;
   SponsorId: number;
   Username: string;
@@ -8,5 +8,5 @@ export interface User {
   UserAddress: string;
   UserEmail: string;
   UserPhoneNum: string;
-  Blacklist: number;
+  isBlacklisted: number;
 }

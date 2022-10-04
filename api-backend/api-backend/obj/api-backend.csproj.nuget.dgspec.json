@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj": {}
+    "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj": {}
   },
   "projects": {
-    "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj": {
+    "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
+        "projectUniqueName": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
         "projectName": "api-backend",
-        "projectPath": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
-        "packagesPath": "/Users/zachclay/.nuget/packages/",
-        "outputPath": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/",
+        "projectPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
+        "packagesPath": "/Users/madisonwilson/.nuget/packages/",
+        "outputPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/zachclay/.nuget/NuGet/NuGet.Config"
+          "/Users/madisonwilson/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -104,7 +104,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[6.0.10, )"
             },
             "MySql.Data": {
               "target": "Package",
@@ -112,7 +112,7 @@
             },
             "MySql.Data.EntityFramework": {
               "target": "Package",
-              "version": "[8.0.22, )"
+              "version": "[8.0.30, )"
             },
             "MySql.Data.EntityFrameworkCore": {
               "target": "Package",

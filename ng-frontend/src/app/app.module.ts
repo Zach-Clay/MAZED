@@ -8,7 +8,7 @@ import {} from 'aws-amplify';
 import { HttpClientModule } from '@angular/common/http';
 
 //Angular Material
-import { MatButtonModule } from '@angular/material/button';
+import { AngularMaterialModule } from './angular-material.module';
 
 //Components
 import { UserRegistrationComponent } from './pages/user-registration/user-registration.component';
@@ -32,7 +32,7 @@ import { HomePageHeaderComponent } from './components/home-page-header/home-page
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
+    AngularMaterialModule,
     FormsModule,
     HttpClientModule,
   ],

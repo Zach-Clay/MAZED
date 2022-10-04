@@ -76,6 +76,40 @@ namespace api_backend.Controllers
             return NoContent();
         }
 
+        //change user based on their username
+        [HttpPut("{username}/change by username")]
+        public async Task<IActionResult> PutUserUsername(string username, User user)
+        {
+            if (username != user.Username) return BadRequest();
+
+            //telling context the entry was modified so we then can change it
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExistsUsername(username))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        //user this for username PUT
+        private bool UserExistsUsername(string username)
+        {
+            throw new NotSupportedException();
+        }
+
         // POST: api/UserController2
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

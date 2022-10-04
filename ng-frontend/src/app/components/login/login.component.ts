@@ -15,6 +15,17 @@ export class LoginComponent implements OnInit {
   newPassword: string;
   newPasswordRepeat: string;
 
+  public timeout: any;
+  public strongPassword = new RegExp(
+    '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})'
+  );
+  public mediumPassword = new RegExp(
+    '((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))'
+  );
+  public displayType: string = 'none';
+  public strengthColor: string = 'red';
+  public strengthText: string = 'Weak';
+
   constructor(private router: Router, private loginService: LoginService) {
     this.loading = false;
     this.user = {} as UserInfo;
@@ -97,4 +108,28 @@ export class LoginComponent implements OnInit {
         this.loading = false;
       });
   }
+
+  StrengthChecker = (PasswordParameter: any) => {
+    if (this.strongPassword.test(PasswordParameter)) {
+      this.strengthColor = 'green';
+      this.strengthText = 'Strong';
+    } else if (this.mediumPassword.test(PasswordParameter)) {
+      this.strengthColor = 'blue';
+      this.strengthText = 'Medium';
+    } else {
+      this.strengthColor = 'red';
+      this.strengthText = 'Weak';
+    }
+  };
+
+  eventListener = () => {
+    this.displayType = 'block';
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => this.StrengthChecker(this.newPassword), 500);
+    if (this.newPassword.length !== 0) {
+      this.displayType != 'block';
+    } else {
+      this.displayType = 'none';
+    }
+  };
 }
