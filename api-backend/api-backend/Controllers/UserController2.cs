@@ -12,7 +12,7 @@ using MazedDB.Models;
 
 namespace api_backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController2 : ControllerBase
     {
