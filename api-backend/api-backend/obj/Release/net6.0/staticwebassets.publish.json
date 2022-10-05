@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "NtGA5CtJJMwYdwO4jojsfiyagQ5nPSUb/rJdia5y+Pk=",
+  "Source": "api-backend",
+  "BasePath": "_content/api-backend",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
