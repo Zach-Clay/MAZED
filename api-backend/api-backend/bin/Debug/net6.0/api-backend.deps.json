@@ -31,6 +31,8 @@
           "MySqlConnector": "2.1.13",
           "Newtonsoft.Json": "13.0.1",
           "Pomelo.EntityFrameworkCore.MySql": "6.0.2",
+          "Shopify.OAuth": "0.6.6",
+          "ShopifySharp": "5.18.5",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
@@ -1173,6 +1175,13 @@
         }
       },
       "Microsoft.Extensions.FileSystemGlobbing/6.0.0": {},
+      "Microsoft.Extensions.Http/2.1.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Logging": "6.0.0",
+          "Microsoft.Extensions.Options": "6.0.0"
+        }
+      },
       "Microsoft.Extensions.Logging/6.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "6.0.0",
@@ -1779,6 +1788,29 @@
             "rid": "win-x86",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Shopify.OAuth/0.6.6": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/net461/Shopify.OAuth.NET45.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ShopifySharp/5.18.5": {
+        "dependencies": {
+          "Microsoft.Extensions.Http": "2.1.0",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/ShopifySharp.dll": {
+            "assemblyVersion": "5.18.5.0",
+            "fileVersion": "5.18.5.0"
           }
         }
       },
@@ -3173,6 +3205,13 @@
       "path": "microsoft.extensions.filesystemglobbing/6.0.0",
       "hashPath": "microsoft.extensions.filesystemglobbing.6.0.0.nupkg.sha512"
     },
+    "Microsoft.Extensions.Http/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vkSkGa1UIZVlAd18oDhrtoawN/q7fDemJcVpT9+28mP7bP0I8zKLSLRwqF++GmPs/7e0Aqlo6jpZm3P7YYS0ag==",
+      "path": "microsoft.extensions.http/2.1.0",
+      "hashPath": "microsoft.extensions.http.2.1.0.nupkg.sha512"
+    },
     "Microsoft.Extensions.Logging/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -3620,6 +3659,20 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "Shopify.OAuth/0.6.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OwencGkGtANoCVsdb0Z2IAhBGIhqpImN95k9dzV+QT+tK0ZhQskR36M8slpEnrj+OADssySFweqI1Mgu6PbiAw==",
+      "path": "shopify.oauth/0.6.6",
+      "hashPath": "shopify.oauth.0.6.6.nupkg.sha512"
+    },
+    "ShopifySharp/5.18.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2oIC8Co9MWxkzGtu+ncAGGqR/mT1+LYP7rtTsRc3uVFm6M9WZYz1tfP2gST4IUJ9mxX/a7Uq1h/EF8ZUH01Agg==",
+      "path": "shopifysharp/5.18.5",
+      "hashPath": "shopifysharp.5.18.5.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
       "type": "package",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mb5DK8W2WxzofhtDlk5DJOEnS42qIx4gmTqDHci6muOp/o+avxCi7g623DWoM54aDe7UhqcH+226jmwAjWTpZQ==",
+  "dgSpecHash": "GGyHKQzuFZ7bavWcqJvAzMtYIVlXT6FdntYaK/X91nFmmk5vUI3SMK4GURhXCy9P0CIl+prxgz0ZibxtnXHm7w==",
   "success": true,
   "projectFilePath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
   "expectedPackageFiles": [
@@ -63,6 +63,7 @@
     "/Users/madisonwilson/.nuget/packages/microsoft.extensions.fileproviders.abstractions/6.0.0/microsoft.extensions.fileproviders.abstractions.6.0.0.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/microsoft.extensions.fileproviders.physical/6.0.0/microsoft.extensions.fileproviders.physical.6.0.0.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/microsoft.extensions.filesystemglobbing/6.0.0/microsoft.extensions.filesystemglobbing.6.0.0.nupkg.sha512",
+    "/Users/madisonwilson/.nuget/packages/microsoft.extensions.http/2.1.0/microsoft.extensions.http.2.1.0.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/microsoft.extensions.logging/6.0.0/microsoft.extensions.logging.6.0.0.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
@@ -127,6 +128,8 @@
     "/Users/madisonwilson/.nuget/packages/runtime.win-arm64.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/runtime.win-x64.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "/Users/madisonwilson/.nuget/packages/shopify.oauth/0.6.6/shopify.oauth.0.6.6.nupkg.sha512",
+    "/Users/madisonwilson/.nuget/packages/shopifysharp/5.18.5/shopifysharp.5.18.5.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.0.6/sqlitepclraw.bundle_e_sqlite3.2.0.6.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/sqlitepclraw.core/2.0.6/sqlitepclraw.core.2.0.6.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.0.6/sqlitepclraw.lib.e_sqlite3.2.0.6.nupkg.sha512",
@@ -219,5 +222,16 @@
     "/Users/madisonwilson/.nuget/packages/system.xml.readerwriter/4.3.0/system.xml.readerwriter.4.3.0.nupkg.sha512",
     "/Users/madisonwilson/.nuget/packages/system.xml.xdocument/4.3.0/system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Shopify.OAuth 0.6.6' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Shopify.OAuth",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
