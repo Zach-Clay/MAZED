@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MazedDB.Models
 {
-    public partial class PointTransation
+    public partial class PointTransaction
     {
         public int PointId { get; set; }
         public int SponsorId { get; set; }

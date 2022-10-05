@@ -23,7 +23,7 @@ namespace MazedDB.Data
         public virtual DbSet<DriverOrder> DriverOrders { get; set; } = null!;
         public virtual DbSet<EfmigrationsHistory> EfmigrationsHistories { get; set; } = null!;
         public virtual DbSet<LoginAttempt> LoginAttempts { get; set; } = null!;
-        public virtual DbSet<PointTransation> PointTransations { get; set; } = null!;
+        public virtual DbSet<PointTransaction> PointTransactions { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<PwdChange> PwdChanges { get; set; } = null!;
         public virtual DbSet<SponsorOrg> SponsorOrgs { get; set; } = null!;
@@ -181,7 +181,7 @@ namespace MazedDB.Data
                     .HasConstraintName("userID_FK");
             });
 
-            modelBuilder.Entity<PointTransation>(entity =>
+            modelBuilder.Entity<PointTransaction>(entity =>
             {
                 entity.HasKey(e => e.PointId)
                     .HasName("PRIMARY");
@@ -211,13 +211,13 @@ namespace MazedDB.Data
                 entity.Property(e => e.UserId).HasColumnName("userId");
 
                 entity.HasOne(d => d.Sponsor)
-                    .WithMany(p => p.PointTransations)
+                    .WithMany(p => p.PointTransactions)
                     .HasForeignKey(d => d.SponsorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("pointTransaction_SponsorIdFK");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.PointTransations)
+                    .WithMany(p => p.PointTransactions)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("pointTransaction_DriverIdFK");
