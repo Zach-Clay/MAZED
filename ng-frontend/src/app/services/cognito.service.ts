@@ -24,7 +24,7 @@ export interface signUpForm {
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class CognitoService {
   private authSubject: BehaviorSubject<any>;
 
   constructor() {
@@ -47,7 +47,7 @@ export class LoginService {
   }
 
   public confirmSignUp(user: UserInfo): Promise<any> {
-    console.log('inside login service');
+    console.log('inside cognito service');
     return Auth.confirmSignUp(user.username, user.code);
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
+import { CognitoService } from 'src/app/services/cognito.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,10 +13,10 @@ export class ProfilePageComponent implements OnInit {
   public user: any;
   public isDisabled: boolean = true;
 
-  constructor(private loginService: LoginService, private userService: UserService) { }
+  constructor(private cognitoService: CognitoService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.loginService
+    this.cognitoService
       .getUser()
       .then((user) => {
         console.log(user);

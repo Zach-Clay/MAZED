@@ -21,5 +21,10 @@ export class UserService {
   public registerUser(user: any) {
     return this.http.post<any>(`${api_url}/user`, user);
   }
+
+  //Update user's information
+  public updateUser(user: any) {
+    
+  }
   
 }

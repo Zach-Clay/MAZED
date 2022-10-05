@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   signUpForm,
-  LoginService,
+  CognitoService,
   UserInfo,
-} from '../../services/login.service';
+} from '../../services/cognito.service';
 import {
   CognitoUserPool,
   CognitoUserAttribute,
@@ -34,8 +34,6 @@ export class UserRegistrationComponent implements OnInit {
   public confirmationCode: any = '';
   user: UserInfo;
 
-  public testUser2: any;
-
   public timeout: any;
   public strongPassword = new RegExp(
     '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})'
@@ -49,27 +47,13 @@ export class UserRegistrationComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private loginService: LoginService,
+    private cognitoService: CognitoService,
     private userService: UserService
   ) {
     this.user = {} as UserInfo;
   }
 
   ngOnInit(): void {
-    this.loginService
-      .getUser()
-      .then((user) => {
-        console.log(user);
-        //this.userService.getUser(user.username).subscribe((data)=>{
-        //   this.testUser2 = data;
-        // })
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    this.userService.getUser('maddie').subscribe((data) => {
-      this.testUser2 = data;
-    });
   }
 
   selectGender(selection: number) {
@@ -182,7 +166,7 @@ export class UserRegistrationComponent implements OnInit {
     this.loading = true;
     this.user.code = this.confirmationCode;
     console.log('clicked buttton');
-    this.loginService
+    this.cognitoService
       .confirmSignUp(this.user)
       .then((success) => {
         console.log(success);
