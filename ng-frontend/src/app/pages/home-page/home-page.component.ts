@@ -25,7 +25,6 @@ export class HomePageComponent implements OnInit {
         this.currentUser = this.cognitoService
           .getUser()
           .then((user: any) => {
-            console.log(user);
             this.currentUser = user;
             this.displayName = true;
           })

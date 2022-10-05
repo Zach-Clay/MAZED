@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { runInThisContext } from 'vm';
 import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-user-registration',
@@ -33,6 +34,7 @@ export class UserRegistrationComponent implements OnInit {
   public date: any = '';
   public confirmationCode: any = '';
   user: UserInfo;
+  newUser: User = {} as User;
 
   public timeout: any;
   public strongPassword = new RegExp(
@@ -48,7 +50,7 @@ export class UserRegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private cognitoService: CognitoService,
-    private userService: UserService
+    private userService: UserService,
   ) {
     this.user = {} as UserInfo;
   }
@@ -143,23 +145,6 @@ export class UserRegistrationComponent implements OnInit {
       }
     );
 
-    // this.loginService
-    //   .signUp(this.user, attributeList)
-    //   .then(() => {
-    //     this.loading = false;
-    //     this.needsConfirmation = true;
-    //   })
-    //   .catch(() => {
-    //     this.loading = false;
-    //   });
-
-    // this.name = '';
-    // this.username = '';
-    // this.email = '';
-    // this.password = '';
-    // this.repeat_password = '';
-    // this.phone = '';
-    // this.address = '';
   };
 
   confirmSignup() {
@@ -169,7 +154,6 @@ export class UserRegistrationComponent implements OnInit {
     this.cognitoService
       .confirmSignUp(this.user)
       .then((success) => {
-        console.log(success);
         this.router.navigate(['/']);
       })
       .catch((error) => {
@@ -183,22 +167,20 @@ export class UserRegistrationComponent implements OnInit {
     let LName = '';
     if (nameArr.length > 1) LName = nameArr[1];
 
-    //create the user in json format
-    let newUser = {
-      Id: 0,
-      SponsorId: 0,
-      Username: this.username,
-      UserFname: FName,
-      UserLname: LName,
-      UserType: 'Driver',
-      UserAddress: this.address,
-      UserEmail: this.email,
-      UserPhoneNum: this.phone,
-      isBlacklisted: 0,
-    };
+    this.newUser.id = 0;
+    this.newUser.sponsorId = 0;
+    this.newUser.username = this.username;
+    this.newUser.userFname = FName;
+    this.newUser.userLname = LName;
+    this.newUser.userType = 'Driver';
+    this.newUser.userAddress = this.address;
+    this.newUser.userEmail = this.email;
+    this.newUser.userPwd = "null";
+    this.newUser.userPhoneNum = this.phone;
+    this.newUser.isBlacklisted = 0;
 
     //post to our api
-    this.userService.registerUser(newUser);
+    this.userService.registerUser(this.newUser);
   }
 
   StrengthChecker = (PasswordParameter: any) => {

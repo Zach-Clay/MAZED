@@ -85,7 +85,7 @@ export class CognitoService {
     return Auth.currentUserInfo();
   }
 
-  public updateUser(user: UserInfo): Promise<any> {
+  public updateUser(user: any): Promise<any> {
     return Auth.currentUserPoolUser().then((cognitoUser: any) => {
       return Auth.updateUserAttributes(cognitoUser, user);
     });

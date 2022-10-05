@@ -4,26 +4,26 @@
   <div class="container info-container">
     <div class="row d-flex">
 
-      <div class="col-9 info-col">
+      <div class="col-9 info-col" *ngIf="showInfo">
         <div class="field">
           <span class="info-text"><strong>First Name: </strong></span>
-          <input class="info-input" type="text" [(ngModel)]="FName" [disabled]="isDisabled">
+          <input class="info-input" type="text" [(ngModel)]="user.userFname" [disabled]="isDisabled">
         </div>
         <div class="field">
           <span class="info-text"><strong>Last Name: </strong></span>
-          <input class="info-input" type="text" [(ngModel)]="FName" [disabled]="isDisabled">
+          <input class="info-input" type="text" [(ngModel)]="user.userLname" [disabled]="isDisabled">
         </div>
         <div class="field">
           <span class="info-text"><strong>Phone Number: </strong></span>
-          <input class="info-input" type="text" [(ngModel)]="FName" [disabled]="isDisabled">
+          <input class="info-input" type="text" [(ngModel)]="prettyPhoneNum" [disabled]="isDisabled">
         </div>
         <div class="field">
           <span class="info-text"><strong>Address: </strong></span>
-          <input class="info-input" type="text" [(ngModel)]="FName" [disabled]="isDisabled">
+          <input class="info-input" type="text" [(ngModel)]="user.userAddress" [disabled]="isDisabled">
         </div>
         <div class="field">
           <span class="info-text"><strong>Email: </strong></span>
-          <input class="info-input" type="text" [(ngModel)]="FName" [disabled]="isDisabled">
+          <input class="info-input" type="text" [(ngModel)]="user.userEmail" [disabled]="isDisabled">
         </div>
       </div>
 
