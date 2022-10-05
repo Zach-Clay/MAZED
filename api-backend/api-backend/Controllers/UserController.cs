@@ -1,112 +1,128 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
-using api_backend.Data;
-using api_backend.Models;
-using Microsoft.AspNetCore.Mvc;
-using api_backend.Logic;
-using MazedDB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using api_backend.Data;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MazedDB.Data;
+using MazedDB.Models;
 
 namespace api_backend.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class UserController : Controller
+    [ApiController]
+    public class UserController : ControllerBase
     {
+        private readonly MazedDBContext _context;
+        //private readonly MazedDBContextProcedures _contextProcedures;
 
+        public UserController(MazedDBContext context)
+        {
+            _context = context;
+            //_contextProcedures = contextProcedures;
+        }
 
-        //Get the user based off username
+        // GET: api/UserController2
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        {
+            if (_context.Users == null) return NotFound();
+            
+            return await _context.Users.Where(e => !e.IsBlacklisted).ToListAsync();
+        }
+
+        // GET: api/UserController2/5
         [HttpGet("{id}")]
-        public IActionResult GetUser(int Id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
-            try
-            {
-                return Ok(UserLogic.getUser(Id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+            if (_context.Users == null) return NotFound();
+            
+            var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
+
+            if (user.IsBlacklisted) return NotFound();
+
+            return user;
         }
 
-        //Add user to the DB
-        [HttpPost]
-        public IActionResult AddUser([FromBody] User user)
-        {
-            try
-            {
-                return Ok(UserLogic.addUser(user));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-
-        //Change user on the DB
+        // PUT: api/UserController2/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public IActionResult ChangeUser(int Id, [FromBody] User user)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
+            if (id != user.Id) return BadRequest();
+            
+            //telling context the entry was modified so we then can change it
+            _context.Entry(user).State = EntityState.Modified;
+
             try
             {
-                return Ok(UserLogic.changeUser(Id, user));
+                await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException)
             {
-                return BadRequest(ex);
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
+
+            return NoContent();
         }
 
-        //Delete user from the DB
+        // POST: api/UserController2
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<User>> PostUser(User user)
+        {
+            if (_context.Users == null)
+            {
+                return Problem("Entity set 'MazedDBContext.Users'  is null.");
+            }
+
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+        }
+
+        // DELETE: api/UserController2/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser([FromBody] User user)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            try
-            {
-                return Ok(UserLogic.addUser(user));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+            if (_context.Users == null) return NotFound();
+            
+            var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
+
+            user.IsBlacklisted = true;
+            //telling context the entry was modified so we then can change it
+            _context.Entry(user).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
-        //user log in user from the DB
-        //[HttpPost("login")]
-        //public IActionResult UserLogin([FromBody] User user)
-        //{
-        //    try
-        //    {
-        //        return Ok(UserLogic.userLogin(user));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex);
-        //    }
-        //}
+        private bool UserExists(int id)
+        {
+            return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        //loading related data***
+        [HttpGet("GetSponsorFromUserId")]
+        public async Task<User?> GetSponsorFromUserId(int id)
+        {
+            return await _context.Users.Include(p => p.SponsorId).Where(p => p.Id == id && p.IsBlacklisted == false).FirstOrDefaultAsync();
+        }
+
+        //how to call stored proceduere
 
     }
 }
-
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace api_backend.Controllers
-{
-    public class EvanController : Controller
-    {
-        // GET: /<controller>/
-        public IActionResult Index()
-        {
-            return View();
-        }
-    }
-}
-
