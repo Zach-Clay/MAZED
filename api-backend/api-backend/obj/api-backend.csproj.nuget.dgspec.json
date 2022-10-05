@@ -134,6 +134,14 @@
               "target": "Package",
               "version": "[6.0.2, )"
             },
+            "Shopify.OAuth": {
+              "target": "Package",
+              "version": "[0.6.6, )"
+            },
+            "ShopifySharp": {
+              "target": "Package",
+              "version": "[5.18.5, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"

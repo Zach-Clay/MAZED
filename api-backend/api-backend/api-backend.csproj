@@ -38,6 +38,8 @@
     <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.4" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="MySql.Data.EntityFramework" Version="8.0.30" />
+    <PackageReference Include="ShopifySharp" Version="5.18.5" />
+    <PackageReference Include="Shopify.OAuth" Version="0.6.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -69,6 +71,8 @@
     <None Remove="MySql.Data.EntityFrameworkCore" />
     <None Remove="MySql.Data.EntityFramework" />
     <None Remove="Controllers\" />
+    <None Remove="ShopifySharp" />
+    <None Remove="Shopify.OAuth" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
