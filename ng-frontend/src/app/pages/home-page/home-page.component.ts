@@ -10,6 +10,7 @@ import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
 export class HomePageComponent implements OnInit {
   isAuthenticated: boolean;
   currentUser: any;
+  displayName: boolean = false;
 
   constructor(private router: Router, private cognitoService: CognitoService) {
     this.isAuthenticated = false;
@@ -26,6 +27,7 @@ export class HomePageComponent implements OnInit {
           .then((user: any) => {
             console.log(user);
             this.currentUser = user;
+            this.displayName = true;
           })
           .catch((e) => {
             console.log(e);

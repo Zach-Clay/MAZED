@@ -35,14 +35,15 @@ namespace api_backend.Controllers
         }
 
         // GET: api/UserController2/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet("{username}")]
+        public async Task<ActionResult<IEnumerable<User>>> GetUser(string username)
         {
             if (_context.Users == null) return NotFound();
-            
-            var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
 
-            if (user.IsBlacklisted == true) return NotFound();
+            var user = await _context.Users.Where(e => e.Username == username).ToListAsync();
+
+            if (user.Count < 1) return NotFound();
+            if (user.ElementAt(0).IsBlacklisted == true) return NotFound();
 
             return user;
         }
