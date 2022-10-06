@@ -186,7 +186,7 @@ namespace MazedDB.Data
                 entity.HasKey(e => e.PointId)
                     .HasName("PRIMARY");
 
-                entity.ToTable("pointTransation");
+                entity.ToTable("pointTransaction");
 
                 entity.HasIndex(e => e.UserId, "pointTransaction_DriverIdFK_idx");
 
@@ -245,6 +245,10 @@ namespace MazedDB.Data
                     .HasColumnType("blob")
                     .HasColumnName("image");
 
+                entity.Property(e => e.Name)
+                    .HasMaxLength(45)
+                    .HasColumnName("name");
+
                 entity.Property(e => e.OrderId).HasColumnName("orderId");
 
                 entity.Property(e => e.OrderQuantity).HasColumnName("orderQuantity");
@@ -300,6 +304,10 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
 
+                entity.Property(e => e.IssueNotifications)
+                    .HasColumnName("issueNotifications")
+                    .HasDefaultValueSql("'1'");
+
                 entity.Property(e => e.ModBy)
                     .HasMaxLength(45)
                     .HasColumnName("modBy");
@@ -307,6 +315,14 @@ namespace MazedDB.Data
                 entity.Property(e => e.ModDate)
                     .HasColumnType("datetime")
                     .HasColumnName("modDate");
+
+                entity.Property(e => e.OrderNotifications)
+                    .HasColumnName("orderNotifications")
+                    .HasDefaultValueSql("'1'");
+
+                entity.Property(e => e.PointNotifications)
+                    .HasColumnName("pointNotifications")
+                    .HasDefaultValueSql("'1'");
 
                 entity.Property(e => e.SponsorId).HasColumnName("SponsorID");
 
