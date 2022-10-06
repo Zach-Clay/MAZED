@@ -58,9 +58,7 @@ export class ProfilePageComponent implements OnInit {
       name: fullName,
       phone_number: this.user.userPhoneNum
     };
-    this.cognitoService.updateUser(cognitoAttributes).then((temp) => {
-      console.log(temp);
-    });
+    this.cognitoService.updateUser(cognitoAttributes);
 
     //re-format the phone number to look pretty
     this.formatPhone();
