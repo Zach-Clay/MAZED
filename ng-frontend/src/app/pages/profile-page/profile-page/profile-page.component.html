@@ -25,6 +25,18 @@
           <span class="info-text"><strong>Email: </strong></span>
           <input class="info-input" type="text" [(ngModel)]="user.userEmail" [disabled]="isDisabled">
         </div>
+        <div class="field">
+          <span class="info-text"><strong>Point Notifications: </strong></span>
+          <mat-slide-toggle class="info-input" [(ngModel)]="user.pointNotifications" [disabled]="isDisabled"></mat-slide-toggle>
+        </div>
+        <div class="field">
+          <span class="info-text"><strong>Order Notifications: </strong></span>
+          <mat-slide-toggle class="info-input" [(ngModel)]="user.orderNotifications" [disabled]="isDisabled"></mat-slide-toggle>
+        </div>
+        <div class="field">
+          <span class="info-text"><strong>Issues With Order Notifications: </strong></span>
+          <mat-slide-toggle class="info-input" [(ngModel)]="user.orderNotifications" [disabled]="isDisabled"></mat-slide-toggle>
+        </div>
       </div>
 
       <div class="col-3 btn-col">
