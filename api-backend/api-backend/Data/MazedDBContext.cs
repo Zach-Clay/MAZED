@@ -19,7 +19,6 @@ namespace MazedDB.Data
 
         public virtual DbSet<Application> Applications { get; set; } = null!;
         public virtual DbSet<AuditLogging> AuditLoggings { get; set; } = null!;
-        public virtual DbSet<Catalogue> Catalogues { get; set; } = null!;
         public virtual DbSet<DriverOrder> DriverOrders { get; set; } = null!;
         public virtual DbSet<EfmigrationsHistory> EfmigrationsHistories { get; set; } = null!;
         public virtual DbSet<LoginAttempt> LoginAttempts { get; set; } = null!;
@@ -102,19 +101,6 @@ namespace MazedDB.Data
                     .HasConstraintName("UserIdFK_AuditLog");
             });
 
-            modelBuilder.Entity<Catalogue>(entity =>
-            {
-                entity.ToTable("catalogue");
-
-                entity.HasIndex(e => e.SponsorId, "catalogue_SponsorIdFK_idx");
-
-                entity.HasOne(d => d.Sponsor)
-                    .WithMany(p => p.Catalogues)
-                    .HasForeignKey(d => d.SponsorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("catalogue_SponsorIdFK");
-            });
-
             modelBuilder.Entity<DriverOrder>(entity =>
             {
                 entity.ToTable("driverOrders");
@@ -160,10 +146,13 @@ namespace MazedDB.Data
             {
                 entity.ToTable("loginAttempts");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasIndex(e => e.Id, "Id_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.AttemptedDate)
-                    .HasMaxLength(45)
+                    .HasColumnType("datetime")
                     .HasColumnName("attemptedDate");
 
                 entity.Property(e => e.IsLoginSuccessful)
@@ -227,15 +216,13 @@ namespace MazedDB.Data
             {
                 entity.ToTable("product");
 
-                entity.HasIndex(e => e.CatalogueId, "product_catalogueIdFK_idx");
+                entity.HasIndex(e => e.SponsorId, "product_sponsorIdFK_idx");
 
                 entity.Property(e => e.ProductId)
                     .ValueGeneratedNever()
                     .HasColumnName("productId");
 
                 entity.Property(e => e.Availibility).HasColumnName("availibility");
-
-                entity.Property(e => e.CatalogueId).HasColumnName("catalogueId");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(45)
@@ -255,11 +242,13 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.PointValue).HasColumnName("pointValue");
 
-                entity.HasOne(d => d.Catalogue)
+                entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
+
+                entity.HasOne(d => d.Sponsor)
                     .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.CatalogueId)
+                    .HasForeignKey(d => d.SponsorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("product_catalogueIdFK");
+                    .HasConstraintName("product_sponsorIdFK");
             });
 
             modelBuilder.Entity<PwdChange>(entity =>

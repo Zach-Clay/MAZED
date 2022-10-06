@@ -22,7 +22,7 @@ namespace MazedDB.Models
         public string? UserEmail { get; set; }
         public string? UserPhoneNum { get; set; }
         public string? UserPwd { get; set; }
-        public Boolean IsBlacklisted { get; set; }
+        public sbyte IsBlacklisted { get; set; }
         public sbyte? PointNotifications { get; set; }
         public sbyte? OrderNotifications { get; set; }
         public sbyte? IssueNotifications { get; set; }
