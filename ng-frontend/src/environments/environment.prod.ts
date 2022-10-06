@@ -1,9 +1,13 @@
 export const environment = {
   production: true,
   cognito: {
-    userPoolId: 'us-east-us-east-1_fGLmSBdnv',
-    userPoolWebClientId: '77glfsp77o6ikotunef1qv9j3a',
+    userPoolId: 'us-east-1_vZEKJenWc',
+    userPoolWebClientId: '7jgko76l2296bd82nhcq0brgtd',
   },
 };
 
-const api_url = 'https://';
+<<<<<<< HEAD
+export const api_url = 'https://';
+=======
+export const api_url = 'http://44.211.142.18/api';
+>>>>>>> origin/Zach/Dev

@@ -3,6 +3,7 @@
 :root {
   --primary-color: #5962ff;
   --secondary-color: #8fbaff;
+  --tertiary-color: #e3f5ff;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&family=Poppins:ital,wght@1,400;1,700&display=swap");
