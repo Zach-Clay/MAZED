@@ -10,4 +10,7 @@ export interface User {
   userPwd: string;
   userPhoneNum: string;
   isBlacklisted: number;
+  pointNotifications: number;
+  orderNotifications: number;
+  issueNotifications: number;
 }

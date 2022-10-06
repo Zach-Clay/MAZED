@@ -12,9 +12,7 @@ import { runInThisContext } from 'vm';
 })
 export class ProfilePageComponent implements OnInit {
 
-  public FName: string = "Zach";
   public user: User = {} as User;
-  public cognitoUser: UserInfo = {} as UserInfo;
   public isDisabled: boolean = true;
   public showInfo: boolean = false;
   public prettyPhoneNum: string = "";
@@ -25,7 +23,6 @@ export class ProfilePageComponent implements OnInit {
     this.cognitoService
       .getUser()
       .then((user: any) => {
-        this.cognitoUser = user.attributes;
         this.userService.getUser(user.username).subscribe((data)=>{
           this.user = data;
           this.showInfo = true;
@@ -42,7 +39,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   updateProfile() {
-    //formate the phonenumber
+    //re-format the phonenumber
     let temp = this.prettyPhoneNum;
     temp = temp.split(' ').join('');
     temp = temp.split('-').join('');
@@ -53,6 +50,7 @@ export class ProfilePageComponent implements OnInit {
     //update our database
     this.userService.updateUser(this.user.id, this.user);
 
+    //Update cognito
     const fullName = this.user.userFname + ' ' + this.user.userLname;
     const cognitoAttributes = {
       address: this.user.userAddress,
@@ -60,11 +58,11 @@ export class ProfilePageComponent implements OnInit {
       name: fullName,
       phone_number: this.user.userPhoneNum
     };
-
     this.cognitoService.updateUser(cognitoAttributes).then((temp) => {
       console.log(temp);
     });
 
+    //re-format the phone number to look pretty
     this.formatPhone();
   }
 
