@@ -1,12 +1,13 @@
-export interface user {
-  Id: number;
-  SponsorId: number;
-  Username: string;
-  UserFname: string;
-  UserLname: string;
-  UserType: string;
-  UserAddress: string;
-  UserEmail: string;
-  UserPhoneNum: string;
+export interface User {
+  id: number;
+  sponsorId: number;
+  username: string;
+  userFname: string;
+  userLname: string;
+  userType: string;
+  userAddress: string;
+  userEmail: string;
+  userPwd: string;
+  userPhoneNum: string;
   isBlacklisted: number;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService, UserInfo } from 'src/app/services/login.service';
+import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
 
 @Component({
   selector: 'app-home-page-header',
@@ -9,12 +9,12 @@ import { LoginService, UserInfo } from 'src/app/services/login.service';
 })
 export class HomePageHeaderComponent implements OnInit {
   image: string = '../assets/light-logo.png';
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private cognitoService: CognitoService, private router: Router) {}
 
   ngOnInit(): void {}
 
   signOut() {
-    this.loginService.signOut().then(() => {
+    this.cognitoService.signOut().then(() => {
       this.router.navigate(['/']);
     });
   }
