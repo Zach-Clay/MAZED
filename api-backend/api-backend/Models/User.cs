@@ -30,7 +30,6 @@ namespace MazedDB.Models
         public string? ModBy { get; set; }
 
         public virtual AuditLogging? AuditLogging { get; set; }
-        public virtual LoginAttempt? LoginAttempt { get; set; }
         public virtual ICollection<DriverOrder> DriverOrders { get; set; }
         public virtual ICollection<PointTransaction> PointTransactions { get; set; }
         public virtual ICollection<PwdChange> PwdChanges { get; set; }

@@ -144,16 +144,18 @@ namespace MazedDB.Data
 
             modelBuilder.Entity<LoginAttempt>(entity =>
             {
+                entity.HasNoKey();
+
                 entity.ToTable("loginAttempts");
 
                 entity.HasIndex(e => e.Id, "Id_UNIQUE")
                     .IsUnique();
 
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
                 entity.Property(e => e.AttemptedDate)
                     .HasColumnType("datetime")
                     .HasColumnName("attemptedDate");
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.IsLoginSuccessful)
                     .HasMaxLength(45)
@@ -162,12 +164,6 @@ namespace MazedDB.Data
                 entity.Property(e => e.Username)
                     .HasMaxLength(45)
                     .HasColumnName("username");
-
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.LoginAttempt)
-                    .HasForeignKey<LoginAttempt>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("userID_FK");
             });
 
             modelBuilder.Entity<PointTransaction>(entity =>

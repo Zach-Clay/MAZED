@@ -9,7 +9,5 @@ namespace MazedDB.Models
         public string Username { get; set; } = null!;
         public DateTime AttemptedDate { get; set; }
         public string IsLoginSuccessful { get; set; } = null!;
-
-        public virtual User IdNavigation { get; set; } = null!;
     }
 }
