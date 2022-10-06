@@ -12,7 +12,7 @@ using MazedDB.Models;
 
 namespace api_backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController2 : ControllerBase
     {
@@ -35,16 +35,17 @@ namespace api_backend.Controllers
         }
 
         // GET: api/UserController2/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet("{username}")]
+        public async Task<ActionResult<User>> GetUser(string username)
         {
             if (_context.Users == null) return NotFound();
-            
-            var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
 
-            if (user.IsBlacklisted == true) return NotFound();
+            var user = await _context.Users.Where(e => e.Username == username).ToListAsync();
 
-            return user;
+            if (user.Count < 1) return NotFound();
+            if (user.ElementAt(0).IsBlacklisted == true) return NotFound();
+
+            return user.ElementAt(0);
         }
 
         // PUT: api/UserController2/5
@@ -120,7 +121,8 @@ namespace api_backend.Controllers
                 return Problem("Entity set 'MazedDBContext.Users'  is null.");
             }
 
-
+            user.ModDate = DateTime.Now;
+            user.ModBy = user.Username;
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 

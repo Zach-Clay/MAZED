@@ -1317,6 +1317,20 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+      "Microsoft.Extensions.Http/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0",
+          "Microsoft.Extensions.Logging": "2.1.0",
+          "Microsoft.Extensions.Options": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Http.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Http.dll": {}
+        }
+      },
       "Microsoft.Extensions.Logging/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -2165,6 +2179,31 @@
             "assetType": "native",
             "rid": "win-x86"
           }
+        }
+      },
+      "Shopify.OAuth/0.6.6": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "compile": {
+          "lib/net461/Shopify.OAuth.NET45.dll": {}
+        },
+        "runtime": {
+          "lib/net461/Shopify.OAuth.NET45.dll": {}
+        }
+      },
+      "ShopifySharp/5.18.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Http": "2.1.0",
+          "newtonsoft.json": "13.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/ShopifySharp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/ShopifySharp.dll": {}
         }
       },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
@@ -5535,6 +5574,19 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Microsoft.Extensions.Http/2.1.0": {
+      "sha512": "vkSkGa1UIZVlAd18oDhrtoawN/q7fDemJcVpT9+28mP7bP0I8zKLSLRwqF++GmPs/7e0Aqlo6jpZm3P7YYS0ag==",
+      "type": "package",
+      "path": "microsoft.extensions.http/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.xml",
+        "microsoft.extensions.http.2.1.0.nupkg.sha512",
+        "microsoft.extensions.http.nuspec"
+      ]
+    },
     "Microsoft.Extensions.Logging/6.0.0": {
       "sha512": "eIbyj40QDg1NDz0HBW0S5f3wrLVnKWnDJ/JtZ+yJDFnDj90VoPuoPmFkeaXrtu+0cKm5GRAwoDf+dBWXK0TUdg==",
       "type": "package",
@@ -7197,6 +7249,51 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "Shopify.OAuth/0.6.6": {
+      "sha512": "OwencGkGtANoCVsdb0Z2IAhBGIhqpImN95k9dzV+QT+tK0ZhQskR36M8slpEnrj+OADssySFweqI1Mgu6PbiAw==",
+      "type": "package",
+      "path": "shopify.oauth/0.6.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20/Shopify.OAuth.NET20.dll",
+        "lib/net20/Shopify.OAuth.NET20.xml",
+        "lib/net40/Shopify.OAuth.NET20.dll",
+        "lib/net40/Shopify.OAuth.NET20.xml",
+        "lib/net45/Shopify.OAuth.NET45.dll",
+        "lib/net45/Shopify.OAuth.NET45.xml",
+        "lib/net451/Shopify.OAuth.NET45.dll",
+        "lib/net451/Shopify.OAuth.NET45.xml",
+        "lib/net452/Shopify.OAuth.NET45.dll",
+        "lib/net452/Shopify.OAuth.NET45.xml",
+        "lib/net46/Shopify.OAuth.NET45.dll",
+        "lib/net46/Shopify.OAuth.NET45.xml",
+        "lib/net461/Shopify.OAuth.NET45.dll",
+        "lib/net461/Shopify.OAuth.NET45.xml",
+        "lib/net462/Shopify.OAuth.NET45.dll",
+        "lib/net462/Shopify.OAuth.NET45.xml",
+        "lib/net47/Shopify.OAuth.NET45.dll",
+        "lib/net47/Shopify.OAuth.NET45.xml",
+        "lib/net471/Shopify.OAuth.NET45.dll",
+        "lib/net471/Shopify.OAuth.NET45.xml",
+        "lib/net472/Shopify.OAuth.NET45.dll",
+        "lib/net472/Shopify.OAuth.NET45.xml",
+        "shopify.oauth.0.6.6.nupkg.sha512",
+        "shopify.oauth.nuspec"
+      ]
+    },
+    "ShopifySharp/5.18.5": {
+      "sha512": "2oIC8Co9MWxkzGtu+ncAGGqR/mT1+LYP7rtTsRc3uVFm6M9WZYz1tfP2gST4IUJ9mxX/a7Uq1h/EF8ZUH01Agg==",
+      "type": "package",
+      "path": "shopifysharp/5.18.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/ShopifySharp.dll",
+        "shopifysharp.5.18.5.nupkg.sha512",
+        "shopifysharp.nuspec"
       ]
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
@@ -11382,23 +11479,25 @@
       "MySqlConnector >= 2.1.13",
       "Newtonsoft.Json >= 13.0.1",
       "Pomelo.EntityFrameworkCore.MySql >= 6.0.2",
+      "Shopify.OAuth >= 0.6.6",
+      "ShopifySharp >= 5.18.5",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
   "packageFolders": {
-    "/Users/madisonwilson/.nuget/packages/": {}
+    "/Users/zachclay/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
+      "projectUniqueName": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
       "projectName": "api-backend",
-      "projectPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
-      "packagesPath": "/Users/madisonwilson/.nuget/packages/",
-      "outputPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/",
+      "projectPath": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
+      "packagesPath": "/Users/zachclay/.nuget/packages/",
+      "outputPath": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/madisonwilson/.nuget/NuGet/NuGet.Config"
+        "/Users/zachclay/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -11518,6 +11617,14 @@
             "target": "Package",
             "version": "[6.0.2, )"
           },
+          "Shopify.OAuth": {
+            "target": "Package",
+            "version": "[0.6.6, )"
+          },
+          "ShopifySharp": {
+            "target": "Package",
+            "version": "[5.18.5, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.4.0, )"
@@ -11545,5 +11652,17 @@
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Shopify.OAuth 0.6.6' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Shopify.OAuth",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

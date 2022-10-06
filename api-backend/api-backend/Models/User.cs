@@ -8,7 +8,7 @@ namespace MazedDB.Models
         public User()
         {
             DriverOrders = new HashSet<DriverOrder>();
-            PointTransations = new HashSet<PointTransation>();
+            PointTransactions = new HashSet<PointTransaction>();
             PwdChanges = new HashSet<PwdChange>();
         }
 
@@ -29,7 +29,7 @@ namespace MazedDB.Models
         public virtual AuditLogging? AuditLogging { get; set; }
         public virtual LoginAttempt? LoginAttempt { get; set; }
         public virtual ICollection<DriverOrder> DriverOrders { get; set; }
-        public virtual ICollection<PointTransation> PointTransations { get; set; }
+        public virtual ICollection<PointTransaction> PointTransactions { get; set; }
         public virtual ICollection<PwdChange> PwdChanges { get; set; }
     }
 }
