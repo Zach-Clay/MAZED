@@ -98,9 +98,10 @@ export class LoginComponent implements OnInit {
     console.log('SIGN IN');
     console.log(this.user);
     this.loading = true;
+    event?.preventDefault();
     this.loginService
       .signIn(this.user)
-      .then(() => {
+      .then((success) => {
         this.router.navigate(['/home']);
       })
       .catch((err) => {
@@ -125,7 +126,10 @@ export class LoginComponent implements OnInit {
   eventListener = () => {
     this.displayType = 'block';
     clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => this.StrengthChecker(this.newPassword), 500);
+    this.timeout = setTimeout(
+      () => this.StrengthChecker(this.newPassword),
+      500
+    );
     if (this.newPassword.length !== 0) {
       this.displayType != 'block';
     } else {
