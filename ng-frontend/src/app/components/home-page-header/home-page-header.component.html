@@ -1,9 +1,20 @@
-<!-- <div class="header">
-  <div class="row">
-    <div class="col">Points:</div>
+<div class="header">
+  <div class="row pb-3" style="background: var(--secondary-color)">
     <div class="col">
-      <img class="d-block pt-3" src="{{ image }}" />
+      <a href="/home">
+        <img
+          class="pt-3 ml-5"
+          src="../../../assets/light-logo.png"
+          style="width: 30%"
+      /></a>
     </div>
-    <div class="col">profile</div>
+    <div class="col pt-4 text-center" style="font-size: 2em">
+      <p class="text-center">POINTS</p>
+      <p class="text-center">120</p>
+    </div>
+    <div class="col pt-3 text-right">
+      <a class="nav-link" routerLink="/profile">Profile</a>
+      <a class="nav-link" routerLink="" (click)="signOut()">Sign out</a>
+    </div>
   </div>
-</div> -->
+</div>

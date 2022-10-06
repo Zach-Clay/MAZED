@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserInfo, LoginService } from 'src/app/services/login.service';
+import { UserInfo, CognitoService } from 'src/app/services/cognito.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   public strengthColor: string = 'red';
   public strengthText: string = 'Weak';
 
-  constructor(private router: Router, private loginService: LoginService) {
+  constructor(private router: Router, private cognitoService: CognitoService) {
     this.loading = false;
     this.user = {} as UserInfo;
     this.forgot = false;
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginService.isAuthenticated().then((success: boolean) => {
+    this.cognitoService.isAuthenticated().then((success: boolean) => {
       if (success) {
         this.router.navigate(['/home']);
       }
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     }
     this.forgot = true;
 
-    this.loginService
+    this.cognitoService
       .forgotPassword(this.user)
       .then(() => {})
       .catch(() => {});
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       alert('Passwords do not match');
     }
     this.user.code = this.resetCode;
-    this.loginService
+    this.cognitoService
       .forgotPasswordSubmit(this.user, this.newPassword)
       .then((success) => {
         // call our own API and log the password change
@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
     console.log('SIGN IN');
     console.log(this.user);
     this.loading = true;
-    this.loginService
+    this.cognitoService
       .signIn(this.user)
       .then(() => {
         this.router.navigate(['/home']);

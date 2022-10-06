@@ -6,4 +6,4 @@ export const environment = {
   },
 };
 
-const api_url = 'https://';
+export const api_url = 'http://44.211.142.18/api';

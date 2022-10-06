@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService, UserInfo } from 'src/app/services/login.service';
+import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
 
 @Component({
   selector: 'app-home-page',
@@ -10,22 +10,23 @@ import { LoginService, UserInfo } from 'src/app/services/login.service';
 export class HomePageComponent implements OnInit {
   isAuthenticated: boolean;
   currentUser: any;
+  displayName: boolean = false;
 
-  constructor(private router: Router, private loginService: LoginService) {
+  constructor(private router: Router, private cognitoService: CognitoService) {
     this.isAuthenticated = false;
   }
 
   ngOnInit(): void {
-    this.loginService.isAuthenticated().then((success: boolean) => {
+    this.cognitoService.isAuthenticated().then((success: boolean) => {
       this.isAuthenticated = success;
       if (!this.isAuthenticated) {
         this.router.navigate(['/']);
       } else {
-        this.currentUser = this.loginService
+        this.currentUser = this.cognitoService
           .getUser()
           .then((user: any) => {
-            console.log(user);
             this.currentUser = user;
+            this.displayName = true;
           })
           .catch((e) => {
             console.log(e);
@@ -35,7 +36,7 @@ export class HomePageComponent implements OnInit {
   }
 
   signOut() {
-    this.loginService.signOut().then(() => {
+    this.cognitoService.signOut().then(() => {
       this.router.navigate(['/']);
     });
   }
