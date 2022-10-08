@@ -11485,24 +11485,29 @@
     ]
   },
   "packageFolders": {
-    "/Users/madisonwilson/.nuget/packages/": {}
+    "/Users/evanbondura/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
+      "projectUniqueName": "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/api-backend.csproj",
       "projectName": "api-backend",
-      "projectPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
-      "packagesPath": "/Users/madisonwilson/.nuget/packages/",
-      "outputPath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/",
+      "projectPath": "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/api-backend.csproj",
+      "packagesPath": "/Users/evanbondura/.nuget/packages/",
+      "outputPath": "/Users/evanbondura/Desktop/Mazed/api-backend/api-backend/obj/",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "/Users/madisonwilson/.nuget/NuGet/NuGet.Config"
+        "/Users/evanbondura/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
