@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MazedDB.Data;
 using MazedDB.Models;
+using static api_backend.Controllers.UserController2;
 
 namespace api_backend.Controllers
 {
@@ -130,10 +131,10 @@ namespace api_backend.Controllers
 
         //get point history for a user based on username
 
-        // [HttpGet("GetAllPointsForUser")]
-        // public async Task<PointTransaction?> GetAllPointsForUser(string username)
-        // {
-        //     return await _context.PointTransactions.GetUser().Where(p => p.UserId == id).FirstOrDefaultAsync();
-        // }
+        //[HttpGet("{id}/GetAllPointsForUser")]
+        //public async Task<PointTransaction?> GetAllPointsForUser(int id)
+        //{
+        //    return await _context.PointTransactions.GetUserId().Where(p => p.UserId == id).FirstOrDefaultAsync();
+        //}
     }
 }

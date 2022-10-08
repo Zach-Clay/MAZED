@@ -11,8 +11,5 @@ namespace MazedDB.Models
         public int PointValue { get; set; }
         public string? Reason { get; set; }
         public DateTime ModDate { get; set; }
-
-        public virtual SponsorOrg Sponsor { get; set; } = null!;
-        public virtual User User { get; set; } = null!;
     }
 }

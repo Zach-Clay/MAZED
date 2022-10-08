@@ -14,6 +14,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMvc().AddControllersAsServices();
 
 //add db context service so our context can create our controller
 builder.Services.AddDbContext<MazedDBContext>(
