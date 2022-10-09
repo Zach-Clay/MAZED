@@ -13,4 +13,10 @@ export interface User {
   pointNotifications: number;
   orderNotifications: number;
   issueNotifications: number;
-}
+};
+
+export interface LoginAttempt {
+  id: number;
+  username: string;
+  isLoginSuccessful: string;
+};

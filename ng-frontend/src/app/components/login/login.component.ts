@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfo, CognitoService } from 'src/app/services/cognito.service';
 import { Router } from '@angular/router';
+import { LoginAttemptService } from 'src/app/services/login-attempt.service';
+import { LoginAttempt } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,11 @@ export class LoginComponent implements OnInit {
   public strengthColor: string = 'red';
   public strengthText: string = 'Weak';
 
-  constructor(private router: Router, private cognitoService: CognitoService) {
+  constructor(
+    private router: Router,
+    private cognitoService: CognitoService,
+    private loginAttemptService: LoginAttemptService
+  ) {
     this.loading = false;
     this.user = {} as UserInfo;
     this.forgot = false;
@@ -101,12 +107,28 @@ export class LoginComponent implements OnInit {
     event?.preventDefault();
     this.cognitoService
       .signIn(this.user)
-      .then((success) => {
+      .then(() => {
+        //log attempt to our db
+        const attempt: LoginAttempt = {
+          id: 0,
+          username: this.user.username,
+          isLoginSuccessful: 'yes',
+        };
+        this.loginAttemptService.addAttempt(attempt);
+
         this.router.navigate(['/home']);
       })
       .catch((err) => {
         alert(err);
         this.loading = false;
+
+        //log attempt to our DB
+        const attempt: LoginAttempt = {
+          id: 0,
+          username: this.user.username,
+          isLoginSuccessful: 'no',
+        };
+        this.loginAttemptService.addAttempt(attempt);
       });
   }
 
