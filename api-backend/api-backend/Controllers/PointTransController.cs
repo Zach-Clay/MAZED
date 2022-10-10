@@ -131,7 +131,7 @@ namespace api_backend.Controllers
 
         //get point history for a user based on username
 
-        [HttpGet("/GetPointsForUser/{UserId}")]
+        [HttpGet("GetPointsForUser/{UserId}")]
         public async Task<List<PointTransaction>> GetAllPointsForUser(int UserId)
         {
             return await _context.PointTransactions.Where(p => p.UserId == UserId).ToListAsync();
