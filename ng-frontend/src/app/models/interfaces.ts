@@ -13,10 +13,18 @@ export interface User {
   pointNotifications: number;
   orderNotifications: number;
   issueNotifications: number;
-};
+}
 
 export interface LoginAttempt {
   id: number;
   username: string;
   isLoginSuccessful: string;
-};
+}
+
+export interface PointsChanges {
+  PointId: number;
+  SponsorId: number;
+  UserId: number;
+  PointValue: number;
+  Reason: string;
+}

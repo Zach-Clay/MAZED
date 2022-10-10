@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
+import { User, PointsChanges } from 'src/app/models/interfaces';
+import { UserService } from 'src/app/services/user.service';
+import { PointsChangesService } from 'src/app/services/points-changes.service';
 
 @Component({
   selector: 'app-home-page',
@@ -10,9 +13,16 @@ import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
 export class HomePageComponent implements OnInit {
   isAuthenticated: boolean;
   currentUser: any;
+  dbUser!: User;
   displayName: boolean = false;
+  pointTransactions!: PointsChanges[];
 
-  constructor(private router: Router, private cognitoService: CognitoService) {
+  constructor(
+    private router: Router,
+    private cognitoService: CognitoService,
+    private userService: UserService,
+    private pointsChangesService: PointsChangesService
+  ) {
     this.isAuthenticated = false;
   }
 
@@ -26,7 +36,18 @@ export class HomePageComponent implements OnInit {
           .getUser()
           .then((user: any) => {
             this.currentUser = user;
-            this.displayName = true;
+            this.userService
+              .getUser(this.currentUser.username)
+              .subscribe((data) => {
+                this.dbUser = data;
+                this.pointsChangesService
+                  .getTransactions(this.dbUser.id)
+                  .subscribe((pointsTrans) => {
+                    this.pointTransactions = pointsTrans;
+                    // display points now
+                    console.log(this.pointTransactions);
+                  });
+              });
           })
           .catch((e) => {
             console.log(e);
