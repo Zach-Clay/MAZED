@@ -289,6 +289,8 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.SponsorId).HasColumnName("SponsorID");
 
+                entity.Property(e => e.TotalPoints).HasColumnName("totalPoints");
+
                 entity.Property(e => e.UserAddress).HasMaxLength(30);
 
                 entity.Property(e => e.UserEmail).HasMaxLength(30);

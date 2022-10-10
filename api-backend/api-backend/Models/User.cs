@@ -27,6 +27,7 @@ namespace MazedDB.Models
         public sbyte? IssueNotifications { get; set; }
         public DateTime? ModDate { get; set; }
         public string? ModBy { get; set; }
+        public int TotalPoints { get; set; }
 
         public virtual AuditLogging? AuditLogging { get; set; }
         public virtual ICollection<DriverOrder> DriverOrders { get; set; }
