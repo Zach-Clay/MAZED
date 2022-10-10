@@ -173,9 +173,7 @@ namespace MazedDB.Data
 
                 entity.ToTable("pointTransaction");
 
-                entity.Property(e => e.PointId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("pointId");
+                entity.Property(e => e.PointId).HasColumnName("pointId");
 
                 entity.Property(e => e.ModDate)
                     .HasColumnType("datetime")
@@ -196,9 +194,7 @@ namespace MazedDB.Data
             {
                 entity.ToTable("product");
 
-                entity.Property(e => e.ProductId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("productId");
+                entity.Property(e => e.ProductId).HasColumnName("productId");
 
                 entity.Property(e => e.Availibility).HasColumnName("availibility");
 
@@ -209,6 +205,8 @@ namespace MazedDB.Data
                 entity.Property(e => e.Image)
                     .HasColumnType("blob")
                     .HasColumnName("image");
+
+                entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(45)
@@ -251,6 +249,10 @@ namespace MazedDB.Data
                 entity.ToTable("sponsorOrgs");
 
                 entity.Property(e => e.CatalogueId).HasColumnName("CatalogueID");
+
+                entity.Property(e => e.DollarToPoint)
+                    .HasColumnName("dollarToPoint")
+                    .HasDefaultValueSql("'0.01'");
 
                 entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
 

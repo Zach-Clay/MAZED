@@ -10,11 +10,10 @@ namespace MazedDB.Models
         public int OrderId { get; set; }
         public int PointValue { get; set; }
         public int OrderQuantity { get; set; }
-        public Boolean Availibility { get; set; }
+        public sbyte Availibility { get; set; }
         public string? Description { get; set; }
         public byte[]? Image { get; set; }
-        public sbyte isBlacklisted { get; set; } = 0;
-        public string? Name { get; set; }
-
+        public string Name { get; set; } = null!;
+        public sbyte IsBlacklisted { get; set; }
     }
 }

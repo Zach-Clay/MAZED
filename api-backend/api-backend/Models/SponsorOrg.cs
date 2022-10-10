@@ -14,6 +14,7 @@ namespace MazedDB.Models
         public string OrgName { get; set; } = null!;
         public string OrgDescription { get; set; } = null!;
         public int CatalogueId { get; set; }
+        public double DollarToPoint { get; set; }
         public sbyte IsBlacklisted { get; set; }
 
         public virtual AuditLogging? AuditLogging { get; set; }
