@@ -1,52 +1,4 @@
-<div class="header">
-  <div class="row pb-3" style="background: var(--secondary-color)">
-    <div class="col align-self-center">
-      <a href="/home">
-        <img
-          class="pt-3 ml-5"
-          src="../../../assets/light-logo.png"
-          style="width: 170px"
-      /></a>
-    </div>
-    <!-- empty column -->
-    <div class="col" style="background: var(--secondary-color);  
-    padding: 1px; 
-    border-radius: 1em;
-    margin: 0px"></div>
-    <div class="col align-self-center text-center" style="font-size: 2em; background: var(--primary-color);  
-    padding: 15px; 
-    border-radius: 1em;
-    margin: 10px ">
-      <p class="row text-light">    </p>
-      <p class="text-light" >POINTS</p>
-      <p class="text-light">120</p>
-    </div>
-     <!-- empty column -->
-    <div class="col" style="background: var(--secondary-color);  
-    padding: 1px; 
-    border-radius: 1em;
-    margin: 2px"></div>
-    <!-- column holding profile & sign out button -->
-    <div class="col-2 align-items-center" style="background: var(--primary-color);  
-    padding: 2px; 
-    border-radius: 1em;
-    margin: 5px ">
-      <!-- profile button -->
-      <div class="row justify-content-sm-center" style="background: var(--secondary-color);  
-      padding: 0px; 
-      border-radius: 1em;
-      margin: 10px">
-      <p class="nav-link text-light" routerLink="/profile">Profile</p> 
-    </div> 
-      <!-- sign out button -->
-      <div class="row justify-content-sm-center" style="background: var(--secondary-color);  
-      padding: 0px; 
-      border-radius: 1em;
-      margin: 10px">
-      <p class = "nav-link text-light" routerLink="" (click)="signOut()">Sign out</p>
-    </div>
-  </div>
-</div>
+<app-home-page-header></app-home-page-header>
 
 <div class="pt-2">
   <div class="text-center" *ngIf="displayName">
@@ -62,14 +14,16 @@
         <div class="bi bi-truck mb-2" style="font-size: 30px"></div>
         <div class="card-text">Point-to-Dollar Conversion:</div>
         <div class="card" style="background: var(--tertiary-color)">
-          <p style="color: var(--primary-color); font-size: 1.2em">
+          <p
+            class="mb-1 mt-1"
+            style="color: var(--primary-color); font-size: 1.2em"
+          >
             recent point updates
           </p>
-          <div
-            class="card mx-2 my-1"
-            style="background: var(--secondary-color)"
-          ></div>
-          <!-- POINT CHANGES HERE -->
+          <app-point-change
+            *ngFor="let pointChange of pointTransactions | slice: 0:4"
+            [pointChange]="pointChange"
+          ></app-point-change>
         </div>
       </div>
     </div>
@@ -125,7 +79,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="row mt-3">
   <div class="col-md-3 w-50">

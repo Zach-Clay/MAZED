@@ -22,11 +22,11 @@ export interface LoginAttempt {
 }
 
 export interface PointsChanges {
-  PointId: number;
-  SponsorId: number;
-  UserId: number;
-  PointValue: number;
-  Reason: string;
+  pointId: number;
+  sponsorId: number;
+  userId: number;
+  pointValue: number;
+  reason: string;
 }
 
 export interface SponsorOrg {
