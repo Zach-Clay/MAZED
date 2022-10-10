@@ -144,8 +144,6 @@ namespace MazedDB.Data
 
             modelBuilder.Entity<LoginAttempt>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("loginAttempts");
 
                 entity.HasIndex(e => e.Id, "Id_UNIQUE")
@@ -154,8 +152,6 @@ namespace MazedDB.Data
                 entity.Property(e => e.AttemptedDate)
                     .HasColumnType("datetime")
                     .HasColumnName("attemptedDate");
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.IsLoginSuccessful)
                     .HasMaxLength(45)
