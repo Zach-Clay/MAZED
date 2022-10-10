@@ -60,6 +60,7 @@ export class HomePageComponent implements OnInit {
                   .subscribe((pointsTrans) => {
                     this.pointTransactions = pointsTrans;
                     // display points now
+                    console.log(this.pointTransactions);
                   });
               });
           })

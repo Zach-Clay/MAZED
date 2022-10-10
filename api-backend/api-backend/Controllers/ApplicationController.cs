@@ -59,7 +59,7 @@ namespace api_backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Application>> Post([FromBody] Application application)
+        public async Task<ActionResult<Application>> Post(Application application)
         {
             if (_context.Applications == null)
             {
@@ -76,7 +76,7 @@ namespace api_backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Application>> Put(int id, [FromBody] Application application)
+        public async Task<ActionResult<Application>> Put(int id, Application application)
         {
             if (id != application.Id)
             {

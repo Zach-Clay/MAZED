@@ -2,8 +2,9 @@
   <app-header></app-header>
 </div>
 
+<a routerLink="/home"><mat-icon>arrow_back</mat-icon></a>
+
 <div class="text-center">
-  <br/>
   <h1 class="mt-2 mb-0 title">Driver Appication to Sponsor</h1>
   <br/>
 </div>
@@ -16,7 +17,7 @@
       <br />
       <mat-form-field appearance="outline" color="primary">
         <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="orgSelection">
-          <mat-option *ngFor="let org of orgs" [value]="org.orgName">
+          <mat-option *ngFor="let org of orgs" [value]="org">
             {{org.orgName}}
           </mat-option>
         </mat-select>

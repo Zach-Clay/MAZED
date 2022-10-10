@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
-import { User, SponsorOrg } from 'src/app/models/interfaces';
+import { User, SponsorOrg, Application } from 'src/app/models/interfaces';
+import { ApplicationService } from 'src/app/services/application.service';
 
 @Component({
   selector: 'app-driver-application',
@@ -17,9 +19,11 @@ export class DriverApplicationComponent implements OnInit {
   description: string = "";
 
   constructor(
+    private router: Router,
     private cognitoService: CognitoService,
     private userService: UserService,
     private sponsorOrgService: SponsorOrgService,
+    private applicationService: ApplicationService
   ) { }
 
   ngOnInit(): void {
@@ -52,8 +56,20 @@ export class DriverApplicationComponent implements OnInit {
     }
 
     //submit the application
-    
+    const application: Application = {
+      id: 0,
+      userId: this.user.id,
+      sponsorId: this.orgSelection.id,
+      approvalStatus: 0,
+      description: this.description,
+      requestedDate: "",
+      responseDate: "",
+      isActive: 1
+    }
 
+    console.log(application);
+
+    this.applicationService.submitApplication(application);
   }
 
 }
