@@ -8,19 +8,16 @@ namespace MazedDB.Models
         public SponsorOrg()
         {
             DriverOrders = new HashSet<DriverOrder>();
-            PointTransactions = new HashSet<PointTransaction>();
-            Products = new HashSet<Product>();
         }
 
         public int Id { get; set; }
         public string OrgName { get; set; } = null!;
         public string OrgDescription { get; set; } = null!;
         public int CatalogueId { get; set; }
+        public double DollarToPoint { get; set; }
         public sbyte IsBlacklisted { get; set; }
 
         public virtual AuditLogging? AuditLogging { get; set; }
         public virtual ICollection<DriverOrder> DriverOrders { get; set; }
-        public virtual ICollection<PointTransaction> PointTransactions { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
     }
 }

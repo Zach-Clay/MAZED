@@ -48,6 +48,20 @@ namespace api_backend.Controllers
             return user.ElementAt(0);
         }
 
+        // GET: api/UserController2/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUserId(int id)
+        {
+            if (_context.Users == null) return NotFound();
+
+            var user = await _context.Users.Where(e => e.Id == id).ToListAsync();
+
+            if (user.Count < 1) return NotFound();
+            if (user.ElementAt(0).IsBlacklisted == 1) return NotFound();
+
+            return user.ElementAt(0);
+        }
+
         // PUT: api/UserController2/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -159,6 +173,13 @@ namespace api_backend.Controllers
         }
 
         //how to call stored proceduere
+
+        //get all drivers by a sponsor'sId
+        [HttpGet("GetDriversBySponsorId")]
+        public async Task<List<User>> GetDriversBySponsorId(int SponsorId)
+        {
+            return await _context.Users.Where(u => u.SponsorId == SponsorId).ToListAsync();
+        }
 
     }
 }

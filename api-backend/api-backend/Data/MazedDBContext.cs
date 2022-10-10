@@ -173,13 +173,7 @@ namespace MazedDB.Data
 
                 entity.ToTable("pointTransaction");
 
-                entity.HasIndex(e => e.UserId, "pointTransaction_DriverIdFK_idx");
-
-                entity.HasIndex(e => e.SponsorId, "pointTransaction_SponsorIdFK_idx");
-
-                entity.Property(e => e.PointId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("pointId");
+                entity.Property(e => e.PointId).HasColumnName("pointId");
 
                 entity.Property(e => e.ModDate)
                     .HasColumnType("datetime")
@@ -194,29 +188,13 @@ namespace MazedDB.Data
                 entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
 
                 entity.Property(e => e.UserId).HasColumnName("userId");
-
-                entity.HasOne(d => d.Sponsor)
-                    .WithMany(p => p.PointTransactions)
-                    .HasForeignKey(d => d.SponsorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("pointTransaction_SponsorIdFK");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PointTransactions)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("pointTransaction_DriverIdFK");
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("product");
 
-                entity.HasIndex(e => e.SponsorId, "product_sponsorIdFK_idx");
-
-                entity.Property(e => e.ProductId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("productId");
+                entity.Property(e => e.ProductId).HasColumnName("productId");
 
                 entity.Property(e => e.Availibility).HasColumnName("availibility");
 
@@ -227,6 +205,8 @@ namespace MazedDB.Data
                 entity.Property(e => e.Image)
                     .HasColumnType("blob")
                     .HasColumnName("image");
+
+                entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(45)
@@ -239,12 +219,6 @@ namespace MazedDB.Data
                 entity.Property(e => e.PointValue).HasColumnName("pointValue");
 
                 entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
-
-                entity.HasOne(d => d.Sponsor)
-                    .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.SponsorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("product_sponsorIdFK");
             });
 
             modelBuilder.Entity<PwdChange>(entity =>
@@ -275,6 +249,10 @@ namespace MazedDB.Data
                 entity.ToTable("sponsorOrgs");
 
                 entity.Property(e => e.CatalogueId).HasColumnName("CatalogueID");
+
+                entity.Property(e => e.DollarToPoint)
+                    .HasColumnName("dollarToPoint")
+                    .HasDefaultValueSql("'0.01'");
 
                 entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
 

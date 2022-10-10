@@ -14,7 +14,6 @@ namespace MazedDB.Models
         public string? Description { get; set; }
         public byte[]? Image { get; set; }
         public string Name { get; set; } = null!;
-
-        public virtual SponsorOrg Sponsor { get; set; } = null!;
+        public sbyte IsBlacklisted { get; set; }
     }
 }
