@@ -173,10 +173,6 @@ namespace MazedDB.Data
 
                 entity.ToTable("pointTransaction");
 
-                entity.HasIndex(e => e.UserId, "pointTransaction_DriverIdFK_idx");
-
-                entity.HasIndex(e => e.SponsorId, "pointTransaction_SponsorIdFK_idx");
-
                 entity.Property(e => e.PointId)
                     .ValueGeneratedNever()
                     .HasColumnName("pointId");
@@ -194,25 +190,11 @@ namespace MazedDB.Data
                 entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
 
                 entity.Property(e => e.UserId).HasColumnName("userId");
-
-                entity.HasOne(d => d.Sponsor)
-                    .WithMany(p => p.PointTransactions)
-                    .HasForeignKey(d => d.SponsorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("pointTransaction_SponsorIdFK");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PointTransactions)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("pointTransaction_DriverIdFK");
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("product");
-
-                entity.HasIndex(e => e.SponsorId, "product_sponsorIdFK_idx");
 
                 entity.Property(e => e.ProductId)
                     .ValueGeneratedNever()
@@ -239,12 +221,6 @@ namespace MazedDB.Data
                 entity.Property(e => e.PointValue).HasColumnName("pointValue");
 
                 entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
-
-                entity.HasOne(d => d.Sponsor)
-                    .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.SponsorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("product_sponsorIdFK");
             });
 
             modelBuilder.Entity<PwdChange>(entity =>
