@@ -16,6 +16,9 @@ export class HomePageComponent implements OnInit {
   dbUser!: User;
   displayName: boolean = false;
   pointTransactions!: PointsChanges[];
+  isDriver: boolean = false;
+  isSponsor: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(
     private router: Router,
@@ -40,12 +43,23 @@ export class HomePageComponent implements OnInit {
               .getUser(this.currentUser.username)
               .subscribe((data) => {
                 this.dbUser = data;
+                //determine userType
+                if (this.dbUser.userType.toLowerCase() === "driver") {
+                  this.isDriver = true;
+                }
+                if (this.dbUser.userType.toLowerCase() === "sponsor") {
+                  this.isSponsor = true;
+                }
+                if (this.dbUser.userType.toLowerCase() === "admin") {
+                  this.isAdmin = true;
+                }
+
+                //get the point transactions
                 this.pointsChangesService
                   .getTransactions(this.dbUser.id)
                   .subscribe((pointsTrans) => {
                     this.pointTransactions = pointsTrans;
                     // display points now
-                    console.log(this.pointTransactions);
                   });
               });
           })

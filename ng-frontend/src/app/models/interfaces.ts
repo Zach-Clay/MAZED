@@ -28,3 +28,23 @@ export interface PointsChanges {
   PointValue: number;
   Reason: string;
 }
+
+export interface SponsorOrg {
+  id: number;
+  orgName: string;
+  orgDescription: string;
+  catalogueId: number;
+  dollarToPoint: number;
+  isBlacklisted: number;
+}
+
+export interface Application {
+  id: number;
+  userId: number;
+  sponsorId: number;
+  approvalStatus: number; //0 or 1
+  description: string;
+  requestedDate: string;
+  responseDate: string;
+  isActive: number; //0 or 1
+}
