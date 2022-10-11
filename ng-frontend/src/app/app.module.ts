@@ -20,6 +20,8 @@ import { HomePageHeaderComponent } from './components/home-page-header/home-page
 import { ProfilePageComponent } from './pages/profile-page/profile-page/profile-page.component';
 import { SponsorWidgetComponent, SponsorAppDialog } from './components/sponsor-widget/sponsor-widget.component';
 import { DriverApplicationComponent } from './pages/driver-application/driver-application.component';
+import { PointChangeComponent } from './components/point-change/point-change.component';
+import { SponsoredDriverComponent } from './components/sponsored-driver/sponsored-driver.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { DriverApplicationComponent } from './pages/driver-application/driver-ap
     ProfilePageComponent,
     SponsorWidgetComponent,
     DriverApplicationComponent,
-    SponsorAppDialog
+    SponsorAppDialog,
+    PointChangeComponent,
+    SponsoredDriverComponent,
   ],
   imports: [
     BrowserModule,

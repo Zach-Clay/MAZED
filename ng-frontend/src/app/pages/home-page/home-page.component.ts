@@ -16,6 +16,7 @@ export class HomePageComponent implements OnInit {
   dbUser!: User;
   displayName: boolean = false;
   pointTransactions!: PointsChanges[];
+  sponsoredDrivers!: User[];
   isDriver: boolean = false;
   isSponsor: boolean = false;
   isAdmin: boolean = false;
@@ -43,14 +44,20 @@ export class HomePageComponent implements OnInit {
               .getUser(this.currentUser.username)
               .subscribe((data) => {
                 this.dbUser = data;
+                this.displayName = true;
                 //determine userType
-                if (this.dbUser.userType.toLowerCase() === "driver") {
+                if (this.dbUser.userType.toLowerCase() === 'driver') {
                   this.isDriver = true;
                 }
-                if (this.dbUser.userType.toLowerCase() === "sponsor") {
+                if (this.dbUser.userType.toLowerCase() === 'sponsor') {
                   this.isSponsor = true;
+                  this.userService
+                    .getDriversBySponsor(this.dbUser.sponsorId)
+                    .subscribe((drivers) => {
+                      this.sponsoredDrivers = drivers;
+                    });
                 }
-                if (this.dbUser.userType.toLowerCase() === "admin") {
+                if (this.dbUser.userType.toLowerCase() === 'admin') {
                   this.isAdmin = true;
                 }
 
@@ -60,7 +67,6 @@ export class HomePageComponent implements OnInit {
                   .subscribe((pointsTrans) => {
                     this.pointTransactions = pointsTrans;
                     // display points now
-                    console.log(this.pointTransactions);
                   });
               });
           })
