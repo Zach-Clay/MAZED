@@ -1,0 +1,12 @@
+
+<div class="container">
+  <mat-card>
+    <h3 class="title">Sponsor Info:</h3>
+    <div *ngIf="showInfo">
+      <a *ngIf="user.sponsorId === 0" class="nav-link" routerLink="/driver-application">Apply to a sponsor</a>
+      <div *ngIf="user.sponsorId !== 0 && showSponsor">
+        <p><strong>Sponsor Name: </strong>{{sponsorOrg.orgName}}</p>
+      </div>
+    </div>
+  </mat-card>
+</div>

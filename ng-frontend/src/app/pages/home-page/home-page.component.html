@@ -1,27 +1,8 @@
-<div class="header">
-  <div class="row pb-3" style="background: var(--secondary-color)">
-    <div class="col">
-      <a href="/home">
-        <img
-          class="pt-3 ml-5"
-          src="../../../assets/light-logo.png"
-          style="width: 30%"
-      /></a>
-    </div>
-    <div class="col pt-4 text-center" style="font-size: 2em">
-      <p class="text-center">POINTS</p>
-      <p class="text-center">120</p>
-    </div>
-    <div class="col pt-3 text-right">
-      <a class="nav-link" routerLink="/profile">Profile</a>
-      <a class="nav-link" routerLink="" (click)="signOut()">Sign out</a>
-    </div>
-  </div>
-</div>
+<app-home-page-header></app-home-page-header>
 
 <div class="pt-2">
   <div class="text-center" *ngIf="displayName">
-    <h2>Welcome, {{ currentUser.attributes.name }}</h2>
+    <h2>Welcome, {{ dbUser.userFname }} {{ dbUser.userLname }}</h2>
   </div>
 </div>
 
@@ -33,14 +14,16 @@
         <div class="bi bi-truck mb-2" style="font-size: 30px"></div>
         <div class="card-text">Point-to-Dollar Conversion:</div>
         <div class="card" style="background: var(--tertiary-color)">
-          <p style="color: var(--primary-color); font-size: 1.2em">
+          <p
+            class="mb-1 mt-1"
+            style="color: var(--primary-color); font-size: 1.2em"
+          >
             recent point updates
           </p>
-          <div
-            class="card mx-2 my-1"
-            style="background: var(--secondary-color)"
-          ></div>
-          <!-- POINT CHANGES HERE -->
+          <app-point-change
+            *ngFor="let pointChange of pointTransactions | slice: 0:4"
+            [pointChange]="pointChange"
+          ></app-point-change>
         </div>
       </div>
     </div>
@@ -92,6 +75,26 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-md-3 w-50">
+    <app-sponsor-widget></app-sponsor-widget>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-md-3 w-50">
+    <div class="card text-light ml-3" style="background: var(--primary-color)">
+      <div class="card-title text-center mt-2">Sponsored Drivers</div>
+      <div class="card-body" style="background: var(--tertiary-color)">
+        <app-sponsored-driver
+          *ngFor="let sponsoredDriver of sponsoredDrivers"
+          [sponsoredDriver]="sponsoredDriver"
+        ></app-sponsored-driver>
       </div>
     </div>
   </div>
