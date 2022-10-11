@@ -47,17 +47,25 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
 
+                entity.Property(e => e.ApplicantName)
+                    .HasMaxLength(45)
+                    .HasColumnName("applicantName");
+
                 entity.Property(e => e.ApprovalStatus).HasColumnName("approvalStatus");
 
-                entity.Property(e => e.Description)
-                    .HasMaxLength(45)
-                    .HasColumnName("description");
+                entity.Property(e => e.DecisionReason).HasColumnName("decisionReason");
+
+                entity.Property(e => e.Description).HasColumnName("description");
 
                 entity.Property(e => e.IsActive).HasColumnName("isActive");
 
                 entity.Property(e => e.RequestedDate).HasColumnName("requestedDate");
 
                 entity.Property(e => e.ResponseDate).HasColumnName("responseDate");
+
+                entity.Property(e => e.SponsorName)
+                    .HasMaxLength(45)
+                    .HasColumnName("sponsorName");
             });
 
             modelBuilder.Entity<AuditLogging>(entity =>

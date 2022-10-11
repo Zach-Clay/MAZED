@@ -11,15 +11,16 @@ export class ApplicationService {
   constructor(private http: HttpClient) { }
 
   public getApplicationsBySponsor(sponsorId: number) {
-    return this.http.get<Application[]>(`${api_url}/application/sponsor/${sponsorId}`);
+    return this.http.get<Application[]>(`${api_url}/Application/sponsor/${sponsorId}`);
   }
 
   public getApplicationsByUser(userId: number) {
-    return this.http.get<Application[]>(`${api_url}/application/user/${userId}`);
+    return this.http.get<Application[]>(`${api_url}/Application/user/${userId}`);
   }
 
   public submitApplication(application: Application) {
-    this.http.post<Application>(`${api_url}/application`, application).subscribe({
+    console.log("Submit this: ", application);
+    this.http.post<Application>(`${api_url}/Application`, application).subscribe({
       next: data => {
         return data;
       },
@@ -30,7 +31,8 @@ export class ApplicationService {
   }
 
   public updateApplication(appId: number, application: Application) {
-    this.http.put<Application>(`${api_url}/application/${appId}`, application).subscribe({
+    console.log("Update to: ", application);
+    this.http.put<Application>(`${api_url}/Application/${appId}`, application).subscribe({
       next: data => {
         return data;
       },

@@ -18,8 +18,9 @@ import { LoginComponent } from './components/login/login.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HomePageHeaderComponent } from './components/home-page-header/home-page-header.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page/profile-page.component';
-import { SponsorWidgetComponent } from './components/sponsor-widget/sponsor-widget.component';
+import { SponsorWidgetComponent, SponsorAppDialog } from './components/sponsor-widget/sponsor-widget.component';
 import { DriverApplicationComponent } from './pages/driver-application/driver-application.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { DriverApplicationComponent } from './pages/driver-application/driver-ap
     ProfilePageComponent,
     SponsorWidgetComponent,
     DriverApplicationComponent,
+    SponsorAppDialog
   ],
   imports: [
     BrowserModule,

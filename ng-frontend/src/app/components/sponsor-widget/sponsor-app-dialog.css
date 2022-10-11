@@ -1,0 +1,29 @@
+mat-icon {
+  cursor: pointer;
+}
+
+.field {
+  margin-bottom: 1px;
+}
+
+.mat-dialog-content {
+  height: auto;
+  overflow: auto;
+}
+
+ mat-list {
+  overflow: auto;
+}
+
+mat-list-item {
+  overflow: auto;
+} 
+
+.description {  
+  overflow: auto;
+}
+
+.content {
+  overflow: auto;
+
+}

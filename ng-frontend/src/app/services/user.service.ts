@@ -15,6 +15,10 @@ export class UserService {
     return this.http.get<User>(`${api_url}/user/${username}`);
   }
 
+  public getUserById(id: number) {
+    return this.http.get<User>(`${api_url}/user/id/${id}`);
+  }
+
   //Add user to the DB with post
   public registerUser(user: User) {
     this.http.post<User>(`${api_url}/user`, user).subscribe({
