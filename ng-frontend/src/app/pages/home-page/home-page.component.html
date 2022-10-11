@@ -2,7 +2,7 @@
 
 <div class="pt-2">
   <div class="text-center" *ngIf="displayName">
-    <h2>Welcome, {{ currentUser.attributes.name }}</h2>
+    <h2>Welcome, {{ dbUser.userFname }} {{ dbUser.userLname }}</h2>
   </div>
 </div>
 
@@ -83,5 +83,19 @@
 <div class="row mt-3">
   <div class="col-md-3 w-50">
     <app-sponsor-widget></app-sponsor-widget>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-md-3 w-50">
+    <div class="card text-light ml-3" style="background: var(--primary-color)">
+      <div class="card-title text-center mt-2">Sponsored Drivers</div>
+      <div class="card-body" style="background: var(--tertiary-color)">
+        <app-sponsored-driver
+          *ngFor="let sponsoredDriver of sponsoredDrivers"
+          [sponsoredDriver]="sponsoredDriver"
+        ></app-sponsored-driver>
+      </div>
+    </div>
   </div>
 </div>

@@ -16,6 +16,7 @@ export class HomePageComponent implements OnInit {
   dbUser!: User;
   displayName: boolean = false;
   pointTransactions!: PointsChanges[];
+  sponsoredDrivers!: User[];
   isDriver: boolean = false;
   isSponsor: boolean = false;
   isAdmin: boolean = false;
@@ -50,6 +51,11 @@ export class HomePageComponent implements OnInit {
                 }
                 if (this.dbUser.userType.toLowerCase() === 'sponsor') {
                   this.isSponsor = true;
+                  this.userService
+                    .getDriversBySponsor(this.dbUser.sponsorId)
+                    .subscribe((drivers) => {
+                      this.sponsoredDrivers = drivers;
+                    });
                 }
                 if (this.dbUser.userType.toLowerCase() === 'admin') {
                   this.isAdmin = true;

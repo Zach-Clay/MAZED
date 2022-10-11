@@ -21,6 +21,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page/profile-
 import { SponsorWidgetComponent } from './components/sponsor-widget/sponsor-widget.component';
 import { DriverApplicationComponent } from './pages/driver-application/driver-application.component';
 import { PointChangeComponent } from './components/point-change/point-change.component';
+import { SponsoredDriverComponent } from './components/sponsored-driver/sponsored-driver.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PointChangeComponent } from './components/point-change/point-change.com
     SponsorWidgetComponent,
     DriverApplicationComponent,
     PointChangeComponent,
+    SponsoredDriverComponent,
   ],
   imports: [
     BrowserModule,
