@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Pending Applications</h1>
+
+<div mat-dialog-content>
+  <mat-list class="app-class">
+
+    <mat-list-item *ngFor="let app of data.applications" style="height: 100px">
+      <span class="title">{{app.applicantName}}</span>
+      <mat-icon (click)="toggleExpand(app)" *ngIf="!app.expanded">keyboard_arrow_right</mat-icon>
+      <mat-icon (click)="toggleExpand(app)" *ngIf="app.expanded">keyboard_arrow_down</mat-icon>
+      
+      <div class="content" *ngIf="app.expanded">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <p class="field">Description: </p>
+        <div class="description">
+          <p>{{app.description}}</p>
+        </div>
+        
+        <p class="field">Reason of rejection or acceptance</p>
+        <input type="text" [(ngModel)]="app.decisionReason"/>
+        <br/>
+        <button mat-raised-button color="accent" (click)="updateApplication(app, 'accept')" [disabled]="app.decisionReason =='' || app.decisionReason==null">Accept</button>
+        &nbsp;
+        <button mat-raised-button color="warn" (click)="updateApplication(app, 'reject')" [disabled]="app.decisionReason =='' || app.decisionReason==null">Reject</button>
+        <br/>
+      </div>
+      <br/>
+      
+    </mat-list-item>
+
+  </mat-list>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onDoneClick()">Done</button>
+</div>

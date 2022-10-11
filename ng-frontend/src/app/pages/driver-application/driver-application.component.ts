@@ -62,12 +62,13 @@ export class DriverApplicationComponent implements OnInit {
       sponsorId: this.orgSelection.id,
       approvalStatus: 0,
       description: this.description,
+      applicantName: this.user.userFname + " " + this.user.userLname,
+      sponsorName: this.orgSelection.orgName,
       requestedDate: "",
       responseDate: "",
+      decisionReason: "",
       isActive: 1
     }
-
-    console.log(application);
 
     this.applicationService.submitApplication(application);
   }

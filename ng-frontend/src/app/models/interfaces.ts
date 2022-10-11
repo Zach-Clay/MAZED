@@ -43,8 +43,11 @@ export interface Application {
   userId: number;
   sponsorId: number;
   approvalStatus: number; //0 or 1
+  applicantName: string;
+  sponsorName: string;
   description: string;
-  requestedDate: string;
-  responseDate: string;
+  requestedDate: any;
+  responseDate: any;
+  decisionReason: string;
   isActive: number; //0 or 1
 }
