@@ -71,6 +71,9 @@ export class DriverApplicationComponent implements OnInit {
     }
 
     this.applicationService.submitApplication(application);
+
+    alert("Application Submitted");
+    this.router.navigateByUrl("/home");
   }
 
 }

@@ -67,7 +67,7 @@ namespace api_backend.Controllers
             }
 
             application.RequestedDate = DateOnly.FromDateTime(DateTime.Now);
-            application.ResponseDate = null;
+            application.ResponseDate = DateOnly.FromDateTime(DateTime.MinValue);
             application.IsActive = 1;
             _context.Applications.Add(application);
             await _context.SaveChangesAsync();

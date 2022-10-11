@@ -38,9 +38,9 @@ import { SponsoredDriverComponent } from './components/sponsored-driver/sponsore
     ProfilePageComponent,
     SponsorWidgetComponent,
     DriverApplicationComponent,
+    SponsorAppDialog,
     PointChangeComponent,
     SponsoredDriverComponent,
-    SponsorAppDialog,
   ],
   imports: [
     BrowserModule,
