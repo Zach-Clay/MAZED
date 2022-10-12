@@ -1,0 +1,39 @@
+<app-home-page-header></app-home-page-header>
+
+<div class="container">
+  <div class="title text-center">
+    <h1>Select a Sponsor</h1>
+    <mat-form-field appearance="fill" color="primary">
+      <mat-select [(ngModel)]="orgSelection">
+        <mat-option *ngFor="let org of orgs" [value]="org"  (selectionChange)="onSelectionChange()">
+          {{org.orgName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  
+
+  <div class="sponsor-content" *ngIf="orgSelection">
+    <mat-card>
+
+      <div class="d-flex">
+        <h2 class="title">{{orgSelection.orgName}}</h2>
+        <div class="edit-btn" *ngIf="(user.userType==='admin') || (user.userType==='sponsor' && orgSelection.id===user.sponsorId)">
+          <button (click)="toggleEdit()" *ngIf="!editing" mat-raised-button color="primary">Edit</button>
+          <button (click)="toggleEdit();updateOrg()" *ngIf="editing" mat-raised-button color="warn">SAVE</button>
+        </div>
+      </div>
+      
+      <h4 class="field">Description: </h4>
+      <span class="not-editing" *ngIf="!editing">{{orgSelection.orgDescription}}</span>
+      <div #orgDesc class="editing" *ngIf="editing" contenteditable>{{orgSelection.orgDescription}}</div>
+     
+      <br/>
+      <br/>
+      <h4 class="field">Dollar to Point Amount: </h4>
+      <span class="not-editing" *ngIf="!editing">${{orgSelection.dollarToPoint}}</span>
+      <div #dollarToPoint class="editing" *ngIf="editing" contenteditable>${{orgSelection.dollarToPoint}}</div>
+      
+    </mat-card>
+  </div>
+</div>

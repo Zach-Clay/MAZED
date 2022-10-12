@@ -126,10 +126,9 @@ export class SponsorWidgetComponent implements OnInit {
       data: {applications: newSponsorApps, user: this.user},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      //this.animal = result;
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
   }
 
 }
@@ -149,7 +148,6 @@ export class SponsorAppDialog implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data.applications);
   }
 
   toggleExpand(app: ExpandedApplication) {
@@ -161,8 +159,6 @@ export class SponsorAppDialog implements OnInit{
   }
 
   updateApplication(app: ExpandedApplication, decision: string) {
-    console.log(app);
-
     let approved = 0;
     if (decision === "accept") approved = 1;
 
@@ -197,8 +193,6 @@ export class SponsorAppDialog implements OnInit{
       window.location.reload();
     }
     
-
-    //now we need to remove all apps with userId == to driver and isactive == 1
   }
 
 }

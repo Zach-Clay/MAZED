@@ -42,7 +42,6 @@ export class ApplicationService {
   }
 
   public updateApplication(appId: number, application: Application) {
-    console.log("Update to: ", application);
     this.http.put<Application>(`${api_url}/Application/${appId}`, application).subscribe({
       next: data => {
         return data;
