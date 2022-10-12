@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -16,6 +16,8 @@ export class SponsorsDashboardComponent implements OnInit {
   orgs!: SponsorOrg[];
   orgSelection!: SponsorOrg;
   editing: boolean = false;
+  showData: boolean = false;
+  drivers!: User[];
 
   @ViewChild('orgDesc') orgDescription!: ElementRef;
   @ViewChild('dollarToPoint') dollarToPoint!: ElementRef;
@@ -40,9 +42,18 @@ export class SponsorsDashboardComponent implements OnInit {
           this.sponsorOrgService.getAllOrgs().subscribe((data) => {
             this.orgs = data;
 
-            // if (this.user.sponsorId !== 0) {
-            //   this.orgSelection = this.orgs.find(o => o.id === this.user.sponsorId)
-            // }
+            if (this.user.sponsorId !== 0) {
+              this.sponsorOrgService.getSponsorOrg(this.user.sponsorId).subscribe((o) => {
+                this.orgSelection = o;
+                //get drivers for that org
+                this.onSelectionChange();
+                this.showData = true;
+              })
+              
+            }
+            else {
+              this.showData = true;
+            }
           });
 
         })
@@ -53,6 +64,11 @@ export class SponsorsDashboardComponent implements OnInit {
   }
 
   onSelectionChange() {
+    //update driver list
+    console.log("change");
+    this.userService.getDriversBySponsor(this.orgSelection.id).subscribe((data) => {
+      this.drivers = data;
+    })
   }
 
   toggleEdit() {
@@ -60,11 +76,27 @@ export class SponsorsDashboardComponent implements OnInit {
   }
 
   updateOrg() {
-    let orgDesc = this.orgDescription.nativeElement.innerText
+    if (confirm("Are you sure you want to save? ")) {
+      let orgDesc = this.orgDescription.nativeElement.innerText
 
-    let dTP = this.dollarToPoint.nativeElement.innerText;
-    dTP = dTP.split("$").join("");
-    console.log(dTP);
+      let dTP = this.dollarToPoint.nativeElement.innerText;
+      dTP = dTP.split("$").join("");
+
+      this.orgSelection.orgDescription = orgDesc;
+      this.orgSelection.dollarToPoint = dTP;
+
+      //make api calls to update org info
+      this.sponsorOrgService.updateSponsorOrg(this.orgSelection.id, this.orgSelection);
+    }
+  }
+
+  removeDriver(driver: User) {
+    if (confirm("Are you sure you want to remove this driver? This action cannot be undone...")) {
+      driver.sponsorId = 0;
+      //make api calls to remove driver
+      this.userService.updateUser(driver.id, driver);
+      this.drivers = this.drivers.filter(d => d.id !== driver.id);
+    }
   }
 
 }

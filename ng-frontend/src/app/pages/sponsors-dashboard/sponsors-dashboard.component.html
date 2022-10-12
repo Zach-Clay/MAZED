@@ -1,11 +1,11 @@
 <app-home-page-header></app-home-page-header>
 
-<div class="container">
+<div class="container" *ngIf="showData">
   <div class="title text-center">
     <h1>Select a Sponsor</h1>
     <mat-form-field appearance="fill" color="primary">
-      <mat-select [(ngModel)]="orgSelection">
-        <mat-option *ngFor="let org of orgs" [value]="org"  (selectionChange)="onSelectionChange()">
+      <mat-select [(ngModel)]="orgSelection" (selectionChange)="onSelectionChange()">
+        <mat-option *ngFor="let org of orgs" [value]="org">
           {{org.orgName}}
         </mat-option>
       </mat-select>
@@ -34,6 +34,22 @@
       <span class="not-editing" *ngIf="!editing">${{orgSelection.dollarToPoint}}</span>
       <div #dollarToPoint class="editing" *ngIf="editing" contenteditable>${{orgSelection.dollarToPoint}}</div>
       
+      <br/>
+      <br/>
+      <h4 class="field">Drivers: </h4>
+      <mat-list>
+        <mat-list-item *ngFor="let driver of drivers">
+
+            <div class="d-flex driver-name">
+              <span>{{driver.userFname}} {{driver.userLname}}</span>
+            </div>
+            <div class="remove-btn"  *ngIf="editing" >
+              <button (click)="removeDriver(driver)" mat-raised-button color="warn">Remove Driver</button>
+            </div>
+
+        </mat-list-item >
+      </mat-list>
+
     </mat-card>
   </div>
 </div>

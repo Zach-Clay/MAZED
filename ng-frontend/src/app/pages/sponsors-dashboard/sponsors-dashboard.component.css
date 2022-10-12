@@ -4,6 +4,7 @@
 
 .field {
   margin-bottom: 1px;
+  font-size: 17px;
 }
 
 .title {
@@ -40,4 +41,21 @@ input {
 
 .editing {
   background-color: rgb(243, 243, 243);
+}
+
+.mat-list-item {
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.mat-list {
+  margin-top: 0px;
+}
+
+.remove-btn {
+  margin-left: auto;
+}
+
+.driver-name {
+  margin-top: 0px;
 }
