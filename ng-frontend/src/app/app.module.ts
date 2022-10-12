@@ -25,6 +25,8 @@ import {
 import { DriverApplicationComponent } from './pages/driver-application/driver-application.component';
 import { PointChangeComponent } from './components/point-change/point-change.component';
 import { SponsoredDriverComponent } from './components/sponsored-driver/sponsored-driver.component';
+import { DriverHomePageComponent } from './pages/driver-home-page/driver-home-page.component';
+import { SponsorHomePageComponent } from './pages/sponsor-home-page/sponsor-home-page.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { SponsoredDriverComponent } from './components/sponsored-driver/sponsore
     SponsorAppDialog,
     PointChangeComponent,
     SponsoredDriverComponent,
+    DriverHomePageComponent,
+    SponsorHomePageComponent,
   ],
   imports: [
     BrowserModule,
