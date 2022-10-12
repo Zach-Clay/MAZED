@@ -1,0 +1,85 @@
+<div class="pt-2">
+  <div class="text-center">
+    <h2>Welcome, {{ dbUser.userFname }} {{ dbUser.userLname }}</h2>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-md-3 w-50">
+    <div class="card text-light ml-3" style="background: var(--primary-color)">
+      <div class="card-body text-center">
+        <div class="card-title mt-0">Sponsor Name</div>
+        <div class="bi bi-truck mb-2" style="font-size: 30px"></div>
+        <div class="card-text">Point-to-Dollar Conversion:</div>
+        <div class="card" style="background: var(--tertiary-color)">
+          <p
+            class="mb-1 mt-1"
+            style="color: var(--primary-color); font-size: 1.2em"
+          >
+            recent point updates
+          </p>
+          <app-point-change
+            *ngFor="let pointChange of pointTransactions | slice: 0:4"
+            [pointChange]="pointChange"
+          ></app-point-change>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm mr-3">
+    <div class="card text-light" style="background: var(--secondary-color)">
+      <div class="card-body text-center">
+        <div class="row">
+          <div class="col-sm mt-1">
+            <div class="card" style="background: var(--tertiary-color)">
+              <p class="text-dark mb-0">product</p>
+            </div>
+          </div>
+          <div class="col-sm mt-1">
+            <div class="card" style="background: var(--tertiary-color)">
+              <p class="text-dark mb-0">product</p>
+            </div>
+          </div>
+          <div class="col-sm mt-1">
+            <div class="card" style="background: var(--tertiary-color)">
+              <p class="text-dark mb-0">product</p>
+            </div>
+          </div>
+          <div class="col-sm mt-1">
+            <div class="card" style="background: var(--tertiary-color)">
+              <p class="text-dark mb-0">product</p>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-sm">
+            <div class="card" style="background: var(--tertiary-color)">
+              <p class="text-dark mb-0">product</p>
+            </div>
+          </div>
+          <div class="col-sm mt-1">
+            <div class="card" style="background: var(--tertiary-color)">
+              <p class="text-dark mb-0">product</p>
+            </div>
+          </div>
+          <div class="col-sm mt-1">
+            <div class="card" style="background: var(--tertiary-color)">
+              <p class="text-dark mb-0">product</p>
+            </div>
+          </div>
+          <div class="col-sm mt-1">
+            <div class="card" style="background: var(--tertiary-color)">
+              <p class="text-dark mb-0">product</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-md-4 w-50">
+    <app-sponsor-widget></app-sponsor-widget>
+  </div>
+</div>

@@ -175,10 +175,10 @@ namespace api_backend.Controllers
         //how to call stored proceduere
 
         //get all drivers by a sponsor'sId
-        [HttpGet("GetDriversBySponsorId")]
+        [HttpGet("GetDriversBySponsorId/{SponsorId}")]
         public async Task<List<User>> GetDriversBySponsorId(int SponsorId)
         {
-            return await _context.Users.Where(u => u.SponsorId == SponsorId).ToListAsync();
+            return await _context.Users.Where(u => u.SponsorId == SponsorId && u.UserType.ToLower() == "driver").ToListAsync();
         }
 
     }
