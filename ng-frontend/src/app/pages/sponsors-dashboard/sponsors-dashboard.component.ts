@@ -65,7 +65,6 @@ export class SponsorsDashboardComponent implements OnInit {
 
   onSelectionChange() {
     //update driver list
-    console.log("change");
     this.userService.getDriversBySponsor(this.orgSelection.id).subscribe((data) => {
       this.drivers = data;
     })
