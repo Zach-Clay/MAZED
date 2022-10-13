@@ -1,20 +1,83 @@
 <div class="header">
   <div class="row pb-3" style="background: var(--secondary-color)">
-    <div class="col">
+    <div class="col align-self-center">
       <a href="/home">
         <img
           class="pt-3 ml-5"
           src="../../../assets/light-logo.png"
-          style="width: 30%"
+          style="width: 170px"
       /></a>
     </div>
-    <div class="col pt-4 text-center" style="font-size: 2em">
-      <p class="text-center">POINTS</p>
-      <p class="text-center">120</p>
+    <!-- empty column -->
+    <div
+      class="col"
+      style="
+        background: var(--secondary-color);
+        padding: 1px;
+        border-radius: 1em;
+        margin: 0px;
+      "
+    ></div>
+    <div
+      class="col align-self-center text-center"
+      style="
+        font-size: 2em;
+        background: var(--primary-color);
+        padding: 15px;
+        border-radius: 1em;
+        margin: 10px;
+      "
+      *ngIf="showPoints"
+    >
+      <p class="row text-light"></p>
+      <p class="text-light">POINTS</p>
+      <p class="text-light">120</p>
     </div>
-    <div class="col pt-3 text-right">
-      <a class="nav-link" routerLink="/profile">Profile</a>
-      <a class="nav-link" routerLink="" (click)="signOut()">Sign out</a>
+    <!-- empty column -->
+    <div
+      class="col"
+      style="
+        background: var(--secondary-color);
+        padding: 1px;
+        border-radius: 1em;
+        margin: 2px;
+      "
+    ></div>
+    <!-- column holding profile & sign out button -->
+    <div
+      class="col-2 align-items-center"
+      style="
+        background: var(--primary-color);
+        padding: 2px;
+        border-radius: 1em;
+        margin: 5px;
+      "
+    >
+      <!-- profile button -->
+      <a
+        class="row justify-content-sm-center nav-link text-light text-center"
+        style="
+          background: var(--secondary-color);
+          border-radius: 1em;
+          margin: 10px;
+        "
+        routerLink="/profile"
+      >
+        Profile
+      </a>
+      <!-- sign out button -->
+      <a
+        class="row justify-content-sm-center nav-link text-light text-center"
+        style="
+          background: var(--secondary-color);
+          border-radius: 1em;
+          margin: 10px;
+        "
+        routerLink=""
+        (click)="signOut()"
+      >
+        Sign Out
+      </a>
     </div>
   </div>
 </div>

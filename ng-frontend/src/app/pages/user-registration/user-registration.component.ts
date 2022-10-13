@@ -172,7 +172,7 @@ export class UserRegistrationComponent implements OnInit {
     this.newUser.username = this.username;
     this.newUser.userFname = FName;
     this.newUser.userLname = LName;
-    this.newUser.userType = 'Driver';
+    this.newUser.userType = 'driver';
     this.newUser.userAddress = this.address;
     this.newUser.userEmail = this.email;
     this.newUser.userPwd = "null";

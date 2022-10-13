@@ -1,0 +1,35 @@
+
+<mat-card>
+  <h3 class="title">Sponsor Info</h3>
+  <a [routerLink]="['/sponsor-dashboard']">Sponsor Dashboard</a>
+  <br/>
+  <br/>
+  <div *ngIf="isDriver">
+    <div *ngIf="user.sponsorId === 0">
+      <a class="apply-link" routerLink="/driver-application">Apply to a sponsor</a>
+      <br/>
+      <br/>
+      <p><strong>Outstanding Applications: </strong></p>
+      <mat-list *ngIf="showDriverOustandingApps">
+        <mat-list-item *ngFor="let app of driverOutstandingApps">
+            {{app.sponsorName}}, submitted {{app.requestedDate.month}}/{{app.requestedDate.day}}/{{app.requestedDate.year}}
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div *ngIf="user.sponsorId !== 0 && showSponsor">
+      <p><strong>Sponsor: </strong>{{sponsorOrg.orgName}}</p>
+    </div>
+  </div>
+
+  <div *ngIf="isSponsor">
+    <div *ngIf="user.sponsorId !== 0 && showSponsor">
+      <p><strong>Sponsor: </strong>{{sponsorOrg.orgName}}</p>
+      
+      <div *ngIf="sponsorsApps">
+        <button mat-raised-button color="accent" (click)="openDialog()">View Pending applications</button>
+      </div>
+
+    </div>
+  </div>
+
+</mat-card>

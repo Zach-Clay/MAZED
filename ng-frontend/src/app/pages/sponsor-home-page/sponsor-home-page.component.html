@@ -1,0 +1,77 @@
+<div class="pt-2">
+  <div class="text-center">
+    <h2>Welcome, {{ dbUser.userFname }} {{ dbUser.userLname }}</h2>
+  </div>
+</div>
+
+<div class="row mt-3"></div>
+<div class="col-sm mr-3">
+  <div class="card text-light" style="background: var(--secondary-color)">
+    <div class="card-body text-center">
+      <div class="row">
+        <div class="col-sm mt-1">
+          <div class="card" style="background: var(--tertiary-color)">
+            <p class="text-dark mb-0">product</p>
+          </div>
+        </div>
+        <div class="col-sm mt-1">
+          <div class="card" style="background: var(--tertiary-color)">
+            <p class="text-dark mb-0">product</p>
+          </div>
+        </div>
+        <div class="col-sm mt-1">
+          <div class="card" style="background: var(--tertiary-color)">
+            <p class="text-dark mb-0">product</p>
+          </div>
+        </div>
+        <div class="col-sm mt-1">
+          <div class="card" style="background: var(--tertiary-color)">
+            <p class="text-dark mb-0">product</p>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-sm">
+          <div class="card" style="background: var(--tertiary-color)">
+            <p class="text-dark mb-0">product</p>
+          </div>
+        </div>
+        <div class="col-sm mt-1">
+          <div class="card" style="background: var(--tertiary-color)">
+            <p class="text-dark mb-0">product</p>
+          </div>
+        </div>
+        <div class="col-sm mt-1">
+          <div class="card" style="background: var(--tertiary-color)">
+            <p class="text-dark mb-0">product</p>
+          </div>
+        </div>
+        <div class="col-sm mt-1">
+          <div class="card" style="background: var(--tertiary-color)">
+            <p class="text-dark mb-0">product</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row sponsor-widget">
+  <div class="col-6">
+    <app-sponsor-widget></app-sponsor-widget>
+  </div>
+</div>  
+
+<div class="row mt-3">
+  <div class="col-md-3 w-50">
+    <div class="card text-light ml-3" style="background: var(--primary-color)">
+      <div class="card-title text-center mt-2">Sponsored Drivers</div>
+      <div class="card-body" style="background: var(--tertiary-color)">
+        <app-sponsored-driver
+          *ngFor="let sponsoredDriver of sponsoredDrivers"
+          [sponsoredDriver]="sponsoredDriver"
+        ></app-sponsored-driver>
+      </div>
+    </div>
+  </div>
+</div>

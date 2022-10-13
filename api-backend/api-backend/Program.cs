@@ -5,6 +5,7 @@ using MySqlConnector;
 using MazedDB.Data;
 using Newtonsoft.Json;
 using api_backend.Procedures;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMvc().AddControllersAsServices();
 
 //add db context service so our context can create our controller
 builder.Services.AddDbContext<MazedDBContext>(

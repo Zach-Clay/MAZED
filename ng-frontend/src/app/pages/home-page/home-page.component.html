@@ -1,98 +1,15 @@
-<div class="header">
-  <div class="row pb-3" style="background: var(--secondary-color)">
-    <div class="col">
-      <a href="/home">
-        <img
-          class="pt-3 ml-5"
-          src="../../../assets/light-logo.png"
-          style="width: 30%"
-      /></a>
-    </div>
-    <div class="col pt-4 text-center" style="font-size: 2em">
-      <p class="text-center">POINTS</p>
-      <p class="text-center">120</p>
-    </div>
-    <div class="col pt-3 text-right">
-      <a class="nav-link" routerLink="/profile">Profile</a>
-      <a class="nav-link" routerLink="" (click)="signOut()">Sign out</a>
-    </div>
-  </div>
+<app-home-page-header [showPoints]="isDriver"></app-home-page-header>
+
+<div *ngIf="isDriver">
+  <app-driver-home-page
+    [dbUser]="dbUser"
+    [cognitoUser]="cognitoUser"
+  ></app-driver-home-page>
 </div>
 
-<div class="pt-2">
-  <div class="text-center" *ngIf="displayName">
-    <h2>Welcome, {{ currentUser.attributes.name }}</h2>
-  </div>
-</div>
-
-<div class="row mt-3">
-  <div class="col-md-3 w-50">
-    <div class="card text-light ml-3" style="background: var(--primary-color)">
-      <div class="card-body text-center">
-        <div class="card-title mt-0">Sponsor Name</div>
-        <div class="bi bi-truck mb-2" style="font-size: 30px"></div>
-        <div class="card-text">Point-to-Dollar Conversion:</div>
-        <div class="card" style="background: var(--tertiary-color)">
-          <p style="color: var(--primary-color); font-size: 1.2em">
-            recent point updates
-          </p>
-          <div
-            class="card mx-2 my-1"
-            style="background: var(--secondary-color)"
-          ></div>
-          <!-- POINT CHANGES HERE -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm mr-3">
-    <div class="card text-light" style="background: var(--secondary-color)">
-      <div class="card-body text-center">
-        <div class="row">
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-sm">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div *ngIf="isSponsor">
+  <app-sponsor-home-page
+    [dbUser]="dbUser"
+    [cognitoUser]="cognitoUser"
+  ></app-sponsor-home-page>
 </div>
