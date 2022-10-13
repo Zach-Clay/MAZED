@@ -31,7 +31,7 @@ namespace api_backend.Controllers
         {
             if (_context.Users == null) return NotFound();
             
-            return await _context.Users.Where(e => e.IsBlacklisted == false).ToListAsync();
+            return await _context.Users.Where(e => e.IsBlacklisted == 0).ToListAsync();
         }
 
         // GET: api/UserController2/5
@@ -43,7 +43,7 @@ namespace api_backend.Controllers
             var user = await _context.Users.Where(e => e.Username == username).ToListAsync();
 
             if (user.Count < 1) return NotFound();
-            if (user.ElementAt(0).IsBlacklisted == true) return NotFound();
+            if (user.ElementAt(0).IsBlacklisted == 1) return NotFound();
 
             return user.ElementAt(0);
         }
@@ -57,7 +57,7 @@ namespace api_backend.Controllers
             var user = await _context.Users.Where(e => e.Id == id).ToListAsync();
 
             if (user.Count < 1) return NotFound();
-            if (user.ElementAt(0).IsBlacklisted == true) return NotFound();
+            if (user.ElementAt(0).IsBlacklisted == 1) return NotFound();
 
             return user.ElementAt(0);
         }
@@ -151,7 +151,7 @@ namespace api_backend.Controllers
             
             var user = await _context.Users.FindAsync(id) ?? throw new Exception("User not found");
 
-            user.IsBlacklisted = true;
+            user.IsBlacklisted = 1;
             //telling context the entry was modified so we then can change it
             _context.Entry(user).State = EntityState.Modified;
 
@@ -166,20 +166,34 @@ namespace api_backend.Controllers
         }
 
         //loading related data***
-        [HttpGet("GetSponsorFromUserId")]
+        [HttpGet("/GetSponsorFromUserId/{Id}")]
         public async Task<User?> GetSponsorFromUserId(int id)
         {
-            return await _context.Users.Include(p => p.SponsorId).Where(p => p.Id == id && p.IsBlacklisted == false).FirstOrDefaultAsync();
+            return await _context.Users.Include(p => p.SponsorId).Where(p => p.Id == id && p.IsBlacklisted == 0).FirstOrDefaultAsync();
         }
 
         //how to call stored proceduere
 
-        //get all drivers by a sponsor'sId
-        [HttpGet("GetDriversBySponsorId")]
-        public async Task<List<User>> GetDriversBySponsorId(int SponsorId)
+        //get all users by a sponsor'sId
+        [HttpGet("/GetUsersBySponsorId/{SponsorId}")]
+        public async Task<List<User>> GetUsersBySponsorId(int SponsorId)
         {
             return await _context.Users.Where(u => u.SponsorId == SponsorId).ToListAsync();
         }
+
+        //get all drivers by a sponsor'sId
+        [HttpGet("/GetDriversBySponsorId/{SponsorId}")]
+        public async Task<List<User>> GetDriversBySponsorId(int SponsorId)
+        {
+            return await _context.Users.Where(u => u.SponsorId == SponsorId && u.UserType == "Driver").ToListAsync();
+        }
+
+        [HttpGet("/GetDriverPoints/{Id}")]
+        public async Task<List<User>> GetDriverPoints(int id)
+        {
+            return await _context.Users.Where(u => u.Id == id).ToListAsync();
+        }
+
 
     }
 }

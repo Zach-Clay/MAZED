@@ -21,12 +21,13 @@ namespace MazedDB.Models
         public string? UserEmail { get; set; }
         public string? UserPhoneNum { get; set; }
         public string? UserPwd { get; set; }
-        public Boolean IsBlacklisted { get; set; }
-        public Boolean? PointNotifications { get; set; }
-        public Boolean? OrderNotifications { get; set; }
-        public Boolean? IssueNotifications { get; set; }
+        public sbyte IsBlacklisted { get; set; }
+        public sbyte? PointNotifications { get; set; }
+        public sbyte? OrderNotifications { get; set; }
+        public sbyte? IssueNotifications { get; set; }
         public DateTime? ModDate { get; set; }
         public string? ModBy { get; set; }
+        public int TotalPoints { get; set; }
 
         public virtual AuditLogging? AuditLogging { get; set; }
         public virtual ICollection<DriverOrder> DriverOrders { get; set; }
