@@ -11,7 +11,7 @@ export class PointsChangesService {
 
   public getTransactions(userID: number) {
     return this.http.get<PointsChanges[]>(
-      `${api_url}/PointTrans/GetPointsForUser/${userID}`
+      `${api_url}/PointTrans/GetPointHistForUser/${userID}`
     );
   }
 
