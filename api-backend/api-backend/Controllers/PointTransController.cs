@@ -84,6 +84,7 @@ namespace api_backend.Controllers
           {
               return Problem("Entity set 'MazedDBContext.PointTransactions'  is null.");
           }
+            pointTransaction.ModDate = DateTime.Now;
             _context.PointTransactions.Add(pointTransaction);
             try
             {
@@ -101,7 +102,7 @@ namespace api_backend.Controllers
                 }
             }
 
-            return CreatedAtAction("GetPointTransaction", new { id = pointTransaction.PointId }, pointTransaction);
+            return CreatedAtAction("GetPointTransID", new { id = pointTransaction.PointId }, pointTransaction);
         }
 
         // DELETE: api/PointTrans/5

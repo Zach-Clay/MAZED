@@ -1,10 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
-import { User, SponsorOrg, Application } from 'src/app/models/interfaces';
+import { User, SponsorOrg, PointsChanges } from 'src/app/models/interfaces';
 import { ViewChild, ElementRef } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { PointsChangesService } from 'src/app/services/points-changes.service';
+
+export interface DialogData {
+  Drivers: User[];
+};
+
 
 @Component({
   selector: 'app-sponsors-dashboard',
@@ -27,6 +34,7 @@ export class SponsorsDashboardComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private sponsorOrgService: SponsorOrgService,
+    public dialog: MatDialog,
   ) { 
   }
 
@@ -95,6 +103,67 @@ export class SponsorsDashboardComponent implements OnInit {
       //make api calls to remove driver
       this.userService.updateUser(driver.id, driver);
       this.drivers = this.drivers.filter(d => d.id !== driver.id);
+    }
+  }
+
+  openDialog(): void {
+
+    const dialogRef = this.dialog.open(AddDeductDialog, {
+      width: '1000px',
+      data: {Drivers: this.drivers},
+    });
+  }
+
+}
+
+@Component({
+  selector: 'add-deduct-dialog',
+  templateUrl: './add-deduct-dialog.html',
+  //styleUrls: ['./add-deduct-dialog.css']
+})
+export class AddDeductDialog implements OnInit{
+
+  driverSelection!: User;
+  pointAmount!: number;
+  reason!: string;
+
+  constructor(
+    public dialogRef: MatDialogRef<AddDeductDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private userService: UserService,
+    private pointChangesService: PointsChangesService
+  ) {}
+
+  ngOnInit(): void {
+  }
+
+  onDoneClick(): void {
+    this.dialogRef.close();
+  }
+
+  updatePoints() {
+    if(confirm("Are you sure you want to add/deduct points?")) {
+      if (this.pointAmount === 0) {
+        return;
+      }
+
+      let pointValue = this.pointAmount;
+      const pointTrans: PointsChanges = {
+        pointId: 0,
+        sponsorId: this.driverSelection.sponsorId,
+        userId: this.driverSelection.id,
+        pointValue: pointValue,
+        reason: this.reason
+      };
+
+      //update the point transaction
+      this.pointChangesService.postTransation(pointTrans);
+
+      //to update the user real time
+      this.driverSelection.totalPoints += pointValue;
+
+      this.pointAmount = 0;
+      this.reason = "";
     }
   }
 

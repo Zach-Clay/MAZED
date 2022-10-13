@@ -34,19 +34,23 @@
       <span class="not-editing" *ngIf="!editing">${{orgSelection.dollarToPoint}}</span>
       <div #dollarToPoint class="editing" *ngIf="editing" contenteditable>${{orgSelection.dollarToPoint}}</div>
       
+      
+
       <br/>
       <br/>
       <h4 class="field">Drivers: </h4>
+      <div class="add-deduct-btn" *ngIf="(user.userType==='admin') || (user.userType==='sponsor' && orgSelection.id===user.sponsorId)">
+        <button mat-raised-button color="accent" (click)="openDialog()">Add/Deduct Driver Points</button>
+      </div>
+    
       <mat-list>
         <mat-list-item *ngFor="let driver of drivers">
-
             <div class="d-flex driver-name">
               <span>{{driver.userFname}} {{driver.userLname}}</span>
             </div>
             <div class="remove-btn"  *ngIf="editing" >
               <button (click)="removeDriver(driver)" mat-raised-button color="warn">Remove Driver</button>
             </div>
-
         </mat-list-item >
       </mat-list>
 

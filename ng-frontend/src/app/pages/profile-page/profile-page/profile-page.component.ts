@@ -39,29 +39,31 @@ export class ProfilePageComponent implements OnInit {
   }
 
   updateProfile() {
-    //re-format the phonenumber
-    let temp = this.prettyPhoneNum;
-    temp = temp.split(' ').join('');
-    temp = temp.split('-').join('');
-    temp = temp.split('(').join('');
-    temp = temp.split(')').join('');
-    this.user.userPhoneNum = temp;
+    if (confirm("Are you sure you want to update your information?")) {
+      //re-format the phonenumber
+      let temp = this.prettyPhoneNum;
+      temp = temp.split(' ').join('');
+      temp = temp.split('-').join('');
+      temp = temp.split('(').join('');
+      temp = temp.split(')').join('');
+      this.user.userPhoneNum = temp;
 
-    //update our database
-    this.userService.updateUser(this.user.id, this.user);
+      //update our database
+      this.userService.updateUser(this.user.id, this.user);
 
-    //Update cognito
-    const fullName = this.user.userFname + ' ' + this.user.userLname;
-    const cognitoAttributes = {
-      address: this.user.userAddress,
-      email: this.user.userEmail,
-      name: fullName,
-      phone_number: this.user.userPhoneNum
-    };
-    this.cognitoService.updateUser(cognitoAttributes);
+      //Update cognito
+      const fullName = this.user.userFname + ' ' + this.user.userLname;
+      const cognitoAttributes = {
+        address: this.user.userAddress,
+        email: this.user.userEmail,
+        name: fullName,
+        phone_number: this.user.userPhoneNum
+      };
+      this.cognitoService.updateUser(cognitoAttributes);
 
-    //re-format the phone number to look pretty
-    this.formatPhone();
+      //re-format the phone number to look pretty
+      this.formatPhone();
+    }
   }
 
   formatPhone() {
