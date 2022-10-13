@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MazedDB.Data;
 using MazedDB.Models;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using static api_backend.Controllers.UserController2;
 
 namespace api_backend.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class ApplicationController : Controller
     {
         private readonly MazedDBContext _context;
@@ -63,11 +63,11 @@ namespace api_backend.Controllers
         {
             if (_context.Applications == null)
             {
-                return Problem("Entity set 'MazedDBContext.PointTransactions'  is null.");
+                return Problem("Entity set 'MazedDBContext.Applications'  is null.");
             }
 
             application.RequestedDate = DateOnly.FromDateTime(DateTime.Now);
-            application.ResponseDate = null;
+            application.ResponseDate = DateOnly.FromDateTime(DateTime.MinValue);
             application.IsActive = 1;
             _context.Applications.Add(application);
             await _context.SaveChangesAsync();
@@ -83,6 +83,10 @@ namespace api_backend.Controllers
                 return BadRequest();
             }
 
+            if (application.IsActive == 0)
+            {
+                application.ResponseDate = DateOnly.FromDateTime(DateTime.Now);
+            }
             _context.Entry(application).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 

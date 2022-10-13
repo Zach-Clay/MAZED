@@ -18,10 +18,17 @@ import { LoginComponent } from './components/login/login.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HomePageHeaderComponent } from './components/home-page-header/home-page-header.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page/profile-page.component';
-import { SponsorWidgetComponent } from './components/sponsor-widget/sponsor-widget.component';
+import {
+  SponsorWidgetComponent,
+  SponsorAppDialog,
+} from './components/sponsor-widget/sponsor-widget.component';
 import { DriverApplicationComponent } from './pages/driver-application/driver-application.component';
 import { PointChangeComponent } from './components/point-change/point-change.component';
 import { SponsoredDriverComponent } from './components/sponsored-driver/sponsored-driver.component';
+import { SponsorsDashboardComponent } from './pages/sponsors-dashboard/sponsors-dashboard.component';
+import { DriverHomePageComponent } from './pages/driver-home-page/driver-home-page.component';
+import { SponsorHomePageComponent } from './pages/sponsor-home-page/sponsor-home-page.component';
+import { AddDeductDialog } from './pages/sponsors-dashboard/sponsors-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +42,13 @@ import { SponsoredDriverComponent } from './components/sponsored-driver/sponsore
     ProfilePageComponent,
     SponsorWidgetComponent,
     DriverApplicationComponent,
+    SponsorAppDialog,
     PointChangeComponent,
     SponsoredDriverComponent,
+    SponsorsDashboardComponent,
+    DriverHomePageComponent,
+    SponsorHomePageComponent,
+    AddDeductDialog,
   ],
   imports: [
     BrowserModule,

@@ -18,4 +18,15 @@ export class SponsorOrgService {
     return this.http.get<SponsorOrg>(`${api_url}/SponsorOrg/${id}`);
   }
 
+  public updateSponsorOrg(id: number, org: SponsorOrg) {
+    return this.http.put<SponsorOrg>(`${api_url}/SponsorOrg/${id}`, org).subscribe({
+      next: (data) => {
+        return data;
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      },
+    });
+  }
+
 }
