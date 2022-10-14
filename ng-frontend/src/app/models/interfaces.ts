@@ -13,6 +13,7 @@ export interface User {
   pointNotifications: number;
   orderNotifications: number;
   issueNotifications: number;
+  totalPoints: number;
 }
 
 export interface LoginAttempt {

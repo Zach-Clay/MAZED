@@ -11,7 +11,18 @@ export class PointsChangesService {
 
   public getTransactions(userID: number) {
     return this.http.get<PointsChanges[]>(
-      `${api_url}/PointTrans/GetPointsForUser/${userID}`
+      `${api_url}/PointTrans/GetPointHistForUser/${userID}`
     );
+  }
+
+  public postTransation(change: PointsChanges) {
+    this.http.post<PointsChanges>(`${api_url}/PointTrans/`, change).subscribe({
+      next: (data) => {
+        return data;
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      },
+    });
   }
 }

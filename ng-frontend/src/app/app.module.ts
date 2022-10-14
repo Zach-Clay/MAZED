@@ -28,6 +28,7 @@ import { SponsoredDriverComponent } from './components/sponsored-driver/sponsore
 import { SponsorsDashboardComponent } from './pages/sponsors-dashboard/sponsors-dashboard.component';
 import { DriverHomePageComponent } from './pages/driver-home-page/driver-home-page.component';
 import { SponsorHomePageComponent } from './pages/sponsor-home-page/sponsor-home-page.component';
+import { AddDeductDialog } from './pages/sponsors-dashboard/sponsors-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { SponsorHomePageComponent } from './pages/sponsor-home-page/sponsor-home
     SponsorsDashboardComponent,
     DriverHomePageComponent,
     SponsorHomePageComponent,
+    AddDeductDialog,
   ],
   imports: [
     BrowserModule,

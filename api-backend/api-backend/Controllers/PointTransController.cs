@@ -84,6 +84,7 @@ namespace api_backend.Controllers
           {
               return Problem("Entity set 'MazedDBContext.PointTransactions'  is null.");
           }
+            pointTransaction.ModDate = DateTime.Now;
             _context.PointTransactions.Add(pointTransaction);
             try
             {
@@ -101,7 +102,7 @@ namespace api_backend.Controllers
                 }
             }
 
-            return CreatedAtAction("GetPointTransaction", new { id = pointTransaction.PointId }, pointTransaction);
+            return CreatedAtAction("GetPointTransID", new { id = pointTransaction.PointId }, pointTransaction);
         }
 
         // DELETE: api/PointTrans/5
@@ -131,8 +132,8 @@ namespace api_backend.Controllers
 
         //get point history for a user based on username
 
-        [HttpGet("GetPointsForUser/{UserId}")]
-        public async Task<List<PointTransaction>> GetAllPointsForUser(int UserId)
+        [HttpGet("GetPointHistForUser/{UserId}")]
+        public async Task<List<PointTransaction>> GetPointHistForUser(int UserId)
         {
             return await _context.PointTransactions.Where(p => p.UserId == UserId).ToListAsync();
         }

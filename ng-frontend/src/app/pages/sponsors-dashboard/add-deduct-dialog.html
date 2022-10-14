@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Add/Deduct Points</h1>
+
+<div mat-dialog-content>
+
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Select Driver</mat-label>
+    <mat-select [(ngModel)]="driverSelection">
+      <mat-option *ngFor="let driver of data.Drivers" [value]="driver">
+        {{driver.userFname}} {{driver.userLname}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="driverSelection">
+    <span><strong>Name: </strong> {{driverSelection.userFname}} {{driverSelection.userLname}}</span>
+    <br/>
+    <br/>
+    <span><strong>Current Points: </strong> {{driverSelection.totalPoints}}</span>
+    <br/>
+    <br/>
+    <span><strong>Add/Deduct Points </strong></span>&nbsp;
+    <mat-form-field appearance="fill">
+      <mat-label>Points</mat-label>
+      <input matInput type="number" placeholder="10" [(ngModel)]="pointAmount">
+    </mat-form-field>
+    &nbsp;
+    <span><strong>Reason For Point Change</strong></span>
+    &nbsp;
+    <input type="text" [(ngModel)]="reason"/>
+    &nbsp;
+    <button mat-flat-button color="accent" (click)="updatePoints()" [disabled]="reason =='' || reason==null">SUBMIT</button>
+  </div>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onDoneClick()">Done</button>
+</div>

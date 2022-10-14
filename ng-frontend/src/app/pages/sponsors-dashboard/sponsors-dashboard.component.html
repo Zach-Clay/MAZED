@@ -66,6 +66,18 @@
       <br />
       <br />
       <h4 class="field">Drivers:</h4>
+      <div
+        class="add-deduct-btn"
+        *ngIf="
+          user.userType === 'admin' ||
+          (user.userType === 'sponsor' && orgSelection.id === user.sponsorId)
+        "
+      >
+        <button mat-raised-button color="accent" (click)="openDialog()">
+          Add/Deduct Driver Points
+        </button>
+      </div>
+
       <mat-list>
         <mat-list-item *ngFor="let driver of drivers">
           <div class="d-flex driver-name">

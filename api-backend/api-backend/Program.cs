@@ -5,6 +5,7 @@ using MySqlConnector;
 using MazedDB.Data;
 using Newtonsoft.Json;
 using api_backend.Procedures;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
