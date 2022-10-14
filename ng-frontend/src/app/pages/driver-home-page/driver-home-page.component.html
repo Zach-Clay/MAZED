@@ -8,7 +8,9 @@
   <div class="col-md-3 w-50">
     <div class="card text-light ml-3" style="background: var(--primary-color)">
       <div class="card-body text-center">
-        <div class="card-title mt-0 lead">{{ currentSponsor.orgName }}</div>
+        <div class="card-title mt-0 lead" *ngIf="fetchedSponsor">
+          {{ currentSponsor.orgName }}
+        </div>
         <div class="bi bi-truck mb-2" style="font-size: 30px"></div>
         <div class="card-text font-weight-bold">Point-to-Dollar Conversion</div>
         <div class="card-text">1 point = ${{ p2drate }}</div>

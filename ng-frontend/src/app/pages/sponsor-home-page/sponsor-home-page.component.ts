@@ -29,7 +29,6 @@ export class SponsorHomePageComponent implements OnInit {
       .getDriversBySponsor(this.dbUser.sponsorId)
       .subscribe((drivers) => {
         this.sponsoredDrivers = drivers;
-        console.log(drivers);
       });
   }
 }

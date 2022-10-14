@@ -18,6 +18,7 @@ export class DriverHomePageComponent implements OnInit {
   pointTransactions!: PointsChanges[];
   p2drate!: string;
   currentSponsor!: SponsorOrg;
+  fetchedSponsor!: boolean;
 
   constructor(
     private router: Router,
@@ -28,6 +29,7 @@ export class DriverHomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.fetchedSponsor = false;
     console.log(this.dbUser);
     this.pointsChangesService
       .getTransactions(this.dbUser.id)
@@ -38,6 +40,7 @@ export class DriverHomePageComponent implements OnInit {
           .subscribe((org) => {
             this.currentSponsor = org;
             this.p2drate = this.currentSponsor.dollarToPoint.toFixed(2);
+            this.fetchedSponsor = true;
           });
 
         // display points now
