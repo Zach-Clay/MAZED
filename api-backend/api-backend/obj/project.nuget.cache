@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< Updated upstream
   "dgSpecHash": "C6whFHgoFfJl/zgM6Cy/N2tdhso7fyI4GgXwheVAqqnQyKwuwLmbCQ/5I237EpmSXtRK6bXU2UODqCVzL/Tb7Q==",
+=======
+  "dgSpecHash": "pYc/F1l2HNr+hEqriUXgYv+Iyo8mQRaWNDo7sWZHjMLlvarpEcGj94narxmADrNUnP19gcZbdl6YBrJZaJKtmw==",
+>>>>>>> Stashed changes
   "success": true,
   "projectFilePath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
   "expectedPackageFiles": [

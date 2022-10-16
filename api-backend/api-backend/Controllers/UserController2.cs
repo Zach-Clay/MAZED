@@ -22,7 +22,6 @@ namespace api_backend.Controllers
         public UserController2(MazedDBContext context)
         {
             _context = context;
-            //_contextProcedures = contextProcedures;
         }
 
         // GET: api/UserController2
@@ -56,8 +55,7 @@ namespace api_backend.Controllers
 
             var user = await _context.Users.Where(e => e.Id == id).ToListAsync();
 
-            if (user.Count < 1) return NotFound();
-            if (user.ElementAt(0).IsBlacklisted == 1) return NotFound();
+            if (user.Count < 1 || user.ElementAt(0).IsBlacklisted == true) return NotFound();
 
             return user.ElementAt(0);
         }
