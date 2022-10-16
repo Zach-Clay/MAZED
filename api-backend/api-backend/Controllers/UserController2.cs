@@ -55,7 +55,7 @@ namespace api_backend.Controllers
 
             var user = await _context.Users.Where(e => e.Id == id).ToListAsync();
 
-            if (user.Count < 1 || user.ElementAt(0).IsBlacklisted == true) return NotFound();
+            if (user.Count < 1 || user.ElementAt(0).IsBlacklisted == 1) return NotFound();
 
             return user.ElementAt(0);
         }

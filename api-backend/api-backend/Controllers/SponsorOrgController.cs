@@ -120,5 +120,12 @@ namespace api_backend.Controllers
         {
             return (_context.SponsorOrgs?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        [HttpGet("GetDollarToPoint/{id}")]
+        public async Task<double?> GetDollarToPointBySponsorId(int id)
+        {
+            SponsorOrg? sponsorOrg = await _context.SponsorOrgs.FindAsync(id);
+            return sponsorOrg?.DollarToPoint;
+        }
     }
 }
