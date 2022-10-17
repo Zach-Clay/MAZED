@@ -32,6 +32,20 @@ namespace api_backend.Controllers
             return await _context.SponsorOrgs.ToListAsync();
         }
 
+        [HttpGet("GetSponsorOrgDailyPointValue/{id}")]
+        public async Task<double> GetSponsorOrgDailyPointValue(int id)
+        {
+            if (_context.SponsorOrgs == null)
+            {
+                throw new Exception("Sponsors not found");
+            }
+
+            SponsorOrg? org = await _context.SponsorOrgs.Where(s => s.Id == id).FirstOrDefaultAsync()
+                  ?? throw new Exception("Sponsor does not exist or Daily amount is not set");
+
+            return org.DailyPointAmount;
+        }
+
         // GET: api/SponsorOrg/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SponsorOrg>> GetSponsorOrg(int id)
@@ -45,6 +59,23 @@ namespace api_backend.Controllers
             if (sponsorOrg == null)
             {
                 return NotFound();
+            }
+
+            return sponsorOrg;
+        }
+
+        [HttpGet("GetSponsorOrg_Object")]
+        public async Task<SponsorOrg> GetSponsorOrg_Object(int id)
+        {
+            if (_context.SponsorOrgs == null)
+            {
+                throw new Exception("Sponsors not found");
+            }
+            var sponsorOrg = await _context.SponsorOrgs.FindAsync(id);
+
+            if (sponsorOrg == null)
+            {
+                throw new Exception("Sponsor not found");
             }
 
             return sponsorOrg;

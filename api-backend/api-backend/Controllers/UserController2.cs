@@ -47,6 +47,16 @@ namespace api_backend.Controllers
             return user.ElementAt(0);
         }
 
+        [HttpGet("GetUser_Object/{username}")]
+        public async Task<User> GetUser_Object(string username)
+        {
+            if (_context.Users == null) throw new Exception("User not found");
+
+            var user = await _context.Users.Where(e => e.Username == username).FirstOrDefaultAsync();
+
+            return user ?? throw new Exception("Specific user not found");
+        }
+
         // GET: api/UserController2/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserId(int id)
