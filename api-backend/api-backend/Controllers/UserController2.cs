@@ -166,7 +166,7 @@ namespace api_backend.Controllers
         }
 
         //loading related data***
-        [HttpGet("/GetSponsorFromUserId/{Id}")]
+        [HttpGet("GetSponsorFromUserId/{Id}")]
         public async Task<User?> GetSponsorFromUserId(int id)
         {
             return await _context.Users.Include(p => p.SponsorId).Where(p => p.Id == id && p.IsBlacklisted == 0).FirstOrDefaultAsync();
@@ -175,20 +175,20 @@ namespace api_backend.Controllers
         //how to call stored proceduere
 
         //get all users by a sponsor'sId
-        [HttpGet("/GetUsersBySponsorId/{SponsorId}")]
+        [HttpGet("GetUsersBySponsorId/{SponsorId}")]
         public async Task<List<User>> GetUsersBySponsorId(int SponsorId)
         {
             return await _context.Users.Where(u => u.SponsorId == SponsorId && u.UserType.ToLower() == "driver").ToListAsync();
         }
 
         //get all drivers by a sponsor'sId
-        [HttpGet("/GetDriversBySponsorId/{SponsorId}")]
+        [HttpGet("GetDriversBySponsorId/{SponsorId}")]
         public async Task<List<User>> GetDriversBySponsorId(int SponsorId)
         {
             return await _context.Users.Where(u => u.SponsorId == SponsorId && u.UserType.ToLower() == "driver").ToListAsync();
         }
 
-        [HttpGet("/GetDriverPoints/{Id}")]
+        [HttpGet("GetDriverPoints/{Id}")]
         public async Task<List<User>> GetDriverPoints(int id)
         {
             return await _context.Users.Where(u => u.Id == id).ToListAsync();
