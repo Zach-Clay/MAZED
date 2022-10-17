@@ -161,9 +161,7 @@ namespace MazedDB.Data
                     .HasColumnType("datetime")
                     .HasColumnName("attemptedDate");
 
-                entity.Property(e => e.IsLoginSuccessful)
-                    .HasMaxLength(45)
-                    .HasColumnName("isLoginSuccessful");
+                entity.Property(e => e.IsLoginSuccessful).HasColumnName("isLoginSuccessful");
 
                 entity.Property(e => e.Username)
                     .HasMaxLength(45)
@@ -260,8 +258,6 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
 
-                entity.Property(e => e.OrgDescription).HasMaxLength(30);
-
                 entity.Property(e => e.OrgName).HasMaxLength(30);
             });
 
@@ -274,6 +270,8 @@ namespace MazedDB.Data
                 entity.Property(e => e.IssueNotifications)
                     .HasColumnName("issueNotifications")
                     .HasDefaultValueSql("'1'");
+
+                entity.Property(e => e.LastLogin).HasColumnType("datetime");
 
                 entity.Property(e => e.ModBy)
                     .HasMaxLength(45)
