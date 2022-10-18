@@ -7,13 +7,15 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { UserRegistrationComponent } from './pages/user-registration/user-registration.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page/profile-page.component';
 import { DriverApplicationComponent } from './pages/driver-application/driver-application.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
   { path: 'register', component: UserRegistrationComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'profile', component: ProfilePageComponent },
-  { path: 'driver-application', component: DriverApplicationComponent }
+  { path: 'driver-application', component: DriverApplicationComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent }
 ];
 
 @NgModule({

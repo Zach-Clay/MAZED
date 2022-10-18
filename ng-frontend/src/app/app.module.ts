@@ -22,7 +22,7 @@ import { SponsorWidgetComponent, SponsorAppDialog } from './components/sponsor-w
 import { DriverApplicationComponent } from './pages/driver-application/driver-application.component';
 import { PointChangeComponent } from './components/point-change/point-change.component';
 import { SponsoredDriverComponent } from './components/sponsored-driver/sponsored-driver.component';
-
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ import { SponsoredDriverComponent } from './components/sponsored-driver/sponsore
     SponsorAppDialog,
     PointChangeComponent,
     SponsoredDriverComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
