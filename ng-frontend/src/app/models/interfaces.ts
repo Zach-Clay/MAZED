@@ -52,3 +52,16 @@ export interface Application {
   decisionReason: string;
   isActive: number; //0 or 1
 }
+
+export interface Product {
+  productId: number;
+  sponsorId: number;
+  orderId: number;
+  pointValue: number;
+  orderQuantity: number;
+  availibility: boolean;
+  description: string;
+  image: number[];
+  name: string;
+  isBlackListed: boolean;
+}
