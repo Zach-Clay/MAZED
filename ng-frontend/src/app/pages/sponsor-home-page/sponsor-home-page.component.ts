@@ -35,8 +35,8 @@ export class SponsorHomePageComponent implements OnInit {
       });
     this.productListService
       .getProductsBySponsorId(this.dbUser.sponsorId)
-      .subscribe((products) => {
-        this.currentProducts = products;
+      .subscribe((data) => {
+        this.currentProducts = data;
       });
   }
 }
