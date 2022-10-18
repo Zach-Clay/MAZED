@@ -8,6 +8,7 @@ import { UserRegistrationComponent } from './pages/user-registration/user-regist
 import { ProfilePageComponent } from './pages/profile-page/profile-page/profile-page.component';
 import { DriverApplicationComponent } from './pages/driver-application/driver-application.component';
 import { SponsorsDashboardComponent } from './pages/sponsors-dashboard/sponsors-dashboard.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
   { path: 'driver-application', component: DriverApplicationComponent },
   { path: 'sponsor-dashboard', component: SponsorsDashboardComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent }
 ];
 
 @NgModule({
