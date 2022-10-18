@@ -3,53 +3,25 @@
     <h2>Welcome, {{ dbUser.userFname }} {{ dbUser.userLname }}</h2>
   </div>
 </div>
-
-<div class="row mt-3"></div>
+<hr />
+<div class="text-center lead text-dark font-weight-bold mb-1">
+  Current Products
+</div>
 <div class="col-sm mr-3">
   <div class="card text-light" style="background: var(--secondary-color)">
     <div class="card-body text-center">
       <div class="row">
-        <div class="col-sm mt-1">
-          <div class="card" style="background: var(--tertiary-color)">
-            <p class="text-dark mb-0">product</p>
-          </div>
+        <div class="col-sm mt-1" *ngIf="currentProducts.length !== 0">
+          <app-product-listing
+            *ngFor="let product of currentProducts"
+            [product]="product"
+          ></app-product-listing>
         </div>
-        <div class="col-sm mt-1">
-          <div class="card" style="background: var(--tertiary-color)">
-            <p class="text-dark mb-0">product</p>
-          </div>
-        </div>
-        <div class="col-sm mt-1">
-          <div class="card" style="background: var(--tertiary-color)">
-            <p class="text-dark mb-0">product</p>
-          </div>
-        </div>
-        <div class="col-sm mt-1">
-          <div class="card" style="background: var(--tertiary-color)">
-            <p class="text-dark mb-0">product</p>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-4">
-        <div class="col-sm">
-          <div class="card" style="background: var(--tertiary-color)">
-            <p class="text-dark mb-0">product</p>
-          </div>
-        </div>
-        <div class="col-sm mt-1">
-          <div class="card" style="background: var(--tertiary-color)">
-            <p class="text-dark mb-0">product</p>
-          </div>
-        </div>
-        <div class="col-sm mt-1">
-          <div class="card" style="background: var(--tertiary-color)">
-            <p class="text-dark mb-0">product</p>
-          </div>
-        </div>
-        <div class="col-sm mt-1">
-          <div class="card" style="background: var(--tertiary-color)">
-            <p class="text-dark mb-0">product</p>
-          </div>
+        <div
+          class="col-sm text-dark font-italic"
+          *ngIf="currentProducts.length === 0"
+        >
+          No products to show
         </div>
       </div>
     </div>
@@ -60,7 +32,7 @@
   <div class="col-6">
     <app-sponsor-widget></app-sponsor-widget>
   </div>
-</div>  
+</div>
 
 <div class="row mt-3">
   <div class="col-md-3 w-50">

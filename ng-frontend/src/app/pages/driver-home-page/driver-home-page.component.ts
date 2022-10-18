@@ -1,10 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
-import { User, PointsChanges, SponsorOrg } from 'src/app/models/interfaces';
+import {
+  User,
+  PointsChanges,
+  SponsorOrg,
+  Product,
+} from 'src/app/models/interfaces';
 import { UserService } from 'src/app/services/user.service';
 import { PointsChangesService } from 'src/app/services/points-changes.service';
 import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
+import { ProductListService } from 'src/app/services/product-list.service';
 import { input } from '@aws-amplify/ui';
 
 @Component({
@@ -16,6 +22,7 @@ export class DriverHomePageComponent implements OnInit {
   @Input() cognitoUser: any;
   @Input() dbUser!: User;
   pointTransactions!: PointsChanges[];
+  products!: Product[];
   p2drate!: string;
   currentSponsor!: SponsorOrg;
   fetchedSponsor!: boolean;
@@ -25,7 +32,8 @@ export class DriverHomePageComponent implements OnInit {
     private cognitoService: CognitoService,
     private userService: UserService,
     private pointsChangesService: PointsChangesService,
-    private sponsorOrgService: SponsorOrgService
+    private sponsorOrgService: SponsorOrgService,
+    private productListService: ProductListService
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +52,11 @@ export class DriverHomePageComponent implements OnInit {
           });
 
         // display points now
+      });
+    this.productListService
+      .getProductsBySponsorId(this.dbUser.sponsorId)
+      .subscribe((data) => {
+        this.products = data;
       });
   }
 }
