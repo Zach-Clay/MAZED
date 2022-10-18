@@ -1,4 +1,8 @@
-<app-home-page-header [showPoints]="isDriver"></app-home-page-header>
+<app-home-page-header
+  [showPoints]="isDriver"
+  [totalPoints]="dbUser.totalPoints"
+  *ngIf="displayName"
+></app-home-page-header>
 
 <div *ngIf="isDriver">
   <app-driver-home-page

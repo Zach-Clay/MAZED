@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
-import { User, PointsChanges } from 'src/app/models/interfaces';
+import { User, PointsChanges, Product } from 'src/app/models/interfaces';
 import { UserService } from 'src/app/services/user.service';
 import { PointsChangesService } from 'src/app/services/points-changes.service';
 import { input } from '@aws-amplify/ui';
+import { ProductListService } from 'src/app/services/product-list.service';
 
 @Component({
   selector: 'app-sponsor-home-page',
@@ -15,12 +16,14 @@ export class SponsorHomePageComponent implements OnInit {
   @Input() cognitoUser: any;
   @Input() dbUser!: User;
   sponsoredDrivers!: User[];
+  currentProducts!: Product[];
 
   constructor(
     private router: Router,
     private cognitoService: CognitoService,
     private userService: UserService,
-    private pointsChangesService: PointsChangesService
+    private pointsChangesService: PointsChangesService,
+    private productListService: ProductListService
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +32,11 @@ export class SponsorHomePageComponent implements OnInit {
       .getDriversBySponsor(this.dbUser.sponsorId)
       .subscribe((drivers) => {
         this.sponsoredDrivers = drivers;
-        console.log(drivers);
+      });
+    this.productListService
+      .getProductsBySponsorId(this.dbUser.sponsorId)
+      .subscribe((data) => {
+        this.currentProducts = data;
       });
   }
 }
