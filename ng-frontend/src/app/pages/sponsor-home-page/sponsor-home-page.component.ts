@@ -16,7 +16,9 @@ export class SponsorHomePageComponent implements OnInit {
   @Input() cognitoUser: any;
   @Input() dbUser!: User;
   sponsoredDrivers!: User[];
+  gotSponsoredDrivers: boolean = false;
   currentProducts!: Product[];
+  gotCurrentProducts: boolean = false;
 
   constructor(
     private router: Router,
@@ -32,11 +34,13 @@ export class SponsorHomePageComponent implements OnInit {
       .getDriversBySponsor(this.dbUser.sponsorId)
       .subscribe((drivers) => {
         this.sponsoredDrivers = drivers;
+        this.gotSponsoredDrivers = true;
       });
     this.productListService
       .getProductsBySponsorId(this.dbUser.sponsorId)
       .subscribe((data) => {
         this.currentProducts = data;
+        this.gotCurrentProducts = true;
       });
   }
 }

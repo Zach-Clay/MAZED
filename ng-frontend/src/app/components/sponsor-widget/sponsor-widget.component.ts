@@ -49,6 +49,7 @@ export class SponsorWidgetComponent implements OnInit {
   showSponsorApps: boolean = false;
   driverOutstandingApps!: Application[];
   showDriverOustandingApps: boolean = false;
+  loaded: boolean = false;
 
   constructor(
     private cognitoService: CognitoService,
@@ -102,6 +103,7 @@ export class SponsorWidgetComponent implements OnInit {
                 this.showDriverOustandingApps = true;
               });
           }
+          this.loaded = true;
         });
       })
       .catch((err) => {

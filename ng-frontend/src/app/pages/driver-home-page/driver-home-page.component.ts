@@ -23,6 +23,7 @@ export class DriverHomePageComponent implements OnInit {
   @Input() dbUser!: User;
   pointTransactions!: PointsChanges[];
   products!: Product[];
+  fetchedProducts!: boolean;
   p2drate!: string;
   currentSponsor!: SponsorOrg;
   fetchedSponsor!: boolean;
@@ -38,6 +39,7 @@ export class DriverHomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchedSponsor = false;
+    this.fetchedProducts = false;
     console.log(this.dbUser);
     this.pointsChangesService
       .getTransactions(this.dbUser.id)
@@ -57,6 +59,7 @@ export class DriverHomePageComponent implements OnInit {
       .getProductsBySponsorId(this.dbUser.sponsorId)
       .subscribe((data) => {
         this.products = data;
+        this.fetchedProducts = true;
       });
   }
 }

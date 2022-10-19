@@ -1,5 +1,12 @@
 <app-home-page-header></app-home-page-header>
 
+<div
+  class="d-flex mt-5 align-content-center justify-content-center"
+  *ngIf="!showData"
+>
+  <div class="spinner-border" role="status"></div>
+</div>
+
 <div class="container" *ngIf="showData">
   <div class="title text-center">
     <h1>Select a Sponsor</h1>
