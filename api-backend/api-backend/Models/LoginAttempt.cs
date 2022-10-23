@@ -8,6 +8,6 @@ namespace MazedDB.Models
         public int Id { get; set; }
         public string Username { get; set; } = null!;
         public DateTime AttemptedDate { get; set; }
-        public string IsLoginSuccessful { get; set; } = null!;
+        public sbyte IsLoginSuccessful { get; set; }
     }
 }

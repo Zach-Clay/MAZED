@@ -25,8 +25,10 @@ namespace MazedDB.Data
         public virtual DbSet<PointTransaction> PointTransactions { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<PwdChange> PwdChanges { get; set; } = null!;
+        public virtual DbSet<SponsQueryParam> SponsQueryParams { get; set; } = null!;
         public virtual DbSet<SponsorOrg> SponsorOrgs { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<UserToSponsor> UserToSponsors { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -161,9 +163,7 @@ namespace MazedDB.Data
                     .HasColumnType("datetime")
                     .HasColumnName("attemptedDate");
 
-                entity.Property(e => e.IsLoginSuccessful)
-                    .HasMaxLength(45)
-                    .HasColumnName("isLoginSuccessful");
+                entity.Property(e => e.IsLoginSuccessful).HasColumnName("isLoginSuccessful");
 
                 entity.Property(e => e.Username)
                     .HasMaxLength(45)
@@ -178,6 +178,8 @@ namespace MazedDB.Data
                 entity.ToTable("pointTransaction");
 
                 entity.Property(e => e.PointId).HasColumnName("pointId");
+
+                entity.Property(e => e.IsSpecialTransaction).HasColumnName("isSpecialTransaction");
 
                 entity.Property(e => e.ModDate)
                     .HasColumnType("datetime")
@@ -248,6 +250,25 @@ namespace MazedDB.Data
                     .HasConstraintName("UserIdFK_PwdChanges");
             });
 
+            modelBuilder.Entity<SponsQueryParam>(entity =>
+            {
+                entity.Property(e => e.Attributes)
+                    .HasMaxLength(45)
+                    .HasColumnName("attributes");
+
+                entity.Property(e => e.Entities)
+                    .HasMaxLength(45)
+                    .HasColumnName("entities");
+
+                entity.Property(e => e.Limit).HasColumnName("limit");
+
+                entity.Property(e => e.MediaType)
+                    .HasMaxLength(45)
+                    .HasColumnName("mediaType");
+
+                entity.Property(e => e.SponsorId).HasColumnName("sponsorID");
+            });
+
             modelBuilder.Entity<SponsorOrg>(entity =>
             {
                 entity.ToTable("sponsorOrgs");
@@ -259,8 +280,6 @@ namespace MazedDB.Data
                     .HasDefaultValueSql("'0.01'");
 
                 entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
-
-                entity.Property(e => e.OrgDescription).HasMaxLength(30);
 
                 entity.Property(e => e.OrgName).HasMaxLength(30);
             });
@@ -274,6 +293,8 @@ namespace MazedDB.Data
                 entity.Property(e => e.IssueNotifications)
                     .HasColumnName("issueNotifications")
                     .HasDefaultValueSql("'1'");
+
+                entity.Property(e => e.LastLogin).HasColumnType("datetime");
 
                 entity.Property(e => e.ModBy)
                     .HasMaxLength(45)
@@ -291,9 +312,7 @@ namespace MazedDB.Data
                     .HasColumnName("pointNotifications")
                     .HasDefaultValueSql("'1'");
 
-                entity.Property(e => e.SponsorId).HasColumnName("SponsorID");
-
-                entity.Property(e => e.TotalPoints).HasColumnName("totalPoints");
+                entity.Property(e => e.SponsorCount).HasColumnName("sponsorCount");
 
                 entity.Property(e => e.UserAddress).HasMaxLength(30);
 
@@ -314,6 +333,22 @@ namespace MazedDB.Data
                 entity.Property(e => e.UserType).HasMaxLength(30);
 
                 entity.Property(e => e.Username).HasMaxLength(30);
+            });
+
+            modelBuilder.Entity<UserToSponsor>(entity =>
+            {
+                entity.ToTable("userToSponsors");
+
+                entity.HasIndex(e => e.Id, "id_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
+
+                entity.Property(e => e.UserId).HasColumnName("userId");
+
+                entity.Property(e => e.UserPoints).HasColumnName("userPoints");
             });
 
             OnModelCreatingPartial(modelBuilder);
