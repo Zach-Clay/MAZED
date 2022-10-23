@@ -22,7 +22,6 @@ namespace api_backend.Controllers
         public UserController2(MazedDBContext context)
         {
             _context = context;
-            //_contextProcedures = contextProcedures;
         }
 
         // GET: api/UserController2
@@ -48,6 +47,16 @@ namespace api_backend.Controllers
             return user.ElementAt(0);
         }
 
+        [HttpGet("GetUser_Object/{username}")]
+        public async Task<User> GetUser_Object(string username)
+        {
+            if (_context.Users == null) throw new Exception("User not found");
+
+            var user = await _context.Users.Where(e => e.Username == username).FirstOrDefaultAsync();
+
+            return user ?? throw new Exception("Specific user not found");
+        }
+
         // GET: api/UserController2/5
         [HttpGet("id/{id}")]
         public async Task<ActionResult<User>> GetUserById(int id)
@@ -56,8 +65,7 @@ namespace api_backend.Controllers
 
             var user = await _context.Users.Where(e => e.Id == id).ToListAsync();
 
-            if (user.Count < 1) return NotFound();
-            if (user.ElementAt(0).IsBlacklisted == 1) return NotFound();
+            if (user.Count < 1 || user.ElementAt(0).IsBlacklisted == 1) return NotFound();
 
             return user.ElementAt(0);
         }
@@ -194,6 +202,32 @@ namespace api_backend.Controllers
             return await _context.Users.Where(u => u.Id == id).ToListAsync();
         }
 
+        [HttpPut("/UserLeavesSponsor/{SponsorId}")]
+        public async Task<User> LeaveSponsor(int SponsorId, string username)
+        {
+            var serviceProvider = HttpContext.RequestServices;
+            var SponsorOrgControllerInstance = (SponsorOrgController)serviceProvider.GetRequiredService<SponsorOrgController>();
+            var PointTransControllerInstance = (PointTransController)serviceProvider.GetRequiredService<PointTransController>();
+
+            var user = await _context.Users.Where(e => e.Username == username).FirstOrDefaultAsync()
+                ?? throw new Exception("The provided user was not found");
+
+            //because of the requirements change, i am not going to edit the user's total points (for this sprint) as i will have
+            //to delete it for the next sprint. 
+            var transaction = new PointTransaction
+            {
+                SponsorId = SponsorId,
+                UserId = user.Id,
+                PointValue = -1 * user.TotalPoints, //stored procedure should take care of this?
+                Reason = "Driver left sponsor",
+                ModDate = DateTime.Now,
+                isSpecialTransaction = 1
+            };
+
+            await PointTransControllerInstance.PostPointTransaction(transaction);
+
+            return user;
+        }
 
     }
 }

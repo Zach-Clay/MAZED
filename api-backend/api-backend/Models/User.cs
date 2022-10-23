@@ -24,10 +24,15 @@ namespace MazedDB.Models
         public sbyte? PointNotifications { get; set; }
         public sbyte? OrderNotifications { get; set; }
         public sbyte? IssueNotifications { get; set; }
+        public DateTime? LastLogin { get; set; }
         public DateTime? ModDate { get; set; }
         public string? ModBy { get; set; }
+<<<<<<< HEAD
         public DateTime? LastLogin { get; set; }
         public int? SponsorCount { get; set; }
+=======
+        public double TotalPoints { get; set; }
+>>>>>>> c45ad7af2a252f12167d82ed46d8dc853cd1e39b
 
         public virtual AuditLogging? AuditLogging { get; set; }
         public virtual ICollection<DriverOrder> DriverOrders { get; set; }
