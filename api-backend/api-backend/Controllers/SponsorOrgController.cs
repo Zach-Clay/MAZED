@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MazedDB.Data;
 using MazedDB.Models;
+using ShopifySharp;
 
 namespace api_backend.Controllers
 {

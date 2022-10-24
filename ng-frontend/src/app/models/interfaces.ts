@@ -24,6 +24,7 @@ export interface UserToSponsor {
   sponsorId: number;
   userPoints: number;
   sponsorTotal?: number;
+  userType: string;
 }
 
 export interface LoginAttempt {

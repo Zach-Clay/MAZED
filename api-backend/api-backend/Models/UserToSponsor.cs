@@ -10,5 +10,6 @@ namespace MazedDB.Models
         public uint SponsorId { get; set; }
         public double UserPoints { get; set; }
         public int? SponsorTotal { get; set; }
+        public string? UserType { get; set; }
     }
 }

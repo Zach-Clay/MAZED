@@ -73,6 +73,8 @@ export class SponsorWidgetComponent implements OnInit {
             this.isSponsor = true;
           }
 
+          
+
           //get sponsor info
           if (this.user.sponsorId !== 0) {
             this.sponsorOrgService
