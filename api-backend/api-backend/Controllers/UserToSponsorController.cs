@@ -83,7 +83,7 @@ namespace api_backend.Controllers
         }
 
         //loading related data***
-        [HttpGet("GetSponsorsFromUserId/{Id}")]
+        [HttpGet("GetSponsorsOrgsFromUserId/{Id}")]
         public async Task<List<SponsorOrg>> GetSponsorsOrgsFromUserId(int Id)
         {
             List<UserToSponsor> userToSponsors =  await _context.UserToSponsors.Where(p => p.SponsorId == Id).ToListAsync();
