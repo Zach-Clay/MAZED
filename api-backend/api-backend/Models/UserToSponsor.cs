@@ -5,9 +5,9 @@ namespace MazedDB.Models
 {
     public partial class UserToSponsor
     {
-        public uint Id { get; set; }
-        public uint UserId { get; set; }
-        public uint SponsorId { get; set; }
-        public double UserPoints { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int SponsorId { get; set; }
+        public int? UserPoints { get; set; }
     }
 }
