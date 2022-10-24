@@ -8,6 +8,6 @@ namespace MazedDB.Models
         public uint Id { get; set; }
         public uint UserId { get; set; }
         public uint SponsorId { get; set; }
-        public int? UserPoints { get; set; }
+        public double UserPoints { get; set; }
     }
 }

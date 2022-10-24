@@ -173,28 +173,7 @@ namespace api_backend.Controllers
             return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        //loading related data***
-        [HttpGet("/GetSponsorFromUserId/{Id}")]
-        public async Task<User?> GetSponsorFromUserId(int id)
-        {
-            return await _context.Users.Include(p => p.SponsorId).Where(p => p.Id == id && p.IsBlacklisted == 0).FirstOrDefaultAsync();
-        }
-
         //how to call stored proceduere
-
-        //get all users by a sponsor'sId
-        [HttpGet("/GetUsersBySponsorId/{SponsorId}")]
-        public async Task<List<User>> GetUsersBySponsorId(int SponsorId)
-        {
-            return await _context.Users.Where(u => u.SponsorId == SponsorId && u.UserType.ToLower() == "driver").ToListAsync();
-        }
-
-        //get all drivers by a sponsor'sId
-        [HttpGet("/GetDriversBySponsorId/{SponsorId}")]
-        public async Task<List<User>> GetDriversBySponsorId(int SponsorId)
-        {
-            return await _context.Users.Where(u => u.SponsorId == SponsorId && u.UserType.ToLower() == "driver").ToListAsync();
-        }
 
         [HttpGet("/GetDriverPoints/{Id}")]
         public async Task<List<User>> GetDriverPoints(int id)
@@ -206,22 +185,23 @@ namespace api_backend.Controllers
         public async Task<User> LeaveSponsor(int SponsorId, string username)
         {
             var serviceProvider = HttpContext.RequestServices;
-            var SponsorOrgControllerInstance = (SponsorOrgController)serviceProvider.GetRequiredService<SponsorOrgController>();
-            var PointTransControllerInstance = (PointTransController)serviceProvider.GetRequiredService<PointTransController>();
+            var SponsorOrgControllerInstance = serviceProvider.GetRequiredService<SponsorOrgController>();
+            var PointTransControllerInstance = serviceProvider.GetRequiredService<PointTransController>();
+            var userToSponsorControllerInstance = serviceProvider.GetRequiredService<UserToSponsorController>();
 
             var user = await _context.Users.Where(e => e.Username == username).FirstOrDefaultAsync()
                 ?? throw new Exception("The provided user was not found");
 
-            //because of the requirements change, i am not going to edit the user's total points (for this sprint) as i will have
-            //to delete it for the next sprint. 
+            var userToSponsor = await userToSponsorControllerInstance.GetUserPointsBySponsor((uint)user.Id, (uint)SponsorId);
+
             var transaction = new PointTransaction
             {
                 SponsorId = SponsorId,
                 UserId = user.Id,
-                PointValue = -1 * user.TotalPoints, //stored procedure should take care of this?
+                PointValue = -1 * userToSponsor.UserPoints,
                 Reason = "Driver left sponsor",
                 ModDate = DateTime.Now,
-                isSpecialTransaction = 1
+                IsSpecialTransaction = 1
             };
 
             await PointTransControllerInstance.PostPointTransaction(transaction);
