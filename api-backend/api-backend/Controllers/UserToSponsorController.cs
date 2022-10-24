@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MazedDB.Data;
 using MazedDB.Models;
-using ShopifySharp;
+using User = MazedDB.Models.User;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -37,16 +37,28 @@ namespace api_backend.Controllers
 
         //get all users by a sponsor'sId
         [HttpGet("GetUsersBySponsorId/{SponsorId}")]
-        public async Task<List<UserToSponsor>> GetUsersBySponsorId(int SponsorId)
+        public async Task<List<User>> GetUsersBySponsorId(int SponsorId)
         {
-            return await _context.UserToSponsors.Where(u => u.SponsorId == SponsorId).ToListAsync();
+            var serviceProvider = HttpContext.RequestServices;
+            var userControllerInstance = serviceProvider.GetRequiredService<UserController2>();
+
+            List<UserToSponsor> userToSponsors = await _context.UserToSponsors.Where(p => p.SponsorId == SponsorId).ToListAsync();
+
+            List<User> users = new List<User>();
+            foreach (var userToSponsor in userToSponsors)
+            {
+                var user = await userControllerInstance.GetUserById_Object((int)userToSponsor.UserId);
+                users.Add(user);
+            }
+
+            return users;
         }
 
         //loading related data***
         [HttpGet("GetSponsorsFromUserId/{Id}")]
-        public async Task<List<UserToSponsor>> GetSponsorsFromUserId(int id)
+        public async Task<List<UserToSponsor>> GetSponsorsFromUserId(int Id)
         {
-            return await _context.UserToSponsors.Where(p => p.UserId == id).ToListAsync();
+            return await _context.UserToSponsors.Where(p => p.SponsorId == Id).ToListAsync();
         }
 
         [HttpPut("UpdateUserPointsBySponsor/{amount}")]
