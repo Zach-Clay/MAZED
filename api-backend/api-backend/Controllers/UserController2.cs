@@ -173,61 +173,37 @@ namespace api_backend.Controllers
             return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        //loading related data***
-        [HttpGet("/GetSponsorFromUserId/{Id}")]
-        public async Task<UserToSponsor?> GetSponsorFromUserId(int id)
+        
+
+        [HttpPut("/UserLeavesSponsor/{SponsorId}")]
+        public async Task<User> LeaveSponsor(int SponsorId, string username)
         {
-            return await _context.UserToSponsors.Include(p => p.SponsorId).Where(p => p.Id == id && p.IsBlacklisted == 0).FirstOrDefaultAsync();
+            var serviceProvider = HttpContext.RequestServices;
+            var SponsorOrgControllerInstance = serviceProvider.GetRequiredService<SponsorOrgController>();
+            var PointTransControllerInstance = serviceProvider.GetRequiredService<PointTransController>();
+            var UserToSponsorControllerInstance = serviceProvider.GetRequiredService<UserToSponsorController>();
+
+            var user = await _context.Users.Where(e => e.Username == username).FirstOrDefaultAsync()
+                ?? throw new Exception("The provided user was not found");
+
+            var uts = await UserToSponsorControllerInstance.GetUserPointsBySponsor((uint)user.Id, (uint)SponsorId);
+
+            //because of the requirements change, i am not going to edit the user's total points (for this sprint) as i will have
+            //to delete it for the next sprint. 
+            var transaction = new PointTransaction
+            {
+                SponsorId = SponsorId,
+                UserId = user.Id,
+                PointValue = -1 * uts.UserPoints, 
+                Reason = "Driver left sponsor",
+                ModDate = DateTime.Now,
+                IsSpecialTransaction = 1
+            };
+
+            await PointTransControllerInstance.PostPointTransaction(transaction);
+
+            return user;
         }
-
-        //how to call stored proceduere
-
-        //get all users by a sponsor'sId
-        [HttpGet("/GetUsersBySponsorId/{SponsorId}")]
-        public async Task<List<UserToSponsor>> GetUsersBySponsorId(int SponsorId)
-        {
-            return await _context.UserToSponsors.Where(u => u.SponsorId == SponsorId && u.UserType.ToLower() == "driver").ToListAsync();
-        }
-
-        //get all drivers by a sponsor'sId
-        [HttpGet("/GetDriversBySponsorId/{SponsorId}")]
-        public async Task<List<UserToSponsor>> GetDriversBySponsorId(int SponsorId)
-        {
-            return await _context.UserToSponsors.Where(u => u.SponsorId == SponsorId && u.UserType.ToLower() == "driver").ToListAsync();
-        }
-
-        [HttpGet("/GetDriverPoints/{Id}")]
-        public async Task<List<UserToSponsor>> GetDriverPoints(int id)
-        {
-            return await _context.UserToSponsors.Where(u => u.Id == id).ToListAsync();
-        }
-
-        //[HttpPut("/UserLeavesSponsor/{SponsorId}")]
-        //public async Task<User> LeaveSponsor(int SponsorId, string username)
-        //{
-        //    var serviceProvider = HttpContext.RequestServices;
-        //    var SponsorOrgControllerInstance = (SponsorOrgController)serviceProvider.GetRequiredService<SponsorOrgController>();
-        //    var PointTransControllerInstance = (PointTransController)serviceProvider.GetRequiredService<PointTransController>();
-
-        //    //var user = await _context.Users.Where(e => e.Username == username).FirstOrDefaultAsync()
-        //    //    ?? throw new Exception("The provided user was not found");
-
-        //    ////because of the requirements change, i am not going to edit the user's total points (for this sprint) as i will have
-        //    ////to delete it for the next sprint. 
-        //    //var transaction = new PointTransaction
-        //    //{
-        //    //    SponsorId = SponsorId,
-        //    //    UserId = user.Id,
-        //    //    PointValue = -1 * user.TotalPoints, //stored procedure should take care of this?
-        //    //    Reason = "Driver left sponsor",
-        //    //    ModDate = DateTime.Now,
-        //    //    isSpecialTransaction = 1
-        //    //};
-
-        //    //await PointTransControllerInstance.PostPointTransaction(transaction);
-
-        //    return user;
-        //}
 
     }
 }

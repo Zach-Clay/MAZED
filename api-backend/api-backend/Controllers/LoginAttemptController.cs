@@ -33,21 +33,21 @@ namespace api_backend.Controllers
             return await _context.LoginAttempts.Where(e => e.Username == username).ToListAsync();
         }
 
-        //Post a new login attempt for a specific user
-        [HttpPost]
-        public async Task<ActionResult<LoginAttempt>> Post([FromBody]LoginAttempt attempt)
-        {
-            if (_context.LoginAttempts == null)
-            {
-                return Problem("Entity set 'MazedDBContext.LoginAttemps'  is null.");
-            }
+        ////Post a new login attempt for a specific user
+        //[HttpPost]
+        //public async Task<ActionResult<LoginAttempt>> Post([FromBody]LoginAttempt attempt)
+        //{
+        //    if (_context.LoginAttempts == null)
+        //    {
+        //        return Problem("Entity set 'MazedDBContext.LoginAttemps'  is null.");
+        //    }
 
-            attempt.AttemptedDate = DateTime.Now;
-            _context.LoginAttempts.Add(attempt);
-            await _context.SaveChangesAsync();
+        //    attempt.AttemptedDate = DateTime.Now;
+        //    _context.LoginAttempts.Add(attempt);
+        //    await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLoginAttempts", new { username = attempt.Username }, attempt);
-        }
+        //    return CreatedAtAction("GetLoginAttempts", new { username = attempt.Username }, attempt);
+        //}
 
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<LoginAttempt>>> GetAllLoginAttempt()
@@ -104,7 +104,7 @@ namespace api_backend.Controllers
 
                 await PointTransControllerInstance.PostPointTransaction(dailyUpdate);
 
-                await userToSponsorControllerInstance.UpdateUserPointsBySponsor((uint)user.Id, u.SponsorId,
+                await userToSponsorControllerInstance.UpdateUserPointsBySponsor((uint)user.Id, (uint)u.SponsorId,
                     await SponsorOrgControllerInstance.GetSponsorOrgDailyPointValue((int)u.SponsorId) * days);
                 user.LastLogin = login.AttemptedDate;
                 await userControllerInstance.PutUser(user.Id, user);

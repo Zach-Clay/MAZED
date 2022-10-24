@@ -49,6 +49,14 @@ namespace api_backend.Controllers
             return await _context.UserToSponsors.Where(p => p.UserId == id).ToListAsync();
         }
 
+        //get all drivers by a sponsor'sId
+        [HttpGet("/GetDriversBySponsorId/{SponsorId}")]
+        public async Task<List<UserToSponsor>> GetDriversBySponsorId(int SponsorId)
+        {
+            return await _context.UserToSponsors.Where(u => u.SponsorId == SponsorId && u.UserType.ToLower() == "driver").ToListAsync();
+        }
+
+
         [HttpPut("UpdateUserPointsBySponsor/{amount}")]
         public async Task<UserToSponsor> UpdateUserPointsBySponsor(uint userID, uint sponsorID, double amount)
         {
@@ -62,6 +70,19 @@ namespace api_backend.Controllers
             await _context.SaveChangesAsync();
 
             return user;
+        }
+
+        //loading related data***
+        [HttpGet("/GetSponsorFromUserId/{Id}")]
+        public async Task<UserToSponsor?> GetSponsorFromUserId(int id)
+        {
+            return await _context.UserToSponsors.Include(p => p.SponsorId).Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
+        [HttpGet("/GetDriverPoints/{Id}")]
+        public async Task<List<UserToSponsor>> GetDriverPoints(int id)
+        {
+            return await _context.UserToSponsors.Where(u => u.Id == id).ToListAsync();
         }
 
         [HttpPost]
