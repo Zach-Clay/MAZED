@@ -1,6 +1,18 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "pheEGE7z8kcE+H4ljQOO0jSGdI22fZ610kGl6SmSa2shHqEN/D5EyGyeCobfrUnaEA3bapkor2GWx6Ou6Bo5ig==",
+=======
+<<<<<<< HEAD
+  "dgSpecHash": "pheEGE7z8kcE+H4ljQOO0jSGdI22fZ610kGl6SmSa2shHqEN/D5EyGyeCobfrUnaEA3bapkor2GWx6Ou6Bo5ig==",
+=======
+<<<<<<< Updated upstream
+  "dgSpecHash": "C6whFHgoFfJl/zgM6Cy/N2tdhso7fyI4GgXwheVAqqnQyKwuwLmbCQ/5I237EpmSXtRK6bXU2UODqCVzL/Tb7Q==",
+=======
+  "dgSpecHash": "pYc/F1l2HNr+hEqriUXgYv+Iyo8mQRaWNDo7sWZHjMLlvarpEcGj94narxmADrNUnP19gcZbdl6YBrJZaJKtmw==",
+>>>>>>> Stashed changes
+>>>>>>> c45ad7af2a252f12167d82ed46d8dc853cd1e39b
+>>>>>>> origin/Madison/Dev
   "success": true,
   "projectFilePath": "/Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
   "expectedPackageFiles": [
