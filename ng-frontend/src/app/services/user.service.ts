@@ -44,33 +44,45 @@ export class UserService {
 
   //Get the sponsor org for a sponsor user --> they cannot have more that one org!!
   public getSponsorOrgBySponsorUserId(sponsorUserId: number) {
-    return this.http.get<SponsorOrg>(`${api_url}/userToSponsor/GetSponsorOrgFromSponsorUsersId/${sponsorUserId}`);
+    return this.http.get<SponsorOrg>(
+      `${api_url}/userToSponsor/GetSponsorOrgFromSponsorUsersId/${sponsorUserId}`
+    );
   }
 
   //Get sponsor orgs by user id
   public getSponsorOrgsByDriverUserId(driverId: number) {
-    return this.http.get<SponsorOrg[]>(`${api_url}/userToSponsor/GetSponsorsOrgsFromDriverUsersId/${driverId}`);
+    return this.http.get<SponsorOrg[]>(
+      `${api_url}/userToSponsor/GetSponsorsOrgsFromDriverUsersId/${driverId}`
+    );
   }
 
   //get all the sponsor users for a given sponsorOrgId
   public getSponsorUsersBySponsorOrgId(sponsorOrgId: number) {
-    return this.http.get<User[]>(`${api_url}/userToSponsor/GetSponsorsBySponsorId/${sponsorOrgId}`);
+    return this.http.get<User[]>(
+      `${api_url}/userToSponsor/GetSponsorsBySponsorId/${sponsorOrgId}`
+    );
   }
 
-   //Get all driver users for a sponsor
-   public getDriverUsersBySponsorOrgId(sponsorOrgId: number) {
-    return this.http.get<User[]>(`${api_url}/userToSponsor/GetDriversBySponsorId/${sponsorOrgId}`);
+  //Get all driver users for a sponsor
+  public getDriverUsersBySponsorOrgId(sponsorOrgId: number) {
+    return this.http.get<User[]>(
+      `${api_url}/userToSponsor/GetDriversBySponsorId/${sponsorOrgId}`
+    );
   }
 
   //Get the userToSponsor entries for a given driver user
   public getUserToSponsorEntriesByDriverUsersId(driverUsersId: number) {
-    return this.http.get<UserToSponsor[]>(`${api_url}/userToSponsor/GetDriversEntriesFromDriverUsersId/${driverUsersId}`);
+    return this.http.get<UserToSponsor[]>(
+      `${api_url}/userToSponsor/GetDriversEntriesFromDriverUsersId/${driverUsersId}`
+    );
   }
 
   //Add a user to a sponsor's org
   public postUserToSponsor(userToSponsor: UserToSponsor) {
     this.http.post(`${api_url}/userToSponsor`, userToSponsor).subscribe({
       next: (data) => {
+        console.log('success!');
+        console.log(data);
         return data;
       },
       error: (error) => {
@@ -90,5 +102,4 @@ export class UserService {
       },
     });
   }
-  
 }

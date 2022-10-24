@@ -31,6 +31,8 @@ import { SponsorHomePageComponent } from './pages/sponsor-home-page/sponsor-home
 import { AddDeductDialog } from './pages/sponsors-dashboard/sponsors-dashboard.component';
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { AdminHomepageComponent } from './pages/admin-homepage/admin-homepage.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
     AddDeductDialog,
     ProductListingComponent,
     AdminDashboardComponent,
+    RegistrationPageComponent,
+    AdminHomepageComponent,
   ],
   imports: [
     BrowserModule,

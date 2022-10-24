@@ -12,6 +12,11 @@
     *ngIf="displayName"
   ></app-home-page-header>
 
+  <div class="pt-2">
+    <div class="text-center">
+      <h2>Welcome, {{ dbUser.userFname }} {{ dbUser.userLname }}</h2>
+    </div>
+  </div>
   <div *ngIf="isDriver">
     <app-driver-home-page
       [dbUser]="dbUser"
@@ -24,5 +29,12 @@
       [dbUser]="dbUser"
       [cognitoUser]="cognitoUser"
     ></app-sponsor-home-page>
+  </div>
+
+  <div *ngIf="isAdmin">
+    <app-admin-homepage
+      [dbUser]="dbUser"
+      [cognitoUser]="cognitoUser"
+    ></app-admin-homepage>
   </div>
 </div>
