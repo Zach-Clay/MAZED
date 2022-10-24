@@ -57,6 +57,16 @@ namespace api_backend.Controllers
             return user ?? throw new Exception("Specific user not found");
         }
 
+        [HttpGet("GetUser_Object/{id}")]
+        public async Task<User> GetUserById_Object(int id)
+        {
+            if (_context.Users == null) throw new Exception("User not found");
+
+            var user = await _context.Users.Where(e => e.Id == id).FirstOrDefaultAsync();
+
+            return user ?? throw new Exception("Specific user not found");
+        }
+
         // GET: api/UserController2/5
         [HttpGet("id/{id}")]
         public async Task<ActionResult<User>> GetUserById(int id)
@@ -173,15 +183,13 @@ namespace api_backend.Controllers
             return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        //how to call stored proceduere
-
-        [HttpGet("/GetDriverPoints/{Id}")]
+        [HttpGet("GetDriverPoints/{Id}")]
         public async Task<List<User>> GetDriverPoints(int id)
         {
             return await _context.Users.Where(u => u.Id == id).ToListAsync();
         }
 
-        [HttpPut("/UserLeavesSponsor/{SponsorId}")]
+        [HttpPut("UserLeavesSponsor/{SponsorId}")]
         public async Task<User> LeaveSponsor(int SponsorId, string username)
         {
             var serviceProvider = HttpContext.RequestServices;

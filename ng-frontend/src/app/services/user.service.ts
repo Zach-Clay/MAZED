@@ -42,10 +42,9 @@ export class UserService {
     });
   }
 
-  // get a sponsor's users
-  public getDriversBySponsor(sponsorId: number) {
-    return this.http.get<User[]>(
-      `${api_url}/user/GetDriversBySponsorId/${sponsorId}`
-    );
+  //Get all users for a sponsor
+  public getUsersBySponsorId(sponsorId: number) {
+    return this.http.get<User>(`${api_url}/UserToSponsor/GetUsersBySponsorId/${sponsorId}`);
   }
+
 }
