@@ -57,13 +57,21 @@ namespace api_backend.Controllers
             User user = await userControllerInstance.GetUser_Object(login.Username);
             List<UserToSponsor> userSponsorID = await userToSponsorControllerInstance.GetSponsorsFromUserId(user.Id);
 
+            //calculate days between last login and current login
+            DateTime LastLogin = user.LastLogin ?? DateTime.Now; //first time login
+            DateTime CurrentLogin = DateTime.Now;
+
+            TimeSpan ts = CurrentLogin - LastLogin;
+            int days = (int) ts.TotalDays;
+
+
             foreach (UserToSponsor u in userSponsorID) //iterate through all sponsors of user
             {
-                PointTransaction dailyUpdate = new PointTransaction
+                PointTransaction dailyUpdate = new()
                 {
                     SponsorId = (int)u.SponsorId,
-                    UserId = user.Id,                                       //hardcoded for testing
-                    PointValue = await SponsorOrgControllerInstance.GetSponsorOrgDailyPointValue(2), //times number of days between
+                    UserId = user.Id,                                     
+                    PointValue = await SponsorOrgControllerInstance.GetSponsorOrgDailyPointValue((int)u.SponsorId) * days, //times number of days between
                     Reason = "Daily rewards",
                     ModDate = DateTime.Now
                 };
@@ -71,7 +79,7 @@ namespace api_backend.Controllers
                 await PointTransControllerInstance.PostPointTransaction(dailyUpdate);
 
                 await userToSponsorControllerInstance.UpdateUserPointsBySponsor((uint)user.Id, u.SponsorId,
-                    await SponsorOrgControllerInstance.GetSponsorOrgDailyPointValue((int)u.SponsorId));
+                    await SponsorOrgControllerInstance.GetSponsorOrgDailyPointValue((int)u.SponsorId) * days);
                 user.LastLogin = login.AttemptedDate;
                 await userControllerInstance.PutUser(user.Id, user);
             }
