@@ -202,26 +202,27 @@ namespace api_backend.Controllers
             return await _context.Users.Where(u => u.Id == id).ToListAsync();
         }
 
-        [HttpPut("/UserLeavesSponsor/{SponsorId}")]
+        [HttpPut("UserLeavesSponsor/{SponsorId}")]
         public async Task<User> LeaveSponsor(int SponsorId, string username)
         {
             var serviceProvider = HttpContext.RequestServices;
-            var SponsorOrgControllerInstance = (SponsorOrgController)serviceProvider.GetRequiredService<SponsorOrgController>();
-            var PointTransControllerInstance = (PointTransController)serviceProvider.GetRequiredService<PointTransController>();
+            var SponsorOrgControllerInstance = serviceProvider.GetRequiredService<SponsorOrgController>();
+            var PointTransControllerInstance = serviceProvider.GetRequiredService<PointTransController>();
+            var userToSponsorControllerInstance = serviceProvider.GetRequiredService<UserToSponsorController>();
 
             var user = await _context.Users.Where(e => e.Username == username).FirstOrDefaultAsync()
                 ?? throw new Exception("The provided user was not found");
 
-            //because of the requirements change, i am not going to edit the user's total points (for this sprint) as i will have
-            //to delete it for the next sprint. 
+            var userToSponsor = await userToSponsorControllerInstance.GetUserPointsBySponsor((uint)user.Id, (uint)SponsorId);
+
             var transaction = new PointTransaction
             {
                 SponsorId = SponsorId,
                 UserId = user.Id,
-                PointValue = -1 * user.TotalPoints, //stored procedure should take care of this?
+                PointValue = -1 * userToSponsor.UserPoints,
                 Reason = "Driver left sponsor",
                 ModDate = DateTime.Now,
-                isSpecialTransaction = 1
+                IsSpecialTransaction = 1
             };
 
             await PointTransControllerInstance.PostPointTransaction(transaction);
