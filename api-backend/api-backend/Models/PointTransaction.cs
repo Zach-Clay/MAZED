@@ -11,6 +11,6 @@ namespace MazedDB.Models
         public double PointValue { get; set; }
         public string? Reason { get; set; }
         public DateTime ModDate { get; set; }
-        public sbyte IsSpecialTransaction { get; set; } = 0;
+        public sbyte IsSpecialTransaction { get; set; }
     }
 }

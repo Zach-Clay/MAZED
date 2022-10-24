@@ -29,6 +29,8 @@ import { SponsorsDashboardComponent } from './pages/sponsors-dashboard/sponsors-
 import { DriverHomePageComponent } from './pages/driver-home-page/driver-home-page.component';
 import { SponsorHomePageComponent } from './pages/sponsor-home-page/sponsor-home-page.component';
 import { AddDeductDialog } from './pages/sponsors-dashboard/sponsors-dashboard.component';
+import { ProductListingComponent } from './components/product-listing/product-listing.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { AddDeductDialog } from './pages/sponsors-dashboard/sponsors-dashboard.c
     DriverHomePageComponent,
     SponsorHomePageComponent,
     AddDeductDialog,
+    ProductListingComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,

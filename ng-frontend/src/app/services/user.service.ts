@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { api_url, environment } from 'src/environments/environment';
-import { User } from '../models/interfaces';
+import { User, SponsorOrg } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -42,10 +42,19 @@ export class UserService {
     });
   }
 
-  // get a sponsor's users
-  public getDriversBySponsor(sponsorId: number) {
-    return this.http.get<User[]>(
-      `${api_url}/user/GetDriversBySponsorId/${sponsorId}`
-    );
+  //Get all sponsors for a sponsor
+  public getSponsorsBySponsorId(sponsorId: number) {
+    return this.http.get<User[]>(`${api_url}/UserToSponsor/GetSponsorsBySponsorId/${sponsorId}`);
   }
+
+   //Get all users for a sponsor
+   public getDriversBySponsorId(sponsorId: number) {
+    return this.http.get<User[]>(`${api_url}/UserToSponsor/GetDriversBySponsorId/${sponsorId}`);
+  }
+
+  //Get sponsor orgs by user id
+  public getSponsorsByUserId(userId: number) {
+    return this.http.get<SponsorOrg[]>(`${api_url}/UserToSponsor/GetSponsorsFromUserId/${userId}`);
+  }
+  
 }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MazedDB.Data;
 using MazedDB.Models;
-using ShopifySharp;
+using User = MazedDB.Models.User;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,17 +36,69 @@ namespace api_backend.Controllers
         }
 
         //get all users by a sponsor'sId
-        [HttpGet("GetUsersBySponsorId/{SponsorId}")]
-        public async Task<List<UserToSponsor>> GetUsersBySponsorId(int SponsorId)
+        [HttpGet("GetSponsorsBySponsorId/{SponsorId}")]
+        public async Task<List<User>> GetSponsorsBySponsorId(int SponsorId)
         {
-            return await _context.UserToSponsors.Where(u => u.SponsorId == SponsorId).ToListAsync();
+            var serviceProvider = HttpContext.RequestServices;
+            var userControllerInstance = serviceProvider.GetRequiredService<UserController2>();
+
+            List<UserToSponsor> userToSponsors = await _context.UserToSponsors.Where(p => p.SponsorId == SponsorId).ToListAsync();
+
+            List<User> users = new List<User>();
+            foreach (var userToSponsor in userToSponsors)
+            {
+                if (userToSponsor.UserType.ToLower() == "driver") continue;
+                var user = await userControllerInstance.GetUserById_Object((int)userToSponsor.UserId);
+                users.Add(user);
+            }
+
+            return users;
+        }
+
+        //get all users by a sponsor'sId
+        [HttpGet("GetDriversBySponsorId/{SponsorId}")]
+        public async Task<List<User>> GetDriversBySponsorId(int SponsorId)
+        {
+            var serviceProvider = HttpContext.RequestServices;
+            var userControllerInstance = serviceProvider.GetRequiredService<UserController2>();
+
+            List<UserToSponsor> userToSponsors = await _context.UserToSponsors.Where(p => p.SponsorId == SponsorId).ToListAsync();
+
+            List<User> users = new List<User>();
+            foreach (var userToSponsor in userToSponsors)
+            {
+                if (userToSponsor.UserType.ToLower() == "sponsor") continue;
+                var user = await userControllerInstance.GetUserById_Object((int)userToSponsor.UserId);
+                users.Add(user);
+            }
+
+            return users;
         }
 
         //loading related data***
         [HttpGet("GetSponsorsFromUserId/{Id}")]
-        public async Task<List<UserToSponsor>> GetSponsorsFromUserId(int id)
+        public async Task<List<UserToSponsor>> GetSponsorsFromUserId(int Id)
         {
-            return await _context.UserToSponsors.Where(p => p.UserId == id).ToListAsync();
+            return await _context.UserToSponsors.Where(p => p.SponsorId == Id).ToListAsync();
+        }
+
+        //loading related data***
+        [HttpGet("GetSponsorsOrgsFromUserId/{Id}")]
+        public async Task<List<SponsorOrg>> GetSponsorsOrgsFromUserId(int Id)
+        {
+            List<UserToSponsor> userToSponsors =  await _context.UserToSponsors.Where(p => p.SponsorId == Id).ToListAsync();
+
+            var serviceProvider = HttpContext.RequestServices;
+            var sponsorOrgControllerInstance = serviceProvider.GetRequiredService<SponsorOrgController>();
+
+            List<SponsorOrg> sponsorOrgs = new List<SponsorOrg>();
+            foreach (var userToSponsor in userToSponsors)
+            {
+                var sponsorOrg = await sponsorOrgControllerInstance.GetSponsorOrg_Object((int)userToSponsor.Id);
+                sponsorOrgs.Add(sponsorOrg);
+            }
+
+            return sponsorOrgs;
         }
 
         //get all drivers by a sponsor'sId

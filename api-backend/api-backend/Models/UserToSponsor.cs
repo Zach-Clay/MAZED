@@ -9,6 +9,7 @@ namespace MazedDB.Models
         public int UserId { get; set; }
         public int SponsorId { get; set; }
         public double UserPoints { get; set; }
-        public string UserType { get; set; } = null!;
+        public int? SponsorTotal { get; set; }
+        public string? UserType { get; set; }
     }
 }

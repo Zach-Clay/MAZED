@@ -48,7 +48,13 @@
             reset password
           </button>
         </div>
-        <input type="submit" class="submit" value="login." />
+        <input type="submit" class="submit" value="login." *ngIf="!loading" />
+        <span
+          class="spinner-border spinner-border-sm mb-2"
+          role="status"
+          aria-hidden="true"
+          *ngIf="loading"
+        ></span>
       </form>
     </div>
 

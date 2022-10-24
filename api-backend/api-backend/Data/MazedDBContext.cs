@@ -346,9 +346,15 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
 
+                entity.Property(e => e.SponsorTotal).HasColumnName("sponsorTotal");
+
                 entity.Property(e => e.UserId).HasColumnName("userId");
 
                 entity.Property(e => e.UserPoints).HasColumnName("userPoints");
+
+                entity.Property(e => e.UserType)
+                    .HasMaxLength(45)
+                    .HasColumnName("userType");
             });
 
             OnModelCreatingPartial(modelBuilder);
