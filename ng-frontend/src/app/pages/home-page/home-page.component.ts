@@ -51,11 +51,16 @@ export class HomePageComponent implements OnInit {
                 }
                 if (this.dbUser.userType.toLowerCase() === 'sponsor') {
                   this.isSponsor = true;
-                  this.userService
-                    .getDriversBySponsor(this.dbUser.sponsorId)
+
+                  //get the sponsors drivers
+                  this.userService.getSponsorOrgBySponsorUserId(this.dbUser.id).subscribe((org) => {
+                    this.userService
+                    .getDriverUsersBySponsorOrgId(org.id)
                     .subscribe((drivers) => {
                       this.sponsoredDrivers = drivers;
                     });
+                  })
+
                 }
                 if (this.dbUser.userType.toLowerCase() === 'admin') {
                   this.isAdmin = true;

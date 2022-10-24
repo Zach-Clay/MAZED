@@ -3,7 +3,7 @@ import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
-import { User, SponsorOrg, PointsChanges } from 'src/app/models/interfaces';
+import { User, SponsorOrg, PointsChanges, UserToSponsor } from 'src/app/models/interfaces';
 import { ViewChild, ElementRef } from '@angular/core';
 import {
   MatDialog,
@@ -11,9 +11,11 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { PointsChangesService } from 'src/app/services/points-changes.service';
+import { ElementSchemaRegistry } from '@angular/compiler';
 
 export interface DialogData {
   Drivers: User[];
+  OrgSelection: SponsorOrg;
 }
 
 @Component({
@@ -28,6 +30,7 @@ export class SponsorsDashboardComponent implements OnInit {
   editing: boolean = false;
   showData: boolean = false;
   drivers!: User[];
+  sponsorsOrg!: SponsorOrg;
 
   @ViewChild('orgDesc') orgDescription!: ElementRef;
   @ViewChild('dollarToPoint') dollarToPoint!: ElementRef;
@@ -51,20 +54,16 @@ export class SponsorsDashboardComponent implements OnInit {
           //Get the orgs
           this.sponsorOrgService.getAllOrgs().subscribe((data) => {
             this.orgs = data;
-
-            if (this.user.sponsorId !== 0) {
-              this.sponsorOrgService
-                .getSponsorOrg(this.user.sponsorId)
-                .subscribe((o) => {
-                  this.orgSelection = o;
-                  //get drivers for that org
-                  this.onSelectionChange();
-                  this.showData = true;
-                });
-            } else {
-              this.showData = true;
-            }
+            this.showData = true;
           });
+
+          //If the user is a sponsor -- get their sponsorOrg
+          if (this.user.userType.toLowerCase() === "sponsor") {
+            this.userService.getSponsorOrgBySponsorUserId(this.user.id).subscribe((org) => {
+              this.sponsorsOrg = org;
+            })
+          }
+
         });
       })
       .catch((err) => {
@@ -75,7 +74,7 @@ export class SponsorsDashboardComponent implements OnInit {
   onSelectionChange() {
     //update driver list
     this.userService
-      .getDriversBySponsor(this.orgSelection.id)
+      .getDriverUsersBySponsorOrgId(this.orgSelection.id)
       .subscribe((data) => {
         this.drivers = data;
       });
@@ -109,17 +108,21 @@ export class SponsorsDashboardComponent implements OnInit {
         'Are you sure you want to remove this driver? This action cannot be undone...'
       )
     ) {
-      driver.sponsorId = 0;
-      //make api calls to remove driver
-      this.userService.updateUser(driver.id, driver);
-      this.drivers = this.drivers.filter((d) => d.id !== driver.id);
+      //Remove the driver from the sponsor
+      this.userService.getUserToSponsorEntriesByDriverUsersId(driver.id).subscribe((data) => {
+        let entries: UserToSponsor[] = data;
+        entries = entries.filter((e) => e.sponsorId === this.orgSelection.id);
+        this.userService.removeUserFromSponsorOrg(entries[0].id);
+        this.drivers = this.drivers.filter((d) => d.id !== driver.id);
+      })
+
     }
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddDeductDialog, {
       width: '1000px',
-      data: { Drivers: this.drivers },
+      data: { Drivers: this.drivers, OrgSelection: this.orgSelection },
     });
   }
 }
@@ -141,7 +144,9 @@ export class AddDeductDialog implements OnInit {
     private pointChangesService: PointsChangesService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data.OrgSelection);
+  }
 
   onDoneClick(): void {
     this.dialogRef.close();
@@ -152,11 +157,12 @@ export class AddDeductDialog implements OnInit {
       if (this.pointAmount === 0) {
         return;
       }
-
+      //TODO
       let pointValue = this.pointAmount;
+
       const pointTrans: PointsChanges = {
         pointId: 0,
-        sponsorId: this.driverSelection.sponsorId,
+        sponsorId: this.data.OrgSelection.id,
         userId: this.driverSelection.id,
         pointValue: pointValue,
         reason: this.reason,

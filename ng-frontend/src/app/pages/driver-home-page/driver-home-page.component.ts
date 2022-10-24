@@ -18,6 +18,7 @@ import { input } from '@aws-amplify/ui';
   templateUrl: './driver-home-page.component.html',
   styleUrls: ['./driver-home-page.component.css'],
 })
+
 export class DriverHomePageComponent implements OnInit {
   @Input() cognitoUser: any;
   @Input() dbUser!: User;
@@ -27,6 +28,7 @@ export class DriverHomePageComponent implements OnInit {
   p2drate!: string;
   currentSponsor!: SponsorOrg;
   fetchedSponsor!: boolean;
+  sponsorOrgs!: SponsorOrg[];
 
   constructor(
     private router: Router,
@@ -45,21 +47,28 @@ export class DriverHomePageComponent implements OnInit {
       .getTransactions(this.dbUser.id)
       .subscribe((pointsTrans) => {
         this.pointTransactions = pointsTrans;
-        this.sponsorOrgService
-          .getSponsorOrg(this.dbUser.sponsorId)
-          .subscribe((org) => {
-            this.currentSponsor = org;
-            this.p2drate = this.currentSponsor.dollarToPoint.toFixed(2);
-            this.fetchedSponsor = true;
-          });
+        
+        // TODO 
+
+        // this.sponsorOrgService
+        //   .getSponsorOrg(this.dbUser.sponsorId)
+        //   .subscribe((org) => {
+        //     this.currentSponsor = org;
+        //     this.p2drate = this.currentSponsor.dollarToPoint.toFixed(2);
+        //     this.fetchedSponsor = true;
+        //   });
 
         // display points now
+        this.fetchedSponsor = true;
       });
-    this.productListService
-      .getProductsBySponsorId(this.dbUser.sponsorId)
-      .subscribe((data) => {
-        this.products = data;
-        this.fetchedProducts = true;
-      });
+
+      //TODO
+    // this.productListService
+    //   .getProductsBySponsorId(this.dbUser.sponsorId)
+    //   .subscribe((data) => {
+    //     this.products = data;
+    //     this.fetchedProducts = true;
+    //   });
+    this.fetchedProducts = true;
   }
 }
