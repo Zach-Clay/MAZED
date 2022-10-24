@@ -35,14 +35,14 @@ namespace api_backend.Controllers
             return uts;
         }
 
-        //get all users by a sponsor'sId
-        [HttpGet("GetSponsorsBySponsorId/{SponsorId}")]
-        public async Task<List<User>> GetSponsorsBySponsorId(int SponsorId)
+        //get all sponsors by a sponsor's Id
+        [HttpGet("GetSponsorsBySponsorId/{SponsorOrgId}")]
+        public async Task<List<User>> GetSponsorsBySponsorId(int SponsorOrgId)
         {
             var serviceProvider = HttpContext.RequestServices;
             var userControllerInstance = serviceProvider.GetRequiredService<UserController2>();
 
-            List<UserToSponsor> userToSponsors = await _context.UserToSponsors.Where(p => p.SponsorId == SponsorId).ToListAsync();
+            List<UserToSponsor> userToSponsors = await _context.UserToSponsors.Where(p => p.SponsorId == SponsorOrgId).ToListAsync();
 
             List<User> users = new List<User>();
             foreach (var userToSponsor in userToSponsors)
@@ -55,7 +55,7 @@ namespace api_backend.Controllers
             return users;
         }
 
-        //get all users by a sponsor'sId
+        //get all drivers by a sponsor'sId
         [HttpGet("GetDriversBySponsorId/{SponsorId}")]
         public async Task<List<User>> GetDriversBySponsorId(int SponsorId)
         {
@@ -75,18 +75,11 @@ namespace api_backend.Controllers
             return users;
         }
 
-        //loading related data***
-        [HttpGet("GetSponsorsFromUserId/{Id}")]
-        public async Task<List<UserToSponsor>> GetSponsorsFromUserId(int Id)
+        //Get all sponsor orgs from a driver's ID
+        [HttpGet("GetSponsorsOrgsFromDriverUsersId/{DriverUsersId}")]
+        public async Task<List<SponsorOrg>> GetSponsorsOrgsFromDriverId(int DriverUsersId)
         {
-            return await _context.UserToSponsors.Where(p => p.SponsorId == Id).ToListAsync();
-        }
-
-        //loading related data***
-        [HttpGet("GetSponsorsOrgsFromUserId/{Id}")]
-        public async Task<List<SponsorOrg>> GetSponsorsOrgsFromUserId(int Id)
-        {
-            List<UserToSponsor> userToSponsors =  await _context.UserToSponsors.Where(p => p.SponsorId == Id).ToListAsync();
+            List<UserToSponsor> userToSponsors = await _context.UserToSponsors.Where(p => p.UserId == DriverUsersId).ToListAsync();
 
             var serviceProvider = HttpContext.RequestServices;
             var sponsorOrgControllerInstance = serviceProvider.GetRequiredService<SponsorOrgController>();
@@ -94,11 +87,50 @@ namespace api_backend.Controllers
             List<SponsorOrg> sponsorOrgs = new List<SponsorOrg>();
             foreach (var userToSponsor in userToSponsors)
             {
-                var sponsorOrg = await sponsorOrgControllerInstance.GetSponsorOrg_Object((int)userToSponsor.Id);
+                var sponsorOrg = await sponsorOrgControllerInstance.GetSponsorOrg_Object((int)userToSponsor.SponsorId);
                 sponsorOrgs.Add(sponsorOrg);
             }
 
             return sponsorOrgs;
+        }
+
+        //Get the sponsor org for a given sponsor ID --> each sponsor can only have one sponsor org!
+        [HttpGet("GetSponsorOrgFromSponsorUsersId/{SponsorUserId}")]
+        public async Task<SponsorOrg> GetSponsorsOrgsFromSponsorUsersId(int SponsorUserId)
+        {
+            List<UserToSponsor> userToSponsors = await _context.UserToSponsors.Where(p => p.UserId == SponsorUserId).ToListAsync();
+
+            var serviceProvider = HttpContext.RequestServices;
+            var sponsorOrgControllerInstance = serviceProvider.GetRequiredService<SponsorOrgController>();
+
+            List<SponsorOrg> sponsorOrgs = new List<SponsorOrg>();
+            foreach (var userToSponsor in userToSponsors)
+            {
+                if (userToSponsor.UserType.ToLower() == "driver") continue;
+                var sponsorOrg = await sponsorOrgControllerInstance.GetSponsorOrg_Object((int)userToSponsor.SponsorId);
+                sponsorOrgs.Add(sponsorOrg);
+            }
+
+            if (sponsorOrgs.Count > 1)
+            {
+                throw new Exception("Sponsor user cannot have more than one sponsor org");
+            }
+
+            return sponsorOrgs[0];
+        }
+
+
+        //loading related data***
+        [HttpGet("GetSponsorsEntriesFromUserId/{Id}")]
+        public async Task<List<UserToSponsor>> GetSponsorsFromUserId(int Id)
+        {
+            return await _context.UserToSponsors.Where(p => p.SponsorId == Id).ToListAsync();
+        }
+
+        [HttpGet("GetDriversEntriesFromDriverUsersId/{DriverUsersId}")]
+        public async Task<List<UserToSponsor>> GetDriversFromUserId(int DriverUsersId)
+        {
+            return await _context.UserToSponsors.Where(p => p.UserId == DriverUsersId).ToListAsync();
         }
 
         [HttpPut("UpdateUserPointsBySponsor/{amount}")]
@@ -127,6 +159,21 @@ namespace api_backend.Controllers
             _context.UserToSponsors.Add(user);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetUserPointsBySponsor", new { id = user.Id }, user);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> RemoveUserFromSponsor(int Id)
+        {
+            if (_context.UserToSponsors == null)
+            {
+                return Problem("Entity set 'MazedDBContext.UserToSponsors'  is null.");
+            }
+
+            List<UserToSponsor> entries = await _context.UserToSponsors.Where(p => p.Id == Id).ToListAsync();
+
+            _context.UserToSponsors.Remove(entries[0]);
+            await _context.SaveChangesAsync();
+            return Ok();
         }
     }
 }

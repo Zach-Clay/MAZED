@@ -11,9 +11,13 @@
       <div class="spinner-border" role="status"></div>
     </div>
     <div *ngIf="loaded">
-      <div *ngIf="user.sponsorId !== 0 && showSponsor">
-        <p><strong>Sponsor: </strong>{{ sponsorOrg.orgName }}</p>
+      <div class="sponsors" *ngIf="showSponsor && sponsorOrgs">
+        <p><strong>Sponsor(s): </strong></p>
+          <div *ngFor="let sponsor of sponsorOrgs">
+            <p>&nbsp;&nbsp;{{sponsor.orgName}}</p>
+          </div>
       </div>
+      <br/>
       <a
         [routerLink]="['/sponsor-dashboard']"
         class="text-light text-center p-2 font-weight-bold"
@@ -22,22 +26,20 @@
       >
       <br />
       <br />
+
       <div *ngIf="isDriver">
-        <div *ngIf="user.sponsorId === 0">
-          <a class="apply-link" routerLink="/driver-application"
-            >Apply to a sponsor</a
-          >
-          <br />
-          <br />
-          <p><strong>Outstanding Applications: </strong></p>
-          <mat-list *ngIf="showDriverOustandingApps">
-            <mat-list-item *ngFor="let app of driverOutstandingApps">
-              {{ app.sponsorName }}, submitted {{ app.requestedDate.month }}/{{
-                app.requestedDate.day
-              }}/{{ app.requestedDate.year }}
-            </mat-list-item>
-          </mat-list>
-        </div>
+        <button mat-raised-button routerLink="/driver-application">Apply to a Sponsor</button>
+
+        <br />
+        <br />
+        <p><strong>Outstanding Applications: </strong></p>
+        <mat-list *ngIf="showDriverOustandingApps">
+          <mat-list-item *ngFor="let app of driverOutstandingApps">
+            {{ app.sponsorName }}, submitted {{ app.requestedDate.month }}/{{
+              app.requestedDate.day
+            }}/{{ app.requestedDate.year }}
+          </mat-list-item>
+        </mat-list>
       </div>
 
       <div *ngIf="isSponsor">
@@ -47,6 +49,7 @@
           </button>
         </div>
       </div>
+
     </div>
   </div>
 </div>

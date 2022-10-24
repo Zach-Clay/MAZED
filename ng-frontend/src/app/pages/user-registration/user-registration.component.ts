@@ -168,7 +168,6 @@ export class UserRegistrationComponent implements OnInit {
     if (nameArr.length > 1) LName = nameArr[1];
 
     this.newUser.id = 0;
-    this.newUser.sponsorId = 0;
     this.newUser.username = this.username;
     this.newUser.userFname = FName;
     this.newUser.userLname = LName;

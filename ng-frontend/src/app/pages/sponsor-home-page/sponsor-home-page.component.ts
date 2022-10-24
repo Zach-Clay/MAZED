@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
-import { User, PointsChanges, Product } from 'src/app/models/interfaces';
+import { User, PointsChanges, Product, SponsorOrg } from 'src/app/models/interfaces';
 import { UserService } from 'src/app/services/user.service';
 import { PointsChangesService } from 'src/app/services/points-changes.service';
 import { input } from '@aws-amplify/ui';
@@ -19,6 +19,7 @@ export class SponsorHomePageComponent implements OnInit {
   gotSponsoredDrivers: boolean = false;
   currentProducts!: Product[];
   gotCurrentProducts: boolean = false;
+  sponsorOrg!: SponsorOrg;
 
   constructor(
     private router: Router,
@@ -30,17 +31,24 @@ export class SponsorHomePageComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.dbUser);
-    this.userService
-      .getDriversBySponsor(this.dbUser.sponsorId)
+
+    //get the drivers for the sponsor
+    this.userService.getSponsorOrgBySponsorUserId(this.dbUser.id).subscribe((org) => {
+      this.sponsorOrg = org;
+      this.userService
+      .getDriverUsersBySponsorOrgId(org.id)
       .subscribe((drivers) => {
         this.sponsoredDrivers = drivers;
         this.gotSponsoredDrivers = true;
       });
-    this.productListService
-      .getProductsBySponsorId(this.dbUser.sponsorId)
+      //get products by sponsor id
+      this.productListService
+      .getProductsBySponsorId(this.sponsorOrg.id)
       .subscribe((data) => {
         this.currentProducts = data;
         this.gotCurrentProducts = true;
       });
+    })
+
   }
 }
