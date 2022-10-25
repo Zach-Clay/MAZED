@@ -25,14 +25,7 @@ export class UserService {
 
   //Add user to the DB with post
   public registerUser(user: User) {
-    this.http.post<User>(`${api_url}/user`, user).subscribe({
-      next: (data) => {
-        return data;
-      },
-      error: (error) => {
-        console.error('There was an error!', error);
-      },
-    });
+    return this.http.post<User>(`${api_url}/user`, user);
   }
 
   //Update user's information
