@@ -179,7 +179,6 @@ export class UserRegistrationComponent implements OnInit {
 
     //post to our api
     this.userService.registerUser(this.newUser).subscribe((user) => {
-      console.log(user);
       if (this.userType == 'sponsor') {
         let userToSponsor: UserToSponsor = {
           id: 0,
