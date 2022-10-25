@@ -30,8 +30,6 @@ export class SponsorHomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.dbUser);
-
     //get the drivers for the sponsor
     this.userService.getSponsorOrgBySponsorUserId(this.dbUser.id).subscribe((org) => {
       this.sponsorOrg = org;

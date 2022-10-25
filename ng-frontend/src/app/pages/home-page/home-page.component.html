@@ -25,4 +25,8 @@
       [cognitoUser]="cognitoUser"
     ></app-sponsor-home-page>
   </div>
+
+  <div *ngIf="isAdmin">
+    <app-admin-dashboard [user]="dbUser"></app-admin-dashboard>
+  </div>
 </div>

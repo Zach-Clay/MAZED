@@ -9,6 +9,11 @@ import { User, SponsorOrg, UserToSponsor } from '../models/interfaces';
 export class UserService {
   constructor(private http: HttpClient) {}
 
+  //Get all of the users
+  public getAllUsers() {
+    return this.http.get<User[]>(`${api_url}/user`);
+  }
+
   //Get user with username = username
   public getUser(username: string) {
     return this.http.get<User>(`${api_url}/user/${username}`);
