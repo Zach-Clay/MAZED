@@ -3,7 +3,12 @@ import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
-import { User, SponsorOrg, PointsChanges, UserToSponsor } from 'src/app/models/interfaces';
+import {
+  User,
+  SponsorOrg,
+  PointsChanges,
+  UserToSponsor,
+} from 'src/app/models/interfaces';
 import { ViewChild, ElementRef } from '@angular/core';
 import {
   MatDialog,
@@ -31,6 +36,7 @@ export class SponsorsDashboardComponent implements OnInit {
   showData: boolean = false;
   drivers!: User[];
   sponsorsOrg!: SponsorOrg;
+  addingSponsor: boolean = false;
 
   @ViewChild('orgDesc') orgDescription!: ElementRef;
   @ViewChild('dollarToPoint') dollarToPoint!: ElementRef;
@@ -58,12 +64,13 @@ export class SponsorsDashboardComponent implements OnInit {
           });
 
           //If the user is a sponsor -- get their sponsorOrg
-          if (this.user.userType.toLowerCase() === "sponsor") {
-            this.userService.getSponsorOrgBySponsorUserId(this.user.id).subscribe((org) => {
-              this.sponsorsOrg = org;
-            })
+          if (this.user.userType.toLowerCase() === 'sponsor') {
+            this.userService
+              .getSponsorOrgBySponsorUserId(this.user.id)
+              .subscribe((org) => {
+                this.sponsorsOrg = org;
+              });
           }
-
         });
       })
       .catch((err) => {
@@ -109,13 +116,14 @@ export class SponsorsDashboardComponent implements OnInit {
       )
     ) {
       //Remove the driver from the sponsor
-      this.userService.getUserToSponsorEntriesByDriverUsersId(driver.id).subscribe((data) => {
-        let entries: UserToSponsor[] = data;
-        entries = entries.filter((e) => e.sponsorId === this.orgSelection.id);
-        this.userService.removeUserFromSponsorOrg(entries[0].id);
-        this.drivers = this.drivers.filter((d) => d.id !== driver.id);
-      })
-
+      this.userService
+        .getUserToSponsorEntriesByDriverUsersId(driver.id)
+        .subscribe((data) => {
+          let entries: UserToSponsor[] = data;
+          entries = entries.filter((e) => e.sponsorId === this.orgSelection.id);
+          this.userService.removeUserFromSponsorOrg(entries[0].id);
+          this.drivers = this.drivers.filter((d) => d.id !== driver.id);
+        });
     }
   }
 
