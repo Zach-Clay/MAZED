@@ -42,7 +42,6 @@ export class DriverHomePageComponent implements OnInit {
   ngOnInit(): void {
     this.fetchedSponsor = false;
     this.fetchedProducts = false;
-    console.log(this.dbUser);
     this.pointsChangesService
       .getTransactions(this.dbUser.id)
       .subscribe((pointsTrans) => {
