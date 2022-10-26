@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { User } from 'src/app/models/interfaces';
 import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
 import { SponsorOrg } from 'src/app/models/interfaces';
 
@@ -8,6 +9,7 @@ import { SponsorOrg } from 'src/app/models/interfaces';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
+  @Input() user!: User;
   addingAdmin: boolean = false;
   addingSponsor: boolean = false;
   orgs!: SponsorOrg[];

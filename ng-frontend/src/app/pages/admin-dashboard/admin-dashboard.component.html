@@ -16,10 +16,11 @@
               "
             >
               <p
-                class="mb-1 mt-1"
+                class="mb-1 mt-1 btn"
                 style="color: var(--primary-color); font-size: 1.2em"
+                routerLink="/profile"
               >
-                view admin profiles
+                View/Update Profiles
               </p>
             </div>
             <div class="mt-4"></div>
@@ -31,8 +32,50 @@
                 border-radius: 1em;
               "
             >
+              <p
+                class="mb-1 mt-1 btn"
+                style="color: var(--primary-color); font-size: 1.2em"
+                routerLink="/sponsor-dashboard"
+              >
+                View Sponsor Orgs
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div
+          class="card text-light ml-3"
+          style="background: var(--primary-color); border-radius: 1em"
+        >
+          <div class="card-body text-center">
+            <div
+              class="card"
+              style="
+                margin: 3px;
+                background: var(--tertiary-color);
+                border-radius: 1em;
+              "
+            >
               <button
-                class="mb-1 mt-1 bg-transparent border-0"
+                class="mb-1 mt-1 bg-transparent border-0 btn"
+                style="color: var(--primary-color); font-size: 1.2em"
+                (click)="addingSponsor = true"
+              >
+                create new sponsor account
+              </button>
+            </div>
+            <div class="mt-4"></div>
+            <div
+              class="card"
+              style="
+                margin: 3px;
+                background: var(--tertiary-color);
+                border-radius: 1em;
+              "
+            >
+              <button
+                class="mb-1 mt-1 bg-transparent border-0 btn"
                 style="color: var(--primary-color); font-size: 1.2em"
                 (click)="addingAdmin = true"
               >
@@ -57,65 +100,7 @@
               "
             >
               <p
-                class="mb-1 mt-1"
-                style="color: var(--primary-color); font-size: 1.2em"
-              >
-                view individual sponsor profiles
-              </p>
-            </div>
-            <div class="mt-4"></div>
-            <div
-              class="card"
-              style="
-                margin: 3px;
-                background: var(--tertiary-color);
-                border-radius: 1em;
-              "
-            >
-              <p
-                class="mb-1 mt-1"
-                style="color: var(--primary-color); font-size: 1.2em"
-              >
-                view main sponsor profiles
-              </p>
-            </div>
-            <div class="mt-4"></div>
-            <div
-              class="card"
-              style="
-                margin: 3px;
-                background: var(--tertiary-color);
-                border-radius: 1em;
-              "
-            >
-              <button
-                class="mb-1 mt-1 bg-transparent border-0"
-                style="color: var(--primary-color); font-size: 1.2em"
-                (click)="addingSponsor = true"
-              >
-                create new sponsor account
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      -->
-      <div class="col">
-        <div
-          class="card text-light ml-3"
-          style="background: var(--primary-color); border-radius: 1em"
-        >
-          <div class="card-body text-center">
-            <div
-              class="card"
-              style="
-                margin: 3px;
-                background: var(--tertiary-color);
-                border-radius: 1em;
-              "
-            >
-              <p
-                class="mb-1 mt-1"
+                class="mb-1 mt-1 btn"
                 style="color: var(--primary-color); font-size: 1.2em"
               >
                 view product catalog
@@ -131,26 +116,10 @@
               "
             >
               <p
-                class="mb-1 mt-1"
+                class="mb-1 mt-1 btn"
                 style="color: var(--primary-color); font-size: 1.2em"
               >
                 view reports
-              </p>
-            </div>
-            <div class="mt-4"></div>
-            <div
-              class="card"
-              style="
-                margin: 3px;
-                background: var(--tertiary-color);
-                border-radius: 1em;
-              "
-            >
-              <p
-                class="mb-1 mt-1"
-                style="color: var(--primary-color); font-size: 1.2em"
-              >
-                view driver profiles
               </p>
             </div>
           </div>

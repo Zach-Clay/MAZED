@@ -178,18 +178,18 @@ export class UserRegistrationComponent implements OnInit {
     this.newUser.isBlacklisted = 0;
 
     //post to our api
-    this.userService.registerUser(this.newUser);
-
-    if (this.userType == 'sponsor') {
-      let userToSponsor: UserToSponsor = {
-        id: 0,
-        userId: this.newUser.id,
-        sponsorId: this.sponsorId,
-        userPoints: 0,
-        userType: this.userType,
-      };
-      this.userService.postUserToSponsor(userToSponsor);
-    }
+    this.userService.registerUser(this.newUser).subscribe((user) => {
+      if (this.userType == 'sponsor') {
+        let userToSponsor: UserToSponsor = {
+          id: 0,
+          userId: user.id,
+          sponsorId: this.sponsorId,
+          userPoints: 0,
+          userType: this.userType,
+        };
+        this.userService.postUserToSponsor(userToSponsor);
+      }
+    });
   }
 
   StrengthChecker = (PasswordParameter: any) => {
