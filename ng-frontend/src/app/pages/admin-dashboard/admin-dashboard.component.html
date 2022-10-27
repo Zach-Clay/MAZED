@@ -1,8 +1,11 @@
 <div *ngIf="!(addingAdmin || addingSponsor)">
-<div class="container">
-  <div class="row mt-4">
-    <div class="col">
-      <div class="card text-light ml-3" style="background: var(--primary-color); border-radius: 1em;">
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col">
+        <div
+          class="card text-light ml-3"
+          style="background: var(--primary-color); border-radius: 1em"
+        >
           <div class="card-body text-center">
             <div
               class="card"
@@ -125,7 +128,7 @@
     </div>
   </div>
 </div>
-</div> 
+<!-- </div>  -->
 <div *ngIf="addingAdmin">
   <app-user-registration [userType]="'admin'"></app-user-registration>
   <div class="register mt-3 mb-3 text-center">
