@@ -35,6 +35,21 @@ namespace api_backend.Controllers
             return uts;
         }
 
+        [HttpGet("GetTotalUserPoints")]
+        public async Task<double> GetTotalUserPoints(uint userID)
+        {
+            List<UserToSponsor> uts = await _context.UserToSponsors.Where(u => u.UserId == userID).ToListAsync();
+
+            double total = 0;
+            foreach (var u in uts)
+            {
+                total += u.UserPoints;
+            }
+
+            return total;
+        }
+        
+
         //get all sponsors by a sponsor's Id
         [HttpGet("GetSponsorsBySponsorId/{SponsorOrgId}")]
         public async Task<List<User>> GetSponsorsBySponsorId(int SponsorOrgId)
