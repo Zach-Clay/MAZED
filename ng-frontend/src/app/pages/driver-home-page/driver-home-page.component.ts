@@ -18,15 +18,13 @@ import { input } from '@aws-amplify/ui';
   templateUrl: './driver-home-page.component.html',
   styleUrls: ['./driver-home-page.component.css'],
 })
-
 export class DriverHomePageComponent implements OnInit {
   @Input() cognitoUser: any;
   @Input() dbUser!: User;
   pointTransactions!: PointsChanges[];
   products!: Product[];
-  fetchedProducts!: boolean;
   p2drate!: string;
-  currentSponsor!: SponsorOrg;
+  currentSponsors!: SponsorOrg[];
   fetchedSponsor!: boolean;
   sponsorOrgs!: SponsorOrg[];
 
@@ -41,33 +39,11 @@ export class DriverHomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchedSponsor = false;
-    this.fetchedProducts = false;
-    this.pointsChangesService
-      .getTransactions(this.dbUser.id)
-      .subscribe((pointsTrans) => {
-        this.pointTransactions = pointsTrans;
-        
-        // TODO 
-
-        // this.sponsorOrgService
-        //   .getSponsorOrg(this.dbUser.sponsorId)
-        //   .subscribe((org) => {
-        //     this.currentSponsor = org;
-        //     this.p2drate = this.currentSponsor.dollarToPoint.toFixed(2);
-        //     this.fetchedSponsor = true;
-        //   });
-
-        // display points now
+    this.userService
+      .getSponsorOrgsByDriverUserId(this.dbUser.id)
+      .subscribe((orgs) => {
+        this.currentSponsors = orgs;
         this.fetchedSponsor = true;
       });
-
-      //TODO
-    // this.productListService
-    //   .getProductsBySponsorId(this.dbUser.sponsorId)
-    //   .subscribe((data) => {
-    //     this.products = data;
-    //     this.fetchedProducts = true;
-    //   });
-    this.fetchedProducts = true;
   }
 }

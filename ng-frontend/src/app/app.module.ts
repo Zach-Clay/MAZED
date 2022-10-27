@@ -33,6 +33,8 @@ import { ProductListingComponent } from './components/product-listing/product-li
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 import { AdminHomepageComponent } from './pages/admin-homepage/admin-homepage.component';
+import { DriverSponsorCardComponent } from './components/driver-sponsor-card/driver-sponsor-card.component';
+import { DriverProductListingComponent } from './components/driver-product-listing/driver-product-listing.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { AdminHomepageComponent } from './pages/admin-homepage/admin-homepage.co
     AdminDashboardComponent,
     RegistrationPageComponent,
     AdminHomepageComponent,
+    DriverSponsorCardComponent,
+    DriverProductListingComponent,
   ],
   imports: [
     BrowserModule,
