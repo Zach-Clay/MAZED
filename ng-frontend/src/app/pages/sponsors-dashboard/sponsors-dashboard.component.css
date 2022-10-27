@@ -1,0 +1,61 @@
+.mat-card {
+  background-color: var(--secondary-color);
+}
+
+.field {
+  margin-bottom: 1px;
+  font-size: 17px;
+}
+
+.title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.edit-btn {
+  margin-left: auto;
+  float: right;
+}
+
+.info-input {
+  width: 95%;
+}
+
+.input-wrapper {
+  overflow-y: none;
+}
+
+input {
+  min-height: 75px;
+  max-height: 200px;
+}
+
+.field input:disabled {
+  background-color: var(--secondary-color);
+  border: none;
+}
+
+.field input:enabled {
+  border: #5962FF;
+}
+
+.editing {
+  background-color: rgb(243, 243, 243);
+}
+
+.mat-list-item {
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.mat-list {
+  margin-top: 0px;
+}
+
+.remove-btn {
+  margin-left: auto;
+}
+
+.driver-name {
+  margin-top: 0px;
+}

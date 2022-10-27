@@ -59,7 +59,9 @@ export class LoginComponent implements OnInit {
     this.cognitoService
       .forgotPassword(this.user)
       .then(() => {})
-      .catch(() => {});
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   submitForgotPassword() {

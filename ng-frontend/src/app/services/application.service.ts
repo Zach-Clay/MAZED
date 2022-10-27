@@ -20,7 +20,18 @@ export class ApplicationService {
 
   public submitApplication(application: Application) {
     console.log("Submit this: ", application);
-    this.http.post<Application>(`${api_url}/Application`, application).subscribe({
+    const newApp = {
+      id: 0,
+      userId: application.userId,
+      sponsorId: application.sponsorId,
+      approvalStatus: application.approvalStatus,
+      description: application.description,
+      applicantName: application.applicantName,
+      sponsorName: application.sponsorName,
+      decisionReason: "",
+      isActive: 1
+    }
+    this.http.post<Application>(`${api_url}/Application`, newApp).subscribe({
       next: data => {
         return data;
       },
@@ -31,7 +42,6 @@ export class ApplicationService {
   }
 
   public updateApplication(appId: number, application: Application) {
-    console.log("Update to: ", application);
     this.http.put<Application>(`${api_url}/Application/${appId}`, application).subscribe({
       next: data => {
         return data;

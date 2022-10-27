@@ -112,6 +112,14 @@ namespace api_backend.Controllers
             return NoContent();
         }
 
+
+        //get all products by a sponsor'sId
+        [HttpGet("GetProductsBySponsorId/{SponsorId}")]
+        public async Task<List<Product>> GetProductsBySponsorId(int SponsorId)
+        {
+            return await _context.Products.Where(p => p.SponsorId == SponsorId).ToListAsync();
+        }
+
     }
 }
 

@@ -27,10 +27,11 @@
         border-radius: 1em;
         margin: 10px;
       "
+      *ngIf="showPoints"
     >
       <p class="row text-light"></p>
       <p class="text-light">POINTS</p>
-      <p class="text-light">120</p>
+      <p class="text-light">{{ totalPoints }}</p>
     </div>
     <!-- empty column -->
     <div

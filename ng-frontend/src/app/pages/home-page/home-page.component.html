@@ -1,103 +1,19 @@
-<app-home-page-header></app-home-page-header>
+<app-home-page-header
+  [showPoints]="isDriver"
+  [totalPoints]="dbUser.totalPoints"
+  *ngIf="displayName"
+></app-home-page-header>
 
-<div class="pt-2">
-  <div class="text-center" *ngIf="displayName">
-    <h2>Welcome, {{ dbUser.userFname }} {{ dbUser.userLname }}</h2>
-  </div>
+<div *ngIf="isDriver">
+  <app-driver-home-page
+    [dbUser]="dbUser"
+    [cognitoUser]="cognitoUser"
+  ></app-driver-home-page>
 </div>
 
-<div class="row mt-3">
-  <div class="col-md-3 w-50">
-    <div class="card text-light ml-3" style="background: var(--primary-color)">
-      <div class="card-body text-center">
-        <div class="card-title mt-0">Sponsor Name</div>
-        <div class="bi bi-truck mb-2" style="font-size: 30px"></div>
-        <div class="card-text">Point-to-Dollar Conversion:</div>
-        <div class="card" style="background: var(--tertiary-color)">
-          <p
-            class="mb-1 mt-1"
-            style="color: var(--primary-color); font-size: 1.2em"
-          >
-            recent point updates
-          </p>
-          <app-point-change
-            *ngFor="let pointChange of pointTransactions | slice: 0:4"
-            [pointChange]="pointChange"
-          ></app-point-change>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm mr-3">
-    <div class="card text-light" style="background: var(--secondary-color)">
-      <div class="card-body text-center">
-        <div class="row">
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-sm">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-          <div class="col-sm mt-1">
-            <div class="card" style="background: var(--tertiary-color)">
-              <p class="text-dark mb-0">product</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row mt-3">
-  <div class="col-md-4 w-50">
-    <div *ngIf="isDriver || isSponsor">
-      <app-sponsor-widget></app-sponsor-widget>
-    </div>
-  </div>
-</div>
-
-<div class="row mt-3">
-  <div class="col-md-3 w-50">
-    <div class="card text-light ml-3" style="background: var(--primary-color)">
-      <div class="card-title text-center mt-2">Sponsored Drivers</div>
-      <div class="card-body" style="background: var(--tertiary-color)">
-        <app-sponsored-driver
-          *ngFor="let sponsoredDriver of sponsoredDrivers"
-          [sponsoredDriver]="sponsoredDriver"
-        ></app-sponsored-driver>
-      </div>
-    </div>
-  </div>
+<div *ngIf="isSponsor">
+  <app-sponsor-home-page
+    [dbUser]="dbUser"
+    [cognitoUser]="cognitoUser"
+  ></app-sponsor-home-page>
 </div>

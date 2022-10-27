@@ -12,7 +12,7 @@ import { PointsChangesService } from 'src/app/services/points-changes.service';
 })
 export class HomePageComponent implements OnInit {
   isAuthenticated: boolean;
-  currentUser: any;
+  cognitoUser: any;
   dbUser!: User;
   displayName: boolean = false;
   pointTransactions!: PointsChanges[];
@@ -36,12 +36,12 @@ export class HomePageComponent implements OnInit {
       if (!this.isAuthenticated) {
         this.router.navigate(['/']);
       } else {
-        this.currentUser = this.cognitoService
+        this.cognitoUser = this.cognitoService
           .getUser()
           .then((user: any) => {
-            this.currentUser = user;
+            this.cognitoUser = user;
             this.userService
-              .getUser(this.currentUser.username)
+              .getUser(this.cognitoUser.username)
               .subscribe((data) => {
                 this.dbUser = data;
                 this.displayName = true;
@@ -74,12 +74,6 @@ export class HomePageComponent implements OnInit {
             console.log(e);
           });
       }
-    });
-  }
-
-  signOut() {
-    this.cognitoService.signOut().then(() => {
-      this.router.navigate(['/']);
     });
   }
 }

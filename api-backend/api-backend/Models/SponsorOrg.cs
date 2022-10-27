@@ -16,6 +16,7 @@ namespace MazedDB.Models
         public int CatalogueId { get; set; }
         public double DollarToPoint { get; set; }
         public sbyte IsBlacklisted { get; set; }
+        public double DailyPointAmount { get; set; }
 
         public virtual AuditLogging? AuditLogging { get; set; }
         public virtual ICollection<DriverOrder> DriverOrders { get; set; }
