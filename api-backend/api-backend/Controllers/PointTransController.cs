@@ -137,5 +137,6 @@ namespace api_backend.Controllers
         {
             return await _context.PointTransactions.Where(p => p.UserId == UserId).ToListAsync();
         }
+
     }
 }
