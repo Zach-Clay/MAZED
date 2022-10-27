@@ -1,9 +1,9 @@
-<div class="container-fluid p-0">
-  <app-header></app-header>
-</div>
-
 <div class="text-center">
-  <h1 class="mt-2 mb-0 title">New User Registration</h1>
+  <h1 class="mt-2 mb-0 title">
+    <span *ngIf="userType == 'driver'"> New User Registration </span>
+    <span *ngIf="userType == 'sponsor'"> New Sponsor User Registration </span>
+    <span *ngIf="userType == 'admin'"> New Admin User Registration </span>
+  </h1>
 </div>
 
 <div class="wrapper">
@@ -182,7 +182,12 @@
     <div class="card-body" *ngIf="needsConfirmation">
       <div class="row">
         <div class="col mb-2">
-          <label for="code" class="form-label">Enter code from email:</label>
+          <div class="font-weight-bold mb-0">
+            You MUST confirm your email before proceeding
+          </div>
+          <label for="code" class="form-label mb-1"
+            >Enter code from email:</label
+          >
           <input
             type="text"
             id="code"
@@ -215,7 +220,7 @@
   </div>
 </div>
 
-<div class="register mt-3 mb-3 text-center">
+<div class="register mt-3 mb-3 text-center" *ngIf="userType == 'driver'">
   <button
     class="bg-transparent border-0 text-primary"
     (click)="returnToLogin()"

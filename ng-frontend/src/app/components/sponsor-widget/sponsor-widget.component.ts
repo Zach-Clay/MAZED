@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -6,13 +6,14 @@ import {
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
-import { User, SponsorOrg } from 'src/app/models/interfaces';
+import { User, SponsorOrg, UserToSponsor } from 'src/app/models/interfaces';
 import { UserService } from 'src/app/services/user.service';
 import { PointsChangesService } from 'src/app/services/points-changes.service';
 import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
 import { ApplicationService } from 'src/app/services/application.service';
 import { Application } from 'src/app/models/interfaces';
 import { MatButtonToggleDefaultOptions } from '@angular/material/button-toggle';
+import { DriverApplicationComponent } from 'src/app/pages/driver-application/driver-application.component';
 
 export interface ExpandedApplication {
   id: number;
@@ -40,15 +41,16 @@ export interface SponsorDialogData {
   styleUrls: ['./sponsor-widget.component.css'],
 })
 export class SponsorWidgetComponent implements OnInit {
-  user!: User;
+  @Input() user!: User;
   showSponsor: boolean = false;
-  sponsorOrg!: SponsorOrg;
+  sponsorOrgs!: SponsorOrg[];
   isDriver: boolean = false;
   isSponsor: boolean = false;
   sponsorsApps!: Application[];
   showSponsorApps: boolean = false;
   driverOutstandingApps!: Application[];
   showDriverOustandingApps: boolean = false;
+  loaded: boolean = false;
 
   constructor(
     private cognitoService: CognitoService,
@@ -59,54 +61,41 @@ export class SponsorWidgetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cognitoService
-      .getUser()
-      .then((user: any) => {
-        this.userService.getUser(user.username).subscribe((data) => {
-          this.user = data;
+    //get the users sponsors
+    this.userService.getSponsorOrgsByDriverUserId(this.user.id).subscribe((data) => {
+      this.sponsorOrgs = data;
+      this.showSponsor = true;
+    });
 
-          if (this.user.userType.toLowerCase() === 'driver') {
-            this.isDriver = true;
-          }
-          if (this.user.userType.toLowerCase() === 'sponsor') {
-            this.isSponsor = true;
-          }
+    //if the user is a driver
+    if (this.user.userType.toLowerCase() === 'driver') {
+      this.isDriver = true;
 
-          //get sponsor info
-          if (this.user.sponsorId !== 0) {
-            this.sponsorOrgService
-              .getSponsorOrg(this.user.sponsorId)
-              .subscribe((org) => {
-                this.sponsorOrg = org;
-                this.showSponsor = true;
-              });
-          }
-
-          if (this.isSponsor) {
-            //get pending applications to sponsor
-            this.applicationService
-              .getApplicationsBySponsor(this.user.sponsorId)
-              .subscribe((apps) => {
-                this.sponsorsApps = apps;
-              });
-          }
-
-          if (this.isDriver) {
-            this.applicationService
-              .getApplicationsByUser(this.user.id)
-              .subscribe((apps) => {
-                this.driverOutstandingApps = apps;
-                this.driverOutstandingApps = this.driverOutstandingApps.filter(
-                  (a) => a.isActive === 1
-                );
-                this.showDriverOustandingApps = true;
-              });
-          }
+      //get the driver's applications
+      this.applicationService
+        .getApplicationsByUser(this.user.id)
+        .subscribe((apps) => {
+          this.driverOutstandingApps = apps;
+          this.driverOutstandingApps = this.driverOutstandingApps.filter(
+            (a) => a.isActive === 1
+          );
+          this.showDriverOustandingApps = true;
         });
+    }
+
+    //if the user is a sponsor
+    if (this.user.userType.toLowerCase() === 'sponsor') {
+      this.isSponsor = true;
+
+      //get the sponsor org for the sponsor user
+      this.userService.getSponsorOrgBySponsorUserId(this.user.id).subscribe((data) => {
+        //Get the applications for that sponsor
+        this.applicationService.getApplicationsBySponsor(data.id).subscribe((apps) => {
+          this.sponsorsApps = apps;
+        })
       })
-      .catch((err) => {
-        console.log(err);
-      });
+    }
+    this.loaded = true;
   }
 
   openDialog(): void {
@@ -187,13 +176,17 @@ export class SponsorAppDialog implements OnInit {
 
     //now update the driver's sponsor
     if (approved) {
-      this.userService.getUserById(application.userId).subscribe((user) => {
-        let userObj = user;
-        userObj.sponsorId = application.sponsorId;
-        this.userService.updateUser(userObj.id, userObj);
-        alert(`driver ${decision}ed`);
-        window.location.reload();
-      });
+      let userToSponsor: UserToSponsor = {
+        id: 0,
+        userId: application.userId,
+        sponsorId: application.sponsorId,
+        userPoints: 0,
+        userType: "driver"
+      };
+      this.userService.postUserToSponsor(userToSponsor);
+      alert(`driver ${decision}ed`);
+      window.location.reload();
+
     } else {
       alert(`driver ${decision}ed`);
       window.location.reload();

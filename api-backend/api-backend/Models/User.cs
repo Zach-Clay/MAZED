@@ -12,7 +12,6 @@ namespace MazedDB.Models
         }
 
         public int Id { get; set; }
-        public int? SponsorId { get; set; }
         public string Username { get; set; } = null!;
         public string UserFname { get; set; } = null!;
         public string UserLname { get; set; } = null!;
@@ -25,10 +24,10 @@ namespace MazedDB.Models
         public sbyte? PointNotifications { get; set; }
         public sbyte? OrderNotifications { get; set; }
         public sbyte? IssueNotifications { get; set; }
-        public DateTime? LastLogin { get; set; }
         public DateTime? ModDate { get; set; }
         public string? ModBy { get; set; }
-        public double TotalPoints { get; set; }
+        public DateTime? LastLogin { get; set; }
+        public int? SponsorCount { get; set; }
 
         public virtual AuditLogging? AuditLogging { get; set; }
         public virtual ICollection<DriverOrder> DriverOrders { get; set; }

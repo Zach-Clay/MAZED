@@ -1,69 +1,171 @@
-<app-home-page-header></app-home-page-header>
-
-<div class="container">
+<div *ngIf="!(addingAdmin || addingSponsor)">
+  <div class="container">
     <div class="row mt-4">
       <div class="col">
-        <div class="card text-light ml-3" style="background: var(--primary-color); border-radius: 1em;">
-            <div class="card-body text-center">
-                <div class="card" style="margin: 3px; background: var(--tertiary-color); border-radius: 1em;">
-                    <p
-                    class="mb-1 mt-1"
-                    style="color: var(--primary-color); font-size: 1.2em">
-                    view admin profiles
-                    </p>
-                </div>
-                <div class="mt-4"> </div>
-                <div class="card" style="margin: 3px; background: var(--tertiary-color); border-radius: 1em;">
-                    <p
-                    class="mb-1 mt-1"
-                    style="color: var(--primary-color); font-size: 1.2em">
-                    view main sponsor profiles
-                </p>
+        <div
+          class="card text-light ml-3"
+          style="background: var(--primary-color); border-radius: 1em"
+        >
+          <div class="card-body text-center">
+            <div
+              class="card"
+              style="
+                margin: 3px;
+                background: var(--tertiary-color);
+                border-radius: 1em;
+              "
+            >
+              <p
+                class="mb-1 mt-1 btn"
+                style="color: var(--primary-color); font-size: 1.2em"
+                routerLink="/profile"
+              >
+                View/Update Profiles
+              </p>
             </div>
+            <div class="mt-4"></div>
+            <div
+              class="card"
+              style="
+                margin: 3px;
+                background: var(--tertiary-color);
+                border-radius: 1em;
+              "
+            >
+              <p
+                class="mb-1 mt-1 btn"
+                style="color: var(--primary-color); font-size: 1.2em"
+                routerLink="/sponsor-dashboard"
+              >
+                View Sponsor Orgs
+              </p>
             </div>
+          </div>
         </div>
       </div>
       <div class="col">
-        <div class="card text-light ml-3" style="background: var(--primary-color); border-radius: 1em;">
-            <div class="card-body text-center">
-                <div class="card" style="margin: 3px; background: var(--tertiary-color); border-radius: 1em;">
-                    <p
-                    class="mb-1 mt-1"
-                    style="color: var(--primary-color); font-size: 1.2em">
-                    view individual sponsor profiles
-                    </p>
-                </div>
-                <div class="mt-4"> </div>
-                <div class="card" style="margin: 3px; background: var(--tertiary-color); border-radius: 1em;">
-                    <p
-                    class="mb-1 mt-1"
-                    style="color: var(--primary-color); font-size: 1.2em">
-                    view driver profiles
-                </p>
+        <div
+          class="card text-light ml-3"
+          style="background: var(--primary-color); border-radius: 1em"
+        >
+          <div class="card-body text-center">
+            <div
+              class="card"
+              style="
+                margin: 3px;
+                background: var(--tertiary-color);
+                border-radius: 1em;
+              "
+            >
+              <button
+                class="mb-1 mt-1 bg-transparent border-0 btn"
+                style="color: var(--primary-color); font-size: 1.2em"
+                (click)="addingSponsor = true"
+              >
+                create new sponsor account
+              </button>
             </div>
+            <div class="mt-4"></div>
+            <div
+              class="card"
+              style="
+                margin: 3px;
+                background: var(--tertiary-color);
+                border-radius: 1em;
+              "
+            >
+              <button
+                class="mb-1 mt-1 bg-transparent border-0 btn"
+                style="color: var(--primary-color); font-size: 1.2em"
+                (click)="addingAdmin = true"
+              >
+                create new admin account
+              </button>
             </div>
+          </div>
         </div>
       </div>
       <div class="col">
-        <div class="card text-light ml-3" style="background: var(--primary-color); border-radius: 1em;">
-            <div class="card-body text-center">
-                <div class="card" style="margin: 3px; background: var(--tertiary-color); border-radius: 1em;">
-                    <p
-                    class="mb-1 mt-1"
-                    style="color: var(--primary-color); font-size: 1.2em">
-                    view product catalog
-                    </p>
-                </div>
-                <div class="mt-4"> </div>
-                <div class="card" style="margin: 3px; background: var(--tertiary-color); border-radius: 1em;">
-                    <p
-                    class="mb-1 mt-1"
-                    style="color: var(--primary-color); font-size: 1.2em">
-                    view reports 
-                </p>
+        <div
+          class="card text-light ml-3"
+          style="background: var(--primary-color); border-radius: 1em"
+        >
+          <div class="card-body text-center">
+            <div
+              class="card"
+              style="
+                margin: 3px;
+                background: var(--tertiary-color);
+                border-radius: 1em;
+              "
+            >
+              <p
+                class="mb-1 mt-1 btn"
+                style="color: var(--primary-color); font-size: 1.2em"
+              >
+                view product catalog
+              </p>
             </div>
+            <div class="mt-4"></div>
+            <div
+              class="card"
+              style="
+                margin: 3px;
+                background: var(--tertiary-color);
+                border-radius: 1em;
+              "
+            >
+              <p
+                class="mb-1 mt-1 btn"
+                style="color: var(--primary-color); font-size: 1.2em"
+              >
+                view reports
+              </p>
             </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="addingAdmin">
+  <app-user-registration [userType]="'admin'"></app-user-registration>
+  <div class="register mt-3 mb-3 text-center">
+    <button
+      class="bg-transparent border-0 text-primary"
+      (click)="addingAdmin = false"
+    >
+      Back to Admin Home Page
+    </button>
+  </div>
+  <br />
+</div>
+
+<div *ngIf="addingSponsor">
+  <div class="title text-center">
+    <h1>Select a Sponsor</h1>
+    <mat-form-field appearance="fill" color="primary">
+      <mat-select [(ngModel)]="orgToAddSponsor">
+        <mat-option *ngFor="let org of orgs" [value]="org">
+          {{ org.orgName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="orgToAddSponsor">
+    <app-user-registration
+      [userType]="'sponsor'"
+      [sponsorId]="orgToAddSponsor.id"
+    ></app-user-registration>
+  </div>
+  <div class="register mt-3 mb-3 text-center">
+    <button
+      class="bg-transparent border-0 text-primary"
+      (click)="addingSponsor = false"
+    >
+      Back to Admin Home Page
+    </button>
+  </div>
+  <br />
 </div>

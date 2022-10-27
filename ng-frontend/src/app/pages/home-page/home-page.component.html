@@ -1,19 +1,40 @@
-<app-home-page-header
-  [showPoints]="isDriver"
-  [totalPoints]="dbUser.totalPoints"
-  *ngIf="displayName"
-></app-home-page-header>
-
-<div *ngIf="isDriver">
-  <app-driver-home-page
-    [dbUser]="dbUser"
-    [cognitoUser]="cognitoUser"
-  ></app-driver-home-page>
+<div
+  class="d-flex mt-5 align-content-center justify-content-center"
+  *ngIf="!dbUser || !cognitoUser"
+>
+  <div class="spinner-border" role="status"></div>
 </div>
 
-<div *ngIf="isSponsor">
-  <app-sponsor-home-page
-    [dbUser]="dbUser"
-    [cognitoUser]="cognitoUser"
-  ></app-sponsor-home-page>
+<div *ngIf="dbUser && cognitoUser">
+  <app-home-page-header
+    [showPoints]="isDriver"
+    [totalPoints]="dbUser.totalPoints"
+    *ngIf="displayName"
+  ></app-home-page-header>
+
+  <div class="pt-2">
+    <div class="text-center">
+      <h2>Welcome, {{ dbUser.userFname }} {{ dbUser.userLname }}</h2>
+    </div>
+  </div>
+  <div *ngIf="isDriver">
+    <app-driver-home-page
+      [dbUser]="dbUser"
+      [cognitoUser]="cognitoUser"
+    ></app-driver-home-page>
+  </div>
+
+  <div *ngIf="isSponsor">
+    <app-sponsor-home-page
+      [dbUser]="dbUser"
+      [cognitoUser]="cognitoUser"
+    ></app-sponsor-home-page>
+  </div>
+
+  <div *ngIf="isAdmin">
+    <app-admin-homepage
+      [dbUser]="dbUser"
+      [cognitoUser]="cognitoUser"
+    ></app-admin-homepage>
+  </div>
 </div>

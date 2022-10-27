@@ -89,23 +89,34 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     if (!this.user.username) {
       alert('Please enter your username!');
+      this.loading = false;
       return;
     }
     if (!this.user.password) {
       alert('Please enter your password!');
+      this.loading = false;
       return;
     }
-    console.log(this.user.username, this.user.password);
     this.user.username = '';
     this.user.password = '';
+    this.loading = false;
   }
 
   public signIn(): void {
-    console.log('SIGN IN');
-    console.log(this.user);
     this.loading = true;
+    if (!this.user.username) {
+      alert('Please enter your username!');
+      this.loading = false;
+      return;
+    }
+    if (!this.user.password) {
+      alert('Please enter your password!');
+      this.loading = false;
+      return;
+    }
     event?.preventDefault();
     this.cognitoService
       .signIn(this.user)
@@ -117,7 +128,7 @@ export class LoginComponent implements OnInit {
           isLoginSuccessful: 'yes',
         };
         this.loginAttemptService.addAttempt(attempt);
-
+        this.loading = false;
         this.router.navigate(['/home']);
       })
       .catch((err) => {

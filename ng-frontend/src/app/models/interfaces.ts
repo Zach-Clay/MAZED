@@ -1,6 +1,7 @@
+import * as internal from "stream";
+
 export interface User {
   id: number;
-  sponsorId: number;
   username: string;
   userFname: string;
   userLname: string;
@@ -14,6 +15,16 @@ export interface User {
   orderNotifications: number;
   issueNotifications: number;
   totalPoints: number;
+  sponsorCount?: number;
+}
+
+export interface UserToSponsor {
+  id: number;
+  userId: number;
+  sponsorId: number;
+  userPoints: number;
+  sponsorTotal?: number;
+  userType: string;
 }
 
 export interface LoginAttempt {
@@ -28,6 +39,7 @@ export interface PointsChanges {
   userId: number;
   pointValue: number;
   reason: string;
+  isSpecialTransaction?: number;
 }
 
 export interface SponsorOrg {

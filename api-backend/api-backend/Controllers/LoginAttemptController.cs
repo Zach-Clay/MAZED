@@ -49,28 +49,41 @@ namespace api_backend.Controllers
 
             //update other models related to user login
             var serviceProvider = HttpContext.RequestServices;
-            var userControllerInstance = (UserController2)serviceProvider.GetRequiredService<UserController2>();
-            var SponsorOrgControllerInstance = (SponsorOrgController)serviceProvider.GetRequiredService<SponsorOrgController>();
-            var PointTransControllerInstance = (PointTransController)serviceProvider.GetRequiredService<PointTransController>();
+            var userControllerInstance = serviceProvider.GetRequiredService<UserController2>();
+            var SponsorOrgControllerInstance = serviceProvider.GetRequiredService<SponsorOrgController>();
+            var PointTransControllerInstance = serviceProvider.GetRequiredService<PointTransController>();
+            var userToSponsorControllerInstance = serviceProvider.GetRequiredService<UserToSponsorController>();
 
             User user = await userControllerInstance.GetUser_Object(login.Username);
-            int userSponsorID = user.SponsorId ?? throw new Exception("No sponsor associated with user");
+            List<UserToSponsor> userSponsorID = await userToSponsorControllerInstance.GetSponsorsFromUserId(user.Id);
 
-            SponsorOrg sponsorOrg = await SponsorOrgControllerInstance.GetSponsorOrg_Object(userSponsorID);
+            //calculate days between last login and current login
+            DateTime LastLogin = user.LastLogin ?? DateTime.Now; //first time login
+            DateTime CurrentLogin = DateTime.Now;
 
-            PointTransaction dailyUpdate = new PointTransaction
+            TimeSpan ts = CurrentLogin - LastLogin;
+            int days = (int) ts.TotalDays;
+
+
+            foreach (UserToSponsor u in userSponsorID) //iterate through all sponsors of user
             {
-                SponsorId = userSponsorID, 
-                UserId = user.Id,                                       //hardcoded for testing
-                PointValue = await SponsorOrgControllerInstance.GetSponsorOrgDailyPointValue(2), //times number of days between
-                Reason = "Daily rewards",
-                ModDate = DateTime.Now
-            };
+                PointTransaction dailyUpdate = new()
+                {
+                    SponsorId = (int)u.SponsorId,
+                    UserId = user.Id,                                     
+                    PointValue = await SponsorOrgControllerInstance.GetSponsorOrgDailyPointValue((int)u.SponsorId) * days, //times number of days between
+                    Reason = "Daily rewards",
+                    ModDate = DateTime.Now
+                };
 
-            await PointTransControllerInstance.PostPointTransaction(dailyUpdate);
-            user.TotalPoints += await SponsorOrgControllerInstance.GetSponsorOrgDailyPointValue(2);
-            user.LastLogin = login.AttemptedDate;
-            await userControllerInstance.PutUser(user.Id, user);
+                await PointTransControllerInstance.PostPointTransaction(dailyUpdate);
+
+                await userToSponsorControllerInstance.UpdateUserPointsBySponsor((uint)user.Id, u.SponsorId,
+                    await SponsorOrgControllerInstance.GetSponsorOrgDailyPointValue((int)u.SponsorId) * days);
+                user.LastLogin = login.AttemptedDate;
+                await userControllerInstance.PutUser(user.Id, user);
+            }
+            
 
             return CreatedAtAction("GetLoginAttempt", new { username = login.Username }, login);
         }

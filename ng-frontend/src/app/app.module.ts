@@ -25,12 +25,23 @@ import {
 import { DriverApplicationComponent } from './pages/driver-application/driver-application.component';
 import { PointChangeComponent } from './components/point-change/point-change.component';
 import { SponsoredDriverComponent } from './components/sponsored-driver/sponsored-driver.component';
+<<<<<<< HEAD
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+=======
+>>>>>>> origin/Danny/Dev
 import { SponsorsDashboardComponent } from './pages/sponsors-dashboard/sponsors-dashboard.component';
 import { DriverHomePageComponent } from './pages/driver-home-page/driver-home-page.component';
 import { SponsorHomePageComponent } from './pages/sponsor-home-page/sponsor-home-page.component';
 import { AddDeductDialog } from './pages/sponsors-dashboard/sponsors-dashboard.component';
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
+<<<<<<< HEAD
+=======
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { AdminHomepageComponent } from './pages/admin-homepage/admin-homepage.component';
+import { DriverSponsorCardComponent } from './components/driver-sponsor-card/driver-sponsor-card.component';
+import { DriverProductListingComponent } from './components/driver-product-listing/driver-product-listing.component';
+>>>>>>> origin/Danny/Dev
 
 @NgModule({
   declarations: [
@@ -47,12 +58,23 @@ import { ProductListingComponent } from './components/product-listing/product-li
     SponsorAppDialog,
     PointChangeComponent,
     SponsoredDriverComponent,
+<<<<<<< HEAD
     AdminDashboardComponent,
+=======
+>>>>>>> origin/Danny/Dev
     SponsorsDashboardComponent,
     DriverHomePageComponent,
     SponsorHomePageComponent,
     AddDeductDialog,
     ProductListingComponent,
+<<<<<<< HEAD
+=======
+    AdminDashboardComponent,
+    RegistrationPageComponent,
+    AdminHomepageComponent,
+    DriverSponsorCardComponent,
+    DriverProductListingComponent,
+>>>>>>> origin/Danny/Dev
   ],
   imports: [
     BrowserModule,

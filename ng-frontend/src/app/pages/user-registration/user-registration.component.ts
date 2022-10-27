@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   signUpForm,
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 import { runInThisContext } from 'vm';
 import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/models/interfaces';
+import { User, UserToSponsor } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-user-registration',
@@ -21,6 +21,8 @@ import { User } from 'src/app/models/interfaces';
   styleUrls: ['./user-registration.component.css'],
 })
 export class UserRegistrationComponent implements OnInit {
+  @Input() userType: string = 'driver';
+  @Input() sponsorId: number = 0;
   public loading: boolean = false;
   public needsConfirmation: boolean = false;
   public name: any = '';
@@ -50,13 +52,12 @@ export class UserRegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private cognitoService: CognitoService,
-    private userService: UserService,
+    private userService: UserService
   ) {
     this.user = {} as UserInfo;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   selectGender(selection: number) {
     switch (selection) {
@@ -144,13 +145,11 @@ export class UserRegistrationComponent implements OnInit {
         this.needsConfirmation = true;
       }
     );
-
   };
 
   confirmSignup() {
     this.loading = true;
     this.user.code = this.confirmationCode;
-    console.log('clicked buttton');
     this.cognitoService
       .confirmSignUp(this.user)
       .then((success) => {
@@ -168,19 +167,29 @@ export class UserRegistrationComponent implements OnInit {
     if (nameArr.length > 1) LName = nameArr[1];
 
     this.newUser.id = 0;
-    this.newUser.sponsorId = 0;
     this.newUser.username = this.username;
     this.newUser.userFname = FName;
     this.newUser.userLname = LName;
-    this.newUser.userType = 'driver';
+    this.newUser.userType = this.userType;
     this.newUser.userAddress = this.address;
     this.newUser.userEmail = this.email;
-    this.newUser.userPwd = "null";
+    this.newUser.userPwd = 'null';
     this.newUser.userPhoneNum = this.phone;
     this.newUser.isBlacklisted = 0;
 
     //post to our api
-    this.userService.registerUser(this.newUser);
+    this.userService.registerUser(this.newUser).subscribe((user) => {
+      if (this.userType == 'sponsor') {
+        let userToSponsor: UserToSponsor = {
+          id: 0,
+          userId: user.id,
+          sponsorId: this.sponsorId,
+          userPoints: 0,
+          userType: this.userType,
+        };
+        this.userService.postUserToSponsor(userToSponsor);
+      }
+    });
   }
 
   StrengthChecker = (PasswordParameter: any) => {
