@@ -31,7 +31,8 @@ namespace api_backend.Controllers
         {
             string? product = null;
             NameValueCollection query= System.Web.HttpUtility.ParseQueryString(String.Empty);
-            query.Add("term", term); query.Add("media", media);
+            query.Add("term", term);
+            query.Add("media", media);
 
             string queryString = SponsQueryParam.iTunes_url +  "/search?" + query.ToString();
 
