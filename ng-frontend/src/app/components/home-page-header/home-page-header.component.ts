@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
+import { User } from '../../models/interfaces';
 
 @Component({
   selector: 'app-home-page-header',
@@ -9,7 +10,8 @@ import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
 })
 export class HomePageHeaderComponent implements OnInit {
   @Input() showPoints: boolean;
-  @Input() totalPoints: number;
+  @Input() dbUser!: User;
+  totalPoints!: number;
   image: string = '../assets/light-logo.png';
   constructor(private cognitoService: CognitoService, private router: Router) {
     this.showPoints = false;
@@ -23,4 +25,6 @@ export class HomePageHeaderComponent implements OnInit {
       this.router.navigate(['/']);
     });
   }
+
+  getPointsPerSponsor() {}
 }

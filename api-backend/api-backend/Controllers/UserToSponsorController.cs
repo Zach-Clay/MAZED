@@ -28,9 +28,9 @@ namespace api_backend.Controllers
         }
 
         [HttpGet("GetUserPointsBySponsor")]
-        public async Task<UserToSponsor> GetUserPointsBySponsor(uint userID, uint sponsorID)
+        public async Task<UserToSponsor> GetUserPointsBySponsor(uint UserID, uint SponsorID)
         {
-            var uts = await _context.UserToSponsors.Where(u => u.UserId == userID && u.SponsorId == sponsorID).FirstOrDefaultAsync()
+            var uts = await _context.UserToSponsors.Where(u => u.UserId == UserID && u.SponsorId == SponsorID).FirstOrDefaultAsync()
                 ?? throw new Exception("could not find user");
             return uts;
         }

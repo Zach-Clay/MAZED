@@ -100,4 +100,11 @@ export class UserService {
       },
     });
   }
+
+  // get a user's point total for a specific sponsor
+  public getUserPointsBySponsor(userId: number, sponsorId: number) {
+    return this.http.get<UserToSponsor>(
+      `${api_url}/userToSponsor/GetUserPointsBySponsor?UserId=${userId}&SponsorId=${sponsorId}`
+    );
+  }
 }
