@@ -195,18 +195,20 @@ namespace api_backend.Controllers
             var serviceProvider = HttpContext.RequestServices;
             var SponsorOrgControllerInstance = serviceProvider.GetRequiredService<SponsorOrgController>();
             var PointTransControllerInstance = serviceProvider.GetRequiredService<PointTransController>();
-            var userToSponsorControllerInstance = serviceProvider.GetRequiredService<UserToSponsorController>();
+            var UserToSponsorControllerInstance = serviceProvider.GetRequiredService<UserToSponsorController>();
 
             var user = await _context.Users.Where(e => e.Username == username).FirstOrDefaultAsync()
                 ?? throw new Exception("The provided user was not found");
 
-            var userToSponsor = await userToSponsorControllerInstance.GetUserPointsBySponsor((uint)user.Id, (uint)SponsorId);
+            var uts = await UserToSponsorControllerInstance.GetUserPointsBySponsor((uint)user.Id, (uint)SponsorId);
 
+            //because of the requirements change, i am not going to edit the user's total points (for this sprint) as i will have
+            //to delete it for the next sprint. 
             var transaction = new PointTransaction
             {
                 SponsorId = SponsorId,
                 UserId = user.Id,
-                PointValue = -1 * userToSponsor.UserPoints,
+                PointValue = -1 * uts.UserPoints, 
                 Reason = "Driver left sponsor",
                 ModDate = DateTime.Now,
                 IsSpecialTransaction = 1

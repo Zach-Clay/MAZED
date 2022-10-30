@@ -148,6 +148,19 @@ namespace api_backend.Controllers
             return user;
         }
 
+        //loading related data***
+        [HttpGet("/GetSponsorFromUserId/{Id}")]
+        public async Task<UserToSponsor?> GetSponsorFromUserId(int id)
+        {
+            return await _context.UserToSponsors.Include(p => p.SponsorId).Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
+        [HttpGet("/GetDriverPoints/{Id}")]
+        public async Task<List<UserToSponsor>> GetDriverPoints(int id)
+        {
+            return await _context.UserToSponsors.Where(u => u.Id == id).ToListAsync();
+        }
+
         [HttpPost]
         public async Task<ActionResult<UserToSponsor>> PostUserToSponsor(UserToSponsor user)
         {
