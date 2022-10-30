@@ -26,8 +26,8 @@ namespace api_backend.Controllers
             _context = context;
         }
 
-        [HttpGet("GetSongArtist")]
-        public async Task<string?> GetSongArtist(string term, string media)
+        [HttpGet("GetMediaTerm")]
+        public async Task<string?> GetMediaTerm(string term, string media)
         {
             string? product = null;
             NameValueCollection query= System.Web.HttpUtility.ParseQueryString(String.Empty);

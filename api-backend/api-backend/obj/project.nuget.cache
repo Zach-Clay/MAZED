@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "C6whFHgoFfJl/zgM6Cy/N2tdhso7fyI4GgXwheVAqqnQyKwuwLmbCQ/5I237EpmSXtRK6bXU2UODqCVzL/Tb7Q==",
-=======
-  "dgSpecHash": "pheEGE7z8kcE+H4ljQOO0jSGdI22fZ610kGl6SmSa2shHqEN/D5EyGyeCobfrUnaEA3bapkor2GWx6Ou6Bo5ig==",
->>>>>>> origin/Zach/Dev
   "success": true,
   "projectFilePath": "/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/api-backend.csproj",
   "expectedPackageFiles": [
@@ -227,12 +223,6 @@
     "/Users/madisonwilson/.nuget/packages/system.xml.xdocument/4.3.0/system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file /Users/zachclay/Documents/Dev/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    },
     {
       "code": "NU1701",
       "level": "Warning",

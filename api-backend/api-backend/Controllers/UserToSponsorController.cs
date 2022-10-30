@@ -101,13 +101,6 @@ namespace api_backend.Controllers
             return sponsorOrgs;
         }
 
-        //get all drivers by a sponsor'sId
-        //[HttpGet("/GetDriversBySponsorId/{SponsorId}")]
-        //public async Task<List<UserToSponsor>> GetDriversBySponsorId(int SponsorId)
-        //{
-        //    return await _context.UserToSponsors.Where(u => u.SponsorId == SponsorId && u.UserType.ToLower() == "driver").ToListAsync();
-        //}
-
 
         [HttpPut("UpdateUserPointsBySponsor/{amount}")]
         public async Task<UserToSponsor> UpdateUserPointsBySponsor(uint userID, uint sponsorID, double amount)
