@@ -49,7 +49,7 @@ namespace api_backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> PostUser(Product product)
+        public async Task<ActionResult<Product>> PostProduct(Product product)
         {
             if (_context.Products == null)
             {
@@ -61,6 +61,20 @@ namespace api_backend.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProduct", new { productId = product.ProductId }, product);
+        }
+
+        [HttpPost("postArrayOfTrackIds")]
+        public async Task<ActionResult<Product>> PostArrayOfTrackIds(int sponsorId, List<int> trackIds)
+        {
+            if (_context.Products == null)
+            {
+                return Problem("Entity set 'MazedDBContext.Products'  is null.");
+            }
+
+
+            
+
+            return new Product();
         }
 
         [HttpDelete("{id}")]

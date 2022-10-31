@@ -16,6 +16,8 @@ using MazedDB.Models;
 
 namespace api_backend.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class SponsorQueryParamsController : Controller
     {
         private readonly MazedDBContext _context;

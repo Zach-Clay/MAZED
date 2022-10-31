@@ -68,12 +68,6 @@ export interface Application {
 export interface Product {
   productId: number;
   sponsorId: number;
-  orderId: number;
-  pointValue: number;
-  orderQuantity: number;
-  availibility: boolean;
-  description: string;
-  image: number[];
-  name: string;
-  isBlackListed: boolean;
+  orderId?: number;
+  trackId: number; 
 }
