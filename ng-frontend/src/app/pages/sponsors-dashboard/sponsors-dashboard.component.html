@@ -54,21 +54,33 @@
           </div>
         </div>
 
-        <div
-          class="add-deduct-btn"
-          *ngIf="
-            user.userType === 'admin' ||
-            (user.userType === 'sponsor' && orgSelection.id === sponsorsOrg.id)
-          "
-        >
-          <button mat-raised-button color="accent" (click)="openDialog()">
-            Add/Deduct Driver Points
-          </button>
+        <div class="d-flex" *ngIf="user.userType === 'admin' ||
+          (user.userType === 'sponsor' && orgSelection.id === sponsorsOrg.id)">
+          <div>
+            <button mat-raised-button color="accent" (click)="openDialog()">
+              Add/Deduct Driver Points
+            </button>
+          </div>
+          &nbsp;
+          <div>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="addingSponsor = true">
+              Create Another Sponsor Account
+            </button>
+          </div>
+          &nbsp;
+          <div>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="navToEditCatalog()">
+              Edit Product Catalog
+            </button>
+          </div>
         </div>
-
-        <br />
-        <br />
-
+        
         <h4 class="field">Description:</h4>
         <span class="not-editing" *ngIf="!editing">{{
           orgSelection.orgDescription
@@ -106,24 +118,6 @@
               </button>
             </div>
           </mat-list-item>
-          <br />
-          <br />
-          <div
-            class="create-account-btn"
-            *ngIf="
-              user.userType === 'admin' ||
-              (user.userType === 'sponsor' &&
-                orgSelection.id === sponsorsOrg.id)
-            "
-          >
-            <button
-              mat-raised-button
-              color="accent"
-              (click)="addingSponsor = true"
-            >
-              Create Another Sponsor Account
-            </button>
-          </div>
         </mat-list>
       </mat-card>
     </div>

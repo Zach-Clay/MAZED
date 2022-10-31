@@ -10,6 +10,7 @@ import { DriverApplicationComponent } from './pages/driver-application/driver-ap
 import { SponsorsDashboardComponent } from './pages/sponsors-dashboard/sponsors-dashboard.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { EditProductCatalogComponent } from './pages/edit-product-catalog/edit-product-catalog.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'driver-application', component: DriverApplicationComponent },
   { path: 'sponsor-dashboard', component: SponsorsDashboardComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'edit-catalog', component: EditProductCatalogComponent },
 ];
 
 @NgModule({

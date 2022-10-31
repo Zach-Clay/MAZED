@@ -12,7 +12,7 @@ export class ItunesApiService {
 
   //Returns an Array of products with the term=term and media=media
   public getProducts(term: string, media: string) {
-    return this.http.get(`${api_url}/SponsorQueryParams/GetMediaTerm?term=${term}&media=${media}`);
+    return this.http.get<any>(`${api_url}/SponsorQueryParams/GetMediaTerm?term=${term}&media=${media.toLowerCase()}`);
   }
 
   

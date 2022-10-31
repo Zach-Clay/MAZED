@@ -63,7 +63,7 @@ namespace api_backend.Controllers
             return CreatedAtAction("GetProduct", new { productId = product.ProductId }, product);
         }
 
-        [HttpPost("postArrayOfTrackIds")]
+        [HttpPost("PostArrayOfTrackIds")]
         public async Task<ActionResult<Product>> PostArrayOfTrackIds(int sponsorId, List<int> trackIds)
         {
             if (_context.Products == null)
