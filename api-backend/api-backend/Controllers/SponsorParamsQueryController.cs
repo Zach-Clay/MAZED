@@ -20,6 +20,7 @@ namespace api_backend.Controllers
     {
         private readonly MazedDBContext _context;
         static HttpClient client = new();
+        private string iTunes_url = "https://itunes.apple.com";
 
         public SponsorQueryParamsController(MazedDBContext context)
         {
@@ -34,7 +35,7 @@ namespace api_backend.Controllers
             query.Add("term", term);
             query.Add("media", media);
 
-            string queryString = SponsQueryParam.iTunes_url +  "/search?" + query.ToString();
+            string queryString = iTunes_url +  "/search?" + query.ToString();
 
             HttpResponseMessage response = await client.GetAsync(queryString);
             if (response.IsSuccessStatusCode)

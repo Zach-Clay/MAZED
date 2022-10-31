@@ -34,7 +34,7 @@ namespace api_backend.Controllers
         {
             if (_context.Products == null) return NotFound();
 
-            return await _context.Products.Where(p => p.IsBlacklisted == 0).ToListAsync<Product>();
+            return await _context.Products.ToListAsync<Product>();
         }
 
         // GET: api/ProductController
@@ -44,8 +44,6 @@ namespace api_backend.Controllers
             if (_context.Products == null) return NotFound();
 
             var product = await _context.Products.FindAsync(id) ?? throw new Exception("Product not found");
-
-            if (product.IsBlacklisted == 1) return NotFound();
 
             return product;
         }
@@ -72,9 +70,7 @@ namespace api_backend.Controllers
 
             var product = await _context.Products.FindAsync(id) ?? throw new Exception("Product not found");
 
-            product.IsBlacklisted = 1;
-            //telling context the entry was modified so we then can change it
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Products.Remove(product);
 
             await _context.SaveChangesAsync();
 
