@@ -2,6 +2,12 @@
   background: #AED2FF;
 }
 
+.radios {
+  font-size: 17px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
 .fixed-btn {
   position: fixed;
   bottom: 1%;

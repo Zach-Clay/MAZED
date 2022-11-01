@@ -6,6 +6,7 @@ using MazedDB.Data;
 using MazedDB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -111,6 +112,25 @@ namespace api_backend.Controllers
             return NoContent();
         }
 
+        [HttpPost("DeleteByArrayOfTrackIds")]
+        public async Task<IActionResult> DeleteProductByArrayOfTrackIds(int sponsorId, List<int> trackIds)
+        {
+            if (_context.Products == null) return NotFound();
+
+            List<Product> products = await _context.Products.Where(p => p.SponsorId == sponsorId).ToListAsync();
+
+            foreach (var product in products)
+            {
+                if (trackIds.Contains(product.TrackId))
+                {
+                    _context.Products.Remove(product);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         // PUT: api/Product/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -142,12 +162,37 @@ namespace api_backend.Controllers
             return NoContent();
         }
 
-
         //get all products by a sponsor'sId
         [HttpGet("GetProductsBySponsorId/{SponsorId}")]
-        public async Task<List<Product>> GetProductsBySponsorId(int SponsorId)
+        public async Task<ActionResult<List<Product>>> GetProductsBySponsorId(int SponsorId)
         {
             return await _context.Products.Where(p => p.SponsorId == SponsorId).ToListAsync();
+        }
+
+        //get all products by a sponsor'sId
+        [HttpGet("GetiTunesProductsBySponsorId/{SponsorId}")]
+        public async Task<ActionResult<JValue>> GetiTunesProductsBySponsorId(int SponsorId)
+        {
+            List<Product> products = await _context.Products.Where(p => p.SponsorId == SponsorId).ToListAsync();
+
+            var serviceProvider = HttpContext.RequestServices;
+            var sponsorParamsQueryInstance = serviceProvider.GetRequiredService<SponsorQueryParamsController>();
+
+            string iTunesItems = "[";
+
+            foreach (Product product in products)
+            {
+                string trackId = product.TrackId.ToString();
+                string term = "all";
+                string? iTunesItem = await sponsorParamsQueryInstance.GetMediaTerm(trackId, term);
+                if (iTunesItem != null)
+                {
+                    iTunesItems+=iTunesItem;
+                }
+            }
+
+            iTunesItems += "]";
+            return (JValue)iTunesItems;
         }
 
     }

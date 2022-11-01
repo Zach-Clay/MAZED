@@ -5,7 +5,63 @@
   <div class="spinner-border" role="status"></div>
 </div>
 
-<div *ngIf="!loading" class="container-fluid">
+<div *ngIf="!loading" class="container text-center radios">
+  <mat-radio-group [(ngModel)]="radioSelection" (change)="radioChange()">
+    <mat-radio-button value="remove">Remove Products</mat-radio-button>
+    &nbsp; &nbsp;
+    <mat-radio-button value="add">Add Products</mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<div *ngIf="!loading && radioSelection==='remove'" class="container-fluid">
+  <h1 class="text-center">Remove From Product Catalog</h1>
+
+  <div class="colored-wrapper">
+    <h2 class="text-center">{{orgSelection.orgName}}</h2>
+
+    <div class="d-flex mt-5 align-content-center justify-content-center"
+      *ngIf="loadingCurrentProducts">
+      <div class="spinner-border" role="status"></div>
+    </div>
+
+    <div *ngIf="currentProducts.length !== 0">
+      <mat-list class="info-list">
+        <mat-list-item *ngFor="let item of currentProducts; let i = index">
+          <div class="card">
+            <div class="row info-row">
+
+              <div class="col-1 checkbox text-center">
+                <input type="checkbox" class="larger" (click)="onSelect(item)">
+              </div>
+
+              <div class="col-11 info">
+                <p><strong>Name: </strong>{{item.trackName}}</p>
+                <p><strong>Available: </strong>Yes</p>
+                <p><strong>Pount Value: </strong>{{item.pointValue}}</p>
+                <p><strong><a target="_blank" href="{{item.trackViewUrl}}">Information</a></strong></p>
+              </div>
+
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+
+      <div *ngIf="currentProducts.length > 0" class="fixed-btn text-right">
+        <br/>
+        <button mat-raised-button color="accent" (click)="onRemoveItems()">Remove Items</button>
+      </div>
+
+    </div>
+
+    <br>
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+</div>
+
+<div *ngIf="!loading && radioSelection==='add'" class="container-fluid">
   <h1 class="text-center">Add To Product Catalog</h1>
 
   <div class="colored-wrapper">
@@ -53,7 +109,7 @@
               <div class="col-11 info">
                 <p><strong>Name: </strong>{{item.trackName}}</p>
                 <p><strong>Available: </strong>Yes</p>
-                <p><strong>Price: </strong>${{item.trackPrice}}</p>
+                <p><strong>Pount Value: </strong>{{item.pointValue}}</p>
                 <p><strong><a target="_blank" href="{{item.trackViewUrl}}">Information</a></strong></p>
               </div>
 

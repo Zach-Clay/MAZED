@@ -10,13 +10,15 @@ export class ProductListService {
   constructor(private http: HttpClient) {}
 
   public getProductsBySponsorId(sponsorId: number) {
-    return this.http.get<Product[]>(
-      `${api_url}/Product/GetProductsBySponsorId/${sponsorId}`
-    );
+    return this.http.get<Product[]>(`${api_url}/Product/GetProductsBySponsorId/${sponsorId}`);
   }
 
-  public postArrayOfTrackIds(sponsorId: number, tracksIds: number[]) {
-    return this.http.post(`${api_url}/Product/PostArrayOfTrackIds?sponsorId=${sponsorId}`, tracksIds);
+  public postArrayOfTrackIds(sponsorId: number, trackIds: number[]) {
+    return this.http.post(`${api_url}/Product/PostArrayOfTrackIds?sponsorId=${sponsorId}`, trackIds);
+  }
+
+  public deleteProductsByArrayOfTrackIds(sponsorId: number, trackIds: number[]) {
+    return this.http.post(`${api_url}/Product/DeleteByArrayOfTrackIds?sponsorId=${sponsorId}`, trackIds);
   }
 
 }

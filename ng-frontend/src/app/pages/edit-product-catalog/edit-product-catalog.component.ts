@@ -22,6 +22,10 @@ export class EditProductCatalogComponent implements OnInit {
   isAdmin: boolean = false;
   orgSelection!: SponsorOrg;
   loading: boolean = true;
+  radioSelection: string = "";
+
+  loadingCurrentProducts: boolean = true;
+  currentProducts: any = [];
 
   mediaTypes: string[] = ['Music', 'Movie', 'Podcast'];
   mediaSelection: string = "";
@@ -88,6 +92,11 @@ export class EditProductCatalogComponent implements OnInit {
         //Add a selected field to each product for bulk editing
         for (let i = 0; i < this.searchResults.length; i++) {
           this.searchResults[i].selected = false;
+
+          //Add pointValue field to each product
+          const price = this.searchResults[i].trackPrice;
+          const conversion = this.orgSelection.dollarToPoint;
+          this.searchResults[i].pointValue = price / conversion;
         }
         this.searchLoading = false;
       })
@@ -119,6 +128,59 @@ export class EditProductCatalogComponent implements OnInit {
         .subscribe(() => {
           window.location.reload();
         })
+    }
+  }
+
+  radioChange() {
+    if (this.radioSelection === "remove") {
+      if (this.currentProducts.length !== 0) {
+        this.currentProducts.splice(0, this.currentProducts.length);
+      }
+      //Get all the current products for the organization
+      this.productListService.getProductsBySponsorId(this.orgSelection.id)
+      .subscribe((products) => {
+        for (let product of products) {
+          this.iTunesService.getProducts(product.trackId.toString(), "all")
+          .subscribe((data) => {
+
+            //add selected field
+            data.results[0].selected = false;
+
+            //add point value
+            const price = data.results[0].trackPrice;
+            const conversion = this.orgSelection.dollarToPoint;
+            data.results[0].pointValue = price / conversion;
+            
+            this.currentProducts.push(data.results[0]);
+            if (this.currentProducts.length === products.length) {
+              this.loadingCurrentProducts = false;
+            }
+          })
+        }
+      })
+    }
+  }//end radioChange
+
+  onRemoveItems() {
+    //Get the items to add
+    let itemsToRemove: number[] = [];
+    for (let item of this.currentProducts) {
+      if (item.selected) itemsToRemove.push(item.trackId);
+    }
+
+    //If they have not selected an item
+    if (itemsToRemove.length === 0) {
+      alert("You must select an item(s) to add");
+      return;
+    }
+
+    //Now submit the changes
+    if (confirm("Are you sure you want to remove these items from your catalog?")) {
+      alert("Submitting...");
+      this.productListService.deleteProductsByArrayOfTrackIds(this.orgSelection.id, itemsToRemove)
+      .subscribe(() => {
+        window.location.reload();
+      });
     }
   }
 

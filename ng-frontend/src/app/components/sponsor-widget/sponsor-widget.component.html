@@ -50,6 +50,12 @@
         </div>
       </div>
 
+      <div *ngIf="isSponsor || isAdmin" style="margin-bottom: 8px;">
+        <button mat-raised-button (click)="navToEditCatalog()">
+          Edit Catalog
+        </button>
+      </div>
+
     </div>
   </div>
 </div>
