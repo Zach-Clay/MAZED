@@ -64,17 +64,37 @@ namespace api_backend.Controllers
         }
 
         [HttpPost("PostArrayOfTrackIds")]
-        public async Task<ActionResult<Product>> PostArrayOfTrackIds(int sponsorId, List<int> trackIds)
+        public async Task<ActionResult> PostArrayOfTrackIds(int sponsorId, List<int> trackIds)
         {
             if (_context.Products == null)
             {
                 return Problem("Entity set 'MazedDBContext.Products'  is null.");
             }
 
+            List<Product> products =  await _context.Products.Where(p => p.SponsorId == sponsorId).ToListAsync();            
 
-            
+            List<int> currIds = new List<int>();
+            foreach (var item in products) {
+                currIds.Add(item.TrackId);
+            }
 
-            return new Product();
+            foreach(int id in trackIds)
+            {
+                //account for duplicates
+                if (currIds.Contains(id)) continue;
+
+                Product product = new Product();
+                product.ProductId = 0;
+                product.SponsorId = sponsorId;
+                product.OrderId = null;
+                product.TrackId = id;
+                _context.Products.Add(product);
+            }
+
+            //_context.Products.Add()
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         [HttpDelete("{id}")]

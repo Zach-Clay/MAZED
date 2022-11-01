@@ -206,9 +206,7 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
 
-                entity.Property(e => e.TrackId)
-                    .HasMaxLength(45)
-                    .HasColumnName("trackId");
+                entity.Property(e => e.TrackId).HasColumnName("trackId");
             });
 
             modelBuilder.Entity<PwdChange>(entity =>

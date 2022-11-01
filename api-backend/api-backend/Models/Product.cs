@@ -8,6 +8,6 @@ namespace MazedDB.Models
         public int ProductId { get; set; }
         public int SponsorId { get; set; }
         public int? OrderId { get; set; }
-        public string TrackId { get; set; } = null!;
+        public int TrackId { get; set; }
     }
 }
