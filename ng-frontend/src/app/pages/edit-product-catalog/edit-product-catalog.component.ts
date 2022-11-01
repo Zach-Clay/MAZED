@@ -7,6 +7,8 @@ import {
 } from 'src/app/models/interfaces';
 import { UserService } from 'src/app/services/user.service';
 import { ItunesApiService } from 'src/app/services/itunes-api.service';
+import { asLiteral } from '@angular/compiler/src/render3/view/util';
+import { ProductListService } from 'src/app/services/product-list.service';
 
 @Component({
   selector: 'app-edit-product-catalog',
@@ -32,6 +34,7 @@ export class EditProductCatalogComponent implements OnInit {
     private cognitoService: CognitoService,
     private userService: UserService,
     private iTunesService: ItunesApiService,
+    private productListService: ProductListService,
     ) { }
 
   ngOnInit(): void {
@@ -86,10 +89,37 @@ export class EditProductCatalogComponent implements OnInit {
         for (let i = 0; i < this.searchResults.length; i++) {
           this.searchResults[i].selected = false;
         }
-
         this.searchLoading = false;
       })
 
+  }
+
+  //on select, we need to change the selected field
+  onSelect(item: any) {
+    item.selected = !item.selected;
+  }
+
+  onSubmitUpdate() {
+    //Get the items to add
+    let itemsToAdd: number[] = [];
+    for (let item of this.searchResults) {
+      if (item.selected) itemsToAdd.push(item.trackId);
+    }
+
+    //If they have not selected an item
+    if (itemsToAdd.length === 0) {
+      alert("You must select an item(s) to add");
+      return;
+    }
+
+    //Now submit the changes
+    if (confirm("Are you sure you want to add these items to your catalog?")) {
+      alert("Submitting...");
+      this.productListService.postArrayOfTrackIds(this.orgSelection.id, itemsToAdd)
+        .subscribe(() => {
+          window.location.reload();
+        })
+    }
   }
 
 }

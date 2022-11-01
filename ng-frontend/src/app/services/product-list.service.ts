@@ -16,19 +16,7 @@ export class ProductListService {
   }
 
   public postArrayOfTrackIds(sponsorId: number, tracksIds: number[]) {
-    const body = {
-      sponsorId: sponsorId,
-      tracksIds: tracksIds
-    };
-
-    this.http.post(`${api_url}/Product/PostArrayOfTrackIds`, body).subscribe({
-      next: data => {
-        return data;
-      },
-      error: error => {
-        console.error('There was an error!', error);
-      }
-    });
+    return this.http.post(`${api_url}/Product/PostArrayOfTrackIds?sponsorId=${sponsorId}`, tracksIds);
   }
 
 }
