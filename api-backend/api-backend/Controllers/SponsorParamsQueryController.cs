@@ -11,15 +11,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MazedDB.Data;
 using MazedDB.Models;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace api_backend.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class SponsorQueryParamsController : Controller
     {
         private readonly MazedDBContext _context;
         static HttpClient client = new();
+        private string iTunes_url = "https://itunes.apple.com";
 
         public SponsorQueryParamsController(MazedDBContext context)
         {
@@ -34,7 +38,7 @@ namespace api_backend.Controllers
             query.Add("term", term);
             query.Add("media", media);
 
-            string queryString = SponsQueryParam.iTunes_url +  "/search?" + query.ToString();
+            string queryString = iTunes_url +  "/search?" + query.ToString();
 
             HttpResponseMessage response = await client.GetAsync(queryString);
             if (response.IsSuccessStatusCode)
@@ -44,6 +48,7 @@ namespace api_backend.Controllers
 
             return product;
         }
+
     }
 }
 

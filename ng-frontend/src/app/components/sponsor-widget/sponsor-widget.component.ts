@@ -46,6 +46,7 @@ export class SponsorWidgetComponent implements OnInit {
   sponsorOrgs!: SponsorOrg[];
   isDriver: boolean = false;
   isSponsor: boolean = false;
+  isAdmin: boolean = true;
   sponsorsApps!: Application[];
   showSponsorApps: boolean = false;
   driverOutstandingApps!: Application[];
@@ -57,7 +58,8 @@ export class SponsorWidgetComponent implements OnInit {
     private userService: UserService,
     private sponsorOrgService: SponsorOrgService,
     private applicationService: ApplicationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -95,7 +97,15 @@ export class SponsorWidgetComponent implements OnInit {
         })
       })
     }
+
+    if (this.user.userType.toLowerCase() === 'admin') {
+      this.isAdmin = true;
+    }
     this.loaded = true;
+  }
+
+  navToEditCatalog() {
+    this.router.navigate(['/edit-catalog']);
   }
 
   openDialog(): void {

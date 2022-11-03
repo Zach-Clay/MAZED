@@ -109,6 +109,10 @@ export class SponsorsDashboardComponent implements OnInit {
     }
   }
 
+  navToEditCatalog() {
+    this.router.navigate(['/edit-catalog']);
+  }
+
   removeDriver(driver: User) {
     if (
       confirm(

@@ -35,6 +35,8 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
 import { AdminHomepageComponent } from './pages/admin-homepage/admin-homepage.component';
 import { DriverSponsorCardComponent } from './components/driver-sponsor-card/driver-sponsor-card.component';
 import { DriverProductListingComponent } from './components/driver-product-listing/driver-product-listing.component';
+import { EditProductCatalogComponent } from './pages/edit-product-catalog/edit-product-catalog.component';
+import { ProductCatalogComponent } from './pages/product-catalog/product-catalog.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { DriverProductListingComponent } from './components/driver-product-listi
     AdminHomepageComponent,
     DriverSponsorCardComponent,
     DriverProductListingComponent,
+    EditProductCatalogComponent,
+    ProductCatalogComponent,
   ],
   imports: [
     BrowserModule,

@@ -202,29 +202,11 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.ProductId).HasColumnName("productId");
 
-                entity.Property(e => e.Availibility).HasColumnName("availibility");
-
-                entity.Property(e => e.Description)
-                    .HasMaxLength(45)
-                    .HasColumnName("description");
-
-                entity.Property(e => e.Image)
-                    .HasColumnType("blob")
-                    .HasColumnName("image");
-
-                entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(45)
-                    .HasColumnName("name");
-
                 entity.Property(e => e.OrderId).HasColumnName("orderId");
 
-                entity.Property(e => e.OrderQuantity).HasColumnName("orderQuantity");
-
-                entity.Property(e => e.PointValue).HasColumnName("pointValue");
-
                 entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
+
+                entity.Property(e => e.TrackId).HasColumnName("trackId");
             });
 
             modelBuilder.Entity<PwdChange>(entity =>
