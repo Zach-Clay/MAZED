@@ -1,6 +1,6 @@
 <div class="text-center">
   <h1 class="mt-2 mb-0 title">
-    <span *ngIf="userType == 'driver'"> New User Registration </span>
+    <span *ngIf="userType == 'driver'"> New Driver Registration </span>
     <span *ngIf="userType == 'sponsor'"> New Sponsor User Registration </span>
     <span *ngIf="userType == 'admin'"> New Admin User Registration </span>
   </h1>
@@ -220,7 +220,10 @@
   </div>
 </div>
 
-<div class="register mt-3 mb-3 text-center" *ngIf="userType == 'driver'">
+<div
+  class="register mt-3 mb-3 text-center"
+  *ngIf="userType == 'driver' && !assisted"
+>
   <button
     class="bg-transparent border-0 text-primary"
     (click)="returnToLogin()"

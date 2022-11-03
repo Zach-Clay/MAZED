@@ -37,6 +37,7 @@ import { DriverSponsorCardComponent } from './components/driver-sponsor-card/dri
 import { DriverProductListingComponent } from './components/driver-product-listing/driver-product-listing.component';
 import { EditProductCatalogComponent } from './pages/edit-product-catalog/edit-product-catalog.component';
 import { ProductCatalogComponent } from './pages/product-catalog/product-catalog.component';
+import { SponsorCreationFormComponent } from './components/sponsor-creation-form/sponsor-creation-form.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ProductCatalogComponent } from './pages/product-catalog/product-catalog
     DriverProductListingComponent,
     EditProductCatalogComponent,
     ProductCatalogComponent,
+    SponsorCreationFormComponent,
   ],
   imports: [
     BrowserModule,
