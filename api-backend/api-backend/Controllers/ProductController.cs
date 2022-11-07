@@ -114,6 +114,7 @@ namespace api_backend.Controllers
 
 
         //get all products by a sponsor'sId
+        //used this one and then call using track ID for getting catlogue sponsor info
         [HttpGet("GetProductsBySponsorId/{SponsorId}")]
         public async Task<List<Product>> GetProductsBySponsorId(int SponsorId)
         {
