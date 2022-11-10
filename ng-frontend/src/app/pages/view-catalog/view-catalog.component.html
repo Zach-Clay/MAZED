@@ -54,7 +54,9 @@
             <div class="col-6 info">
               <p><strong>Name: </strong>{{ item.trackName }}</p>
               <p><strong>Available: </strong>Yes</p>
-              <p><strong>Pount Value: </strong>{{ item.pointValue }}</p>
+              <p>
+                <strong>Pount Value: </strong>{{ item.pointValue.toFixed(2) }}
+              </p>
               <p>
                 <strong
                   ><a target="_blank" href="{{ item.trackViewUrl }}"
