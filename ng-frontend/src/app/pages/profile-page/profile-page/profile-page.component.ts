@@ -11,11 +11,16 @@ import { runInThisContext } from 'vm';
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent implements OnInit {
-
-  public user: User = {} as User;
-  public isDisabled: boolean = true;
-  public showInfo: boolean = false;
-  public prettyPhoneNum: string = "";
+  user!: User;
+  selectedUser!: User;
+  userList!: User[];
+  isDisabled: boolean = true;
+  infoLoaded: boolean = false;
+  selectLoaded: boolean = false;
+  prettyPhoneNum: string = "";
+  isDriver: boolean = false;
+  isSponsor: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private cognitoService: CognitoService, private userService: UserService) { }
 
@@ -25,7 +30,33 @@ export class ProfilePageComponent implements OnInit {
       .then((user: any) => {
         this.userService.getUser(user.username).subscribe((data)=>{
           this.user = data;
-          this.showInfo = true;
+          this.selectedUser = this.user;
+          this.infoLoaded = true;
+
+          //Get info for multiselect box
+          if(this.user.userType.toLowerCase() === "driver") this.isDriver = true;
+          //If they are a sponsor - they need to be able to select all of their driver profiles
+          if(this.user.userType.toLowerCase() === "sponsor") {
+            this.isSponsor = true;
+
+            //Get the sponsors sponsor org
+            this.userService.getSponsorOrgBySponsorUserId(this.user.id).subscribe((org) => {
+              //Then get the drivers for that org
+              this.userService.getDriverUsersBySponsorOrgId(org.id).subscribe((drivers) => {
+                this.userList = drivers;
+                this.selectLoaded = true;
+              })
+            })
+            }
+          //If they are an admin, they can select an profile
+          if(this.user.userType.toLowerCase() === "admin") {
+            this.isAdmin = true;
+            //Get all users
+            this.userService.getAllUsers().subscribe((users) => {
+              this.userList = users;
+              this.selectLoaded = true;
+            })
+          }
           this.formatPhone();
         })
       })
@@ -46,28 +77,32 @@ export class ProfilePageComponent implements OnInit {
       temp = temp.split('-').join('');
       temp = temp.split('(').join('');
       temp = temp.split(')').join('');
-      this.user.userPhoneNum = temp;
+      this.selectedUser.userPhoneNum = temp;
 
       //update our database
-      this.userService.updateUser(this.user.id, this.user);
+      this.userService.updateUser(this.selectedUser.id, this.selectedUser);
 
       //Update cognito
-      const fullName = this.user.userFname + ' ' + this.user.userLname;
+      const fullName = this.selectedUser.userFname + ' ' + this.selectedUser.userLname;
       const cognitoAttributes = {
-        address: this.user.userAddress,
-        email: this.user.userEmail,
+        address: this.selectedUser.userAddress,
+        email: this.selectedUser.userEmail,
         name: fullName,
-        phone_number: this.user.userPhoneNum
+        phone_number: this.selectedUser.userPhoneNum
       };
-      this.cognitoService.updateUser(cognitoAttributes);
+      this.cognitoService.updateUser(this.selectedUser.username, cognitoAttributes);
 
       //re-format the phone number to look pretty
       this.formatPhone();
     }
   }
 
+  onSelectionChange() {
+    this.formatPhone();
+  }
+
   formatPhone() {
-    let temp = this.user.userPhoneNum;
+    let temp = this.selectedUser.userPhoneNum;
     var cleaned = ('' + temp).replace(/\D/g, '');
     var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
     if (match) {

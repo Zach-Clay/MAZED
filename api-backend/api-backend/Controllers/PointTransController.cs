@@ -137,5 +137,11 @@ namespace api_backend.Controllers
         {
             return await _context.PointTransactions.Where(p => p.UserId == UserId).ToListAsync();
         }
+
+        [HttpGet("GetSpecialTransactionByUser")]
+        public async Task<List<PointTransaction>> GetSpecialTransactionByUser(int UserId)
+        {
+            return await _context.PointTransactions.Where(p => p.UserId == UserId && p.IsSpecialTransaction == 1).ToListAsync();
+        }
     }
 }

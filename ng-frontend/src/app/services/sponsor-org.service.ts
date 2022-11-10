@@ -4,11 +4,14 @@ import { api_url, environment } from 'src/environments/environment';
 import { SponsorOrg } from '../models/interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SponsorOrgService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  public addSponsorOrg(org: SponsorOrg) {
+    return this.http.post<SponsorOrg>(`${api_url}/SponsorOrg`, org);
+  }
 
   public getAllOrgs() {
     return this.http.get<SponsorOrg[]>(`${api_url}/SponsorOrg`);
@@ -19,14 +22,15 @@ export class SponsorOrgService {
   }
 
   public updateSponsorOrg(id: number, org: SponsorOrg) {
-    return this.http.put<SponsorOrg>(`${api_url}/SponsorOrg/${id}`, org).subscribe({
-      next: (data) => {
-        return data;
-      },
-      error: (error) => {
-        console.error('There was an error!', error);
-      },
-    });
+    return this.http
+      .put<SponsorOrg>(`${api_url}/SponsorOrg/${id}`, org)
+      .subscribe({
+        next: (data) => {
+          return data;
+        },
+        error: (error) => {
+          console.error('There was an error!', error);
+        },
+      });
   }
-
 }

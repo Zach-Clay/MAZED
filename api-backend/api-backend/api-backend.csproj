@@ -86,5 +86,6 @@
     <Compile Remove="Controllers\EvanController.cs" />
     <Compile Remove="Controllers\UserController.cs" />
     <Compile Remove="Data\UsersAPIDBContext.cs" />
+    <Compile Remove="Logic\UserLogic.cs" />
   </ItemGroup>
 </Project>

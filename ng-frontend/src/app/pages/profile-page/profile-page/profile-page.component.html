@@ -1,17 +1,50 @@
 <app-home-page-header></app-home-page-header>
 
-<div class="wrapper info-wrapper">
+<div
+  class="d-flex mt-5 align-content-center justify-content-center"
+  *ngIf="!infoLoaded && !selectLoaded"
+  >
+  <div class="spinner-border" role="status"></div>
+</div>
+
+<div class="container text-center" *ngIf="selectLoaded">
+  <br/>
+  <div *ngIf="isAdmin">
+    <p><strong>Select A User To Edit:</strong></p>
+      <mat-form-field>
+       <mat-select [(ngModel)]="selectedUser" (selectionChange)="onSelectionChange()">
+         <mat-option *ngFor="let user of userList" [value]="user">
+           {{user.userFname}} {{user.userLname}}, {{user.username}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+  <div *ngIf="isSponsor">
+    <p><strong>Select A Driver To Edit:</strong></p>
+      <mat-form-field>
+       <mat-select [(ngModel)]="selectedUser" (selectionChange)="onSelectionChange()">
+         <mat-option *ngFor="let user of userList" [value]="user">
+           {{user.userFname}} {{user.userLname}}, {{user.username}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+</div>
+  
+<div class="wrapper info-wrapper" *ngIf="infoLoaded">
+  <div class="text-center">
+    <h3>USER: {{selectedUser.username}}</h3>
+  </div>
   <div class="container info-container">
     <div class="row d-flex">
-
-      <div class="col-9 info-col" *ngIf="showInfo">
+      <div class="col-9 info-col">
         <div class="field">
           <span class="info-text"><strong>First Name: </strong></span>
-          <input class="info-input" type="text" [(ngModel)]="user.userFname" [disabled]="isDisabled">
+          <input class="info-input" type="text" [(ngModel)]="selectedUser.userFname" [disabled]="isDisabled">
         </div>
         <div class="field">
           <span class="info-text"><strong>Last Name: </strong></span>
-          <input class="info-input" type="text" [(ngModel)]="user.userLname" [disabled]="isDisabled">
+          <input class="info-input" type="text" [(ngModel)]="selectedUser.userLname" [disabled]="isDisabled">
         </div>
         <div class="field">
           <span class="info-text"><strong>Phone Number: </strong></span>
@@ -19,23 +52,23 @@
         </div>
         <div class="field">
           <span class="info-text"><strong>Address: </strong></span>
-          <input class="info-input" type="text" [(ngModel)]="user.userAddress" [disabled]="isDisabled">
+          <input class="info-input" type="text" [(ngModel)]="selectedUser.userAddress" [disabled]="isDisabled">
         </div>
         <div class="field">
           <span class="info-text"><strong>Email: </strong></span>
-          <input class="info-input" type="text" [(ngModel)]="user.userEmail" [disabled]="isDisabled">
+          <input class="info-input" type="text" [(ngModel)]="selectedUser.userEmail" [disabled]="isDisabled">
         </div>
         <div class="field">
           <span class="info-text"><strong>Point Notifications: </strong></span>
-          <mat-slide-toggle class="info-input" [(ngModel)]="user.pointNotifications" [disabled]="isDisabled"></mat-slide-toggle>
+          <mat-slide-toggle class="info-input" [(ngModel)]="selectedUser.pointNotifications" [disabled]="isDisabled"></mat-slide-toggle>
         </div>
         <div class="field">
           <span class="info-text"><strong>Order Notifications: </strong></span>
-          <mat-slide-toggle class="info-input" [(ngModel)]="user.orderNotifications" [disabled]="isDisabled"></mat-slide-toggle>
+          <mat-slide-toggle class="info-input" [(ngModel)]="selectedUser.orderNotifications" [disabled]="isDisabled"></mat-slide-toggle>
         </div>
         <div class="field">
           <span class="info-text"><strong>Issues With Order Notifications: </strong></span>
-          <mat-slide-toggle class="info-input" [(ngModel)]="user.issueNotifications" [disabled]="isDisabled"></mat-slide-toggle>
+          <mat-slide-toggle class="info-input" [(ngModel)]="selectedUser.issueNotifications" [disabled]="isDisabled"></mat-slide-toggle>
         </div>
       </div>
 
