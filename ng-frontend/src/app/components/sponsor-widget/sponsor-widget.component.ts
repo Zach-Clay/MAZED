@@ -108,6 +108,10 @@ export class SponsorWidgetComponent implements OnInit {
     this.router.navigate(['/edit-catalog']);
   }
 
+  navToViewCatalog() {
+    this.router.navigate(['/view-catalog']);
+  }
+
   openDialog(): void {
     let newSponsorApps: ExpandedApplication[] = [];
     //add expanded field to each sponsorApp
