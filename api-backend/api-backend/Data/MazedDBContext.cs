@@ -19,6 +19,7 @@ namespace MazedDB.Data
 
         public virtual DbSet<Application> Applications { get; set; } = null!;
         public virtual DbSet<AuditLogging> AuditLoggings { get; set; } = null!;
+        public virtual DbSet<DriverCart> DriverCarts { get; set; } = null!;
         public virtual DbSet<DriverOrder> DriverOrders { get; set; } = null!;
         public virtual DbSet<EfmigrationsHistory> EfmigrationsHistories { get; set; } = null!;
         public virtual DbSet<LoginAttempt> LoginAttempts { get; set; } = null!;
@@ -111,6 +112,26 @@ namespace MazedDB.Data
                     .HasConstraintName("UserIdFK_AuditLog");
             });
 
+            modelBuilder.Entity<DriverCart>(entity =>
+            {
+                entity.ToTable("driverCart");
+
+                entity.HasIndex(e => e.Id, "id_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.MediaType).HasColumnName("mediaType");
+
+                entity.Property(e => e.PointValue).HasColumnName("pointValue");
+
+                entity.Property(e => e.ProductId).HasColumnName("productId");
+
+                entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
+
+                entity.Property(e => e.UserId).HasColumnName("userId");
+            });
+
             modelBuilder.Entity<DriverOrder>(entity =>
             {
                 entity.ToTable("driverOrders");
@@ -201,6 +222,8 @@ namespace MazedDB.Data
                 entity.ToTable("product");
 
                 entity.Property(e => e.ProductId).HasColumnName("productId");
+
+                entity.Property(e => e.ItemCost).HasColumnName("itemCost");
 
                 entity.Property(e => e.OrderId).HasColumnName("orderId");
 
@@ -328,7 +351,9 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
 
-                entity.Property(e => e.SponsorTotal).HasColumnName("sponsorTotal");
+                entity.Property(e => e.SponsorTotal)
+                    .HasColumnName("sponsorTotal")
+                    .HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.UserId).HasColumnName("userId");
 

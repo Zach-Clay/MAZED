@@ -46,7 +46,7 @@ export class SponsorWidgetComponent implements OnInit {
   sponsorOrgs!: SponsorOrg[];
   isDriver: boolean = false;
   isSponsor: boolean = false;
-  isAdmin: boolean = true;
+  isAdmin: boolean = false;
   sponsorsApps!: Application[];
   showSponsorApps: boolean = false;
   driverOutstandingApps!: Application[];
@@ -106,6 +106,10 @@ export class SponsorWidgetComponent implements OnInit {
 
   navToEditCatalog() {
     this.router.navigate(['/edit-catalog']);
+  }
+
+  navToViewCatalog() {
+    this.router.navigate(['/view-catalog']);
   }
 
   openDialog(): void {

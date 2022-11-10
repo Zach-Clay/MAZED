@@ -1,0 +1,81 @@
+<app-home-page-header></app-home-page-header>
+
+<div class="d-flex mt-5 align-content-center justify-content-center"
+  *ngIf="loading">
+  <div class="spinner-border" role="status"></div>
+</div>
+
+<div class="container" *ngIf="!loading">
+
+  <br>
+  <div *ngIf="isDriver || isAdmin" class="text-center">
+    <p><strong>Select An Orgs Catalog</strong></p>
+    <mat-form-field appearance="fill">
+      <mat-select [(ngModel)]="orgSelection" (selectionChange)="onSelectionChange()">
+        <mat-option *ngFor="let org of orgChoices" [value]="org">
+          {{org.orgName}}
+         </mat-option>
+       </mat-select>
+     </mat-form-field>
+  </div>
+
+  <div class="d-flex mt-5 align-content-center justify-content-center"
+    *ngIf="orgCatalogLoading">
+    <div class="spinner-border" role="status"></div>
+  </div>
+
+  <div class="colored-wrapper" *ngIf="currentProducts.length !== 0">
+    <br>
+    <div class="row">
+      <h2 class="col text-center">{{orgSelection.orgName}}</h2>
+      <div class="col" *ngIf="isSponsor || isAdmin">
+        <button mat-raised-button 
+        color="accent"
+        (click)="navToEditCatalog()">
+          Edit Product Catalog
+        </button>
+      </div>
+    </div>
+
+    <mat-list class="info-list">
+      <mat-list-item *ngFor="let item of currentProducts; let i = index">
+        <div class="card">
+          <div class="row info-row">
+
+            <div class="col-7 info">
+              <p><strong>Name: </strong>{{item.trackName}}</p>
+              <p><strong>Available: </strong>Yes</p>
+              <p><strong>Pount Value: </strong>{{item.pointValue}}</p>
+              <p><strong><a target="_blank" href="{{item.trackViewUrl}}">Information</a></strong></p>
+            </div>
+
+            <div class="col-4" *ngIf="isDriver">
+              <div>
+                <button mat-raised-button 
+                color="primary"
+                (click)="onAddToCart()">
+                  Add To Cart
+                </button>
+              </div>
+              <br>
+              <div>
+                <button mat-raised-button
+                (click)="onCheckout()">
+                  Checkout
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <br>
+  </div>
+  <br>
+
+  <div class="text-center" *ngIf="currentProducts.length === 0 && orgCatalogLoading === false">
+    <p>No Products to Display</p>
+  </div>
+
+</div>

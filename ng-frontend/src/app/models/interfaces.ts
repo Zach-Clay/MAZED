@@ -30,7 +30,7 @@ export interface UserToSponsor {
 export interface LoginAttempt {
   id: number;
   username: string;
-  isLoginSuccessful: string;
+  isLoginSuccessful: number;
 }
 
 export interface PointsChanges {

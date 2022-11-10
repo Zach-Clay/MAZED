@@ -12,6 +12,7 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 import { EditProductCatalogComponent } from './pages/edit-product-catalog/edit-product-catalog.component';
 import { ProductCatalogComponent } from './pages/product-catalog/product-catalog.component';
+import { ViewCatalogComponent } from './pages/view-catalog/view-catalog.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'edit-catalog', component: EditProductCatalogComponent },
   { path: 'product-catalog', component: ProductCatalogComponent },
+  { path: 'view-catalog', component: ViewCatalogComponent },
 ];
 
 @NgModule({

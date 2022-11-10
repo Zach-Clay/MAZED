@@ -125,7 +125,7 @@ export class LoginComponent implements OnInit {
         const attempt: LoginAttempt = {
           id: 0,
           username: this.user.username,
-          isLoginSuccessful: 'yes',
+          isLoginSuccessful: 1,
         };
         this.loginAttemptService.addAttempt(attempt);
         this.loading = false;
@@ -139,7 +139,7 @@ export class LoginComponent implements OnInit {
         const attempt: LoginAttempt = {
           id: 0,
           username: this.user.username,
-          isLoginSuccessful: 'no',
+          isLoginSuccessful: 0,
         };
         this.loginAttemptService.addAttempt(attempt);
       });

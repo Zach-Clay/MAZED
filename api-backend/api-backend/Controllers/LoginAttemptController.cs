@@ -69,7 +69,7 @@ namespace api_backend.Controllers
                 return Problem("Entity set 'MazedDBContext.LoginAttempts'  is null.");
             }
 
-
+            login.AttemptedDate = DateTime.Now;
             _context.LoginAttempts.Add(login);
             await _context.SaveChangesAsync();
 
