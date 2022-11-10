@@ -54,8 +54,13 @@
           </div>
         </div>
 
-        <div class="d-flex" *ngIf="user.userType === 'admin' ||
-          (user.userType === 'sponsor' && orgSelection.id === sponsorsOrg.id)">
+        <div
+          class="d-flex"
+          *ngIf="
+            user.userType === 'admin' ||
+            (user.userType === 'sponsor' && orgSelection.id === sponsorsOrg.id)
+          "
+        >
           <div>
             <button mat-raised-button color="accent" (click)="openDialog()">
               Add/Deduct Driver Points
@@ -66,7 +71,8 @@
             <button
               mat-raised-button
               color="accent"
-              (click)="addingSponsor = true">
+              (click)="addingSponsor = true"
+            >
               Create Another Sponsor Account
             </button>
           </div>
@@ -75,12 +81,13 @@
             <button
               mat-raised-button
               color="accent"
-              (click)="navToEditCatalog()">
+              (click)="navToEditCatalog()"
+            >
               Edit Product Catalog
             </button>
           </div>
         </div>
-        
+
         <h4 class="field">Description:</h4>
         <span class="not-editing" *ngIf="!editing">{{
           orgSelection.orgDescription
@@ -128,6 +135,7 @@
   <app-user-registration
     [userType]="'sponsor'"
     [sponsorId]="sponsorsOrg.id"
+    [assisted]="true"
   ></app-user-registration>
   <div class="register mt-3 mb-3 text-center">
     <button

@@ -23,6 +23,7 @@ import { User, UserToSponsor } from 'src/app/models/interfaces';
 export class UserRegistrationComponent implements OnInit {
   @Input() userType: string = 'driver';
   @Input() sponsorId: number = 0;
+  @Input() assisted: boolean = false;
   public loading: boolean = false;
   public needsConfirmation: boolean = false;
   public name: any = '';

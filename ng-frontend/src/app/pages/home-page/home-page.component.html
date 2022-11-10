@@ -7,8 +7,8 @@
 
 <div *ngIf="dbUser && cognitoUser">
   <app-home-page-header
-    [showPoints]="isDriver"
-    [totalPoints]="dbUser.totalPoints"
+    [showPoints]="false"
+    [dbUser]="dbUser"
     *ngIf="displayName"
   ></app-home-page-header>
 

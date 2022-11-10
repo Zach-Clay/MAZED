@@ -12,6 +12,8 @@ export class AdminDashboardComponent implements OnInit {
   @Input() user!: User;
   addingAdmin: boolean = false;
   addingSponsor: boolean = false;
+  addingDriver: boolean = false;
+  addingSponsorOrg: boolean = false;
   orgs!: SponsorOrg[];
   orgToAddSponsor!: SponsorOrg;
 
