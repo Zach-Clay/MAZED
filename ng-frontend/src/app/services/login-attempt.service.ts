@@ -17,7 +17,7 @@ export class LoginAttemptService {
 
   //Post a new login attempt
   public addAttempt(attempt: LoginAttempt) {
-    this.http.post<LoginAttempt[]>(`${api_url}/LoginAttempt`, attempt).subscribe({
+    this.http.post<LoginAttempt>(`${api_url}/LoginAttempt`, attempt).subscribe({
       next: data => {
         return data;
       },
