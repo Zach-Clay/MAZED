@@ -9,5 +9,6 @@ namespace MazedDB.Models
         public int SponsorId { get; set; }
         public int? OrderId { get; set; }
         public int TrackId { get; set; }
+        public int? ItemCost { get; set; }
     }
 }
