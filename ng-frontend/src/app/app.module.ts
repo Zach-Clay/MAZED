@@ -30,6 +30,14 @@ import { DriverHomePageComponent } from './pages/driver-home-page/driver-home-pa
 import { SponsorHomePageComponent } from './pages/sponsor-home-page/sponsor-home-page.component';
 import { AddDeductDialog } from './pages/sponsors-dashboard/sponsors-dashboard.component';
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { AdminHomepageComponent } from './pages/admin-homepage/admin-homepage.component';
+import { DriverSponsorCardComponent } from './components/driver-sponsor-card/driver-sponsor-card.component';
+import { DriverProductListingComponent } from './components/driver-product-listing/driver-product-listing.component';
+import { EditProductCatalogComponent } from './pages/edit-product-catalog/edit-product-catalog.component';
+import { ProductCatalogComponent } from './pages/product-catalog/product-catalog.component';
+import { SponsorCreationFormComponent } from './components/sponsor-creation-form/sponsor-creation-form.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +59,14 @@ import { ProductListingComponent } from './components/product-listing/product-li
     SponsorHomePageComponent,
     AddDeductDialog,
     ProductListingComponent,
+    AdminDashboardComponent,
+    RegistrationPageComponent,
+    AdminHomepageComponent,
+    DriverSponsorCardComponent,
+    DriverProductListingComponent,
+    EditProductCatalogComponent,
+    ProductCatalogComponent,
+    SponsorCreationFormComponent,
   ],
   imports: [
     BrowserModule,

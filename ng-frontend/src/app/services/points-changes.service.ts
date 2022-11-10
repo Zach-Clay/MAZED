@@ -16,7 +16,7 @@ export class PointsChangesService {
   }
 
   public postTransation(change: PointsChanges) {
-    this.http.post<PointsChanges>(`${api_url}/PointTrans/`, change).subscribe({
+    this.http.post<PointsChanges>(`${api_url}/PointTrans`, change).subscribe({
       next: (data) => {
         return data;
       },
@@ -25,4 +25,5 @@ export class PointsChangesService {
       },
     });
   }
+  
 }

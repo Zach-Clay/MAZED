@@ -6,6 +6,7 @@ using MazedDB.Data;
 using MazedDB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,7 +35,7 @@ namespace api_backend.Controllers
         {
             if (_context.Products == null) return NotFound();
 
-            return await _context.Products.Where(p => p.IsBlacklisted == 0).ToListAsync<Product>();
+            return await _context.Products.ToListAsync<Product>();
         }
 
         // GET: api/ProductController
@@ -45,13 +46,11 @@ namespace api_backend.Controllers
 
             var product = await _context.Products.FindAsync(id) ?? throw new Exception("Product not found");
 
-            if (product.IsBlacklisted == 1) return NotFound();
-
             return product;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> PostUser(Product product)
+        public async Task<ActionResult<Product>> PostProduct(Product product)
         {
             if (_context.Products == null)
             {
@@ -65,6 +64,40 @@ namespace api_backend.Controllers
             return CreatedAtAction("GetProduct", new { productId = product.ProductId }, product);
         }
 
+        [HttpPost("PostArrayOfTrackIds")]
+        public async Task<ActionResult> PostArrayOfTrackIds(int sponsorId, List<int> trackIds)
+        {
+            if (_context.Products == null)
+            {
+                return Problem("Entity set 'MazedDBContext.Products'  is null.");
+            }
+
+            List<Product> products =  await _context.Products.Where(p => p.SponsorId == sponsorId).ToListAsync();            
+
+            List<int> currIds = new List<int>();
+            foreach (var item in products) {
+                currIds.Add(item.TrackId);
+            }
+
+            foreach(int id in trackIds)
+            {
+                //account for duplicates
+                if (currIds.Contains(id)) continue;
+
+                Product product = new Product();
+                product.ProductId = 0;
+                product.SponsorId = sponsorId;
+                product.OrderId = null;
+                product.TrackId = id;
+                _context.Products.Add(product);
+            }
+
+            //_context.Products.Add()
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
@@ -72,12 +105,29 @@ namespace api_backend.Controllers
 
             var product = await _context.Products.FindAsync(id) ?? throw new Exception("Product not found");
 
-            product.IsBlacklisted = 1;
-            //telling context the entry was modified so we then can change it
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Products.Remove(product);
 
             await _context.SaveChangesAsync();
 
+            return NoContent();
+        }
+
+        [HttpPost("DeleteByArrayOfTrackIds")]
+        public async Task<IActionResult> DeleteProductByArrayOfTrackIds(int sponsorId, List<int> trackIds)
+        {
+            if (_context.Products == null) return NotFound();
+
+            List<Product> products = await _context.Products.Where(p => p.SponsorId == sponsorId).ToListAsync();
+
+            foreach (var product in products)
+            {
+                if (trackIds.Contains(product.TrackId))
+                {
+                    _context.Products.Remove(product);
+                }
+            }
+
+            await _context.SaveChangesAsync();
             return NoContent();
         }
 
@@ -112,12 +162,38 @@ namespace api_backend.Controllers
             return NoContent();
         }
 
-
         //get all products by a sponsor'sId
+        //used this one and then call using track ID for getting catlogue sponsor info
         [HttpGet("GetProductsBySponsorId/{SponsorId}")]
-        public async Task<List<Product>> GetProductsBySponsorId(int SponsorId)
+        public async Task<ActionResult<List<Product>>> GetProductsBySponsorId(int SponsorId)
         {
             return await _context.Products.Where(p => p.SponsorId == SponsorId).ToListAsync();
+        }
+
+        //get all products by a sponsor'sId
+        [HttpGet("GetiTunesProductsBySponsorId/{SponsorId}")]
+        public async Task<ActionResult<JValue>> GetiTunesProductsBySponsorId(int SponsorId)
+        {
+            List<Product> products = await _context.Products.Where(p => p.SponsorId == SponsorId).ToListAsync();
+
+            var serviceProvider = HttpContext.RequestServices;
+            var sponsorParamsQueryInstance = serviceProvider.GetRequiredService<SponsorQueryParamsController>();
+
+            string iTunesItems = "[";
+
+            foreach (Product product in products)
+            {
+                string trackId = product.TrackId.ToString();
+                string term = "all";
+                string? iTunesItem = await sponsorParamsQueryInstance.GetMediaTerm(trackId, term);
+                if (iTunesItem != null)
+                {
+                    iTunesItems+=iTunesItem;
+                }
+            }
+
+            iTunesItems += "]";
+            return (JValue)iTunesItems;
         }
 
     }
