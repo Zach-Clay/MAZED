@@ -62,7 +62,7 @@ namespace api_backend.Controllers
             List<User> users = new List<User>();
             foreach (var userToSponsor in userToSponsors)
             {
-                if (userToSponsor.UserType.ToLower() == "driver") continue;
+                if (userToSponsor.UserType!.ToLower() == "driver") continue;
                 var user = await userControllerInstance.GetUserById_Object((int)userToSponsor.UserId);
                 users.Add(user);
             }
@@ -82,7 +82,7 @@ namespace api_backend.Controllers
             List<User> users = new List<User>();
             foreach (var userToSponsor in userToSponsors)
             {
-                if (userToSponsor.UserType.ToLower() == "sponsor") continue;
+                if (userToSponsor.UserType!.ToLower() == "sponsor") continue;
                 var user = await userControllerInstance.GetUserById_Object((int)userToSponsor.UserId);
                 users.Add(user);
             }
