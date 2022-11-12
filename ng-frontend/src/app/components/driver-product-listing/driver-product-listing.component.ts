@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 export class DriverProductListingComponent implements OnInit {
   @Input() currentSponsor!: SponsorOrg;
   @Input() dbUser!: User;
+  @Input() clickable!: boolean;
   products!: Product[];
   fetchedProducts: boolean = false;
 
@@ -37,7 +38,7 @@ export class DriverProductListingComponent implements OnInit {
   }
 
   goToCatalogue() {
-    if (this.dbUser.userType.toLowerCase() != 'driver') {
+    if (this.dbUser.userType.toLowerCase() != 'driver' || !this.clickable) {
       return;
     }
     this.router.navigate(['/view-catalog']);

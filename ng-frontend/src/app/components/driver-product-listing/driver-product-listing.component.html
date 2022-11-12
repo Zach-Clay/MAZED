@@ -4,7 +4,9 @@
       class="card-body text-center"
       [ngStyle]="{
         cursor:
-          dbUser.userType.toLowerCase() == 'driver' ? 'pointer' : 'default'
+          dbUser.userType.toLowerCase() == 'driver' && clickable
+            ? 'pointer'
+            : 'default'
       }"
       (click)="goToCatalogue()"
     >
