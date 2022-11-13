@@ -20,6 +20,7 @@ export class ProductListingComponent implements OnInit {
       .getProducts(this.product.trackId.toString(), 'all')
       .subscribe((data) => {
         this.itunes_product = data.results[0];
+        console.log(data);
 
         const price = data.results[0].trackPrice;
         const conversion = this.sponsor.dollarToPoint;

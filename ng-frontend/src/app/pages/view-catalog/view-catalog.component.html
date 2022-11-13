@@ -33,8 +33,14 @@
   <div class="colored-wrapper" *ngIf="currentProducts.length !== 0">
     <br />
     <div class="row">
-      <h2 class="col text-center">{{ orgSelection.orgName }}</h2>
-      <div class="col" *ngIf="isSponsor || isAdmin">
+      <div class="col-3"></div>
+      <h2 class="col-6 text-center">{{ orgSelection.orgName }}</h2>
+      <div class="col-3">
+        <div *ngIf="isDriver" class="text-right mr-2">
+          <button mat-raised-button (click)="onCheckout()">Checkout</button>
+        </div>
+      </div>
+      <div class="col-3" *ngIf="isSponsor || isAdmin">
         <button mat-raised-button color="accent" (click)="navToEditCatalog()">
           Edit Product Catalog
         </button>
@@ -43,7 +49,13 @@
 
     <mat-list class="info-list">
       <mat-list-item *ngFor="let item of currentProducts; let i = index">
-        <div class="card">
+        <div
+          class="card"
+          [ngStyle]="{
+            background: item.available ? '' : 'silver',
+            filter: item.available ? '' : 'grayscale(100%)'
+          }"
+        >
           <div class="row info-row">
             <div class="col-2 pl-4">
               <img
@@ -72,16 +84,12 @@
                   mat-raised-button
                   color="primary"
                   (click)="onAddToCart()"
+                  *ngIf="item.available"
                 >
                   Add To Cart
                 </button>
               </div>
               <br />
-              <div>
-                <button mat-raised-button (click)="onCheckout()">
-                  Checkout
-                </button>
-              </div>
             </div>
           </div>
         </div>

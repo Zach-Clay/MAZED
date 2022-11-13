@@ -113,6 +113,8 @@ export class ViewCatalogComponent implements OnInit {
               const price = data.results[0].trackPrice;
               const conversion = this.orgSelection.dollarToPoint;
               data.results[0].pointValue = price / conversion;
+              // if the trackID is a multiple of 9, make the product unavailable to simulate unavailability
+              data.results[0].available = data.results[0].trackId % 9 != 0;
 
               this.currentProducts.push(data.results[0]);
               if (this.currentProducts.length === products.length) {
