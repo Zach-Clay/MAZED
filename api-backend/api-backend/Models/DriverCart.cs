@@ -11,5 +11,6 @@ namespace MazedDB.Models
         public int? MediaType { get; set; }
         public int PointValue { get; set; }
         public int? ProductId { get; set; }
+        public int? CartTotal { get; set; }
     }
 }

@@ -19,7 +19,6 @@ export class ProductListingComponent implements OnInit {
     this.itunesApiService
       .getProducts(this.product.trackId.toString(), 'all')
       .subscribe((data) => {
-        console.log(data);
 
         this.itunes_product = data.results[0];
 

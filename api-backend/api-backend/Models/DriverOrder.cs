@@ -11,6 +11,7 @@ namespace MazedDB.Models
         public string OrderStatus { get; set; } = null!;
         public int TotalPointVal { get; set; }
         public DateTime OrderDate { get; set; }
+        public string ProductList { get; set; } = null!;
 
         public virtual SponsorOrg Sponsor { get; set; } = null!;
         public virtual User User { get; set; } = null!;
