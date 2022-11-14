@@ -945,3 +945,8 @@
 /Users/evanbondura/Desktop/Mazed/api-backend/api-backend/obj/Debug/net6.0/api-backend.pdb
 /Users/evanbondura/Desktop/Mazed/api-backend/api-backend/obj/Debug/net6.0/api-backend.genruntimeconfig.cache
 /Users/evanbondura/Desktop/Mazed/api-backend/api-backend/obj/Debug/net6.0/ref/api-backend.dll
+/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/staticwebassets/msbuild.api-backend.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/staticwebassets/msbuild.build.api-backend.props
+/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.api-backend.props
+/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.api-backend.props
+/Users/madisonwilson/Desktop/CPSC4910/F22-Team02-Wilson.Bondura.Clay.Hayes.Saad/api-backend/api-backend/obj/Debug/net6.0/staticwebassets.pack.json

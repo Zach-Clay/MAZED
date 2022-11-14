@@ -87,5 +87,6 @@
     <Compile Remove="Controllers\UserController.cs" />
     <Compile Remove="Data\UsersAPIDBContext.cs" />
     <Compile Remove="Logic\UserLogic.cs" />
+    <Compile Remove="Controllers\ITunesController.cs" />
   </ItemGroup>
 </Project>
