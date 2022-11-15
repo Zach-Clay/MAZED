@@ -30,7 +30,6 @@ namespace MazedDB.Data
         public virtual DbSet<SponsorOrg> SponsorOrgs { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserToSponsor> UserToSponsors { get; set; } = null!;
-        public virtual DbSet<DriverCart> DriverCarts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -124,8 +123,6 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.CartTotal).HasColumnName("cartTotal");
 
-                entity.Property(e => e.MediaType).HasColumnName("mediaType");
-
                 entity.Property(e => e.PointValue).HasColumnName("pointValue");
 
                 entity.Property(e => e.ProductId).HasColumnName("productId");
@@ -164,21 +161,6 @@ namespace MazedDB.Data
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("order_driverFK");
-            });
-
-            modelBuilder.Entity<DriverCart>(entity =>
-            {
-                entity.ToTable("driverCart");
-
-                entity.Property(e => e.ProductId).HasColumnName("productId");
-
-                entity.Property(e => e.UserId).HasColumnName("userId");
-
-                entity.Property(e => e.SponsorId).HasColumnName("sponsorId");
-
-                entity.Property(e => e.PointValue).HasColumnName("pointValue");
-
-                entity.Property(e => e.CartTotal).HasColumnName("cartTotal");
             });
 
             modelBuilder.Entity<EfmigrationsHistory>(entity =>
@@ -244,19 +226,6 @@ namespace MazedDB.Data
                 entity.Property(e => e.ProductId).HasColumnName("productId");
 
                 entity.Property(e => e.ItemCost).HasColumnName("itemCost");
-                entity.Property(e => e.Description)
-                    .HasMaxLength(45)
-                    .HasColumnName("description");
-
-                entity.Property(e => e.Image)
-                    .HasColumnType("blob")
-                    .HasColumnName("image");
-
-                entity.Property(e => e.IsBlacklisted).HasColumnName("isBlacklisted");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(45)
-                    .HasColumnName("name");
 
                 entity.Property(e => e.OrderId).HasColumnName("orderId");
 

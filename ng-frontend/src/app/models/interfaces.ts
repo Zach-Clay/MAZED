@@ -70,4 +70,14 @@ export interface Product {
   sponsorId: number;
   orderId?: number;
   trackId: number; 
+  itemCost: number;
+}
+
+export interface Cart {
+  id: number;
+  userId: number;
+  sponsorId: number;
+  pointValue?: number;
+  productId: number;
+  cartTotal?: number;
 }
