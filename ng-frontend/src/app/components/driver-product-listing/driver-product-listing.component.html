@@ -1,7 +1,20 @@
 <div class="col-sm mr-3" *ngIf="fetchedProducts">
   <div class="card text-light" style="background: var(--secondary-color)">
-    <div class="card-body text-center">
+    <div
+      class="card-body text-center"
+      [ngStyle]="{
+        cursor:
+          dbUser.userType.toLowerCase() == 'driver' && clickable
+            ? 'pointer'
+            : 'default'
+      }"
+      (click)="goToCatalogue()"
+    >
       <div class="flex-row align-items-center">
+        <div class="text-center lead text-dark font-weight-bold mb-1">
+          Catalog Preview
+        </div>
+        <hr />
         <div class="mt-1" *ngIf="products.length !== 0">
           <div class="card-deck row">
             <app-product-listing
