@@ -60,6 +60,13 @@ namespace api_backend.Controllers
             return await _context.DriverCarts.Where(p => p.UserId == userId).ToListAsync();
         }
 
+        [HttpGet("GetCartByUserSponsorTrackId")]
+        public async Task<DriverCart> GetCartByUserSponsorTrackId(int userId, int sponsorId, int productId)
+        {
+            List<DriverCart> cart = await _context.DriverCarts.Where(p => p.UserId == userId && p.SponsorId == sponsorId && p.ProductId == productId).ToListAsync();
+            return cart.ElementAt(0);
+        }
+
         //use this if want all information from product id -> can call this with delete for product deletion
         [HttpGet("GetCartProducts/{productId}")]
         public async Task<List<DriverCart>> GetCartProducts(int productId)
@@ -70,7 +77,7 @@ namespace api_backend.Controllers
         // POST api/values
         //need to post to certain user's cart
         [HttpPost]
-        public async Task<ActionResult<DriverCart>> PostCartProd(DriverCart cartProd)
+        public async Task<ActionResult<DriverCart>> PostCartProd([FromBody]DriverCart cartProd)
         {
             if (_context.DriverCarts == null)
             {

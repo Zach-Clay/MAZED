@@ -39,6 +39,7 @@ import { EditProductCatalogComponent } from './pages/edit-product-catalog/edit-p
 import { ProductCatalogComponent } from './pages/product-catalog/product-catalog.component';
 import { SponsorCreationFormComponent } from './components/sponsor-creation-form/sponsor-creation-form.component';
 import { ViewCatalogComponent } from './pages/view-catalog/view-catalog.component';
+import { CheckoutDialog } from './pages/view-catalog/view-catalog.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { ViewCatalogComponent } from './pages/view-catalog/view-catalog.componen
     ProductCatalogComponent,
     SponsorCreationFormComponent,
     ViewCatalogComponent,
+    CheckoutDialog,
   ],
   imports: [
     BrowserModule,

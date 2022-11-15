@@ -37,7 +37,7 @@
       <h2 class="col-6 text-center">{{ orgSelection.orgName }}</h2>
       <div class="col-3">
         <div *ngIf="isDriver" class="text-right mr-2">
-          <button mat-raised-button (click)="onCheckout()">Checkout</button>
+          <button mat-raised-button (click)="onCheckout()">View Cart</button>
         </div>
       </div>
       <div class="col-3" *ngIf="isSponsor || isAdmin">
@@ -63,7 +63,7 @@
                 style="height: 100%; width: auto"
               />
             </div>
-            <div class="col-6 info">
+            <div class="col-7 info">
               <p><strong>Name: </strong>{{ item.trackName }}</p>
               <p><strong>Available: </strong>{{ item.available }}</p>
               <p>
@@ -78,12 +78,12 @@
               </p>
             </div>
 
-            <div class="col-3" *ngIf="isDriver">
+            <div class="col-2" *ngIf="isDriver">
               <div>
                 <button
                   mat-raised-button
                   color="primary"
-                  (click)="onAddToCart()"
+                  (click)="onAddToCart(item)"
                   *ngIf="item.available"
                 >
                   Add To Cart
