@@ -148,6 +148,7 @@ export class AddDeductDialog implements OnInit {
   driverSelection!: User;
   pointAmount!: number;
   reason!: string;
+  driverPoints!: number;
 
   constructor(
     public dialogRef: MatDialogRef<AddDeductDialog>,
@@ -157,7 +158,13 @@ export class AddDeductDialog implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data.OrgSelection);
+  }
+
+  selectionChange(driver:User) {
+    this.userService.getUserPointsBySponsor(driver.id, this.data.OrgSelection.id)
+    .subscribe((data) => {
+      this.driverPoints = data.userPoints;
+    })
   }
 
   onDoneClick(): void {
@@ -184,7 +191,8 @@ export class AddDeductDialog implements OnInit {
       this.pointChangesService.postTransation(pointTrans);
 
       //to update the user real time
-      this.driverSelection.totalPoints += pointValue;
+      this.driverPoints += pointValue;
+
 
       this.pointAmount = 0;
       this.reason = '';

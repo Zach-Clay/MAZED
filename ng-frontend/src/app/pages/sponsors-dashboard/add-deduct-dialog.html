@@ -5,7 +5,7 @@
   <mat-form-field appearance="outline" color="primary">
     <mat-label>Select Driver</mat-label>
     <mat-select [(ngModel)]="driverSelection">
-      <mat-option *ngFor="let driver of data.Drivers" [value]="driver">
+      <mat-option *ngFor="let driver of data.Drivers" [value]="driver" (onSelectionChange)="selectionChange(driver)">
         {{driver.userFname}} {{driver.userLname}}
       </mat-option>
     </mat-select>
@@ -17,7 +17,7 @@
     <br/>
 
     <!--TODO-->
-    <span><strong>Current Points: </strong> {{driverSelection.totalPoints}}</span>
+    <span><strong>Current Points: </strong> {{driverPoints}}</span>
     
     <br/>
     <br/>

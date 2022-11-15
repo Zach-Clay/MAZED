@@ -14,16 +14,19 @@
       [clickable]="false"
     ></app-driver-product-listing>
   </div>
+  <br>
 
-  <div class="row sponsor-widget">
-    <div class="col-6">
-      <app-sponsor-widget [user]="dbUser"></app-sponsor-widget>
-    </div>
+  <div class="container">
+    
   </div>
 
-  <div class="row mt-3">
-    <div class="col-md-3 w-50">
-      <div
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <app-sponsor-widget [user]="dbUser"></app-sponsor-widget>
+      </div>
+      <div class="col">
+        <div
         class="card text-light ml-3"
         style="background: var(--primary-color)"
       >
@@ -35,6 +38,8 @@
           ></app-sponsored-driver>
         </div>
       </div>
+      </div>
     </div>
   </div>
+  
 </div>

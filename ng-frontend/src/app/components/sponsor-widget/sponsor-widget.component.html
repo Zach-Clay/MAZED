@@ -1,7 +1,7 @@
-<div class="row ml-2">
+<div class="row text-center">
   <div
-    class="col-md-5 card text-light"
-    style="background: var(--primary-color)"
+    class=" card text-light"
+    style="background: var(--primary-color);width: 100%;"
   >
     <div class="text-center mt-2 mb-2 lead">Sponsor Info</div>
     <div
@@ -32,14 +32,7 @@
 
         <br />
         <br />
-        <p><strong>Outstanding Applications: </strong></p>
-        <mat-list *ngIf="showDriverOustandingApps">
-          <mat-list-item *ngFor="let app of driverOutstandingApps">
-            {{ app.sponsorName }}, submitted {{ app.requestedDate.month }}/{{
-              app.requestedDate.day
-            }}/{{ app.requestedDate.year }}
-          </mat-list-item>
-        </mat-list>
+        
       </div>
 
       <div *ngIf="isSponsor">
@@ -60,6 +53,17 @@
         <button mat-raised-button (click)="navToViewCatalog()">
           View Catalog(s)
         </button>
+      </div>
+
+      <div *ngIf="isDriver">
+        <p><strong>Outstanding Applications: </strong></p>
+        <mat-list *ngIf="showDriverOustandingApps">
+          <mat-list-item *ngFor="let app of driverOutstandingApps">
+            {{ app.sponsorName }}, submitted {{ app.requestedDate.month }}/{{
+              app.requestedDate.day
+            }}/{{ app.requestedDate.year }}
+          </mat-list-item>
+        </mat-list>
       </div>
 
     </div>

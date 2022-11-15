@@ -57,8 +57,8 @@
         <div
           class="d-flex"
           *ngIf="
-            user.userType === 'admin' ||
-            (user.userType === 'sponsor' && orgSelection.id === sponsorsOrg.id)
+            user.userType.toLowerCase() === 'admin' ||
+            (user.userType.toLowerCase() === 'sponsor' && orgSelection.id === sponsorsOrg.id)
           "
         >
           <div>
@@ -72,6 +72,7 @@
               mat-raised-button
               color="accent"
               (click)="addingSponsor = true"
+              *ngIf="user.userType.toLowerCase() === 'admin'"
             >
               Create Another Sponsor Account
             </button>
