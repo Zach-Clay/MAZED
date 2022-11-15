@@ -7,6 +7,8 @@ using MazedDB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShopifySharp;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -128,6 +130,29 @@ namespace api_backend.Controllers
 
             _context.DriverCarts.Remove(product);
             await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("DeleteByUser/{userId}")]
+        public async Task<IActionResult> DeleteCartByUser(int userId)
+        {
+            if (_context.DriverCarts == null) return NotFound();
+
+            var serviceProvider = HttpContext.RequestServices;
+            var driverOrderController = serviceProvider.GetRequiredService<DriverOrderController>();
+
+            List<DriverCart> cart = await GetCartByUser(userId);
+
+            await driverOrderController.PostDriverOrderAsync(cart);
+
+            //remove all products in cart based off user
+            foreach (DriverCart product in cart)
+            {
+                _context.DriverCarts.Remove(product);
+                await _context.SaveChangesAsync();
+            }
+            
 
             return NoContent();
         }
