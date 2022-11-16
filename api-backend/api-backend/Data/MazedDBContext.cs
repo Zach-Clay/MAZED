@@ -123,6 +123,10 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.CartTotal).HasColumnName("cartTotal");
 
+                entity.Property(e => e.DriverCartcol)
+                    .HasMaxLength(45)
+                    .HasColumnName("driverCartcol");
+
                 entity.Property(e => e.PointValue).HasColumnName("pointValue");
 
                 entity.Property(e => e.ProductId).HasColumnName("productId");
