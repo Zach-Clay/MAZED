@@ -43,7 +43,6 @@ namespace api_backend.Controllers
             int id = cart[0].UserId;
             int sponsorId = cart[0].SponsorId;
             double totalPoints = 0.0;
-            DateTime now = DateTime.Now;
 
             foreach (DriverCart cartProduct in cart) totalPoints += cartProduct.PointValue;
 
@@ -53,7 +52,7 @@ namespace api_backend.Controllers
                 UserId = id,
                 SponsorId = sponsorId,
                 TotalPointVal = totalPoints,
-                OrderDate = now,
+                OrderDate = DateTime.Now,
                 ProductList = JsonSerializer.Serialize(cart)
             };
 
