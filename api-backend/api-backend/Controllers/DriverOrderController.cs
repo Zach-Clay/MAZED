@@ -39,7 +39,6 @@ namespace api_backend.Controllers
         [HttpPost("Post")]
         public async Task<DriverOrder> PostDriverOrderAsync(List<DriverCart> cart)
         {
-
             //this is assuming all the items in the cart are for the same user and sponsor
             int id = cart[0].UserId;
             int sponsorId = cart[0].SponsorId;

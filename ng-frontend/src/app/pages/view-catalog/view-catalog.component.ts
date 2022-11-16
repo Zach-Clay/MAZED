@@ -33,6 +33,8 @@ export class ViewCatalogComponent implements OnInit {
   currentProducts: any = [];
   orgCatalogLoading: boolean = false;
 
+  addToCartLoading: boolean = false;
+
   constructor(
     private cognitoService: CognitoService,
     private userService: UserService,
@@ -139,18 +141,26 @@ export class ViewCatalogComponent implements OnInit {
   }
 
   onAddToCart(item: any) {
+    this.addToCartLoading = true;
     const cartItem: Cart = {
       id: 0,
       userId: this.dbUser.id,
       sponsorId: this.orgSelection.id,
+      pointValue: item.pointValue,
       productId: item.trackId
     }
     this.cartService.addToCart(cartItem)
     .subscribe((res) => {
+      
     })
+
+    setTimeout(() => {
+      this.addToCartLoading = false;
+    }, 1500)
+
   }
 
-  onCheckout() {
+  onViewCart() {
     const dialogRef = this.dialog.open(CheckoutDialog, {
       width: '80vw',
       data: { user: this.dbUser, sponsor: this.orgSelection },
@@ -242,13 +252,15 @@ export class CheckoutDialog implements OnInit {
   }
 
   onCheckout() {
-    console.log(this.cartItems);
+    if (confirm("Are you sure you want to checkout?")) {
 
-    //Add items to the order table
-
-
-    //Remove items from cart table
-
+      //Delete items from cart and send to order table
+      this.cartService.checkoutAndDeleteCart(this.data.user.id)
+      .subscribe(() => {
+        this.userService.updateUserPointsBySponsorId(this.data.user.id, this.data.sponsor.id, this.cartTotalPoints*-1);
+        this.onDoneClick();
+      });
+    }
   }
 
 }

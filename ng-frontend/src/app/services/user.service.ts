@@ -40,6 +40,21 @@ export class UserService {
     });
   }
 
+  public updateUserPointsBySponsorId(userId: number, sponsorId: number, amount: number) {
+    console.log("hello");
+    this.http.put(
+      `${api_url}/userToSponsor/UpdateUserPointsBySponsor?userID=${userId}&sponsorID=${sponsorId}&amount=${amount}`,
+      null
+    ).subscribe({
+      next: (data) => {
+        return data;
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      },
+    });
+  }
+
   //Get the sponsor org for a sponsor user --> they cannot have more that one org!!
   public getSponsorOrgBySponsorUserId(sponsorUserId: number) {
     return this.http.get<SponsorOrg>(

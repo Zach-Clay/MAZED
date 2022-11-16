@@ -77,7 +77,17 @@ export interface Cart {
   id: number;
   userId: number;
   sponsorId: number;
-  pointValue?: number;
+  pointValue: number;
   productId: number;
   cartTotal?: number;
+}
+
+export interface Order {
+  id: number;
+  userId: number;
+  sponsorId: number;
+  orderStatus?: string;
+  totalPointValue: number;
+  orderDate: string;
+  productList: any;
 }
