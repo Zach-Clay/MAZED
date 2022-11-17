@@ -40,7 +40,6 @@ export class OrdersComponent implements OnInit {
           .subscribe((res) => {
             this.orders = res;
             console.log(this.orders);
-            console.log(JSON.parse(this.orders[0].productList).length);
             this.loading = false;
           })
 

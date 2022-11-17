@@ -12,7 +12,11 @@
   </div>
 
 
-  <div *ngIf="!loading">
+  <div *ngIf="!loading && orders.length < 1" class="text-center">
+    <h3>No Recent Orders</h3>
+  </div>
+
+  <div *ngIf="!loading && orders.length > 0">
     <mat-list>
       <mat-list-item *ngFor="let order of orders">
         <div class="row info-row" style="width:100%;">
