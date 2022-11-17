@@ -87,7 +87,7 @@ export interface Order {
   userId: number;
   sponsorId: number;
   orderStatus?: string;
-  totalPointValue: number;
+  totalPointVal: number;
   orderDate: string;
   productList: any;
 }

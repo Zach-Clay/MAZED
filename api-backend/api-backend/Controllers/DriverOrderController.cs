@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace api_backend.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class DriverOrderController : Controller
     {
         private readonly MazedDBContext _context;
@@ -34,6 +37,29 @@ namespace api_backend.Controllers
             return await _context.DriverOrders.ToListAsync() ?? throw new Exception("Order not found");
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(int id)
+        {
+            if (_context.DriverOrders == null) return NotFound();
+
+            var order = await _context.DriverOrders.FindAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _context.DriverOrders.Remove(order);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpGet("GetOrdersByDriverId/{id}")]
+        public async Task<List<DriverOrder>> GetOrdersByDriverId(int id)
+        {
+            return await _context.DriverOrders.Where(o => o.UserId == id).ToListAsync();
+        }
+
         //take cart and make it into an order
         //this will be only be called by cartController
         [HttpPost("Post")]
@@ -52,6 +78,7 @@ namespace api_backend.Controllers
                 UserId = id,
                 SponsorId = sponsorId,
                 TotalPointVal = totalPoints,
+                OrderStatus = "Processing",
                 OrderDate = DateTime.Now,
                 ProductList = JsonSerializer.Serialize(cart)
             };

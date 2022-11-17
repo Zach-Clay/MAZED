@@ -46,4 +46,8 @@ export class DriverHomePageComponent implements OnInit {
         this.fetchedSponsor = true;
       });
   }
+
+  navToOrders() {
+    this.router.navigate(['/orders']);
+  }
 }

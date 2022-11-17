@@ -5,6 +5,19 @@
   <div class="spinner-border" role="status"></div>
 </div>
 
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <app-sponsor-widget [user]="dbUser"></app-sponsor-widget>
+    </div>
+    <div class="col">
+      <div style="margin:auto;">
+        <button mat-raised-button color="accent" (click)="navToOrders()">View Orders</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div *ngIf="fetchedSponsor">
   <div *ngIf="currentSponsors.length > 0">
     <app-driver-sponsor-card
@@ -15,15 +28,6 @@
     ></app-driver-sponsor-card>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <app-sponsor-widget [user]="dbUser"></app-sponsor-widget>
-      </div>
-      <div class="col">
 
-      </div>
-    </div>
-  </div>
   
 </div>
