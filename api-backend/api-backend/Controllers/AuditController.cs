@@ -10,6 +10,23 @@ using Microsoft.EntityFrameworkCore;
 using MazedDB.Data;
 using MazedDB.Models;
 
+
+//NOTES:
+//Sponsor users can call
+//    -> point tracking report (slect drivers) CALL DRIVER POINT
+//    -> audit log report
+
+//admin users
+//    -> sale by sponsor report CALL SALES BY SPONSOR OR BOTH DRIVER AND SPONSOR
+//    -> invoice per sponsor
+//    -> audit log report
+
+//audit categories
+//    -> get driver apps with driver and sponsor info
+//    -> get all point changes
+//    -> get password changes by user
+//    -> login attempts by username
+
 namespace api_backend.Controllers
 {
     [Route("api/[controller]")]
@@ -21,14 +38,6 @@ namespace api_backend.Controllers
         {
             _context = context;
         }
-
-        // GET: api/values
-        //[HttpGet]
-        //get all admin logs?
-        //public async Task<ActionResult<IEnumerable<AuditLogging>>> getAdminLog()
-        //{
-
-        //}
 
         //get individual driver point transaction by date
         [HttpGet("GetDriverPointTransactions")]
@@ -62,6 +71,42 @@ namespace api_backend.Controllers
             return pointTransactions; 
         }
 
+        //get all applications to a sponsor
+        [HttpGet("GetSponsorsApplications")]
+        public async Task<ActionResult<List<Application>>> GetSponsorsApplicationsAsync(int sponsorID)
+        {
+            var serviceProvider = HttpContext.RequestServices;
+            var ApplicationControllerInstance = serviceProvider.GetRequiredService<ApplicationController>();
+
+            ActionResult<List<Application>> applications = await ApplicationControllerInstance.GetApplicationsBySponsor(sponsorID);
+
+            return applications;
+        }
+
+        //get all pwd attempts by user
+        //[HttpGet("GetPassChanges")]
+        //public async Task<List<Application>> GetPassAttemptsAsync(int userID)
+        //{
+        //    var serviceProvider = HttpContext.RequestServices;
+        //    var ApplicationControllerInstance = serviceProvider.GetRequiredService<ApplicationController>();
+
+        //    ActionResult<List<Application>> passChanges = await ApplicationControllerInstance.GetApplicationsBySponsor(sponsorID);
+
+        //    return passChanges;
+        //}
+
+        //get all login attempts by user
+        [HttpGet("GetLoginAttempts")]
+        public async Task<ActionResult<List<LoginAttempt>>> GetLoginAttempts(string username)
+        {
+            var serviceProvider = HttpContext.RequestServices;
+            var LoginAttemptControllerInstance = serviceProvider.GetRequiredService<LoginAttemptController>();
+
+            ActionResult<List<LoginAttempt>> loginChanges = await LoginAttemptControllerInstance.GetLoginAttempts(username);
+
+            return loginChanges;
+        }
+
         //Get sales for an indivual sponsor
         [HttpGet("GetSalesBySponsor")]
         public async Task<List<DriverOrder>> GetSalesBySponsorAsync(int SponsorID, DateTime? start, DateTime? end)
@@ -82,6 +127,38 @@ namespace api_backend.Controllers
             }
 
             //whittle away driver orders after end date
+            if (end != null)
+            {
+                foreach (DriverOrder d in driverOrders)
+                {
+                    if (DateTime.Compare(d.OrderDate, (DateTime)end) > 0)
+                        driverOrders.Remove(d);
+                }
+            }
+
+            return driverOrders;
+        }
+
+        //Get sales for an indivual driver
+        [HttpGet("GetSalesByDriver")]
+        public async Task<List<DriverOrder>> GetSalesByDriverAsync(int DriverID, DateTime? start, DateTime? end)
+        {
+            var serviceProvider = HttpContext.RequestServices;
+            var DriverOrderControllerInstance = serviceProvider.GetRequiredService<DriverOrderController>();
+
+            List<DriverOrder> driverOrders = await DriverOrderControllerInstance.GetAllBySponsorAsync(DriverID);
+
+            //remove driver orders before start date
+            if (start != null)
+            {
+                foreach (DriverOrder d in driverOrders)
+                {
+                    if (DateTime.Compare(d.OrderDate, (DateTime)start) < 0)
+                        driverOrders.Remove(d);
+                }
+            }
+
+            //remove driver orders after end date
             if (end != null)
             {
                 foreach (DriverOrder d in driverOrders)

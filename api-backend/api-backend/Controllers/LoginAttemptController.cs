@@ -34,6 +34,7 @@ namespace api_backend.Controllers
             return await _context.LoginAttempts.Where(e => e.Username == username).ToListAsync();
         }
 
+
         ////Post a new login attempt for a specific user
         //[HttpPost]
         //public async Task<ActionResult<LoginAttempt>> Post([FromBody]LoginAttempt attempt)
