@@ -218,6 +218,8 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.ProductId).HasColumnName("productId");
 
+                entity.Property(e => e.Availibility).HasColumnName("availibility");
+
                 entity.Property(e => e.Description)
                     .HasMaxLength(45)
                     .HasColumnName("description");
