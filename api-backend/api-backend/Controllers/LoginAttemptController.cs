@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MazedDB.Data;
 using MazedDB.Models;
+
 namespace api_backend.Controllers
 {
     [Route("api/[controller]")]
