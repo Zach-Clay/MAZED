@@ -23,7 +23,7 @@ namespace api_backend.Controllers
         }
 
         // GET: api/values
-        [HttpGet]
+        //[HttpGet]
         //get all admin logs?
         //public async Task<ActionResult<IEnumerable<AuditLogging>>> getAdminLog()
         //{
@@ -32,7 +32,7 @@ namespace api_backend.Controllers
 
         //get individual driver point transaction by date
         [HttpGet("GetDriverPointTransactions")]
-        public async Task<List<PointTransaction>> GetDriverPointTransactions(DateTime? start, DateTime? end, int driverID)
+        public async Task<List<PointTransaction>> GetDriverPointTransactionsAsync(DateTime? start, DateTime? end, int driverID)
         {
             var serviceProvider = HttpContext.RequestServices;
             var PointTransControllerInstance = serviceProvider.GetRequiredService<PointTransController>();
@@ -61,6 +61,39 @@ namespace api_backend.Controllers
 
             return pointTransactions; 
         }
+
+        //Get sales for an indivual sponsor
+        [HttpGet("GetSalesBySponsor")]
+        public async Task<List<DriverOrder>> GetSalesBySponsorAsync(int SponsorID, DateTime? start, DateTime? end)
+        {
+            var serviceProvider = HttpContext.RequestServices;
+            var DriverOrderControllerInstance = serviceProvider.GetRequiredService<DriverOrderController>();
+
+            List<DriverOrder> driverOrders = await DriverOrderControllerInstance.GetAllBySponsorAsync(SponsorID);
+
+            //whittle away driver orders before start date
+            if (start != null)
+            {
+                foreach ( DriverOrder d in driverOrders)
+                {
+                    if (DateTime.Compare(d.OrderDate, (DateTime)start) < 0)
+                        driverOrders.Remove(d);
+                }
+            }
+
+            //whittle away driver orders after end date
+            if (end != null)
+            {
+                foreach (DriverOrder d in driverOrders)
+                {
+                    if (DateTime.Compare(d.OrderDate, (DateTime)end) > 0)
+                        driverOrders.Remove(d);
+                }
+            }
+
+            return driverOrders;
+        }
     }
+
 }
 
