@@ -1,6 +1,11 @@
 <app-home-page-header></app-home-page-header>
 
-<div class="alert alert-success sticky-top" role="alert" style="height: 55px;" *ngIf="addToCartLoading">
+<div
+  class="alert alert-success sticky-top"
+  role="alert"
+  style="height: 55px"
+  *ngIf="addToCartLoading"
+>
   Item successfully added
 </div>
 
@@ -71,7 +76,7 @@
               <p><strong>Name: </strong>{{ item.trackName }}</p>
               <p><strong>Available: </strong>{{ item.available }}</p>
               <p>
-                <strong>Pount Value: </strong>{{ item.pointValue.toFixed(2) }}
+                <strong>Point Value: </strong>{{ item.pointValue.toFixed(2) }}
               </p>
               <p>
                 <strong

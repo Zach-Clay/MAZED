@@ -42,6 +42,7 @@ export class HomePageComponent implements OnInit {
               .getUser(this.cognitoUser.username)
               .subscribe((data) => {
                 this.dbUser = data;
+                console.log(data);
                 this.displayName = true;
                 //determine userType
                 if (this.dbUser.userType.toLowerCase() === 'driver') {
