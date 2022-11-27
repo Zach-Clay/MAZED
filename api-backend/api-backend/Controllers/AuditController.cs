@@ -14,12 +14,12 @@ using MazedDB.Models;
 //NOTES:
 //Sponsor users can call
 //    -> point tracking report (slect drivers) CALL DRIVER POINT
-//    -> audit log report
+//    -> audit log report - LET DEFINE WHICH CAT AND CALL THAT FUNCTION
 
 //admin users
-//    -> sale by sponsor report CALL SALES BY SPONSOR OR BOTH DRIVER AND SPONSOR
-//    -> invoice per sponsor
-//    -> audit log report
+//    -> sale by sponsor report CALL SALES BY SPONSOR 
+//    -> invoice per sponsor CALL SALES BY SPONSOR AND THEN THE SALES BY DRIVER???
+//    -> audit log report - LET DEFINE WHICH CAT AND CALL THAT FUNCTION
 
 //audit categories
 //    -> get driver apps with driver and sponsor info
