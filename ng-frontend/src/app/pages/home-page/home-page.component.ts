@@ -14,6 +14,9 @@ export class HomePageComponent implements OnInit {
   isAuthenticated: boolean;
   cognitoUser: any;
   dbUser!: User;
+  ogUser!: User;
+  canSeeSwitchToDriver: boolean = false;
+  canSeeSwitchToSponsor: boolean = false;
   displayName: boolean = false;
   isDriver: boolean = false;
   isSponsor: boolean = false;
@@ -41,8 +44,10 @@ export class HomePageComponent implements OnInit {
             this.userService
               .getUser(this.cognitoUser.username)
               .subscribe((data) => {
+                this.ogUser = data;
                 this.dbUser = data;
-                console.log(data);
+                this.canSeeSwitchToDriver =
+                  this.ogUser.userType.toLowerCase() == 'sponsor';
                 this.displayName = true;
                 //determine userType
                 if (this.dbUser.userType.toLowerCase() === 'driver') {
@@ -61,5 +66,39 @@ export class HomePageComponent implements OnInit {
           });
       }
     });
+  }
+
+  getPointsPerSponsor() {}
+
+  signOut() {
+    this.cognitoService.signOut().then(() => {
+      this.router.navigate(['/']);
+    });
+  }
+
+  switchToDriver() {
+    let sponsorOrg = null;
+    this.userService
+      .getSponsorOrgBySponsorUserId(this.ogUser.id)
+      .subscribe((org) => {
+        sponsorOrg = org;
+        this.userService
+          .getUser(`sponsor${org.id}_%driver`)
+          .subscribe((testUser) => {
+            this.dbUser = testUser;
+            this.isDriver = true;
+            this.isSponsor = false;
+            this.canSeeSwitchToSponsor = true;
+            this.canSeeSwitchToDriver = false;
+          });
+      });
+  }
+
+  switchToSponsor() {
+    this.dbUser = this.ogUser;
+    this.isDriver = false;
+    this.isSponsor = true;
+    this.canSeeSwitchToDriver = true;
+    this.canSeeSwitchToSponsor = false;
   }
 }

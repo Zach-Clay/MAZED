@@ -66,18 +66,31 @@
         Profile
       </a>
       <!-- sign out button -->
-      <a
-        class="row justify-content-sm-center nav-link text-light text-center"
-        style="
-          background: var(--secondary-color);
-          border-radius: 1em;
-          margin: 10px;
-        "
-        routerLink=""
-        (click)="signOut()"
-      >
-        Sign Out
-      </a>
+      <div class="row">
+        <button
+          class="col justify-content-sm-center nav-link text-light text-center m-3"
+          *ngIf="canSeeSwitchToDriver"
+          style="
+            background: var(--secondary-color);
+            border-radius: 1em;
+            border: transparent;
+          "
+          (click)="switchToDriver()"
+        >
+          Driver View
+        </button>
+        <button
+          class="col justify-content-sm-center nav-link text-light text-center m-3"
+          style="
+            background: var(--secondary-color);
+            border-radius: 1em;
+            border: transparent;
+          "
+          (click)="signOut()"
+        >
+          Sign Out
+        </button>
+      </div>
     </div>
   </div>
 </div>

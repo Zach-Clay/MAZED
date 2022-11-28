@@ -35,6 +35,7 @@ export class SponsorHomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.sponsoredDrivers = [];
     //get the drivers for the sponsor
     this.userService
       .getSponsorOrgBySponsorUserId(this.dbUser.id)
@@ -43,7 +44,11 @@ export class SponsorHomePageComponent implements OnInit {
         this.userService
           .getDriverUsersBySponsorOrgId(org.id)
           .subscribe((drivers) => {
-            this.sponsoredDrivers = drivers;
+            drivers.forEach((driver) => {
+              if (!driver.username.includes('%driver')) {
+                this.sponsoredDrivers.push(driver);
+              }
+            });
             this.gotSponsoredDrivers = true;
           });
         //get products by sponsor id

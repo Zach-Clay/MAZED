@@ -7,11 +7,16 @@ import { ProductListService } from 'src/app/services/product-list.service';
 import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
 import { ItunesApiService } from 'src/app/services/itunes-api.service';
 import { CartService } from 'src/app/services/cart.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
 export interface CheckoutDialogData {
   user: User;
   sponsor: SponsorOrg;
+  canCheckout: boolean;
 }
 
 @Component({
@@ -23,10 +28,13 @@ export class ViewCatalogComponent implements OnInit {
   isAuthenticated: boolean = false;
   cognitoUser: any;
   dbUser!: User;
+  ogUser!: User;
   isSponsor: boolean = false;
   isAdmin: boolean = false;
   isDriver: boolean = false;
   loading: boolean = true;
+  canSeeSwitchToSponsor = false;
+  canSeeSwitchToDriver = false;
 
   orgChoices!: SponsorOrg[];
   orgSelection!: SponsorOrg;
@@ -43,7 +51,7 @@ export class ViewCatalogComponent implements OnInit {
     private iTunesService: ItunesApiService,
     private router: Router,
     private cartService: CartService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +68,10 @@ export class ViewCatalogComponent implements OnInit {
               .getUser(this.cognitoUser.username)
               .subscribe((data) => {
                 this.dbUser = data;
+                this.ogUser = data;
+
+                this.canSeeSwitchToDriver =
+                  this.ogUser.userType.toLowerCase() == 'sponsor';
 
                 if (this.dbUser.userType.toLowerCase() === 'driver') {
                   this.isDriver = true;
@@ -147,24 +159,63 @@ export class ViewCatalogComponent implements OnInit {
       userId: this.dbUser.id,
       sponsorId: this.orgSelection.id,
       pointValue: item.pointValue,
-      productId: item.trackId
-    }
-    this.cartService.addToCart(cartItem)
-    .subscribe((res) => {
-      
-    })
+      productId: item.trackId,
+    };
+    this.cartService.addToCart(cartItem).subscribe((res) => {});
 
     setTimeout(() => {
       this.addToCartLoading = false;
-    }, 1500)
-
+    }, 1500);
   }
 
   onViewCart() {
     const dialogRef = this.dialog.open(CheckoutDialog, {
       width: '80vw',
-      data: { user: this.dbUser, sponsor: this.orgSelection },
+      data: {
+        user: this.dbUser,
+        sponsor: this.orgSelection,
+        canCheckOut: !this.canSeeSwitchToSponsor,
+      },
     });
+  }
+
+  signOut() {
+    this.cognitoService.signOut().then(() => {
+      this.router.navigate(['/']);
+    });
+  }
+
+  switchToDriver() {
+    let sponsorOrg = null;
+    this.userService
+      .getSponsorOrgBySponsorUserId(this.ogUser.id)
+      .subscribe((org) => {
+        sponsorOrg = org;
+        this.userService
+          .getUser(`sponsor${org.id}_%driver`)
+          .subscribe((testUser) => {
+            this.dbUser = testUser;
+            this.isDriver = true;
+            this.isSponsor = false;
+            this.canSeeSwitchToSponsor = true;
+            this.canSeeSwitchToDriver = false;
+            this.userService
+              .getSponsorOrgsByDriverUserId(testUser.id)
+              .subscribe((orgs) => {
+                this.orgChoices = orgs;
+                this.loading = false;
+              });
+          });
+      });
+  }
+
+  switchToSponsor() {
+    this.dbUser = this.ogUser;
+    this.isDriver = false;
+    this.isSponsor = true;
+    this.orgChoices = [];
+    this.canSeeSwitchToDriver = true;
+    this.canSeeSwitchToSponsor = false;
   }
 }
 
@@ -185,13 +236,12 @@ export class CheckoutDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: CheckoutDialogData,
     private userService: UserService,
     private cartService: CartService,
-    private iTunesService: ItunesApiService,
+    private iTunesService: ItunesApiService
   ) {}
 
   ngOnInit(): void {
     //Get the cart items
-    this.cartService.getCartByUserId(this.data.user.id)
-    .subscribe((items) => {
+    this.cartService.getCartByUserId(this.data.user.id).subscribe((items) => {
       this.cartItems = items;
 
       //Get the products
@@ -215,13 +265,14 @@ export class CheckoutDialog implements OnInit {
             }
           });
       }
-    })
+    });
 
     //Get the users points
-    this.userService.getUserPointsBySponsor(this.data.user.id, this.data.sponsor.id)
-    .subscribe((data) => {
-      this.userPoints = data.userPoints;
-    })
+    this.userService
+      .getUserPointsBySponsor(this.data.user.id, this.data.sponsor.id)
+      .subscribe((data) => {
+        this.userPoints = data.userPoints;
+      });
   }
 
   onDoneClick(): void {
@@ -230,37 +281,47 @@ export class CheckoutDialog implements OnInit {
 
   deleteCartItem(trackId: number) {
     //delete from cart table
-    this.cartService.getCartItemByUserSponsorTrackId(trackId, this.data.user.id, this.data.sponsor.id)
-    .subscribe((cartItem) => {
-      console.log(cartItem);
+    this.cartService
+      .getCartItemByUserSponsorTrackId(
+        trackId,
+        this.data.user.id,
+        this.data.sponsor.id
+      )
+      .subscribe((cartItem) => {
+        console.log(cartItem);
 
-      this.cartService.deleteFromCart(cartItem.id)
-      .subscribe(() => {
+        this.cartService.deleteFromCart(cartItem.id).subscribe(() => {
+          this.cartItems = this.cartItems.filter((c) => c.id !== cartItem.id);
 
-        this.cartItems = this.cartItems.filter(c => c.id !== cartItem.id);
-
-        this.cartTotalPoints = 0;
-        for (let i = 0; i < this.currentProducts.length; i++) {
-          if (this.currentProducts[i].trackId === trackId) {
-            this.currentProducts.splice(i, 1);
-            continue;
+          this.cartTotalPoints = 0;
+          for (let i = 0; i < this.currentProducts.length; i++) {
+            if (this.currentProducts[i].trackId === trackId) {
+              this.currentProducts.splice(i, 1);
+              continue;
+            }
+            this.cartTotalPoints += this.currentProducts[i].pointValue;
           }
-          this.cartTotalPoints += this.currentProducts[i].pointValue;
-        }
-      })
-    })
+        });
+      });
   }
 
   onCheckout() {
-    if (confirm("Are you sure you want to checkout?")) {
-
-      //Delete items from cart and send to order table
-      this.cartService.checkoutAndDeleteCart(this.data.user.id)
-      .subscribe(() => {
-        this.userService.updateUserPointsBySponsorId(this.data.user.id, this.data.sponsor.id, this.cartTotalPoints*-1);
-        this.onDoneClick();
-      });
+    if (confirm('Are you sure you want to checkout?')) {
+      if (!this.data.canCheckout) {
+        alert('Cannot checkout in Driver View');
+      } else {
+        //Delete items from cart and send to order table
+        this.cartService
+          .checkoutAndDeleteCart(this.data.user.id)
+          .subscribe(() => {
+            this.userService.updateUserPointsBySponsorId(
+              this.data.user.id,
+              this.data.sponsor.id,
+              this.cartTotalPoints * -1
+            );
+            this.onDoneClick();
+          });
+      }
     }
   }
-
 }

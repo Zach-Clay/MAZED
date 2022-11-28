@@ -1,4 +1,96 @@
-<app-home-page-header></app-home-page-header>
+<div class="header">
+  <div class="row pb-3" style="background: var(--secondary-color)">
+    <div class="col align-self-center">
+      <a href="/home">
+        <img
+          class="pt-3 ml-5"
+          src="../../../assets/light-logo.png"
+          style="width: 170px"
+      /></a>
+    </div>
+    <!-- empty column -->
+    <div
+      class="col"
+      style="
+        background: var(--secondary-color);
+        padding: 1px;
+        border-radius: 1em;
+        margin: 0px;
+      "
+    ></div>
+    <!-- empty column -->
+    <div
+      class="col"
+      style="
+        background: var(--secondary-color);
+        padding: 1px;
+        border-radius: 1em;
+        margin: 2px;
+      "
+    ></div>
+    <!-- column holding profile & sign out button -->
+    <div
+      class="col-2 align-items-center"
+      style="
+        background: var(--primary-color);
+        padding: 2px;
+        border-radius: 1em;
+        margin: 5px;
+      "
+    >
+      <!-- profile button -->
+      <a
+        class="row justify-content-sm-center nav-link text-light text-center"
+        style="
+          background: var(--secondary-color);
+          border-radius: 1em;
+          margin: 10px;
+        "
+        routerLink="/profile"
+      >
+        Profile
+      </a>
+      <!-- sign out button -->
+      <div class="row">
+        <button
+          class="col justify-content-sm-center nav-link text-light text-center m-3"
+          *ngIf="canSeeSwitchToDriver"
+          style="
+            background: var(--secondary-color);
+            border-radius: 1em;
+            border: transparent;
+          "
+          (click)="switchToDriver()"
+        >
+          Driver View
+        </button>
+        <button
+          class="col justify-content-sm-center nav-link text-light text-center m-3"
+          *ngIf="canSeeSwitchToSponsor"
+          style="
+            background: var(--secondary-color);
+            border-radius: 1em;
+            border: transparent;
+          "
+          (click)="switchToSponsor()"
+        >
+          Sponsor View
+        </button>
+        <button
+          class="col justify-content-sm-center nav-link text-light text-center m-3"
+          style="
+            background: var(--secondary-color);
+            border-radius: 1em;
+            border: transparent;
+          "
+          (click)="signOut()"
+        >
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div *ngIf="!addingSponsor">
   <div
@@ -58,7 +150,8 @@
           class="d-flex"
           *ngIf="
             user.userType.toLowerCase() === 'admin' ||
-            (user.userType.toLowerCase() === 'sponsor' && orgSelection.id === sponsorsOrg.id)
+            (user.userType.toLowerCase() === 'sponsor' &&
+              orgSelection.id === sponsorsOrg.id)
           "
         >
           <div>

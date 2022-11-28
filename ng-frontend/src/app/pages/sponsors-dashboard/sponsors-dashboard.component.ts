@@ -30,6 +30,7 @@ export interface DialogData {
 })
 export class SponsorsDashboardComponent implements OnInit {
   user!: User;
+  ogUser!: User;
   orgs!: SponsorOrg[];
   orgSelection!: SponsorOrg;
   editing: boolean = false;
@@ -37,6 +38,8 @@ export class SponsorsDashboardComponent implements OnInit {
   drivers!: User[];
   sponsorsOrg!: SponsorOrg;
   addingSponsor: boolean = false;
+  canSeeSwitchToSponsor = false;
+  canSeeSwitchToDriver = false;
 
   @ViewChild('orgDesc') orgDescription!: ElementRef;
   @ViewChild('dollarToPoint') dollarToPoint!: ElementRef;
@@ -56,6 +59,10 @@ export class SponsorsDashboardComponent implements OnInit {
         //Get the user
         this.userService.getUser(user.username).subscribe((data) => {
           this.user = data;
+          this.ogUser = data;
+
+          this.canSeeSwitchToDriver =
+            this.ogUser.userType.toLowerCase() == 'sponsor';
 
           //Get the orgs
           this.sponsorOrgService.getAllOrgs().subscribe((data) => {
@@ -79,11 +86,16 @@ export class SponsorsDashboardComponent implements OnInit {
   }
 
   onSelectionChange() {
+    this.drivers = [];
     //update driver list
     this.userService
       .getDriverUsersBySponsorOrgId(this.orgSelection.id)
       .subscribe((data) => {
-        this.drivers = data;
+        data.forEach((driver) => {
+          if (!driver.username.includes('%driver')) {
+            this.drivers.push(driver);
+          }
+        });
       });
   }
 
@@ -137,6 +149,34 @@ export class SponsorsDashboardComponent implements OnInit {
       data: { Drivers: this.drivers, OrgSelection: this.orgSelection },
     });
   }
+
+  signOut() {
+    this.cognitoService.signOut().then(() => {
+      this.router.navigate(['/']);
+    });
+  }
+
+  switchToDriver() {
+    let sponsorOrg = null;
+    this.userService
+      .getSponsorOrgBySponsorUserId(this.ogUser.id)
+      .subscribe((org) => {
+        sponsorOrg = org;
+        this.userService
+          .getUser(`sponsor${org.id}_%driver`)
+          .subscribe((testUser) => {
+            this.user = testUser;
+            this.canSeeSwitchToSponsor = true;
+            this.canSeeSwitchToDriver = false;
+          });
+      });
+  }
+
+  switchToSponsor() {
+    this.user = this.ogUser;
+    this.canSeeSwitchToDriver = true;
+    this.canSeeSwitchToSponsor = false;
+  }
 }
 
 @Component({
@@ -157,14 +197,14 @@ export class AddDeductDialog implements OnInit {
     private pointChangesService: PointsChangesService
   ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  selectionChange(driver:User) {
-    this.userService.getUserPointsBySponsor(driver.id, this.data.OrgSelection.id)
-    .subscribe((data) => {
-      this.driverPoints = data.userPoints;
-    })
+  selectionChange(driver: User) {
+    this.userService
+      .getUserPointsBySponsor(driver.id, this.data.OrgSelection.id)
+      .subscribe((data) => {
+        this.driverPoints = data.userPoints;
+      });
   }
 
   onDoneClick(): void {
@@ -192,7 +232,6 @@ export class AddDeductDialog implements OnInit {
 
       //to update the user real time
       this.driverPoints += pointValue;
-
 
       this.pointAmount = 0;
       this.reason = '';

@@ -40,19 +40,25 @@ export class UserService {
     });
   }
 
-  public updateUserPointsBySponsorId(userId: number, sponsorId: number, amount: number) {
-    console.log("hello");
-    this.http.put(
-      `${api_url}/userToSponsor/UpdateUserPointsBySponsor?userID=${userId}&sponsorID=${sponsorId}&amount=${amount}`,
-      null
-    ).subscribe({
-      next: (data) => {
-        return data;
-      },
-      error: (error) => {
-        console.error('There was an error!', error);
-      },
-    });
+  public updateUserPointsBySponsorId(
+    userId: number,
+    sponsorId: number,
+    amount: number
+  ) {
+    console.log('hello');
+    this.http
+      .put(
+        `${api_url}/userToSponsor/UpdateUserPointsBySponsor?userID=${userId}&sponsorID=${sponsorId}&amount=${amount}`,
+        null
+      )
+      .subscribe({
+        next: (data) => {
+          return data;
+        },
+        error: (error) => {
+          console.error('There was an error!', error);
+        },
+      });
   }
 
   //Get the sponsor org for a sponsor user --> they cannot have more that one org!!
@@ -92,16 +98,17 @@ export class UserService {
 
   //Add a user to a sponsor's org
   public postUserToSponsor(userToSponsor: UserToSponsor) {
-    this.http.post(`${api_url}/userToSponsor`, userToSponsor).subscribe({
-      next: (data) => {
-        console.log('success!');
-        console.log(data);
-        return data;
-      },
-      error: (error) => {
-        console.error('There was an error!', error);
-      },
-    });
+    return this.http.post(`${api_url}/userToSponsor`, userToSponsor);
+    // this.http.post(`${api_url}/userToSponsor`, userToSponsor).subscribe({
+    //   next: (data) => {
+    //     console.log('success!');
+    //     console.log(data);
+    //     return data;
+    //   },
+    //   error: (error) => {
+    //     console.error('There was an error!', error);
+    //   },
+    // });
   }
 
   //remove a user from a sponsor org given the userToSponsor ID
