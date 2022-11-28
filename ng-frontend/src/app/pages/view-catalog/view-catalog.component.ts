@@ -197,7 +197,7 @@ export class ViewCatalogComponent implements OnInit {
   }
 
   switchToDriver(showSelection: boolean) {
-    if (showSelection) {
+    if (showSelection && this.ogUser.userType.toLowerCase() == 'admin') {
       this.selectDriver = true;
       return;
     }

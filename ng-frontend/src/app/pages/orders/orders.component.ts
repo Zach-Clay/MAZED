@@ -89,7 +89,7 @@ export class OrdersComponent implements OnInit {
   }
 
   switchToDriver(showSelection: boolean) {
-    if (showSelection) {
+    if (showSelection && this.ogUser.userType.toLowerCase() == 'admin') {
       this.selectDriver = true;
       return;
     }
@@ -121,7 +121,7 @@ export class OrdersComponent implements OnInit {
   }
 
   switchToSponsor(showSponsorSelection: boolean) {
-    if (showSponsorSelection) {
+    if (showSponsorSelection && this.ogUser.userType.toLowerCase() == 'admin') {
       this.selectSponsor = true;
       return;
     }
