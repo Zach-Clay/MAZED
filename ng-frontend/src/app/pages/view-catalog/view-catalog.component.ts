@@ -33,8 +33,13 @@ export class ViewCatalogComponent implements OnInit {
   isAdmin: boolean = false;
   isDriver: boolean = false;
   loading: boolean = true;
-  canSeeSwitchToSponsor = false;
-  canSeeSwitchToDriver = false;
+  canSeeSwitchToDriver: boolean = false;
+  canSeeSwitchToSponsor: boolean = false;
+  canSeeSwitchToOriginal: boolean = false;
+  selectDriver: boolean = false;
+  selectSponsor: boolean = false;
+  sponsorSelection!: SponsorOrg;
+  allOrgs!: any;
 
   orgChoices!: SponsorOrg[];
   orgSelection!: SponsorOrg;
@@ -70,8 +75,14 @@ export class ViewCatalogComponent implements OnInit {
                 this.dbUser = data;
                 this.ogUser = data;
 
+                this.sponsorOrgService.getAllOrgs().subscribe((data) => {
+                  this.allOrgs = data;
+                });
                 this.canSeeSwitchToDriver =
-                  this.ogUser.userType.toLowerCase() == 'sponsor';
+                  this.ogUser.userType.toLowerCase() == 'sponsor' ||
+                  this.ogUser.userType.toLowerCase() == 'admin';
+                this.canSeeSwitchToSponsor =
+                  this.ogUser.userType.toLowerCase() == 'admin';
 
                 if (this.dbUser.userType.toLowerCase() === 'driver') {
                   this.isDriver = true;
@@ -174,7 +185,7 @@ export class ViewCatalogComponent implements OnInit {
       data: {
         user: this.dbUser,
         sponsor: this.orgSelection,
-        canCheckOut: !this.canSeeSwitchToSponsor,
+        canCheckOut: !this.canSeeSwitchToOriginal,
       },
     });
   }
@@ -185,37 +196,95 @@ export class ViewCatalogComponent implements OnInit {
     });
   }
 
-  switchToDriver() {
-    let sponsorOrg = null;
+  switchToDriver(showSelection: boolean) {
+    if (showSelection) {
+      this.selectDriver = true;
+      return;
+    }
+    if (this.ogUser.userType.toLowerCase() == 'admin') {
+      this.selectDriver = false;
+      console.log('hello');
+
+      this.userService
+        .getUser(`sponsor${this.sponsorSelection.id}_%driver`)
+        .subscribe((testUser) => {
+          this.dbUser = testUser;
+          this.isDriver = true;
+          this.isAdmin = false;
+          this.canSeeSwitchToOriginal = true;
+          this.canSeeSwitchToDriver = false;
+          this.canSeeSwitchToSponsor = false;
+          this.userService
+            .getSponsorOrgsByDriverUserId(testUser.id)
+            .subscribe((orgs) => {
+              this.orgChoices = orgs;
+              this.loading = false;
+            });
+        });
+    } else {
+      this.userService
+        .getSponsorOrgBySponsorUserId(this.ogUser.id)
+        .subscribe((org) => {
+          this.userService
+            .getUser(`sponsor${org.id}_%driver`)
+            .subscribe((testUser) => {
+              this.dbUser = testUser;
+              this.isDriver = true;
+              this.isSponsor = false;
+              this.canSeeSwitchToOriginal = true;
+              this.canSeeSwitchToDriver = false;
+              this.userService
+                .getSponsorOrgsByDriverUserId(testUser.id)
+                .subscribe((orgs) => {
+                  this.orgChoices = orgs;
+                  this.loading = false;
+                });
+            });
+        });
+    }
+  }
+
+  switchToSponsor(showSponsorSelection: boolean) {
+    if (showSponsorSelection) {
+      this.selectSponsor = true;
+      return;
+    }
+
+    this.selectSponsor = false;
+    let orgId = '';
+    if (this.sponsorSelection.id == 1) {
+      orgId = '01';
+    } else {
+      orgId = this.sponsorSelection.id.toString();
+    }
     this.userService
-      .getSponsorOrgBySponsorUserId(this.ogUser.id)
-      .subscribe((org) => {
-        sponsorOrg = org;
-        this.userService
-          .getUser(`sponsor${org.id}_%driver`)
-          .subscribe((testUser) => {
-            this.dbUser = testUser;
-            this.isDriver = true;
-            this.isSponsor = false;
-            this.canSeeSwitchToSponsor = true;
-            this.canSeeSwitchToDriver = false;
-            this.userService
-              .getSponsorOrgsByDriverUserId(testUser.id)
-              .subscribe((orgs) => {
-                this.orgChoices = orgs;
-                this.loading = false;
-              });
-          });
+      .getUser(`sponsor${orgId}_%sponsor`)
+      .subscribe((testUser) => {
+        this.dbUser = testUser;
+        this.isSponsor = true;
+        this.isAdmin = false;
+        this.canSeeSwitchToOriginal = true;
+        this.canSeeSwitchToDriver = false;
+        this.canSeeSwitchToSponsor = false;
       });
   }
 
-  switchToSponsor() {
+  switchToOriginal() {
     this.dbUser = this.ogUser;
-    this.isDriver = false;
-    this.isSponsor = true;
     this.orgChoices = [];
-    this.canSeeSwitchToDriver = true;
-    this.canSeeSwitchToSponsor = false;
+    if (this.ogUser.userType.toLowerCase() == 'admin') {
+      this.isDriver = false;
+      this.isSponsor = false;
+      this.isAdmin = true;
+      this.canSeeSwitchToDriver = true;
+      this.canSeeSwitchToSponsor = true;
+      this.canSeeSwitchToOriginal = false;
+    } else {
+      this.isDriver = false;
+      this.isSponsor = true;
+      this.canSeeSwitchToDriver = true;
+      this.canSeeSwitchToOriginal = false;
+    }
   }
 }
 

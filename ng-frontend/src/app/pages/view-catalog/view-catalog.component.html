@@ -51,33 +51,77 @@
         Profile
       </a>
       <!-- sign out button -->
-      <div class="row">
+      <div class="row pt-0 mt-0 mb-0 pb-0">
+        <div
+          class="col m-0 pb-0 mb-0 pt-0 mt-0"
+          *ngIf="
+            canSeeSwitchToDriver ||
+            canSeeSwitchToSponsor ||
+            canSeeSwitchToOriginal
+          "
+        >
+          <button
+            class="row justify-content-sm-center nav-link text-light text-center ml-2 pb-0 mb-0 pt-0 mt-0"
+            *ngIf="canSeeSwitchToDriver"
+            style="
+              background: var(--secondary-color);
+              border-radius: 1em;
+              border: transparent;
+            "
+            (click)="switchToDriver(true)"
+          >
+            Driver View
+          </button>
+          <button
+            class="col justify-content-sm-center nav-link text-light text-center ml-2 mb-0 p-0 mt-1"
+            *ngIf="canSeeSwitchToSponsor"
+            style="
+              background: var(--secondary-color);
+              border-radius: 1em;
+              border: transparent;
+            "
+            (click)="switchToSponsor(true)"
+          >
+            Sponsor View
+          </button>
+          <button
+            class="col justify-content-sm-center nav-link text-light text-center ml-2 p-0 mb-0"
+            *ngIf="canSeeSwitchToOriginal"
+            style="
+              background: var(--secondary-color);
+              border-radius: 1em;
+              border: transparent;
+            "
+            (click)="switchToOriginal()"
+          >
+            Normal View
+          </button>
+        </div>
         <button
-          class="col justify-content-sm-center nav-link text-light text-center m-3"
-          *ngIf="canSeeSwitchToDriver"
+          class="col justify-content-sm-center nav-link text-light text-center mr-3 pb-0 mb-0 pt-0 mt-0"
+          *ngIf="
+            canSeeSwitchToDriver ||
+            canSeeSwitchToSponsor ||
+            canSeeSwitchToOriginal
+          "
           style="
             background: var(--secondary-color);
             border-radius: 1em;
             border: transparent;
           "
-          (click)="switchToDriver()"
+          (click)="signOut()"
         >
-          Driver View
+          Sign Out
         </button>
         <button
           class="col justify-content-sm-center nav-link text-light text-center m-3"
-          *ngIf="canSeeSwitchToSponsor"
-          style="
-            background: var(--secondary-color);
-            border-radius: 1em;
-            border: transparent;
+          *ngIf="
+            !(
+              canSeeSwitchToDriver ||
+              canSeeSwitchToSponsor ||
+              canSeeSwitchToOriginal
+            )
           "
-          (click)="switchToSponsor()"
-        >
-          Sponsor View
-        </button>
-        <button
-          class="col justify-content-sm-center nav-link text-light text-center m-3"
           style="
             background: var(--secondary-color);
             border-radius: 1em;
@@ -92,118 +136,152 @@
   </div>
 </div>
 
-<div
-  class="alert alert-success sticky-top"
-  role="alert"
-  style="height: 55px"
-  *ngIf="addToCartLoading"
->
-  Item successfully added
-</div>
-
-<div
-  class="d-flex mt-5 align-content-center justify-content-center"
-  *ngIf="loading"
->
-  <div class="spinner-border" role="status"></div>
-</div>
-
-<div class="container" *ngIf="!loading">
-  <br />
-  <div *ngIf="isDriver || isAdmin" class="text-center">
-    <p><strong>Select An Orgs Catalog</strong></p>
-    <mat-form-field appearance="fill">
+<div *ngIf="selectDriver">
+  <div class="title text-center">
+    <h1>Select a Sponsor</h1>
+    <mat-form-field appearance="fill" color="primary">
       <mat-select
-        [(ngModel)]="orgSelection"
-        (selectionChange)="onSelectionChange()"
+        [(ngModel)]="sponsorSelection"
+        (selectionChange)="switchToDriver(false)"
       >
-        <mat-option *ngFor="let org of orgChoices" [value]="org">
+        <mat-option *ngFor="let org of allOrgs" [value]="org">
           {{ org.orgName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
+</div>
+
+<div *ngIf="selectSponsor">
+  <div class="title text-center">
+    <h1>Select a Sponsor</h1>
+    <mat-form-field appearance="fill" color="primary">
+      <mat-select
+        [(ngModel)]="sponsorSelection"
+        (selectionChange)="switchToSponsor(false)"
+      >
+        <mat-option *ngFor="let org of allOrgs" [value]="org">
+          {{ org.orgName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div *ngIf="!(selectDriver || selectSponsor)">
+  <div
+    class="alert alert-success sticky-top"
+    role="alert"
+    style="height: 55px"
+    *ngIf="addToCartLoading"
+  >
+    Item successfully added
+  </div>
 
   <div
     class="d-flex mt-5 align-content-center justify-content-center"
-    *ngIf="orgCatalogLoading"
+    *ngIf="loading"
   >
     <div class="spinner-border" role="status"></div>
   </div>
 
-  <div class="colored-wrapper" *ngIf="currentProducts.length !== 0">
+  <div class="container" *ngIf="!loading">
     <br />
-    <div class="row">
-      <div class="col-3"></div>
-      <h2 class="col-6 text-center">{{ orgSelection.orgName }}</h2>
-      <div class="col-3">
-        <div *ngIf="isDriver" class="text-right mr-2">
-          <button mat-raised-button (click)="onViewCart()">View Cart</button>
-        </div>
-      </div>
-      <div class="col-3" *ngIf="isSponsor || isAdmin">
-        <button mat-raised-button color="accent" (click)="navToEditCatalog()">
-          Edit Product Catalog
-        </button>
-      </div>
+    <div *ngIf="isDriver || isAdmin" class="text-center">
+      <p><strong>Select An Orgs Catalog</strong></p>
+      <mat-form-field appearance="fill">
+        <mat-select
+          [(ngModel)]="orgSelection"
+          (selectionChange)="onSelectionChange()"
+        >
+          <mat-option *ngFor="let org of orgChoices" [value]="org">
+            {{ org.orgName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
-    <mat-list class="info-list">
-      <mat-list-item *ngFor="let item of currentProducts; let i = index">
-        <div
-          class="card"
-          [ngStyle]="{
-            background: item.available ? '' : 'silver',
-            filter: item.available ? '' : 'grayscale(100%)'
-          }"
-        >
-          <div class="row info-row">
-            <div class="col-2 pl-4">
-              <img
-                src="{{ item.artworkUrl100 }}"
-                style="height: 100%; width: auto"
-              />
-            </div>
-            <div class="col-7 info">
-              <p><strong>Name: </strong>{{ item.trackName }}</p>
-              <p><strong>Available: </strong>{{ item.available }}</p>
-              <p>
-                <strong>Point Value: </strong>{{ item.pointValue.toFixed(2) }}
-              </p>
-              <p>
-                <strong
-                  ><a target="_blank" href="{{ item.trackViewUrl }}"
-                    >Information</a
-                  ></strong
-                >
-              </p>
-            </div>
+    <div
+      class="d-flex mt-5 align-content-center justify-content-center"
+      *ngIf="orgCatalogLoading"
+    >
+      <div class="spinner-border" role="status"></div>
+    </div>
 
-            <div class="col-2" *ngIf="isDriver">
-              <div>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  (click)="onAddToCart(item)"
-                  *ngIf="item.available"
-                >
-                  Add To Cart
-                </button>
-              </div>
-              <br />
-            </div>
+    <div class="colored-wrapper" *ngIf="currentProducts.length !== 0">
+      <br />
+      <div class="row">
+        <div class="col-3"></div>
+        <h2 class="col-6 text-center">{{ orgSelection.orgName }}</h2>
+        <div class="col-3">
+          <div *ngIf="isDriver" class="text-right mr-2">
+            <button mat-raised-button (click)="onViewCart()">View Cart</button>
           </div>
         </div>
-      </mat-list-item>
-    </mat-list>
-    <br />
-  </div>
-  <br />
+        <div class="col-3" *ngIf="isSponsor || isAdmin">
+          <button mat-raised-button color="accent" (click)="navToEditCatalog()">
+            Edit Product Catalog
+          </button>
+        </div>
+      </div>
 
-  <div
-    class="text-center"
-    *ngIf="currentProducts.length === 0 && orgCatalogLoading === false"
-  >
-    <p>No Products to Display</p>
+      <mat-list class="info-list">
+        <mat-list-item *ngFor="let item of currentProducts; let i = index">
+          <div
+            class="card"
+            [ngStyle]="{
+              background: item.available ? '' : 'silver',
+              filter: item.available ? '' : 'grayscale(100%)'
+            }"
+          >
+            <div class="row info-row">
+              <div class="col-2 pl-4">
+                <img
+                  src="{{ item.artworkUrl100 }}"
+                  style="height: 100%; width: auto"
+                />
+              </div>
+              <div class="col-7 info">
+                <p><strong>Name: </strong>{{ item.trackName }}</p>
+                <p><strong>Available: </strong>{{ item.available }}</p>
+                <p>
+                  <strong>Point Value: </strong>{{ item.pointValue.toFixed(2) }}
+                </p>
+                <p>
+                  <strong
+                    ><a target="_blank" href="{{ item.trackViewUrl }}"
+                      >Information</a
+                    ></strong
+                  >
+                </p>
+              </div>
+
+              <div class="col-2" *ngIf="isDriver">
+                <div>
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="onAddToCart(item)"
+                    *ngIf="item.available"
+                  >
+                    Add To Cart
+                  </button>
+                </div>
+                <br />
+              </div>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+      <br />
+    </div>
+    <br />
+
+    <div
+      class="text-center"
+      *ngIf="currentProducts.length === 0 && orgCatalogLoading === false"
+    >
+      <p>No Products to Display</p>
+    </div>
   </div>
 </div>

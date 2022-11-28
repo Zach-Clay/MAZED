@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CognitoService, UserInfo } from 'src/app/services/cognito.service';
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/interfaces';
+import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
+import { User, SponsorOrg } from 'src/app/models/interfaces';
 import { format } from 'path';
 import { runInThisContext } from 'vm';
 import { Router } from '@angular/router';
@@ -27,8 +28,13 @@ export class ProfilePageComponent implements OnInit {
   resetCode: string = '';
   newPassword: string = '';
   newPasswordRepeat: string = '';
-  canSeeSwitchToDriver = false;
-  canSeeSwitchToSponsor = false;
+  canSeeSwitchToDriver: boolean = false;
+  canSeeSwitchToSponsor: boolean = false;
+  canSeeSwitchToOriginal: boolean = false;
+  selectDriver: boolean = false;
+  selectSponsor: boolean = false;
+  sponsorSelection!: SponsorOrg;
+  allOrgs!: any;
 
   public timeout: any;
   public strongPassword = new RegExp(
@@ -44,7 +50,8 @@ export class ProfilePageComponent implements OnInit {
   constructor(
     private cognitoService: CognitoService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private sponsorOrgService: SponsorOrgService
   ) {}
 
   ngOnInit(): void {
@@ -58,8 +65,14 @@ export class ProfilePageComponent implements OnInit {
           this.selectedUser = this.user;
           this.infoLoaded = true;
 
+          this.sponsorOrgService.getAllOrgs().subscribe((data) => {
+            this.allOrgs = data;
+          });
           this.canSeeSwitchToDriver =
-            this.ogUser.userType.toLowerCase() == 'sponsor';
+            this.ogUser.userType.toLowerCase() == 'sponsor' ||
+            this.ogUser.userType.toLowerCase() == 'admin';
+          this.canSeeSwitchToSponsor =
+            this.ogUser.userType.toLowerCase() == 'admin';
 
           //Get info for multiselect box
           if (this.user.userType.toLowerCase() === 'driver')
@@ -103,12 +116,16 @@ export class ProfilePageComponent implements OnInit {
   }
 
   editBtn() {
-    if (this.canSeeSwitchToSponsor)
-      alert('Cannot edit profile while in Driver View');
+    if (this.canSeeSwitchToOriginal)
+      alert('Cannot edit profile while in View Mode');
     else this.isDisabled = !this.isDisabled;
   }
 
   changePasswordBtn() {
+    if (this.canSeeSwitchToOriginal) {
+      alert('Cannot change password while in View Mode');
+      return;
+    }
     this.changingPassword = true;
     this.cognitoService
       .forgotPassword(this.user.username)
@@ -235,31 +252,85 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
-  switchToDriver() {
-    let sponsorOrg = null;
+  switchToDriver(showSelection: boolean) {
+    if (showSelection) {
+      this.selectDriver = true;
+      return;
+    }
+    if (this.ogUser.userType.toLowerCase() == 'admin') {
+      this.selectDriver = false;
+      console.log('hello');
+
+      this.userService
+        .getUser(`sponsor${this.sponsorSelection.id}_%driver`)
+        .subscribe((testUser) => {
+          this.user = testUser;
+          this.isDriver = true;
+          this.isAdmin = false;
+          this.canSeeSwitchToOriginal = true;
+          this.canSeeSwitchToDriver = false;
+          this.canSeeSwitchToSponsor = false;
+          this.selectedUser = this.user;
+        });
+    } else {
+      this.userService
+        .getSponsorOrgBySponsorUserId(this.ogUser.id)
+        .subscribe((org) => {
+          this.userService
+            .getUser(`sponsor${org.id}_%driver`)
+            .subscribe((testUser) => {
+              this.user = testUser;
+              this.isDriver = true;
+              this.isSponsor = false;
+              this.canSeeSwitchToOriginal = true;
+              this.canSeeSwitchToDriver = false;
+              this.selectedUser = this.user;
+            });
+        });
+    }
+  }
+
+  switchToSponsor(showSponsorSelection: boolean) {
+    if (showSponsorSelection) {
+      this.selectSponsor = true;
+      return;
+    }
+
+    this.selectSponsor = false;
+    let orgId = '';
+    if (this.sponsorSelection.id == 1) {
+      orgId = '01';
+    } else {
+      orgId = this.sponsorSelection.id.toString();
+    }
     this.userService
-      .getSponsorOrgBySponsorUserId(this.ogUser.id)
-      .subscribe((org) => {
-        sponsorOrg = org;
-        this.userService
-          .getUser(`sponsor${org.id}_%driver`)
-          .subscribe((testUser) => {
-            this.user = testUser;
-            this.selectedUser = testUser;
-            this.isSponsor = false;
-            this.isDriver = true;
-            this.canSeeSwitchToSponsor = true;
-            this.canSeeSwitchToDriver = false;
-          });
+      .getUser(`sponsor${orgId}_%sponsor`)
+      .subscribe((testUser) => {
+        this.user = testUser;
+        this.isSponsor = true;
+        this.isAdmin = false;
+        this.canSeeSwitchToOriginal = true;
+        this.canSeeSwitchToDriver = false;
+        this.canSeeSwitchToSponsor = false;
+        this.selectedUser = this.user;
       });
   }
 
-  switchToSponsor() {
+  switchToOriginal() {
     this.user = this.ogUser;
-    this.selectedUser = this.ogUser;
-    this.isSponsor = true;
-    this.isDriver = false;
-    this.canSeeSwitchToDriver = true;
-    this.canSeeSwitchToSponsor = false;
+    this.selectedUser = this.user;
+    if (this.ogUser.userType.toLowerCase() == 'admin') {
+      this.isDriver = false;
+      this.isSponsor = false;
+      this.isAdmin = true;
+      this.canSeeSwitchToDriver = true;
+      this.canSeeSwitchToSponsor = true;
+      this.canSeeSwitchToOriginal = false;
+    } else {
+      this.isDriver = false;
+      this.isSponsor = true;
+      this.canSeeSwitchToDriver = true;
+      this.canSeeSwitchToOriginal = false;
+    }
   }
 }

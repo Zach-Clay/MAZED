@@ -38,8 +38,12 @@ export class SponsorsDashboardComponent implements OnInit {
   drivers!: User[];
   sponsorsOrg!: SponsorOrg;
   addingSponsor: boolean = false;
-  canSeeSwitchToSponsor = false;
-  canSeeSwitchToDriver = false;
+  canSeeSwitchToDriver: boolean = false;
+  canSeeSwitchToSponsor: boolean = false;
+  canSeeSwitchToOriginal: boolean = false;
+  selectDriver: boolean = false;
+  selectSponsor: boolean = false;
+  sponsorSelection!: SponsorOrg;
 
   @ViewChild('orgDesc') orgDescription!: ElementRef;
   @ViewChild('dollarToPoint') dollarToPoint!: ElementRef;
@@ -62,7 +66,10 @@ export class SponsorsDashboardComponent implements OnInit {
           this.ogUser = data;
 
           this.canSeeSwitchToDriver =
-            this.ogUser.userType.toLowerCase() == 'sponsor';
+            this.ogUser.userType.toLowerCase() == 'sponsor' ||
+            this.ogUser.userType.toLowerCase() == 'admin';
+          this.canSeeSwitchToSponsor =
+            this.ogUser.userType.toLowerCase() == 'admin';
 
           //Get the orgs
           this.sponsorOrgService.getAllOrgs().subscribe((data) => {
@@ -156,26 +163,72 @@ export class SponsorsDashboardComponent implements OnInit {
     });
   }
 
-  switchToDriver() {
-    let sponsorOrg = null;
+  switchToDriver(showSelection: boolean) {
+    if (showSelection) {
+      this.selectDriver = true;
+      return;
+    }
+    if (this.ogUser.userType.toLowerCase() == 'admin') {
+      this.selectDriver = false;
+      console.log('hello');
+
+      this.userService
+        .getUser(`sponsor${this.sponsorSelection.id}_%driver`)
+        .subscribe((testUser) => {
+          this.user = testUser;
+          this.canSeeSwitchToOriginal = true;
+          this.canSeeSwitchToDriver = false;
+          this.canSeeSwitchToSponsor = false;
+        });
+    } else {
+      this.userService
+        .getSponsorOrgBySponsorUserId(this.ogUser.id)
+        .subscribe((org) => {
+          this.userService
+            .getUser(`sponsor${org.id}_%driver`)
+            .subscribe((testUser) => {
+              this.user = testUser;
+              this.canSeeSwitchToOriginal = true;
+              this.canSeeSwitchToDriver = false;
+            });
+        });
+    }
+  }
+
+  switchToSponsor(showSponsorSelection: boolean) {
+    if (showSponsorSelection) {
+      this.selectSponsor = true;
+      return;
+    }
+
+    this.selectSponsor = false;
+    let orgId = '';
+    if (this.sponsorSelection.id == 1) {
+      orgId = '01';
+    } else {
+      orgId = this.sponsorSelection.id.toString();
+    }
     this.userService
-      .getSponsorOrgBySponsorUserId(this.ogUser.id)
-      .subscribe((org) => {
-        sponsorOrg = org;
-        this.userService
-          .getUser(`sponsor${org.id}_%driver`)
-          .subscribe((testUser) => {
-            this.user = testUser;
-            this.canSeeSwitchToSponsor = true;
-            this.canSeeSwitchToDriver = false;
-          });
+      .getUser(`sponsor${orgId}_%sponsor`)
+      .subscribe((testUser) => {
+        this.user = testUser;
+        this.canSeeSwitchToOriginal = true;
+        this.canSeeSwitchToDriver = false;
+        this.canSeeSwitchToSponsor = false;
+        this.sponsorsOrg = this.sponsorSelection;
       });
   }
 
-  switchToSponsor() {
+  switchToOriginal() {
     this.user = this.ogUser;
-    this.canSeeSwitchToDriver = true;
-    this.canSeeSwitchToSponsor = false;
+    if (this.ogUser.userType.toLowerCase() == 'admin') {
+      this.canSeeSwitchToDriver = true;
+      this.canSeeSwitchToSponsor = true;
+      this.canSeeSwitchToOriginal = false;
+    } else {
+      this.canSeeSwitchToDriver = true;
+      this.canSeeSwitchToOriginal = false;
+    }
   }
 }
 

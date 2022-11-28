@@ -51,33 +51,77 @@
         Profile
       </a>
       <!-- sign out button -->
-      <div class="row">
+      <div class="row pt-0 mt-0 mb-0 pb-0">
+        <div
+          class="col m-0 pb-0 mb-0 pt-0 mt-0"
+          *ngIf="
+            canSeeSwitchToDriver ||
+            canSeeSwitchToSponsor ||
+            canSeeSwitchToOriginal
+          "
+        >
+          <button
+            class="row justify-content-sm-center nav-link text-light text-center ml-2 pb-0 mb-0 pt-0 mt-0"
+            *ngIf="canSeeSwitchToDriver"
+            style="
+              background: var(--secondary-color);
+              border-radius: 1em;
+              border: transparent;
+            "
+            (click)="switchToDriver(true)"
+          >
+            Driver View
+          </button>
+          <button
+            class="col justify-content-sm-center nav-link text-light text-center ml-2 mb-0 p-0 mt-1"
+            *ngIf="canSeeSwitchToSponsor"
+            style="
+              background: var(--secondary-color);
+              border-radius: 1em;
+              border: transparent;
+            "
+            (click)="switchToSponsor(true)"
+          >
+            Sponsor View
+          </button>
+          <button
+            class="col justify-content-sm-center nav-link text-light text-center ml-2 p-0 mb-0"
+            *ngIf="canSeeSwitchToOriginal"
+            style="
+              background: var(--secondary-color);
+              border-radius: 1em;
+              border: transparent;
+            "
+            (click)="switchToOriginal()"
+          >
+            Normal View
+          </button>
+        </div>
         <button
-          class="col justify-content-sm-center nav-link text-light text-center m-3"
-          *ngIf="canSeeSwitchToDriver"
+          class="col justify-content-sm-center nav-link text-light text-center mr-3 pb-0 mb-0 pt-0 mt-0"
+          *ngIf="
+            canSeeSwitchToDriver ||
+            canSeeSwitchToSponsor ||
+            canSeeSwitchToOriginal
+          "
           style="
             background: var(--secondary-color);
             border-radius: 1em;
             border: transparent;
           "
-          (click)="switchToDriver()"
+          (click)="signOut()"
         >
-          Driver View
+          Sign Out
         </button>
         <button
           class="col justify-content-sm-center nav-link text-light text-center m-3"
-          *ngIf="canSeeSwitchToSponsor"
-          style="
-            background: var(--secondary-color);
-            border-radius: 1em;
-            border: transparent;
+          *ngIf="
+            !(
+              canSeeSwitchToDriver ||
+              canSeeSwitchToSponsor ||
+              canSeeSwitchToOriginal
+            )
           "
-          (click)="switchToSponsor()"
-        >
-          Sponsor View
-        </button>
-        <button
-          class="col justify-content-sm-center nav-link text-light text-center m-3"
           style="
             background: var(--secondary-color);
             border-radius: 1em;
@@ -92,227 +136,268 @@
   </div>
 </div>
 
-<div
-  class="d-flex mt-5 align-content-center justify-content-center"
-  *ngIf="!infoLoaded && !selectLoaded"
->
-  <div class="spinner-border" role="status"></div>
-</div>
-
-<div class="container text-center" *ngIf="selectLoaded && !changingPassword">
-  <br />
-  <div *ngIf="isAdmin">
-    <p><strong>Select A User To Edit:</strong></p>
-    <mat-form-field>
+<div *ngIf="selectDriver">
+  <div class="title text-center">
+    <h1>Select a Sponsor</h1>
+    <mat-form-field appearance="fill" color="primary">
       <mat-select
-        [(ngModel)]="selectedUser"
-        (selectionChange)="onSelectionChange()"
+        [(ngModel)]="sponsorSelection"
+        (selectionChange)="switchToDriver(false)"
       >
-        <mat-option *ngFor="let user of userList" [value]="user">
-          {{ user.userFname }} {{ user.userLname }}, {{ user.username }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div *ngIf="isSponsor">
-    <p><strong>Select A Driver To Edit:</strong></p>
-    <mat-form-field>
-      <mat-select
-        [(ngModel)]="selectedUser"
-        (selectionChange)="onSelectionChange()"
-      >
-        <mat-option *ngFor="let user of userList" [value]="user">
-          {{ user.userFname }} {{ user.userLname }}, {{ user.username }}
+        <mat-option *ngFor="let org of allOrgs" [value]="org">
+          {{ org.orgName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
 </div>
 
-<div class="wrapper info-wrapper" *ngIf="infoLoaded && !changingPassword">
-  <div class="text-center">
-    <h3>USER: {{ selectedUser.username }}</h3>
-  </div>
-  <div class="container info-container">
-    <div class="row d-flex">
-      <div class="col-9 info-col">
-        <div class="field">
-          <span class="info-text"><strong>First Name: </strong></span>
-          <input
-            class="info-input"
-            type="text"
-            [(ngModel)]="selectedUser.userFname"
-            [disabled]="isDisabled"
-          />
-        </div>
-        <div class="field">
-          <span class="info-text"><strong>Last Name: </strong></span>
-          <input
-            class="info-input"
-            type="text"
-            [(ngModel)]="selectedUser.userLname"
-            [disabled]="isDisabled"
-          />
-        </div>
-        <div class="field">
-          <span class="info-text"><strong>Phone Number: </strong></span>
-          <input
-            class="info-input"
-            type="text"
-            [(ngModel)]="prettyPhoneNum"
-            [disabled]="isDisabled"
-          />
-        </div>
-        <div class="field">
-          <span class="info-text"><strong>Address: </strong></span>
-          <input
-            class="info-input"
-            type="text"
-            [(ngModel)]="selectedUser.userAddress"
-            [disabled]="isDisabled"
-          />
-        </div>
-        <div class="field">
-          <span class="info-text"><strong>Email: </strong></span>
-          <input
-            class="info-input"
-            type="text"
-            [(ngModel)]="selectedUser.userEmail"
-            [disabled]="isDisabled"
-          />
-        </div>
-        <div class="field">
-          <span class="info-text"><strong>Point Notifications: </strong></span>
-          <mat-slide-toggle
-            class="info-input"
-            [(ngModel)]="selectedUser.pointNotifications"
-            [disabled]="isDisabled"
-          ></mat-slide-toggle>
-        </div>
-        <div class="field">
-          <span class="info-text"><strong>Order Notifications: </strong></span>
-          <mat-slide-toggle
-            class="info-input"
-            [(ngModel)]="selectedUser.orderNotifications"
-            [disabled]="isDisabled"
-          ></mat-slide-toggle>
-        </div>
-        <div class="field">
-          <span class="info-text"
-            ><strong>Issues With Order Notifications: </strong></span
-          >
-          <mat-slide-toggle
-            class="info-input"
-            [(ngModel)]="selectedUser.issueNotifications"
-            [disabled]="isDisabled"
-          ></mat-slide-toggle>
-        </div>
-      </div>
-
-      <div class="col-3 pt-4">
-        <div class="row">
-          <div *ngIf="isDisabled" class="edit-btn">
-            <button mat-raised-button color="primary" (click)="editBtn()">
-              Edit Profile
-            </button>
-          </div>
-          <div *ngIf="!isDisabled" class="save-btn">
-            <button
-              mat-raised-button
-              color="warn"
-              (click)="editBtn(); updateProfile()"
-            >
-              &emsp;SAVE&emsp;
-            </button>
-          </div>
-        </div>
-        <div class="row pt-2">
-          <div
-            *ngIf="isDriver || selectedUser.username == user.username"
-            class="edit-btn"
-          >
-            <button
-              mat-raised-button
-              style="background-color: #ff7a7a; color: white"
-              (click)="changePasswordBtn()"
-            >
-              Change Password
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+<div *ngIf="selectSponsor">
+  <div class="title text-center">
+    <h1>Select a Sponsor</h1>
+    <mat-form-field appearance="fill" color="primary">
+      <mat-select
+        [(ngModel)]="sponsorSelection"
+        (selectionChange)="switchToSponsor(false)"
+      >
+        <mat-option *ngFor="let org of allOrgs" [value]="org">
+          {{ org.orgName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 </div>
 
-<div
-  class="card-body container w-25 mt-5"
-  style="background: var(--secondary-color); border-radius: 0.4em"
-  *ngIf="changingPassword"
->
-  <div class="text-center mb-3">
-    A code was sent to the email associated with this account. It may take a few
-    minutes to receive the email.
+<div *ngIf="!(selectDriver || selectSponsor)">
+  <div
+    class="d-flex mt-5 align-content-center justify-content-center"
+    *ngIf="!infoLoaded && !selectLoaded"
+  >
+    <div class="spinner-border" role="status"></div>
   </div>
-  <div class="mb-3" style="background: var(--primary-color); height: 1px"></div>
-  <div class="row">
-    <div class="col mb-2">
-      <label for="code" class="form-label">Enter code from email:</label>
-      <input
-        type="text"
-        id="code"
-        name="code"
-        #code="ngModel"
-        [(ngModel)]="resetCode"
-        class="form-control form-control-sm"
-      />
+
+  <div class="container text-center" *ngIf="selectLoaded && !changingPassword">
+    <br />
+    <div *ngIf="isAdmin">
+      <p><strong>Select A User To Edit:</strong></p>
+      <mat-form-field>
+        <mat-select
+          [(ngModel)]="selectedUser"
+          (selectionChange)="onSelectionChange()"
+        >
+          <mat-option *ngFor="let user of userList" [value]="user">
+            {{ user.userFname }} {{ user.userLname }}, {{ user.username }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="isSponsor">
+      <p><strong>Select A Driver To Edit:</strong></p>
+      <mat-form-field>
+        <mat-select
+          [(ngModel)]="selectedUser"
+          (selectionChange)="onSelectionChange()"
+        >
+          <mat-option *ngFor="let user of userList" [value]="user">
+            {{ user.userFname }} {{ user.userLname }}, {{ user.username }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
-  <div class="row">
-    <div class="col mb-2">
-      <label for="code" class="form-label">Enter new password:</label>
-      <input
-        type="text"
-        id="code"
-        name="code"
-        #code="ngModel"
-        [(ngModel)]="newPassword"
-        class="form-control form-control-sm"
-        (keyup)="eventListener()"
-      />
-      <span
-        #strengthDisp
-        id="StrengthDisp"
-        class="badge displayBadge"
-        [ngStyle]="{ display: displayType, backgroundColor: strengthColor }"
-      >
-        {{ strengthText }}
-      </span>
+
+  <div class="wrapper info-wrapper" *ngIf="infoLoaded && !changingPassword">
+    <div class="text-center">
+      <h3>USER: {{ selectedUser.username }}</h3>
+    </div>
+    <div class="container info-container">
+      <div class="row d-flex">
+        <div class="col-9 info-col">
+          <div class="field">
+            <span class="info-text"><strong>First Name: </strong></span>
+            <input
+              class="info-input"
+              type="text"
+              [(ngModel)]="selectedUser.userFname"
+              [disabled]="isDisabled"
+            />
+          </div>
+          <div class="field">
+            <span class="info-text"><strong>Last Name: </strong></span>
+            <input
+              class="info-input"
+              type="text"
+              [(ngModel)]="selectedUser.userLname"
+              [disabled]="isDisabled"
+            />
+          </div>
+          <div class="field">
+            <span class="info-text"><strong>Phone Number: </strong></span>
+            <input
+              class="info-input"
+              type="text"
+              [(ngModel)]="prettyPhoneNum"
+              [disabled]="isDisabled"
+            />
+          </div>
+          <div class="field">
+            <span class="info-text"><strong>Address: </strong></span>
+            <input
+              class="info-input"
+              type="text"
+              [(ngModel)]="selectedUser.userAddress"
+              [disabled]="isDisabled"
+            />
+          </div>
+          <div class="field">
+            <span class="info-text"><strong>Email: </strong></span>
+            <input
+              class="info-input"
+              type="text"
+              [(ngModel)]="selectedUser.userEmail"
+              [disabled]="isDisabled"
+            />
+          </div>
+          <div class="field">
+            <span class="info-text"
+              ><strong>Point Notifications: </strong></span
+            >
+            <mat-slide-toggle
+              class="info-input"
+              [(ngModel)]="selectedUser.pointNotifications"
+              [disabled]="isDisabled"
+            ></mat-slide-toggle>
+          </div>
+          <div class="field">
+            <span class="info-text"
+              ><strong>Order Notifications: </strong></span
+            >
+            <mat-slide-toggle
+              class="info-input"
+              [(ngModel)]="selectedUser.orderNotifications"
+              [disabled]="isDisabled"
+            ></mat-slide-toggle>
+          </div>
+          <div class="field">
+            <span class="info-text"
+              ><strong>Issues With Order Notifications: </strong></span
+            >
+            <mat-slide-toggle
+              class="info-input"
+              [(ngModel)]="selectedUser.issueNotifications"
+              [disabled]="isDisabled"
+            ></mat-slide-toggle>
+          </div>
+        </div>
+
+        <div class="col-3 pt-4">
+          <div class="row">
+            <div *ngIf="isDisabled" class="edit-btn">
+              <button mat-raised-button color="primary" (click)="editBtn()">
+                Edit Profile
+              </button>
+            </div>
+            <div *ngIf="!isDisabled" class="save-btn">
+              <button
+                mat-raised-button
+                color="warn"
+                (click)="editBtn(); updateProfile()"
+              >
+                &emsp;SAVE&emsp;
+              </button>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div
+              *ngIf="isDriver || selectedUser.username == user.username"
+              class="edit-btn"
+            >
+              <button
+                mat-raised-button
+                style="background-color: #ff7a7a; color: white"
+                (click)="changePasswordBtn()"
+              >
+                Change Password
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col mb-2">
-      <label for="code" class="form-label">Repeat new password:</label>
-      <input
-        type="text"
-        id="code"
-        name="code"
-        #code="ngModel"
-        [(ngModel)]="newPasswordRepeat"
-        class="form-control form-control-sm"
-      />
+
+  <div
+    class="card-body container w-25 mt-5"
+    style="background: var(--secondary-color); border-radius: 0.4em"
+    *ngIf="changingPassword"
+  >
+    <div class="text-center mb-3">
+      A code was sent to the email associated with this account. It may take a
+      few minutes to receive the email.
     </div>
-  </div>
-  <div class="row">
-    <div class="col d-grid text-center">
-      <button
-        type="button"
-        (click)="submitForgotPassword()"
-        class="btn btn-sm confirm-button"
-        style="background: var(--primary-color); color: white"
-      >
-        Confirm
-      </button>
+    <div
+      class="mb-3"
+      style="background: var(--primary-color); height: 1px"
+    ></div>
+    <div class="row">
+      <div class="col mb-2">
+        <label for="code" class="form-label">Enter code from email:</label>
+        <input
+          type="text"
+          id="code"
+          name="code"
+          #code="ngModel"
+          [(ngModel)]="resetCode"
+          class="form-control form-control-sm"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mb-2">
+        <label for="code" class="form-label">Enter new password:</label>
+        <input
+          type="text"
+          id="code"
+          name="code"
+          #code="ngModel"
+          [(ngModel)]="newPassword"
+          class="form-control form-control-sm"
+          (keyup)="eventListener()"
+        />
+        <span
+          #strengthDisp
+          id="StrengthDisp"
+          class="badge displayBadge"
+          [ngStyle]="{ display: displayType, backgroundColor: strengthColor }"
+        >
+          {{ strengthText }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mb-2">
+        <label for="code" class="form-label">Repeat new password:</label>
+        <input
+          type="text"
+          id="code"
+          name="code"
+          #code="ngModel"
+          [(ngModel)]="newPasswordRepeat"
+          class="form-control form-control-sm"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col d-grid text-center">
+        <button
+          type="button"
+          (click)="submitForgotPassword()"
+          class="btn btn-sm confirm-button"
+          style="background: var(--primary-color); color: white"
+        >
+          Confirm
+        </button>
+      </div>
     </div>
   </div>
 </div>
