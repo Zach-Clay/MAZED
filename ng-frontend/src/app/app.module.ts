@@ -41,6 +41,7 @@ import { SponsorCreationFormComponent } from './components/sponsor-creation-form
 import { ViewCatalogComponent } from './pages/view-catalog/view-catalog.component';
 import { CheckoutDialog } from './pages/view-catalog/view-catalog.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { AuditReportsComponent } from './pages/audit-reports/audit-reports.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
     ViewCatalogComponent,
     CheckoutDialog,
     OrdersComponent,
+    AuditReportsComponent,
   ],
   imports: [
     BrowserModule,
