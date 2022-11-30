@@ -180,12 +180,14 @@ export class ViewCatalogComponent implements OnInit {
   }
 
   onViewCart() {
+    console.log(!this.canSeeSwitchToOriginal);
+
     const dialogRef = this.dialog.open(CheckoutDialog, {
       width: '80vw',
       data: {
         user: this.dbUser,
         sponsor: this.orgSelection,
-        canCheckOut: !this.canSeeSwitchToOriginal,
+        canCheckout: !this.canSeeSwitchToOriginal,
       },
     });
   }
@@ -309,6 +311,8 @@ export class CheckoutDialog implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.data.canCheckout);
+
     //Get the cart items
     this.cartService.getCartByUserId(this.data.user.id).subscribe((items) => {
       this.cartItems = items;
@@ -375,6 +379,8 @@ export class CheckoutDialog implements OnInit {
   }
 
   onCheckout() {
+    console.log(this.data.canCheckout);
+
     if (confirm('Are you sure you want to checkout?')) {
       if (!this.data.canCheckout) {
         alert('Cannot checkout in Driver View');
