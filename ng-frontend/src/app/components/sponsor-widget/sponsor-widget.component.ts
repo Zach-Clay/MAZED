@@ -197,7 +197,7 @@ export class SponsorAppDialog implements OnInit {
         userPoints: 0,
         userType: "driver"
       };
-      this.userService.postUserToSponsor(userToSponsor);
+      this.userService.postUserToSponsor(userToSponsor).subscribe();
       alert(`driver ${decision}ed`);
       window.location.reload();
 
