@@ -16,6 +16,7 @@ export class AdminDashboardComponent implements OnInit {
   addingSponsorOrg: boolean = false;
   orgs!: SponsorOrg[];
   orgToAddSponsor!: SponsorOrg;
+  viewingReports: boolean = false;
 
   constructor(private sponsorOrgService: SponsorOrgService) {}
 

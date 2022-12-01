@@ -1,5 +1,13 @@
 <div
-  *ngIf="!(addingAdmin || addingSponsor || addingDriver || addingSponsorOrg)"
+  *ngIf="
+    !(
+      addingAdmin ||
+      addingSponsor ||
+      addingDriver ||
+      addingSponsorOrg ||
+      viewingReports
+    )
+  "
 >
   <div class="container">
     <div class="row mt-4">
@@ -151,12 +159,13 @@
                 border-radius: 1em;
               "
             >
-              <p
-                class="mb-1 mt-1 btn"
+              <button
+                class="mb-1 mt-1 bg-transparent border-0 btn"
                 style="color: var(--primary-color); font-size: 1.2em"
+                (click)="viewingReports = true"
               >
-                view reports
-              </p>
+                View Reports
+              </button>
             </div>
           </div>
         </div>
