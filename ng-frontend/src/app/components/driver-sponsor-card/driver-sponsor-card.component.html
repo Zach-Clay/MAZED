@@ -6,7 +6,7 @@
           {{ currentSponsor.orgName }}
         </div>
         <!-- <div class="bi bi-truck mb-2" style="font-size: 30px"></div> -->
-        <div class="mb-2" style="font-size: 30px">{{ points }}</div>
+        <div class="mb-2" style="font-size: 30px">{{ points.toFixed(0) }}</div>
         <div class="card-text font-weight-bold">Point-to-Dollar Conversion</div>
         <div class="card-text">1 point = ${{ p2drate }}</div>
         <div class="card" style="background: var(--tertiary-color)">

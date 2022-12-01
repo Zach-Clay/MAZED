@@ -7,19 +7,9 @@
 
 <div *ngIf="gotCurrentProducts && gotSponsoredDrivers">
   <hr />
-  <div class="col-sm mr-3">
-    <app-driver-product-listing
-      [currentSponsor]="sponsorOrg"
-      [dbUser]="dbUser"
-      [clickable]="false"
-    ></app-driver-product-listing>
+ 
+  <div class="container">   
   </div>
-  <br>
-
-  <div class="container">
-    
-  </div>
-
   <div class="container">
     <div class="row">
       <div class="col">
@@ -40,6 +30,16 @@
       </div>
       </div>
     </div>
+  </div>
+
+  <br>
+
+  <div class="col-sm mr-3">
+    <app-driver-product-listing
+      [currentSponsor]="sponsorOrg"
+      [dbUser]="dbUser"
+      [clickable]="false"
+    ></app-driver-product-listing>
   </div>
   
 </div>

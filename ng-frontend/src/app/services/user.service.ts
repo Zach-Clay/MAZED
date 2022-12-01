@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { api_url, environment } from 'src/environments/environment';
 import { User, SponsorOrg, UserToSponsor } from '../models/interfaces';
+import { UserTokenConfiguration } from 'aws-sdk/clients/kendra';
 
 @Injectable({
   providedIn: 'root',
@@ -98,7 +99,8 @@ export class UserService {
 
   //Add a user to a sponsor's org
   public postUserToSponsor(userToSponsor: UserToSponsor) {
-    return this.http.post(`${api_url}/userToSponsor`, userToSponsor);
+    console.log("inside post user to sponsor", userToSponsor);
+    return this.http.post<UserToSponsor>(`${api_url}/userToSponsor`, userToSponsor);
     // this.http.post(`${api_url}/userToSponsor`, userToSponsor).subscribe({
     //   next: (data) => {
     //     console.log('success!');

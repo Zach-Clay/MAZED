@@ -6,14 +6,13 @@
 </div>
 
 <div class="container">
+  <div class="text-center">
+    <button mat-raised-button color="accent" (click)="navToOrders()">View Orders</button>
+  </div>
+  <br>
   <div class="row">
     <div class="col">
       <app-sponsor-widget [user]="dbUser"></app-sponsor-widget>
-    </div>
-    <div class="col">
-      <div style="margin:auto;">
-        <button mat-raised-button color="accent" (click)="navToOrders()">View Orders</button>
-      </div>
     </div>
   </div>
 </div>

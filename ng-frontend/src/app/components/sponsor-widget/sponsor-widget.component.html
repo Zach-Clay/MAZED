@@ -10,61 +10,74 @@
     >
       <div class="spinner-border" role="status"></div>
     </div>
+    
+    
+    
     <div *ngIf="loaded">
-      <div class="sponsors" *ngIf="showSponsor && sponsorOrgs">
-        <p><strong>Sponsor(s): </strong></p>
-          <div *ngFor="let sponsor of sponsorOrgs">
-            <p>&nbsp;&nbsp;{{sponsor.orgName}}</p>
+      <div class="row">
+        <div class="col">
+
+          <div class="sponsors" *ngIf="showSponsor && sponsorOrgs">
+            <p><strong>Sponsor(s): </strong></p>
+              <div *ngFor="let sponsor of sponsorOrgs">
+                <p>&nbsp;&nbsp;{{sponsor.orgName}}</p>
+              </div>
           </div>
-      </div>
-      <br/>
-      <a
-        [routerLink]="['/sponsor-dashboard']"
-        class="text-light text-center p-2 font-weight-bold"
-        style="background: var(--secondary-color); border-radius: 0.3em"
-        >Sponsor Dashboard</a
-      >
-      <br />
-      <br />
 
-      <div *ngIf="isDriver">
-        <button mat-raised-button routerLink="/driver-application">Apply to a Sponsor</button>
+          <a
+            [routerLink]="['/sponsor-dashboard']"
+            class="text-light text-center p-2 font-weight-bold"
+            style="background: var(--secondary-color); border-radius: 0.3em"
+            >Sponsor Dashboard
+          </a>
 
-        <br />
-        <br />
-        
-      </div>
+          <br>
+          <br>
+          <div style="margin-bottom: 8px;">
+            <button mat-raised-button (click)="navToViewCatalog()">
+              View Catalog(s)
+            </button>
+          </div>
 
-      <div *ngIf="isSponsor">
-        <div *ngIf="sponsorsApps" class="mb-2">
-          <button mat-raised-button (click)="openDialog()">
-            View Pending Apps
-          </button>
+        </div>
+        <div class="col">
+
+          <br>
+          <div *ngIf="isSponsor">
+            <div *ngIf="sponsorsApps" class="mb-2">
+              <button mat-raised-button (click)="openDialog()">
+                View Pending Apps
+              </button>
+            </div>
+          </div>
+    
+          <div *ngIf="isSponsor || isAdmin" style="margin-bottom: 8px;">
+            <button mat-raised-button (click)="navToEditCatalog()">
+              Edit Catalog
+            </button>
+          </div>
+
+          <div *ngIf="isDriver">
+            <button mat-raised-button routerLink="/driver-application">Apply to a Sponsor</button>
+            <br />
+            <br />
+          </div>
+
+          <div *ngIf="isDriver">
+            <p><strong>Outstanding Applications: </strong></p>
+            <mat-list *ngIf="showDriverOustandingApps">
+              <mat-list-item *ngFor="let app of driverOutstandingApps">
+                {{ app.sponsorName }}, submitted {{ app.requestedDate.month }}/{{
+                  app.requestedDate.day
+                }}/{{ app.requestedDate.year }}
+              </mat-list-item>
+            </mat-list>
+          </div>
+
         </div>
       </div>
+      <br>
 
-      <div *ngIf="isSponsor || isAdmin" style="margin-bottom: 8px;">
-        <button mat-raised-button (click)="navToEditCatalog()">
-          Edit Catalog
-        </button>
-      </div>
-
-      <div style="margin-bottom: 8px;">
-        <button mat-raised-button (click)="navToViewCatalog()">
-          View Catalog(s)
-        </button>
-      </div>
-
-      <div *ngIf="isDriver">
-        <p><strong>Outstanding Applications: </strong></p>
-        <mat-list *ngIf="showDriverOustandingApps">
-          <mat-list-item *ngFor="let app of driverOutstandingApps">
-            {{ app.sponsorName }}, submitted {{ app.requestedDate.month }}/{{
-              app.requestedDate.day
-            }}/{{ app.requestedDate.year }}
-          </mat-list-item>
-        </mat-list>
-      </div>
 
     </div>
   </div>
