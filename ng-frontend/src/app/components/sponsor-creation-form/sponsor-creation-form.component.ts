@@ -94,7 +94,7 @@ export class SponsorCreationFormComponent implements OnInit {
           userPoints: 0,
           userType: 'sponsor',
         };
-        this.userService.postUserToSponsor(userToSponsor);
+        this.userService.postUserToSponsor(userToSponsor).subscribe();
       });
     });
 

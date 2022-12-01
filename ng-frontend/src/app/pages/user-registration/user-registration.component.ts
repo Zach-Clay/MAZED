@@ -171,6 +171,7 @@ export class UserRegistrationComponent implements OnInit {
     this.newUser.username = this.username;
     this.newUser.userFname = FName;
     this.newUser.userLname = LName;
+    console.log("USER TYPE = " + this.userType);
     if (!this.userType || this.userType === "") {
       this.newUser.userType = 'driver';
     }
@@ -195,7 +196,7 @@ export class UserRegistrationComponent implements OnInit {
           userType: 'sponsor',
         };
         console.log('posting user to sponsor')
-        this.userService.postUserToSponsor(userToSponsor);
+        this.userService.postUserToSponsor(userToSponsor).subscribe();
       }
     });
   }
