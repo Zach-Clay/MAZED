@@ -58,6 +58,13 @@ namespace api_backend.Controllers
         public async Task<List<DriverOrder>> GetOrdersByDriverId(int id)
         {
             return await _context.DriverOrders.Where(o => o.UserId == id).ToListAsync();
+        } 
+        
+        [HttpGet("GetAllBySponsor")]
+        public async Task<List<DriverOrder>> GetAllBySponsorAsync(int sponsorID)
+        {
+            return await _context.DriverOrders.Where(d => d.SponsorId == sponsorID).ToListAsync()
+                   ?? throw new Exception("Order not found");
         }
 
         //take cart and make it into an order

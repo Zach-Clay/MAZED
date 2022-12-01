@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MazedDB.Data;
 using MazedDB.Models;
+
 namespace api_backend.Controllers
 {
     [Route("api/[controller]")]
@@ -32,6 +33,7 @@ namespace api_backend.Controllers
 
             return await _context.LoginAttempts.Where(e => e.Username == username).ToListAsync();
         }
+
 
         ////Post a new login attempt for a specific user
         //[HttpPost]
