@@ -237,19 +237,11 @@
               </button>
             </div>
             &nbsp;
-            <div>
-              <button
-                mat-raised-button
-                color="accent"
-                (click)="addingSponsor = true"
-                *ngIf="user.userType.toLowerCase() === 'admin'"
-              >
-                Create Another Sponsor Account
-              </button>
-            </div>
+
             &nbsp;
             <div>
               <button
+                *ngIf="user.userType.toLowerCase() === 'sponsor'"
                 mat-raised-button
                 color="accent"
                 (click)="navToEditCatalog()"

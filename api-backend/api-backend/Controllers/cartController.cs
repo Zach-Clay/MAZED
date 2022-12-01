@@ -16,6 +16,7 @@ namespace api_backend.Controllers
 {
 
     [Route("api/[controller]")]
+    [ApiController]
     public class cartController : Controller
     {
         private readonly MazedDBContext _context;
