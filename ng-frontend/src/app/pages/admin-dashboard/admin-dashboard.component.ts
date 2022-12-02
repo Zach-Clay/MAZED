@@ -3,6 +3,7 @@ import { User } from 'src/app/models/interfaces';
 import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
 import { SponsorOrg } from 'src/app/models/interfaces';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -22,7 +23,8 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(
     private sponsorOrgService: SponsorOrgService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -32,5 +34,9 @@ export class AdminDashboardComponent implements OnInit {
     this.sponsorOrgService.getAllOrgs().subscribe((data) => {
       this.orgs = data;
     });
+  }
+
+  navToProductCatalog() {
+    this.router.navigate(['view-catalog']);
   }
 }

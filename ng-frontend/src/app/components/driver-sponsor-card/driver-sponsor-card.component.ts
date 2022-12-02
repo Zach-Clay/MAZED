@@ -36,7 +36,7 @@ export class DriverSponsorCardComponent implements OnInit {
     this.userService
       .getUserPointsBySponsor(this.dbUser.id, this.currentSponsor.id)
       .subscribe((data) => {
-        this.points = data.userPoints;
+        this.points = Math.round(data.userPoints);
       });
   }
 }
