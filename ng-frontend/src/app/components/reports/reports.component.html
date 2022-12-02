@@ -18,24 +18,24 @@
   <div class="col-4"></div>
   <button
     class="col-2 mb-1 mr-1 mt-1 border-0 btn"
-    style="
-      color: white;
-      border-radius: 1em;
-      font-size: 1.2em;
-      background-color: var(--secondary-color);
-    "
+    style="color: white; border-radius: 1em; font-size: 1.2em"
+    [ngStyle]="{
+      'background-color': viewingOrders
+        ? 'var(--primary-color)'
+        : 'var(--secondary-color)'
+    }"
     (click)="viewingOrders = true; viewingPoints = false"
   >
     View Orders Report
   </button>
   <button
     class="col-2 mb-1 ml-1 mt-1 border-0 btn"
-    style="
-      color: white;
-      border-radius: 1em;
-      font-size: 1.2em;
-      background-color: var(--secondary-color);
-    "
+    style="color: white; border-radius: 1em; font-size: 1.2em"
+    [ngStyle]="{
+      'background-color': viewingPoints
+        ? 'var(--primary-color)'
+        : 'var(--secondary-color)'
+    }"
     (click)="viewingPoints = true; viewingOrders = false"
   >
     View Point Transactions Report
@@ -55,6 +55,12 @@
         color: var(--primary-color);
         font-size: 1.2em;
       "
+      [ngStyle]="{
+        'background-color': viewingEntireOrgReports
+          ? 'var(--primary-color)'
+          : 'var(--secondary-color)',
+        color: viewingEntireOrgReports ? 'white' : 'var(--primary-color)'
+      }"
       (click)="selectedEntireOrg()"
     >
       View Organization's Consolidated Reports
