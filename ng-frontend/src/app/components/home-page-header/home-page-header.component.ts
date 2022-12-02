@@ -32,8 +32,8 @@ export class HomePageHeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.canSeeSwitchToDriver = this.ogUser.userType.toLowerCase() == 'sponsor';
-    this.dbUser = this.ogUser;
+    // this.canSeeSwitchToDriver = this.ogUser.userType.toLowerCase() == 'sponsor';
+    // this.dbUser = this.ogUser;
   }
 
   signOut() {

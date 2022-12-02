@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PointsChanges } from 'src/app/models/interfaces';
+import { PointsChanges, User } from 'src/app/models/interfaces';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-point-change',
@@ -8,7 +9,13 @@ import { PointsChanges } from 'src/app/models/interfaces';
 })
 export class PointChangeComponent implements OnInit {
   @Input() pointChange!: PointsChanges;
-  constructor() {}
+  @Input() isReport: boolean = false;
+  user!: User;
+  constructor(private userService: UserService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService
+      .getUserById(this.pointChange.userId)
+      .subscribe((u) => (this.user = u));
+  }
 }

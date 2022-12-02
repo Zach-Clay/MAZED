@@ -15,6 +15,7 @@ import { ProductCatalogComponent } from './pages/product-catalog/product-catalog
 import { ViewCatalogComponent } from './pages/view-catalog/view-catalog.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AuditReportsComponent } from './pages/audit-reports/audit-reports.component';
+import { SponsorReportPageComponent } from './pages/sponsor-report-page/sponsor-report-page.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'product-catalog', component: ProductCatalogComponent },
   { path: 'view-catalog', component: ViewCatalogComponent },
   { path: 'orders', component: OrdersComponent },
-  { path: 'audit-reports',component: AuditReportsComponent},
+  { path: 'audit-reports', component: AuditReportsComponent },
+  { path: 'sponsor-reports', component: SponsorReportPageComponent },
 ];
 
 @NgModule({

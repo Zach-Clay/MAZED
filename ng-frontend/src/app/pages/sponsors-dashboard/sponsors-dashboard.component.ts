@@ -278,6 +278,7 @@ export class AddDeductDialog implements OnInit {
         userId: this.driverSelection.id,
         pointValue: pointValue,
         reason: this.reason,
+        modDate: Date.now(),
       };
 
       //update the point transaction

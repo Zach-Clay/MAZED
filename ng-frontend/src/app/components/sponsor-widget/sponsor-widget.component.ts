@@ -59,15 +59,17 @@ export class SponsorWidgetComponent implements OnInit {
     private sponsorOrgService: SponsorOrgService,
     private applicationService: ApplicationService,
     public dialog: MatDialog,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     //get the users sponsors
-    this.userService.getSponsorOrgsByDriverUserId(this.user.id).subscribe((data) => {
-      this.sponsorOrgs = data;
-      this.showSponsor = true;
-    });
+    this.userService
+      .getSponsorOrgsByDriverUserId(this.user.id)
+      .subscribe((data) => {
+        this.sponsorOrgs = data;
+        this.showSponsor = true;
+      });
 
     //if the user is a driver
     if (this.user.userType.toLowerCase() === 'driver') {
@@ -90,12 +92,16 @@ export class SponsorWidgetComponent implements OnInit {
       this.isSponsor = true;
 
       //get the sponsor org for the sponsor user
-      this.userService.getSponsorOrgBySponsorUserId(this.user.id).subscribe((data) => {
-        //Get the applications for that sponsor
-        this.applicationService.getApplicationsBySponsor(data.id).subscribe((apps) => {
-          this.sponsorsApps = apps;
-        })
-      })
+      this.userService
+        .getSponsorOrgBySponsorUserId(this.user.id)
+        .subscribe((data) => {
+          //Get the applications for that sponsor
+          this.applicationService
+            .getApplicationsBySponsor(data.id)
+            .subscribe((apps) => {
+              this.sponsorsApps = apps;
+            });
+        });
     }
 
     if (this.user.userType.toLowerCase() === 'admin') {
@@ -110,6 +116,10 @@ export class SponsorWidgetComponent implements OnInit {
 
   navToViewCatalog() {
     this.router.navigate(['/view-catalog']);
+  }
+
+  navToReports() {
+    this.router.navigate(['/sponsor-reports']);
   }
 
   openDialog(): void {
@@ -195,12 +205,11 @@ export class SponsorAppDialog implements OnInit {
         userId: application.userId,
         sponsorId: application.sponsorId,
         userPoints: 0,
-        userType: "driver"
+        userType: 'driver',
       };
       this.userService.postUserToSponsor(userToSponsor).subscribe();
       alert(`driver ${decision}ed`);
       window.location.reload();
-
     } else {
       alert(`driver ${decision}ed`);
       window.location.reload();

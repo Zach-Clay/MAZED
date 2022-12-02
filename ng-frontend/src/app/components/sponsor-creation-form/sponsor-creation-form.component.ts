@@ -81,6 +81,7 @@ export class SponsorCreationFormComponent implements OnInit {
               sponsorId: sponsorData.id,
               userId: userData.id,
               pointValue: 99999,
+              modDate: Date.now(),
               reason: 'these points are for testing purposes',
             };
             this.pointChangesService.postTransation(pointTrans);

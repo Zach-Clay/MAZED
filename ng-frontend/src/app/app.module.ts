@@ -42,6 +42,9 @@ import { ViewCatalogComponent } from './pages/view-catalog/view-catalog.componen
 import { CheckoutDialog } from './pages/view-catalog/view-catalog.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AuditReportsComponent } from './pages/audit-reports/audit-reports.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { OrderReportComponent } from './components/order-report/order-report.component';
+import { SponsorReportPageComponent } from './pages/sponsor-report-page/sponsor-report-page.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +78,9 @@ import { AuditReportsComponent } from './pages/audit-reports/audit-reports.compo
     CheckoutDialog,
     OrdersComponent,
     AuditReportsComponent,
+    ReportsComponent,
+    OrderReportComponent,
+    SponsorReportPageComponent,
   ],
   imports: [
     BrowserModule,

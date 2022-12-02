@@ -1,12 +1,15 @@
 <div class="row mt-2">
   <div class="col-md-3 w-50">
-    <div class="card text-light ml-3" style="background: var(--primary-color); height:100%;">
+    <div
+      class="card text-light ml-3"
+      style="background: var(--primary-color); height: 100%"
+    >
       <div class="card-body text-center">
         <div class="card-title mt-0 lead" *ngIf="currentSponsor">
           {{ currentSponsor.orgName }}
         </div>
         <!-- <div class="bi bi-truck mb-2" style="font-size: 30px"></div> -->
-        <div class="mb-2" style="font-size: 30px">{{ points.toFixed(0) }}</div>
+        <div class="mb-2" style="font-size: 30px">{{ points }}</div>
         <div class="card-text font-weight-bold">Point-to-Dollar Conversion</div>
         <div class="card-text">1 point = ${{ p2drate }}</div>
         <div class="card" style="background: var(--tertiary-color)">
@@ -17,7 +20,9 @@
             recent point updates
           </p>
           <app-point-change
-            *ngFor="let pointChange of pointTransactions.reverse() | slice: 0:4"
+            *ngFor="
+              let pointChange of pointTransactions.reverse() | slice : 0 : 4
+            "
             [pointChange]="pointChange"
           ></app-point-change>
         </div>

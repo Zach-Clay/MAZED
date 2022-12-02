@@ -1,7 +1,7 @@
 <div class="row text-center">
   <div
-    class=" card text-light"
-    style="background: var(--primary-color);width: 100%;"
+    class="card text-light"
+    style="background: var(--primary-color); width: 100%"
   >
     <div class="text-center mt-2 mb-2 lead">Sponsor Info</div>
     <div
@@ -10,18 +10,15 @@
     >
       <div class="spinner-border" role="status"></div>
     </div>
-    
-    
-    
+
     <div *ngIf="loaded">
       <div class="row">
         <div class="col">
-
           <div class="sponsors" *ngIf="showSponsor && sponsorOrgs">
             <p><strong>Sponsor(s): </strong></p>
-              <div *ngFor="let sponsor of sponsorOrgs">
-                <p>&nbsp;&nbsp;{{sponsor.orgName}}</p>
-              </div>
+            <div *ngFor="let sponsor of sponsorOrgs">
+              <p>&nbsp;&nbsp;{{ sponsor.orgName }}</p>
+            </div>
           </div>
 
           <a
@@ -31,18 +28,16 @@
             >Sponsor Dashboard
           </a>
 
-          <br>
-          <br>
-          <div style="margin-bottom: 8px;">
-            <button mat-raised-button (click)="navToViewCatalog()">
+          <br />
+          <br />
+          <div style="margin-bottom: 8px">
+            <button mat-raised-button (click)="navToReports()">
               View Catalog(s)
             </button>
           </div>
-
         </div>
         <div class="col">
-
-          <br>
+          <br />
           <div *ngIf="isSponsor">
             <div *ngIf="sponsorsApps" class="mb-2">
               <button mat-raised-button (click)="openDialog()">
@@ -50,15 +45,23 @@
               </button>
             </div>
           </div>
-    
-          <div *ngIf="isSponsor || isAdmin" style="margin-bottom: 8px;">
+
+          <div *ngIf="isSponsor || isAdmin" style="margin-bottom: 8px">
             <button mat-raised-button (click)="navToEditCatalog()">
               Edit Catalog
             </button>
           </div>
 
+          <div *ngIf="isSponsor" style="margin-bottom: 8px">
+            <button mat-raised-button (click)="navToReports()">
+              View Reports
+            </button>
+          </div>
+
           <div *ngIf="isDriver">
-            <button mat-raised-button routerLink="/driver-application">Apply to a Sponsor</button>
+            <button mat-raised-button routerLink="/driver-application">
+              Apply to a Sponsor
+            </button>
             <br />
             <br />
           </div>
@@ -67,18 +70,16 @@
             <p><strong>Outstanding Applications: </strong></p>
             <mat-list *ngIf="showDriverOustandingApps">
               <mat-list-item *ngFor="let app of driverOutstandingApps">
-                {{ app.sponsorName }}, submitted {{ app.requestedDate.month }}/{{
-                  app.requestedDate.day
-                }}/{{ app.requestedDate.year }}
+                {{ app.sponsorName }}, submitted
+                {{ app.requestedDate.month }}/{{ app.requestedDate.day }}/{{
+                  app.requestedDate.year
+                }}
               </mat-list-item>
             </mat-list>
           </div>
-
         </div>
       </div>
-      <br>
-
-
+      <br />
     </div>
   </div>
 </div>

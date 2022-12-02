@@ -1,4 +1,20 @@
-<div class="card mx-2 my-1" style="background: var(--secondary-color)">
-  {{ pointChange.pointValue }} |
-  {{ pointChange.reason }}
+<div *ngIf="!isReport">
+  <div class="card mx-2 my-1" style="background: var(--secondary-color)">
+    {{ pointChange.pointValue }} |
+    {{ pointChange.reason }}
+  </div>
+</div>
+
+<div *ngIf="isReport">
+  <div *ngIf="user">
+    <div class="ml-3">
+      <div class="row">
+        <div class="col">{{ user.userFname }} {{ user.userLname }}</div>
+        <div class="col">{{ pointChange.pointValue }}</div>
+        <div class="col">{{ pointChange.reason }}</div>
+        <div class="col">{{ pointChange.modDate }}</div>
+      </div>
+    </div>
+    <hr />
+  </div>
 </div>

@@ -210,9 +210,20 @@
     ></app-user-registration>
   </div>
 </div>
+
+<div *ngIf="viewingReports">
+  <app-reports [user]="user"></app-reports>
+</div>
+
 <div
   class="register mt-3 mb-3 text-center"
-  *ngIf="addingAdmin || addingSponsor || addingDriver || addingSponsorOrg"
+  *ngIf="
+    addingAdmin ||
+    addingSponsor ||
+    addingDriver ||
+    addingSponsorOrg ||
+    viewingReports
+  "
 >
   <button
     class="bg-transparent border-0 text-primary"
@@ -220,7 +231,8 @@
       addingAdmin = false;
       addingSponsor = false;
       addingDriver = false;
-      addingSponsorOrg = false
+      addingSponsorOrg = false;
+      viewingReports = false
     "
   >
     Back to Admin Home Page
