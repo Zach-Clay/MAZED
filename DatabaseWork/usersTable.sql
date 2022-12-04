@@ -1,0 +1,20 @@
+CREATE TABLE `users` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Username` varchar(30) NOT NULL,
+  `UserFName` varchar(30) NOT NULL,
+  `UserLName` varchar(30) NOT NULL,
+  `UserType` varchar(30) NOT NULL,
+  `UserAddress` varchar(30) DEFAULT NULL,
+  `UserEmail` varchar(30) DEFAULT NULL,
+  `UserPhoneNum` varchar(30) DEFAULT NULL,
+  `UserPwd` varchar(30) DEFAULT NULL,
+  `isBlacklisted` tinyint NOT NULL DEFAULT '0',
+  `pointNotifications` tinyint DEFAULT '1',
+  `orderNotifications` tinyint DEFAULT '1',
+  `issueNotifications` tinyint DEFAULT '1',
+  `modDate` datetime DEFAULT NULL,
+  `modBy` varchar(45) DEFAULT NULL,
+  `LastLogin` datetime DEFAULT NULL,
+  `sponsorCount` int DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
