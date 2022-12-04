@@ -21,7 +21,7 @@ import { User, UserToSponsor } from 'src/app/models/interfaces';
   styleUrls: ['./user-registration.component.css'],
 })
 export class UserRegistrationComponent implements OnInit {
-  @Input() userType: string = 'driver';
+  @Input() userType!: string;
   @Input() sponsorId: number = 0;
   @Input() assisted: boolean = false;
   public loading: boolean = false;
@@ -171,7 +171,13 @@ export class UserRegistrationComponent implements OnInit {
     this.newUser.username = this.username;
     this.newUser.userFname = FName;
     this.newUser.userLname = LName;
-    this.newUser.userType = this.userType;
+    console.log("USER TYPE = " + this.userType);
+    if (!this.userType || this.userType === "") {
+      this.newUser.userType = 'driver';
+    }
+    else {
+      this.newUser.userType = this.userType;
+    }
     this.newUser.userAddress = this.address;
     this.newUser.userEmail = this.email;
     this.newUser.userPwd = 'null';
@@ -180,15 +186,17 @@ export class UserRegistrationComponent implements OnInit {
 
     //post to our api
     this.userService.registerUser(this.newUser).subscribe((user) => {
-      if (this.userType == 'sponsor') {
+      console.log('registered user', user);
+      if (user.userType.toLowerCase() === 'sponsor') {
         let userToSponsor: UserToSponsor = {
           id: 0,
           userId: user.id,
           sponsorId: this.sponsorId,
           userPoints: 0,
-          userType: this.userType,
+          userType: 'sponsor',
         };
-        this.userService.postUserToSponsor(userToSponsor);
+        console.log('posting user to sponsor')
+        this.userService.postUserToSponsor(userToSponsor).subscribe();
       }
     });
   }

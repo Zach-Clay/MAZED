@@ -1,0 +1,17 @@
+.mat-list .mat-list-item {
+  height: auto;
+}
+
+.info-row {
+  border: solid 2px blue;
+  border-radius: 5px;
+  margin-top: 5px;
+  background-color: #AED2FF;
+}
+
+.info-col {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5px;
+  padding-bottom: 8px;
+}

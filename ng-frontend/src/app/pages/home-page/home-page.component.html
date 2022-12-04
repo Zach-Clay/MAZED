@@ -6,35 +6,200 @@
 </div>
 
 <div *ngIf="dbUser && cognitoUser">
-  <app-home-page-header
-    [showPoints]="false"
-    [dbUser]="dbUser"
-    *ngIf="displayName"
-  ></app-home-page-header>
-
-  <div class="pt-2">
-    <div class="text-center">
-      <h2>Welcome, {{ dbUser.userFname }} {{ dbUser.userLname }}</h2>
+  <div class="header">
+    <div class="row pb-3" style="background: var(--secondary-color)">
+      <div class="col align-self-center">
+        <a href="/home">
+          <img
+            class="pt-3 ml-5"
+            src="../../../assets/light-logo.png"
+            style="width: 170px"
+        /></a>
+      </div>
+      <!-- empty column -->
+      <div
+        class="col"
+        style="
+          background: var(--secondary-color);
+          padding: 1px;
+          border-radius: 1em;
+          margin: 0px;
+        "
+      ></div>
+      <!-- empty column -->
+      <div
+        class="col"
+        style="
+          background: var(--secondary-color);
+          padding: 1px;
+          border-radius: 1em;
+          margin: 2px;
+        "
+      ></div>
+      <!-- column holding profile & sign out button -->
+      <div
+        class="col-2 align-items-center"
+        style="
+          background: var(--primary-color);
+          padding: 2px;
+          border-radius: 1em;
+          margin: 5px;
+        "
+      >
+        <!-- profile button -->
+        <a
+          class="row justify-content-sm-center nav-link text-light text-center"
+          style="
+            background: var(--secondary-color);
+            border-radius: 1em;
+            margin: 10px;
+          "
+          routerLink="/profile"
+        >
+          Profile
+        </a>
+        <!-- sign out button -->
+        <div class="row pt-0 mt-0 mb-0 pb-0">
+          <div
+            class="col m-0 pb-0 mb-0 pt-0 mt-0"
+            *ngIf="
+              canSeeSwitchToDriver ||
+              canSeeSwitchToSponsor ||
+              canSeeSwitchToOriginal
+            "
+          >
+            <button
+              class="row justify-content-sm-center nav-link text-light text-center ml-2 pb-0 mb-0 pt-0 mt-0"
+              *ngIf="canSeeSwitchToDriver"
+              style="
+                background: var(--secondary-color);
+                border-radius: 1em;
+                border: transparent;
+              "
+              (click)="switchToDriver(true)"
+            >
+              Driver View
+            </button>
+            <button
+              class="col justify-content-sm-center nav-link text-light text-center ml-2 mb-0 p-0 mt-1"
+              *ngIf="canSeeSwitchToSponsor"
+              style="
+                background: var(--secondary-color);
+                border-radius: 1em;
+                border: transparent;
+              "
+              (click)="switchToSponsor(true)"
+            >
+              Sponsor View
+            </button>
+            <button
+              class="col justify-content-sm-center nav-link text-light text-center ml-2 p-0 mb-0"
+              *ngIf="canSeeSwitchToOriginal"
+              style="
+                background: var(--secondary-color);
+                border-radius: 1em;
+                border: transparent;
+              "
+              (click)="switchToOriginal()"
+            >
+              Normal View
+            </button>
+          </div>
+          <button
+            class="col justify-content-sm-center nav-link text-light text-center mr-3 pb-0 mb-0 pt-0 mt-0"
+            *ngIf="
+              canSeeSwitchToDriver ||
+              canSeeSwitchToSponsor ||
+              canSeeSwitchToOriginal
+            "
+            style="
+              background: var(--secondary-color);
+              border-radius: 1em;
+              border: transparent;
+            "
+            (click)="signOut()"
+          >
+            Sign Out
+          </button>
+          <button
+            class="col justify-content-sm-center nav-link text-light text-center m-3"
+            *ngIf="
+              !(
+                canSeeSwitchToDriver ||
+                canSeeSwitchToSponsor ||
+                canSeeSwitchToOriginal
+              )
+            "
+            style="
+              background: var(--secondary-color);
+              border-radius: 1em;
+              border: transparent;
+            "
+            (click)="signOut()"
+          >
+            Sign Out
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-  <div *ngIf="isDriver">
-    <app-driver-home-page
-      [dbUser]="dbUser"
-      [cognitoUser]="cognitoUser"
-    ></app-driver-home-page>
+
+  <div *ngIf="selectDriver">
+    <div class="title text-center">
+      <h1>Select a Sponsor</h1>
+      <mat-form-field appearance="fill" color="primary">
+        <mat-select
+          [(ngModel)]="sponsorSelection"
+          (selectionChange)="switchToDriver(false)"
+        >
+          <mat-option *ngFor="let org of allOrgs" [value]="org">
+            {{ org.orgName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 
-  <div *ngIf="isSponsor">
-    <app-sponsor-home-page
-      [dbUser]="dbUser"
-      [cognitoUser]="cognitoUser"
-    ></app-sponsor-home-page>
+  <div *ngIf="selectSponsor">
+    <div class="title text-center">
+      <h1>Select a Sponsor</h1>
+      <mat-form-field appearance="fill" color="primary">
+        <mat-select
+          [(ngModel)]="sponsorSelection"
+          (selectionChange)="switchToSponsor(false)"
+        >
+          <mat-option *ngFor="let org of allOrgs" [value]="org">
+            {{ org.orgName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 
-  <div *ngIf="isAdmin">
-    <app-admin-homepage
-      [dbUser]="dbUser"
-      [cognitoUser]="cognitoUser"
-    ></app-admin-homepage>
+  <div *ngIf="!(selectSponsor || selectDriver)">
+    <div class="pt-2">
+      <div class="text-center">
+        <h2>Welcome, {{ dbUser.userFname }} {{ dbUser.userLname }}</h2>
+      </div>
+    </div>
+    <div *ngIf="isDriver">
+      <app-driver-home-page
+        [dbUser]="dbUser"
+        [cognitoUser]="cognitoUser"
+      ></app-driver-home-page>
+    </div>
+    <div *ngIf="isSponsor">
+      <app-sponsor-home-page
+        [dbUser]="dbUser"
+        [cognitoUser]="cognitoUser"
+      ></app-sponsor-home-page>
+    </div>
+
+    <div *ngIf="isAdmin">
+      <app-admin-homepage
+        [dbUser]="dbUser"
+        [cognitoUser]="cognitoUser"
+      ></app-admin-homepage>
+    </div>
   </div>
 </div>

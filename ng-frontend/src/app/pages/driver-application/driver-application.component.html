@@ -15,7 +15,7 @@
 
       <span class="lead">Sponsor Organization</span>
       <br />
-      <mat-form-field appearance="outline" color="primary">
+      <mat-form-field appearance="fill">
         <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="orgSelection">
           <mat-option *ngFor="let org of orgs" [value]="org">
             {{org.orgName}}

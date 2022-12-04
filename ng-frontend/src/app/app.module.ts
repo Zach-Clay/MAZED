@@ -38,6 +38,13 @@ import { DriverProductListingComponent } from './components/driver-product-listi
 import { EditProductCatalogComponent } from './pages/edit-product-catalog/edit-product-catalog.component';
 import { ProductCatalogComponent } from './pages/product-catalog/product-catalog.component';
 import { SponsorCreationFormComponent } from './components/sponsor-creation-form/sponsor-creation-form.component';
+import { ViewCatalogComponent } from './pages/view-catalog/view-catalog.component';
+import { CheckoutDialog } from './pages/view-catalog/view-catalog.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { AuditReportsComponent } from './pages/audit-reports/audit-reports.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { OrderReportComponent } from './components/order-report/order-report.component';
+import { SponsorReportPageComponent } from './pages/sponsor-report-page/sponsor-report-page.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +74,13 @@ import { SponsorCreationFormComponent } from './components/sponsor-creation-form
     EditProductCatalogComponent,
     ProductCatalogComponent,
     SponsorCreationFormComponent,
+    ViewCatalogComponent,
+    CheckoutDialog,
+    OrdersComponent,
+    AuditReportsComponent,
+    ReportsComponent,
+    OrderReportComponent,
+    SponsorReportPageComponent,
   ],
   imports: [
     BrowserModule,

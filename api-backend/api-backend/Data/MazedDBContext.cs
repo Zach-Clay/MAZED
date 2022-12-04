@@ -121,7 +121,11 @@ namespace MazedDB.Data
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.MediaType).HasColumnName("mediaType");
+                entity.Property(e => e.CartTotal).HasColumnName("cartTotal");
+
+                entity.Property(e => e.DriverCartcol)
+                    .HasMaxLength(45)
+                    .HasColumnName("driverCartcol");
 
                 entity.Property(e => e.PointValue).HasColumnName("pointValue");
 
@@ -143,6 +147,8 @@ namespace MazedDB.Data
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
                 entity.Property(e => e.OrderStatus).HasMaxLength(30);
+
+                entity.Property(e => e.ProductList).HasColumnType("json");
 
                 entity.Property(e => e.SponsorId).HasColumnName("SponsorID");
 

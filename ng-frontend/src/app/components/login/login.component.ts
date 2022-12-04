@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
     this.forgot = true;
 
     this.cognitoService
-      .forgotPassword(this.user)
+      .forgotPassword(this.user.username)
       .then(() => {})
       .catch((e) => {
         console.log(e);
@@ -76,7 +76,11 @@ export class LoginComponent implements OnInit {
     }
     this.user.code = this.resetCode;
     this.cognitoService
-      .forgotPasswordSubmit(this.user, this.newPassword)
+      .forgotPasswordSubmit(
+        this.user.username,
+        this.user.code,
+        this.newPassword
+      )
       .then((success) => {
         // call our own API and log the password change
         this.resetCode = '';
@@ -125,7 +129,7 @@ export class LoginComponent implements OnInit {
         const attempt: LoginAttempt = {
           id: 0,
           username: this.user.username,
-          isLoginSuccessful: 'yes',
+          isLoginSuccessful: 1,
         };
         this.loginAttemptService.addAttempt(attempt);
         this.loading = false;
@@ -139,7 +143,7 @@ export class LoginComponent implements OnInit {
         const attempt: LoginAttempt = {
           id: 0,
           username: this.user.username,
-          isLoginSuccessful: 'no',
+          isLoginSuccessful: 0,
         };
         this.loginAttemptService.addAttempt(attempt);
       });

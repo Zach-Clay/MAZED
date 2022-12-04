@@ -1,5 +1,13 @@
 <div
-  *ngIf="!(addingAdmin || addingSponsor || addingDriver || addingSponsorOrg)"
+  *ngIf="
+    !(
+      addingAdmin ||
+      addingSponsor ||
+      addingDriver ||
+      addingSponsorOrg ||
+      viewingReports
+    )
+  "
 >
   <div class="container">
     <div class="row mt-4">
@@ -135,12 +143,13 @@
                 border-radius: 1em;
               "
             >
-              <p
-                class="mb-1 mt-1 btn"
+              <button 
+                class="mb-1 mt-1 bg-transparent border-0 btn"
                 style="color: var(--primary-color); font-size: 1.2em"
+                (click)="navToProductCatalog()"
               >
                 view product catalog
-              </p>
+            </button>
             </div>
             <div class="mt-4"></div>
             <div
@@ -151,12 +160,13 @@
                 border-radius: 1em;
               "
             >
-              <p
-                class="mb-1 mt-1 btn"
+              <button
+                class="mb-1 mt-1 bg-transparent border-0 btn"
                 style="color: var(--primary-color); font-size: 1.2em"
+                (click)="viewingReports = true"
               >
-                view reports
-              </p>
+                View Reports
+              </button>
             </div>
           </div>
         </div>
@@ -201,9 +211,20 @@
     ></app-user-registration>
   </div>
 </div>
+
+<div *ngIf="viewingReports">
+  <app-reports [user]="user"></app-reports>
+</div>
+
 <div
   class="register mt-3 mb-3 text-center"
-  *ngIf="addingAdmin || addingSponsor || addingDriver || addingSponsorOrg"
+  *ngIf="
+    addingAdmin ||
+    addingSponsor ||
+    addingDriver ||
+    addingSponsorOrg ||
+    viewingReports
+  "
 >
   <button
     class="bg-transparent border-0 text-primary"
@@ -211,7 +232,8 @@
       addingAdmin = false;
       addingSponsor = false;
       addingDriver = false;
-      addingSponsorOrg = false
+      addingSponsorOrg = false;
+      viewingReports = false
     "
   >
     Back to Admin Home Page

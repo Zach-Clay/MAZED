@@ -1,0 +1,178 @@
+<div *ngIf="needToSelectSponsor">
+  <div class="title text-center">
+    <h1>Select a Sponsor To View Reports</h1>
+    <mat-form-field appearance="fill" color="primary">
+      <mat-select
+        [(ngModel)]="orgToViewReports"
+        (selectionChange)="onReportsOrgSelectionChange()"
+      >
+        <mat-option *ngFor="let org of orgs" [value]="org">
+          {{ org.orgName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4"></div>
+  <button
+    class="col-2 mb-1 mr-1 mt-1 border-0 btn"
+    style="color: white; border-radius: 1em; font-size: 1.2em"
+    [ngStyle]="{
+      'background-color': viewingOrders
+        ? 'var(--primary-color)'
+        : 'var(--secondary-color)'
+    }"
+    (click)="viewingOrders = true; viewingPoints = false"
+  >
+    View Orders Report
+  </button>
+  <button
+    class="col-2 mb-1 ml-1 mt-1 border-0 btn"
+    style="color: white; border-radius: 1em; font-size: 1.2em"
+    [ngStyle]="{
+      'background-color': viewingPoints
+        ? 'var(--primary-color)'
+        : 'var(--secondary-color)'
+    }"
+    (click)="viewingPoints = true; viewingOrders = false"
+  >
+    View Point Transactions Report
+  </button>
+  <div class="col-4"></div>
+</div>
+<hr />
+<div *ngIf="orgToViewReports && (viewingOrders || viewingPoints)" class="row">
+  <div class="col-3"></div>
+  <div class="col-3">
+    <button
+      class="mb-1 mt-1 border-0 btn"
+      style="
+        margin: 3px;
+        background: var(--tertiary-color);
+        border-radius: 1em;
+        color: var(--primary-color);
+        font-size: 1.2em;
+      "
+      [ngStyle]="{
+        'background-color': viewingEntireOrgReports
+          ? 'var(--primary-color)'
+          : 'var(--secondary-color)',
+        color: viewingEntireOrgReports ? 'white' : 'var(--primary-color)'
+      }"
+      (click)="selectedEntireOrg()"
+    >
+      View Organization's Consolidated Reports
+    </button>
+  </div>
+
+  <div class="ml-3 title text-center">
+    <h1>Select a Driver To View Reports</h1>
+    <mat-form-field appearance="fill" color="primary">
+      <mat-select
+        [(ngModel)]="driverToViewReports"
+        (selectionChange)="onReportsDriverSelectionChange()"
+      >
+        <mat-option *ngFor="let driver of driversInOrg" [value]="driver">
+          {{ driver.userFname }} {{ driver.userLname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-3"></div>
+</div>
+<hr />
+<div *ngIf="viewingEntireOrgReports || driverToViewReports">
+  <div *ngIf="!viewingEntireOrgReports">
+    <div *ngIf="viewingPoints">
+      <div class="row ml-1">
+        <div class="col font-weight-bold">DRIVER NAME</div>
+        <div class="col font-weight-bold">POINT AMOUNT</div>
+        <div class="col font-weight-bold">REASON</div>
+        <div class="col font-weight-bold">DATE AND TIME</div>
+      </div>
+      <hr />
+      <div *ngIf="pointChangesForUser && pointChangesForUser.length !== 0">
+        <app-point-change
+          *ngFor="let pointChange of pointChangesForUser"
+          [pointChange]="pointChange"
+          [isReport]="true"
+        ></app-point-change>
+      </div>
+      <div
+        *ngIf="!pointChangesForUser || pointChangesForUser.length == 0"
+        class="ml-2"
+      >
+        No Point Changes To Show
+      </div>
+    </div>
+    <div *ngIf="viewingOrders">
+      <div class="row ml-1">
+        <div class="col font-weight-bold">DRIVER NAME</div>
+        <div class="col font-weight-bold">POINT AMOUNT</div>
+        <div class="col font-weight-bold">PRODUCT LIST</div>
+        <div class="col font-weight-bold">DATE AND TIME</div>
+      </div>
+      <hr />
+      <div *ngIf="orderHistoryForUser && orderHistoryForUser.length > 0">
+        <app-order-report
+          *ngFor="let order of orderHistoryForUser"
+          [order]="order"
+        ></app-order-report>
+      </div>
+      <div
+        *ngIf="!orderHistoryForUser || orderHistoryForUser.length == 0"
+        class="ml-2"
+      >
+        No Orders to Display
+      </div>
+    </div>
+  </div>
+  <div *ngIf="viewingEntireOrgReports">
+    <div *ngIf="viewingPoints">
+      <div class="row ml-1">
+        <div class="col font-weight-bold">DRIVER NAME</div>
+        <div class="col font-weight-bold">POINT AMOUNT</div>
+        <div class="col font-weight-bold">REASON</div>
+        <div class="col font-weight-bold">DATE AND TIME</div>
+      </div>
+      <hr />
+      <div
+        *ngIf="pointChangesForSponsor && pointChangesForSponsor.length !== 0"
+      >
+        <app-point-change
+          *ngFor="let pointChange of pointChangesForSponsor"
+          [pointChange]="pointChange"
+          [isReport]="true"
+        ></app-point-change>
+      </div>
+      <div
+        *ngIf="!pointChangesForSponsor || pointChangesForSponsor.length == 0"
+      >
+        No Point Changes To Show
+      </div>
+    </div>
+    <div *ngIf="viewingOrders">
+      <div class="row ml-1">
+        <div class="col font-weight-bold">DRIVER NAME</div>
+        <div class="col font-weight-bold">POINT AMOUNT</div>
+        <div class="col font-weight-bold">PRODUCT LIST</div>
+        <div class="col font-weight-bold">DATE AND TIME</div>
+      </div>
+      <hr />
+      <div *ngIf="orderHistoryForSponsor && orderHistoryForSponsor.length > 0">
+        <app-order-report
+          *ngFor="let order of orderHistoryForSponsor"
+          [order]="order"
+        ></app-order-report>
+      </div>
+      <div
+        *ngIf="!orderHistoryForSponsor || orderHistoryForSponsor.length == 0"
+        class="ml-2"
+      >
+        No Orders to Display
+      </div>
+    </div>
+  </div>
+</div>

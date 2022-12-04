@@ -1,0 +1,59 @@
+<h1 mat-dialog-title>Current Cart</h1>
+
+<div mat-dialog-content>
+  <div *ngIf="currentProducts.length ===0">
+    No Products In Cart
+  </div>
+
+  <mat-list>
+    <mat-list-item *ngFor="let item of currentProducts; let i = index" style="height:200px;">
+      <div class="row content">
+        <div class="col-2 pl-4">
+          <img
+            src="{{ item.artworkUrl100 }}"
+            style="height: 100%; width: auto"
+          />
+        </div>
+        <div class="col-7 info">
+          <p><strong>Name: </strong>{{ item.trackName }}</p>
+          <p><strong>Pount Value: </strong>{{ item.pointValue.toFixed(2) }}</p>
+          <p>
+            <strong
+              ><a target="_blank" href="{{ item.trackViewUrl }}"
+                >Information</a
+              ></strong
+            >
+          </p>
+        </div>
+
+        <div class="col-2">
+          <div>
+            <button mat-raised-button color="warn" (click)="deleteCartItem(item.trackId)">Remove Item</button>
+          </div>
+        </div>
+
+      </div> 
+    </mat-list-item>
+  </mat-list>
+
+</div>
+
+<div mat-dialog-actions>
+
+  <p>My Total Points: <strong>{{userPoints.toFixed(2)}}</strong></p>
+  &nbsp;
+  &nbsp;
+  <p>Cart Total: <strong>{{cartTotalPoints.toFixed(2)}}</strong></p>
+
+  <div style="margin-left:auto;">
+    <p *ngIf="cartTotalPoints > userPoints">Insufficient Points</p>
+    <button mat-raised-button 
+      color="primary"
+      [disabled]="cartTotalPoints > userPoints"
+      (click)="onCheckout()"
+    >
+      Checkout
+    </button>
+    <button mat-raised-button (click)="onDoneClick()">Done</button>
+  </div>
+</div>

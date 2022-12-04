@@ -1,4 +1,4 @@
-import * as internal from "stream";
+import * as internal from 'stream';
 
 export interface User {
   id: number;
@@ -30,7 +30,7 @@ export interface UserToSponsor {
 export interface LoginAttempt {
   id: number;
   username: string;
-  isLoginSuccessful: string;
+  isLoginSuccessful: number;
 }
 
 export interface PointsChanges {
@@ -39,6 +39,7 @@ export interface PointsChanges {
   userId: number;
   pointValue: number;
   reason: string;
+  modDate?: any;
   isSpecialTransaction?: number;
 }
 
@@ -69,5 +70,25 @@ export interface Product {
   productId: number;
   sponsorId: number;
   orderId?: number;
-  trackId: number; 
+  trackId: number;
+  itemCost: number;
+}
+
+export interface Cart {
+  id: number;
+  userId: number;
+  sponsorId: number;
+  pointValue: number;
+  productId: number;
+  cartTotal?: number;
+}
+
+export interface Order {
+  id: number;
+  userId: number;
+  sponsorId: number;
+  orderStatus?: string;
+  totalPointVal: number;
+  orderDate: string;
+  productList: any;
 }

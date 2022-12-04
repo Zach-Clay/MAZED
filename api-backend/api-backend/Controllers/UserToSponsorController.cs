@@ -148,7 +148,7 @@ namespace api_backend.Controllers
             return await _context.UserToSponsors.Where(p => p.UserId == DriverUsersId).ToListAsync();
         }
 
-        [HttpPut("UpdateUserPointsBySponsor/{amount}")]
+        [HttpPut("UpdateUserPointsBySponsor")]
         public async Task<UserToSponsor> UpdateUserPointsBySponsor(uint userID, uint sponsorID, double amount)
         {
             var user = await GetUserPointsBySponsor(userID, sponsorID) ?? throw new Exception("user or sponsor not found");

@@ -1,0 +1,11 @@
+<div *ngIf="user && items.length > 0">
+  <div class="ml-3">
+    <div class="row">
+      <div class="col">{{ user.userFname }} {{ user.userLname }}</div>
+      <div class="col">{{ order.totalPointVal }}</div>
+      <div class="col">{{ items }}</div>
+      <div class="col">{{ order.orderDate }}</div>
+    </div>
+  </div>
+  <hr />
+</div>

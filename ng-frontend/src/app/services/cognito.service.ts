@@ -29,11 +29,12 @@ export class CognitoService {
   private authSubject: BehaviorSubject<any>;
 
   private SESConfig: any = {
-    region: "us-east-1",
+    region: 'us-east-1',
     // accessKeyId: "AKIAT77CFA37Z23ISGNM",
     // accessSecretKey: "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",
-  }
-  private cognitoidentityserviceprovider: any = new AWS.CognitoIdentityServiceProvider(this.SESConfig);  
+  };
+  private cognitoidentityserviceprovider: any =
+    new AWS.CognitoIdentityServiceProvider(this.SESConfig);
 
   constructor() {
     Amplify.configure({
@@ -94,28 +95,32 @@ export class CognitoService {
     return Auth.currentUserInfo();
   }
 
-  public updateUser(username: string, user: any): Promise<any> {   
+  public updateUser(username: string, user: any): Promise<any> {
     let params = {
       UserPoolId: environment.cognito.userPoolId,
-      Username: username
+      Username: username,
     };
-    this.cognitoidentityserviceprovider.adminGetUser(params, function(err:any, data:any) {
-      if (err) console.log(err, err.stack); // an error occurred
-      else     console.log(data);           // successful response
-    });
+    this.cognitoidentityserviceprovider.adminGetUser(
+      params,
+      function (err: any, data: any) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else console.log(data); // successful response
+      }
+    );
     return Auth.currentUserPoolUser().then((cognitoUser: any) => {
       return Auth.updateUserAttributes(cognitoUser, user);
     });
   }
 
-  public forgotPassword(user: UserInfo): Promise<any> {
-    return Auth.forgotPassword(user.username);
+  public forgotPassword(username: string): Promise<any> {
+    return Auth.forgotPassword(username);
   }
 
   public forgotPasswordSubmit(
-    user: UserInfo,
+    username: string,
+    code: string,
     newPassword: string
   ): Promise<any> {
-    return Auth.forgotPasswordSubmit(user.username, user.code, newPassword);
+    return Auth.forgotPasswordSubmit(username, code, newPassword);
   }
 }

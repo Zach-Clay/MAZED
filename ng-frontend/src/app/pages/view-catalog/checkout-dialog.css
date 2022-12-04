@@ -1,0 +1,16 @@
+.mat-dialog-content {
+  height: auto;
+  overflow: auto;
+}
+mat-list {
+  overflow: auto;
+  width: 100%;
+}
+mat-list-item {
+  overflow: auto;
+  width: 100%;
+} 
+.content {
+  overflow: auto;
+  width: 100%;
+}

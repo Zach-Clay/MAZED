@@ -8,9 +8,10 @@ namespace MazedDB.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public int SponsorId { get; set; }
-        public string OrderStatus { get; set; } = null!;
-        public int TotalPointVal { get; set; }
+        public string? OrderStatus { get; set; }
+        public double TotalPointVal { get; set; }
         public DateTime OrderDate { get; set; }
+        public string ProductList { get; set; } = null!;
 
         public virtual SponsorOrg Sponsor { get; set; } = null!;
         public virtual User User { get; set; } = null!;

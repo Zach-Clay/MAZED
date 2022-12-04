@@ -8,6 +8,7 @@ import {
 import { PointsChangesService } from 'src/app/services/points-changes.service';
 import { SponsorOrgService } from 'src/app/services/sponsor-org.service';
 import { ProductListService } from 'src/app/services/product-list.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-driver-product-listing',
@@ -17,12 +18,14 @@ import { ProductListService } from 'src/app/services/product-list.service';
 export class DriverProductListingComponent implements OnInit {
   @Input() currentSponsor!: SponsorOrg;
   @Input() dbUser!: User;
+  @Input() clickable!: boolean;
   products!: Product[];
   fetchedProducts: boolean = false;
 
   constructor(
     private pointsChangesService: PointsChangesService,
-    private productListService: ProductListService
+    private productListService: ProductListService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -32,5 +35,12 @@ export class DriverProductListingComponent implements OnInit {
         this.products = data;
         this.fetchedProducts = true;
       });
+  }
+
+  goToCatalogue() {
+    if (this.dbUser.userType.toLowerCase() != 'driver' || !this.clickable) {
+      return;
+    }
+    this.router.navigate(['/view-catalog']);
   }
 }
