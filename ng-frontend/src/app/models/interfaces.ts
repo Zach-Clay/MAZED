@@ -39,7 +39,7 @@ export interface PointsChanges {
   userId: number;
   pointValue: number;
   reason: string;
-  modDate: any;
+  modDate?: any;
   isSpecialTransaction?: number;
 }
 
