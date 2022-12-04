@@ -29,7 +29,6 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     //Get the orgs
-    console.log(this.user);
 
     this.sponsorOrgService.getAllOrgs().subscribe((data) => {
       this.orgs = data;
