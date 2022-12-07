@@ -13,6 +13,7 @@ Frontend:
 Backend: 
 - ASP.NET Web API
 - C#
+- EF Core
 
 Database: 
 - AWS RDS
