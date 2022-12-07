@@ -5,7 +5,7 @@ MAZED Team Good Driver Rewards Program for CPSC4910 at Clemson University (Senio
 # Technologies
 
 Frontend: 
-- AngularJS
+- Angular
 - Bootstrap
 - Angular Material
 - Amazon Cognito (User Authentication)
