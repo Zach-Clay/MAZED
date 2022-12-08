@@ -30,8 +30,6 @@ export class CognitoService {
 
   private SESConfig: any = {
     region: 'us-east-1',
-    // accessKeyId: "AKIAT77CFA37Z23ISGNM",
-    // accessSecretKey: "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",
   };
   private cognitoidentityserviceprovider: any =
     new AWS.CognitoIdentityServiceProvider(this.SESConfig);
